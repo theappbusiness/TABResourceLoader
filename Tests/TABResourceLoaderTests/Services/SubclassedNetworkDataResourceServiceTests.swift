@@ -27,8 +27,6 @@ final class SubclassedNetworkDataResourceService<Resource: NetworkJSONResourceTy
   }
 }
 
-private let testURL = NSURL(string: "http://test.com")!
-private let url = NSURL(string: "www.test.com")!
 
 class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
@@ -36,6 +34,7 @@ class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
   
   var mockSession: MockURLSession!
   var mockResource: MockNetworkJSONResource!
+  let mockURL = NSURL(string: "http://test.com")!
 
   override func setUp() {
     super.setUp()
@@ -45,14 +44,14 @@ class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
   func test_subclassHTTPHeaderFields_areOverridenByResourceHTTPHeaderFields() {
     let resourceHTTPHeaderFields = [commonKey: "resource"]
-    mockResource = MockNetworkJSONResource(url: testURL, HTTPHeaderFields: resourceHTTPHeaderFields)
+    mockResource = MockNetworkJSONResource(url: mockURL, HTTPHeaderFields: resourceHTTPHeaderFields)
     testService.fetch(resource: mockResource) { _ in }
     XCTAssertEqual(mockSession.capturedRequest!.allHTTPHeaderFields!, resourceHTTPHeaderFields)
   }
 
   func test_finalRequestInclude_subclassHTTPHeaderFields_and_resourceHTTPHeaderFields() {
     let resourceHTTPHeaderFields = ["resource_key" : "resource"]
-    mockResource = MockNetworkJSONResource(url: testURL, HTTPHeaderFields: resourceHTTPHeaderFields)
+    mockResource = MockNetworkJSONResource(url: mockURL, HTTPHeaderFields: resourceHTTPHeaderFields)
     testService.fetch(resource: mockResource) { _ in }
     let expectedHeaderFields = [commonKey: "subclass", "resource_key" : "resource"]
     XCTAssertEqual(mockSession.capturedRequest!.allHTTPHeaderFields!, expectedHeaderFields)
