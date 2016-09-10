@@ -76,11 +76,11 @@ struct CitiesResource: NetworkJSONResourceType {
 
 ### Retrieving the resource
 
-Use the provided `NetworkJSONResourceService` to retrieve your `CitiesResource` from a web service:
+Use the provided `NetworkDataResourceService` to retrieve your `CitiesResource` from a web service:
 
 ```swift
 let europeResource = CitiesResource(continent: "europe")
-let networkJSONService = NetworkJSONResourceService<CitiesResource>()
+let networkJSONService = NetworkDataResourceService<CitiesResource>()
 networkJSONService.fetch(resource: europeResource) { [weak self] result in
   // do something with the result
 }
@@ -91,7 +91,7 @@ networkJSONService.fetch(resource: europeResource) { [weak self] result in
 Define a typealias for conveniency if you using `NSOperation`s:
 
 ```swift
-private typealias CitiesNetworkResourceOperation = ResourceOperation<NetworkJSONResourceService<CitiesResource>>
+private typealias CitiesNetworkResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>
 ```
 
 Create the operation using a `CitiesResource`
@@ -111,7 +111,7 @@ operationQueue.addOperation(citiesNetworkResourceOperation)
 
 ## Creating your own services and operations
 
-At the moment the only service provided is the `NetworkJSONResourceService`. This will change in future updates where it may be relevant to ship this library with more default services. In the meantime the user can create they own service by conforming to `ResourceServiceType`. Similarly, even though the `ResourceOperation` may cater for most needs the developer can choose to have their own resource operation that conforms to `ResourceOperationType`.
+At the moment the only service provided is the `NetworkDataResourceService`. This will change in future updates where it may be relevant to ship this library with more default services. In the meantime the user can create they own service by conforming to `ResourceServiceType`. Similarly, even though the `ResourceOperation` may cater for most needs the developer can choose to have their own resource operation that conforms to `ResourceOperationType`.
 
 ## Author
 
