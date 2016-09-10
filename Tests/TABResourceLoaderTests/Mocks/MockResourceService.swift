@@ -18,7 +18,7 @@ class MockResourceService: ResourceServiceType {
 
   required init() {}
 
-  func fetch(resource: Resource, completion: (Result<Resource.Model>) -> Void) {
+  func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
     capturedResource = resource
     capturedCompletion = completion
   }

@@ -21,10 +21,10 @@ struct MockNetworkJSONResource: NetworkJSONResourceType {
   let url: URL
   let HTTPRequestMethod: HTTPMethod
   let HTTPHeaderFields: [String: String]?
-  let JSONBody: AnyObject?
+  let JSONBody: Any?
   let queryItems: [URLQueryItem]?
 
-  init(url: URL, HTTPRequestMethod: HTTPMethod = .GET, HTTPHeaderFields: [String : String]? = nil, JSONBody: AnyObject? = nil, queryItems: [URLQueryItem]? = nil) {
+  init(url: URL, HTTPRequestMethod: HTTPMethod = .GET, HTTPHeaderFields: [String : String]? = nil, JSONBody: Any? = nil, queryItems: [URLQueryItem]? = nil) {
     self.url = url
     self.HTTPRequestMethod = HTTPRequestMethod
     self.HTTPHeaderFields = HTTPHeaderFields

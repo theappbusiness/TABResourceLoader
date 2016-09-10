@@ -25,27 +25,27 @@ public protocol Finishable: class {
 
 public protocol ResourceOperationType: Cancellable, Finishable {
 
-  associatedtype Resource: ResourceType
-
+  associatedtype ResourceService: ResourceServiceType
+  
   /**
    Fetches a resource using the provided service
 
    - parameter resource: The resource to fetch
    - parameter service:  The service to be used for fetching the resource
    */
-  func fetch<Service: ResourceServiceType>(resource: Resource, usingService service: Service) where Service.Resource == Resource
-
+  func fetch(resource: ResourceService.Resource, usingService service: ResourceService)
+  
   /**
    Called when the operation has finished, called on Main thread
 
    - parameter result: The result of the operation
    */
-  func didFinishFetchingResource(result: Result<Resource.Model>)
+  func didFinishFetchingResource(result: Result<ResourceService.Resource.Model>)
 }
 
 public extension ResourceOperationType {
-
-  public func fetch<Service: ResourceServiceType>(resource: Resource, usingService service: Service) where Service.Resource == Resource {
+  
+  func fetch(resource: ResourceService.Resource, usingService service: ResourceService) {
     if cancelled { return }
     service.fetch(resource: resource) { [weak self] (result) in
       Thread.rl_executeOnMain { [weak self] in

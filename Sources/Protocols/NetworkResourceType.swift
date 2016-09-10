@@ -28,7 +28,7 @@ public protocol NetworkResourceType {
   var HTTPHeaderFields: [String: String]? { get }
 
   /// The HTTP body as JSON used to fetch this resource
-  var JSONBody: AnyObject? { get }
+  var JSONBody: Any? { get }
 
   /// The query items to be added to the url to fetch this resource
   var queryItems: [URLQueryItem]? { get }
@@ -46,7 +46,7 @@ public extension NetworkResourceType {
 
   public var HTTPRequestMethod: HTTPMethod { return .GET }
   public var HTTPHeaderFields: [String: String]? { return [:] }
-  public var JSONBody: AnyObject? { return nil }
+  public var JSONBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
 
   public func urlRequest() -> URLRequest? {

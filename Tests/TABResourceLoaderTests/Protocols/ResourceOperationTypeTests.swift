@@ -11,7 +11,7 @@ import XCTest
 
 class TestResourceOperation: ResourceOperationType {
 
-  typealias Resource = MockResource
+  typealias ResourceService = MockResourceService
 
   var cancelled: Bool = false
   var capturedFinishedErrors: [NSError]?

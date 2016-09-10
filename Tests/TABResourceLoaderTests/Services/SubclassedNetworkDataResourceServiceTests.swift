@@ -11,7 +11,7 @@ import XCTest
 
 private let commonKey = "common"
 
-final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType: NetworkDataResourceService<Resource> {
+final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: NetworkDataResourceService<Resource> {
 
   // Needed because of https://bugs.swift.org/browse/SR-416
   required init() {
@@ -30,7 +30,7 @@ final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType &
 
 class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
-  var testService: SubclassedNetworkDataResourceService
+  var testService: SubclassedNetworkDataResourceService<MockNetworkJSONResource>!
   
   var mockSession: MockURLSession!
   var mockResource: MockNetworkJSONResource!

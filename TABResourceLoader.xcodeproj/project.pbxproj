@@ -35,12 +35,12 @@
 		4F079D701D8459D400D08DA0 /* ImageResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D4D1D84599300D08DA0 /* ImageResourceTypeTests.swift */; };
 		4F079D711D8459D400D08DA0 /* JSONResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D4E1D84599300D08DA0 /* JSONResourceTypeTests.swift */; };
 		4F079D721D8459D400D08DA0 /* NetworkResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D4F1D84599300D08DA0 /* NetworkResourceTypeTests.swift */; };
-		4F079D731D8459D400D08DA0 /* ResourceOperationTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */; };
 		4F079D741D8459D400D08DA0 /* NetworkDataResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */; };
 		4F079D771D845F7E00D08DA0 /* MockNetworkResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D761D845F7E00D08DA0 /* MockNetworkResource.swift */; };
 		4F079D7A1D84652200D08DA0 /* ImageMocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D781D84650800D08DA0 /* ImageMocker.swift */; };
 		4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */; };
-		4FB4D6D31D8475D400A7D1B8 /* ResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */; };
+		4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */; };
+		4FB4D6D71D84801800A7D1B8 /* ResourceOperationTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -403,7 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F079D2E1D84577E00D08DA0 /* ResourceOperationType.swift in Sources */,
-				4FB4D6D31D8475D400A7D1B8 /* ResourceOperation.swift in Sources */,
+				4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */,
 				4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */,
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
 				4F079D771D845F7E00D08DA0 /* MockNetworkResource.swift in Sources */,
@@ -426,10 +426,10 @@
 				4F079D7A1D84652200D08DA0 /* ImageMocker.swift in Sources */,
 				4F079D651D8459D400D08DA0 /* XCTestCase+Additions.swift in Sources */,
 				4F079D661D8459D400D08DA0 /* MockDefaultJSONResourceType.swift in Sources */,
-				4F079D731D8459D400D08DA0 /* ResourceOperationTypeTests.swift in Sources */,
 				4F079D721D8459D400D08DA0 /* NetworkResourceTypeTests.swift in Sources */,
 				4F079D6C1D8459D400D08DA0 /* MockResource.swift in Sources */,
 				4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */,
+				4FB4D6D71D84801800A7D1B8 /* ResourceOperationTypeTests.swift in Sources */,
 				4F079D6F1D8459D400D08DA0 /* ResourceOperationTests.swift in Sources */,
 				4F079D701D8459D400D08DA0 /* ImageResourceTypeTests.swift in Sources */,
 				4F079D6E1D8459D400D08DA0 /* MockURLSession.swift in Sources */,

@@ -13,7 +13,7 @@ struct MockObject {
 }
 
 extension MockObject {
-  init?(jsonDictionary: [String : AnyObject]) {
+  init?(jsonDictionary: [String : Any]) {
     guard let parsedName = jsonDictionary["name"] as? String else {
       return nil
     }
