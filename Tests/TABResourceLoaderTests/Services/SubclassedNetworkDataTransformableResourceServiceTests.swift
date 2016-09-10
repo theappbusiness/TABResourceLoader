@@ -1,5 +1,5 @@
 //
-//  SubclassedNetworkJSONResourceServiceTests.swift
+//  SubclassedNetworkDataTransformableResourceServiceTests.swift
 //  TABResourceLoaderTests
 //
 //  Created by Luciano Marisi on 10/09/2016.
@@ -11,7 +11,7 @@ import XCTest
 
 private let commonKey = "common"
 
-final class SubclassedNetworkJSONResourceService<Resource: NetworkJSONResourceType>: NetworkDataTransformableResourceService<Resource> {
+final class SubclassedNetworkDataTransformableResourceService<Resource: NetworkJSONResourceType>: NetworkDataTransformableResourceService<Resource> {
 
   // Needed because of https://bugs.swift.org/browse/SR-416
   required init() {
@@ -32,7 +32,7 @@ private let url = NSURL(string: "www.test.com")!
 
 class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
-  var testService: SubclassedNetworkJSONResourceService<MockNetworkJSONResource>!
+  var testService: SubclassedNetworkDataTransformableResourceService<MockNetworkJSONResource>!
   
   var mockSession: MockURLSession!
   var mockResource: MockNetworkJSONResource!
@@ -40,7 +40,7 @@ class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
   override func setUp() {
     super.setUp()
     mockSession = MockURLSession()
-    testService = SubclassedNetworkJSONResourceService<MockNetworkJSONResource>(session: mockSession)
+    testService = SubclassedNetworkDataTransformableResourceService<MockNetworkJSONResource>(session: mockSession)
   }
 
   func test_subclassHTTPHeaderFields_areOverridenByResourceHTTPHeaderFields() {
