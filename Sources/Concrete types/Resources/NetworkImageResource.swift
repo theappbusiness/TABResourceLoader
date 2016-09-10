@@ -13,5 +13,5 @@ import Foundation
  */
 public struct NetworkImageResource: NetworkImageResourceType {
   public typealias Model = UIImage
-  public let url: NSURL
+  public let url: URL
 }

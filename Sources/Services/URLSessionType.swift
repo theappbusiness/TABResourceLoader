@@ -9,11 +9,11 @@
 import Foundation
 
 protocol URLSessionType {
-  func performRequest(request: NSURLRequest, completion: (NSData?, NSURLResponse?, NSError?) -> Void)
+  func performRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, NSError?) -> Void)
 }
 
-extension NSURLSession: URLSessionType {
-  public func performRequest(request: NSURLRequest, completion: (NSData?, NSURLResponse?, NSError?) -> Void) {
-    dataTaskWithRequest(request, completionHandler: completion).resume()
+extension URLSession: URLSessionType {
+  public func performRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, NSError?) -> Void) {
+    dataTask(with: request, completionHandler: completion as! (Data?, URLResponse?, Error?) -> Void).resume()
   }
 }

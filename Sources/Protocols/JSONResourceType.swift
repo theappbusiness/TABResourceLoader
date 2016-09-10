@@ -19,8 +19,8 @@ public protocol ResourceType {
  *  Defines a specific ResourceType used for JSON resources
  */
 public protocol JSONResourceType: DataResourceType {
-  func modelFrom(jsonDictionary jsonDictionary: [String : AnyObject]) -> Model?
-  func modelFrom(jsonArray jsonArray: [AnyObject]) -> Model?
+  func modelFrom(jsonDictionary: [String : AnyObject]) -> Model?
+  func modelFrom(jsonArray: [AnyObject]) -> Model?
 }
 
 // MARK: - Parsing defaults
@@ -32,7 +32,7 @@ extension JSONResourceType {
 
    - returns: An instantiated model if parsing was succesful, otherwise nil
    */
-  public func modelFrom(jsonDictionary jsonDictionary: [String : AnyObject]) -> Model? { return nil }
+  public func modelFrom(jsonDictionary: [String : AnyObject]) -> Model? { return nil }
 
   /**
    Parse this resources Model from a JSON array
@@ -41,22 +41,22 @@ extension JSONResourceType {
 
    - returns: An instantiated model if parsing was succesful, otherwise nil
    */
-  public func modelFrom(jsonArray jsonArray: [AnyObject]) -> Model? { return nil }
+  public func modelFrom(jsonArray: [AnyObject]) -> Model? { return nil }
 }
 
-enum JSONParsingError: ErrorType {
-  case InvalidJSONData
-  case CannotParseJSONDictionary
-  case CannotParseJSONArray
-  case UnsupportedType
+enum JSONParsingError: Error {
+  case invalidJSONData
+  case cannotParseJSONDictionary
+  case cannotParseJSONArray
+  case unsupportedType
 }
 
 // MARK: - Convenince parsing functions
 extension JSONResourceType {
 
-  public func resultFrom(data data: NSData) -> Result<Model> {
-    guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) else {
-      return .Failure(JSONParsingError.InvalidJSONData)
+  public func resultFrom(data: Data) -> Result<Model> {
+    guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
+      return .failure(JSONParsingError.invalidJSONData)
     }
 
     if let jsonDictionary = jsonObject as? [String: AnyObject] {
@@ -68,21 +68,21 @@ extension JSONResourceType {
     }
 
     // This is likely an impossible case since `JSONObjectWithData` likely only returns [String: AnyObject] or [AnyObject] but still needed to appease the compiler
-    return .Failure(JSONParsingError.UnsupportedType)
+    return .failure(JSONParsingError.unsupportedType)
   }
 
-  private func resultFrom(jsonDictionary jsonDictionary: [String: AnyObject]) -> Result<Model> {
+  fileprivate func resultFrom(jsonDictionary: [String: AnyObject]) -> Result<Model> {
     guard let parsedResults = modelFrom(jsonDictionary: jsonDictionary) else {
-      return .Failure(JSONParsingError.CannotParseJSONDictionary)
+      return .failure(JSONParsingError.cannotParseJSONDictionary)
     }
-    return .Success(parsedResults)
+    return .success(parsedResults)
   }
 
-  private func resultFrom(jsonArray jsonArray: [AnyObject]) -> Result<Model> {
+  fileprivate func resultFrom(jsonArray: [AnyObject]) -> Result<Model> {
     guard let parsedResults = modelFrom(jsonArray: jsonArray) else {
-      return .Failure(JSONParsingError.CannotParseJSONArray)
+      return .failure(JSONParsingError.cannotParseJSONArray)
     }
-    return .Success(parsedResults)
+    return .success(parsedResults)
   }
 
 }

@@ -9,8 +9,8 @@
 import Foundation
 
 public enum Result<T> {
-  case Success(T)
-  case Failure(ErrorType)
+  case success(T)
+  case failure(Error)
 }
 
 // http://www.cocoawithlove.com/blog/2016/08/21/result-types-part-one.html#conclusion-and-usage
@@ -38,19 +38,19 @@ extension Result {
   /// Returns the success result if it exists, otherwise nil
   func successResult() -> T? {
     switch self {
-    case .Success(let successResult):
+    case .success(let successResult):
       return successResult
-    case .Failure:
+    case .failure:
       return nil
     }
   }
   
   /// Returns the error if it exists, otherwise nil
-  func error() -> ErrorType? {
+  func error() -> Error? {
     switch self {
-    case .Success:
+    case .success:
       return nil
-    case .Failure(let error):
+    case .failure(let error):
       return error
     }
   }

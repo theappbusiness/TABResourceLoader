@@ -8,8 +8,8 @@
 
 import Foundation
 
-public enum ImageDownloadingError: ErrorType {
-  case InvalidImageData
+public enum ImageDownloadingError: Error {
+  case invalidImageData
 }
 
 /**
@@ -26,15 +26,15 @@ public protocol ImageResourceType: DataResourceType {
    
    - returns: Result of image decoding.
    */
-  func resultFrom(data data: NSData) -> Result<Model>
+  func resultFrom(data: Data) -> Result<Model>
 }
 
 // MARK: - Convenince parsing functions
 extension ImageResourceType {
-  public func resultFrom(data data: NSData) -> Result<UIImage> {
+  public func resultFrom(data: Data) -> Result<UIImage> {
     guard let image = UIImage(data: data) else {
-      return Result.Failure(ImageDownloadingError.InvalidImageData)
+      return Result.failure(ImageDownloadingError.invalidImageData)
     }
-    return .Success(image)
+    return .success(image)
   }
 }

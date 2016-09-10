@@ -8,19 +8,19 @@
 
 import Foundation
 
-extension NSThread {
+extension Thread {
   /**
    Checks the current thread and runs the given closure synchronously on the main thread.
    
    - parameter mainThreadClosure: the closure to call on the main thread
    */
-  static func rl_executeOnMain(mainThreadClosure: () -> Void) {
-    if self.currentThread() == self.mainThread() {
+  static func rl_executeOnMain(_ mainThreadClosure: () -> Void) {
+    if self.current == self.main {
       mainThreadClosure()
     } else {
       
-      let queue = dispatch_get_main_queue()
-      dispatch_sync(queue, {
+      let queue = DispatchQueue.main
+      queue.sync(execute: {
         mainThreadClosure()
       })
       

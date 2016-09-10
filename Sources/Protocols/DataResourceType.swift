@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol DataResourceType: ResourceType {
-  func resultFrom(data data: NSData) -> Result<Model>
+  func resultFrom(data: Data) -> Result<Model>
 }

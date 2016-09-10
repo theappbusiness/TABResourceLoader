@@ -10,5 +10,5 @@ import Foundation
 
 struct MockNetworkResource: NetworkResourceType {
   typealias Model = String
-  let url: NSURL
+  let url: URL
 }

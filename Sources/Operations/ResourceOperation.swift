@@ -17,7 +17,7 @@ public final class ResourceOperation<ResourceService: ResourceServiceType>: Base
   private let service: ResourceService
   private let didFinishFetchingResourceCallback: DidFinishFetchingResourceCallback
 
-  public init(resource: ResourceService.Resource, service: ResourceService = ResourceService(), didFinishFetchingResourceCallback: DidFinishFetchingResourceCallback) {
+  public init(resource: ResourceService.Resource, service: ResourceService = ResourceService(), didFinishFetchingResourceCallback: @escaping DidFinishFetchingResourceCallback) {
     self.resource = resource
     self.service = service
     self.didFinishFetchingResourceCallback = didFinishFetchingResourceCallback

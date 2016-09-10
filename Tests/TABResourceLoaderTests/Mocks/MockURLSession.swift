@@ -10,10 +10,10 @@ import Foundation
 @testable import TABResourceLoader
 
 final class MockURLSession: URLSessionType {
-  var capturedRequest: NSURLRequest?
-  var capturedCompletion: ((NSData?, NSURLResponse?, NSError?) -> Void)?
+  var capturedRequest: URLRequest?
+  var capturedCompletion: ((Data?, URLResponse?, NSError?) -> Void)?
 
-  func performRequest(request: NSURLRequest, completion: (NSData?, NSURLResponse?, NSError?) -> Void) {
+  func performRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, NSError?) -> Void) {
     capturedRequest = request
     capturedCompletion = completion
   }

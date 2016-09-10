@@ -19,14 +19,14 @@ class ResourceOperationTests: XCTestCase {
   }
 
   func test_didFinishFetchingResource_calledWithCorrectResult() {
-    weak var expectation = expectationWithDescription("didFinishFetchingResourceCallback expectation")
+    weak var expectation = self.expectation(description: "didFinishFetchingResourceCallback expectation")
     let didFinishFetchingResourceCallback: (ResourceOperation<MockResourceService>, Result<String>) -> Void = { (operation, result) in
       XCTAssertEqual(result.successResult(), "success")
       expectation?.fulfill()
     }
     let resourceOperation = ResourceOperation<MockResourceService>(resource: mockResource, didFinishFetchingResourceCallback: didFinishFetchingResourceCallback)
-    resourceOperation.didFinishFetchingResource(result: .Success("success"))
-    waitForExpectationsWithTimeout(1, handler: nil)
+    resourceOperation.didFinishFetchingResource(result: .success("success"))
+    waitForExpectations(timeout: 1, handler: nil)
   }
 
 }

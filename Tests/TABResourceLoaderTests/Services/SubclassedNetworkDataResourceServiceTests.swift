@@ -11,7 +11,7 @@ import XCTest
 
 private let commonKey = "common"
 
-final class SubclassedNetworkDataResourceService<Resource: protocol<NetworkResourceType, DataResourceType>>: NetworkDataResourceService<Resource> {
+final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType: NetworkDataResourceService<Resource> {
 
   // Needed because of https://bugs.swift.org/browse/SR-416
   required init() {
@@ -30,16 +30,16 @@ final class SubclassedNetworkDataResourceService<Resource: protocol<NetworkResou
 
 class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
-  var testService: SubclassedNetworkDataResourceService<MockNetworkJSONResource>!
+  var testService: SubclassedNetworkDataResourceService
   
   var mockSession: MockURLSession!
   var mockResource: MockNetworkJSONResource!
-  let mockURL = NSURL(string: "http://test.com")!
+  let mockURL = URL(string: "http://test.com")!
 
   override func setUp() {
     super.setUp()
     mockSession = MockURLSession()
-    testService = SubclassedNetworkDataResourceService<MockNetworkJSONResource>(session: mockSession)
+    testService = SubclassedNetworkDataResourceService(session: mockSession)
   }
 
   func test_subclassHTTPHeaderFields_areOverridenByResourceHTTPHeaderFields() {
