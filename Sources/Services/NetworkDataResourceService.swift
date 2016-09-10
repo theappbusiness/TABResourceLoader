@@ -1,5 +1,5 @@
 //
-//  NetworkDataTransformableResourceService.swift
+//  NetworkDataResourceService.swift
 //  TABResourceLoader
 //
 //  Created by Luciano Marisi on 05/07/2016.
@@ -23,7 +23,7 @@ public enum NetworkServiceError: ErrorType {
   case NoData
 }
 
-public class NetworkDataTransformableResourceService<Resource: NetworkDataTransformableResourceType>: ResourceServiceType {
+public class NetworkDataResourceService<Resource: NetworkDataResourceType>: ResourceServiceType {
   
   /**
    Method designed to be implemented on subclasses, these fields will be overriden by any HTTP header field
@@ -36,7 +36,7 @@ public class NetworkDataTransformableResourceService<Resource: NetworkDataTransf
   }
   
   /**
-   Designated initilizer for NetworkDataTransformableResourceService
+   Designated initilizer for NetworkDataResourceService
    
    - returns: An new instance
    */

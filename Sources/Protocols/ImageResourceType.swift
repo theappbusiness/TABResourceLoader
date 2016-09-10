@@ -15,7 +15,7 @@ public enum ImageDownloadingError: ErrorType {
 /**
  *  Defines a specific ResourceType for Image resources
  */
-public protocol ImageResourceType: DataTransformableResourceType {
+public protocol ImageResourceType: DataResourceType {
   
   associatedtype Model: UIImage
   

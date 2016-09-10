@@ -1,5 +1,5 @@
 //
-//  NetworkDataTransformableResourceServiceTests.swift
+//  NetworkDataResourceServiceTests.swift
 //  TABResourceLoaderTests
 //
 //  Created by Luciano Marisi on 10/09/2016.
@@ -9,24 +9,24 @@
 import XCTest
 @testable import TABResourceLoader
 
-class NetworkDataTransformableResourceServiceTests: XCTestCase {
+class NetworkDataResourceServiceTests: XCTestCase {
   
   var mockSession: MockURLSession!
   var mockResource: MockDefaultNetworkJSONResource!
   let mockURL = NSURL(string: "http://test.com")!
   
-  var testService: NetworkDataTransformableResourceService<MockDefaultNetworkJSONResource>!
+  var testService: NetworkDataResourceService<MockDefaultNetworkJSONResource>!
   
   override func setUp() {
     super.setUp()
     mockSession = MockURLSession()
     mockResource = MockDefaultNetworkJSONResource(url: mockURL)
     
-    testService = NetworkDataTransformableResourceService<MockDefaultNetworkJSONResource>(session: mockSession)
+    testService = NetworkDataResourceService<MockDefaultNetworkJSONResource>(session: mockSession)
   }
   
   func test_publicInitializerUsesNSURLSession() {
-    testService = NetworkDataTransformableResourceService<MockDefaultNetworkJSONResource>()
+    testService = NetworkDataResourceService<MockDefaultNetworkJSONResource>()
     XCTAssert(testService.session is NSURLSession)
   }
   
@@ -40,7 +40,7 @@ class NetworkDataTransformableResourceServiceTests: XCTestCase {
 
   func test_fetch_withInvalidURLRequest_callsFailureWithCorrectError() {
     let mockInvalidURLResource = MockNilURLRequestNetworkJSONResource()
-    let newTestRequestManager = NetworkDataTransformableResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
+    let newTestRequestManager = NetworkDataResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
     XCTAssertNil(mockInvalidURLResource.urlRequest())
     performAsyncTest() { expectation in
       newTestRequestManager.fetch(resource: mockInvalidURLResource) { result in

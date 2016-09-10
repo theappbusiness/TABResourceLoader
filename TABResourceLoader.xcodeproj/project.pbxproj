@@ -11,13 +11,13 @@
 		4F079CDA1D84559200D08DA0 /* TABResourceLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F079CCF1D84559100D08DA0 /* TABResourceLoader.framework */; };
 		4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1C1D84577E00D08DA0 /* BaseAsynchronousOperation.swift */; };
 		4F079D291D84577E00D08DA0 /* ResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */; };
-		4F079D2A1D84577E00D08DA0 /* DataTransformableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1F1D84577E00D08DA0 /* DataTransformableResourceType.swift */; };
+		4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */; };
 		4F079D2B1D84577E00D08DA0 /* ImageResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D201D84577E00D08DA0 /* ImageResourceType.swift */; };
 		4F079D2C1D84577E00D08DA0 /* JSONResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D211D84577E00D08DA0 /* JSONResourceType.swift */; };
 		4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */; };
 		4F079D2E1D84577E00D08DA0 /* ResourceOperationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */; };
 		4F079D2F1D84577E00D08DA0 /* ResourceServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */; };
-		4F079D301D84577E00D08DA0 /* NetworkDataTransformableResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D261D84577E00D08DA0 /* NetworkDataTransformableResourceService.swift */; };
+		4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D261D84577E00D08DA0 /* NetworkDataResourceService.swift */; };
 		4F079D311D84577E00D08DA0 /* URLSessionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D271D84577E00D08DA0 /* URLSessionType.swift */; };
 		4F079D351D8457FF00D08DA0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D341D8457FF00D08DA0 /* Result.swift */; };
 		4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D361D84585E00D08DA0 /* NSThread+Additions.swift */; };
@@ -37,10 +37,10 @@
 		4F079D711D8459D400D08DA0 /* JSONResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D4E1D84599300D08DA0 /* JSONResourceTypeTests.swift */; };
 		4F079D721D8459D400D08DA0 /* NetworkResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D4F1D84599300D08DA0 /* NetworkResourceTypeTests.swift */; };
 		4F079D731D8459D400D08DA0 /* ResourceOperationTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */; };
-		4F079D741D8459D400D08DA0 /* NetworkDataTransformableResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D521D84599300D08DA0 /* NetworkDataTransformableResourceServiceTests.swift */; };
+		4F079D741D8459D400D08DA0 /* NetworkDataResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */; };
 		4F079D771D845F7E00D08DA0 /* MockNetworkResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D761D845F7E00D08DA0 /* MockNetworkResource.swift */; };
 		4F079D7A1D84652200D08DA0 /* ImageMocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D781D84650800D08DA0 /* ImageMocker.swift */; };
-		4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataTransformableResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D531D84599300D08DA0 /* SubclassedNetworkDataTransformableResourceServiceTests.swift */; };
+		4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,13 +61,13 @@
 		4F079CE01D84559200D08DA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F079D1C1D84577E00D08DA0 /* BaseAsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAsynchronousOperation.swift; sourceTree = "<group>"; };
 		4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceOperation.swift; sourceTree = "<group>"; };
-		4F079D1F1D84577E00D08DA0 /* DataTransformableResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransformableResourceType.swift; sourceTree = "<group>"; };
+		4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataResourceType.swift; sourceTree = "<group>"; };
 		4F079D201D84577E00D08DA0 /* ImageResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResourceType.swift; sourceTree = "<group>"; };
 		4F079D211D84577E00D08DA0 /* JSONResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONResourceType.swift; sourceTree = "<group>"; };
 		4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResourceType.swift; sourceTree = "<group>"; };
 		4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceOperationType.swift; sourceTree = "<group>"; };
 		4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceServiceType.swift; sourceTree = "<group>"; };
-		4F079D261D84577E00D08DA0 /* NetworkDataTransformableResourceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataTransformableResourceService.swift; sourceTree = "<group>"; };
+		4F079D261D84577E00D08DA0 /* NetworkDataResourceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResourceService.swift; sourceTree = "<group>"; };
 		4F079D271D84577E00D08DA0 /* URLSessionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionType.swift; sourceTree = "<group>"; };
 		4F079D341D8457FF00D08DA0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4F079D361D84585E00D08DA0 /* NSThread+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSThread+Additions.swift"; sourceTree = "<group>"; };
@@ -87,8 +87,8 @@
 		4F079D4E1D84599300D08DA0 /* JSONResourceTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONResourceTypeTests.swift; sourceTree = "<group>"; };
 		4F079D4F1D84599300D08DA0 /* NetworkResourceTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResourceTypeTests.swift; sourceTree = "<group>"; };
 		4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceOperationTypeTests.swift; sourceTree = "<group>"; };
-		4F079D521D84599300D08DA0 /* NetworkDataTransformableResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataTransformableResourceServiceTests.swift; sourceTree = "<group>"; };
-		4F079D531D84599300D08DA0 /* SubclassedNetworkDataTransformableResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubclassedNetworkDataTransformableResourceServiceTests.swift; sourceTree = "<group>"; };
+		4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResourceServiceTests.swift; sourceTree = "<group>"; };
+		4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubclassedNetworkDataResourceServiceTests.swift; sourceTree = "<group>"; };
 		4F079D761D845F7E00D08DA0 /* MockNetworkResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkResource.swift; sourceTree = "<group>"; };
 		4F079D781D84650800D08DA0 /* ImageMocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMocker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,7 +194,7 @@
 		4F079D1E1D84577E00D08DA0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				4F079D1F1D84577E00D08DA0 /* DataTransformableResourceType.swift */,
+				4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */,
 				4F079D201D84577E00D08DA0 /* ImageResourceType.swift */,
 				4F079D211D84577E00D08DA0 /* JSONResourceType.swift */,
 				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
@@ -207,7 +207,7 @@
 		4F079D251D84577E00D08DA0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4F079D261D84577E00D08DA0 /* NetworkDataTransformableResourceService.swift */,
+				4F079D261D84577E00D08DA0 /* NetworkDataResourceService.swift */,
 				4F079D271D84577E00D08DA0 /* URLSessionType.swift */,
 			);
 			path = Services;
@@ -286,8 +286,8 @@
 		4F079D511D84599300D08DA0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4F079D521D84599300D08DA0 /* NetworkDataTransformableResourceServiceTests.swift */,
-				4F079D531D84599300D08DA0 /* SubclassedNetworkDataTransformableResourceServiceTests.swift */,
+				4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */,
+				4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -406,11 +406,11 @@
 				4F079D771D845F7E00D08DA0 /* MockNetworkResource.swift in Sources */,
 				4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */,
 				4F079D2C1D84577E00D08DA0 /* JSONResourceType.swift in Sources */,
-				4F079D2A1D84577E00D08DA0 /* DataTransformableResourceType.swift in Sources */,
+				4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */,
 				4F079D291D84577E00D08DA0 /* ResourceOperation.swift in Sources */,
 				4F079D3C1D8458E800D08DA0 /* NetworkImageResource.swift in Sources */,
 				4F079D351D8457FF00D08DA0 /* Result.swift in Sources */,
-				4F079D301D84577E00D08DA0 /* NetworkDataTransformableResourceService.swift in Sources */,
+				4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */,
 				4F079D2B1D84577E00D08DA0 /* ImageResourceType.swift in Sources */,
 				4F079D311D84577E00D08DA0 /* URLSessionType.swift in Sources */,
 				4F079D2F1D84577E00D08DA0 /* ResourceServiceType.swift in Sources */,
@@ -427,12 +427,12 @@
 				4F079D731D8459D400D08DA0 /* ResourceOperationTypeTests.swift in Sources */,
 				4F079D721D8459D400D08DA0 /* NetworkResourceTypeTests.swift in Sources */,
 				4F079D6C1D8459D400D08DA0 /* MockResource.swift in Sources */,
-				4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataTransformableResourceServiceTests.swift in Sources */,
+				4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6F1D8459D400D08DA0 /* ResourceOperationTests.swift in Sources */,
 				4F079D701D8459D400D08DA0 /* ImageResourceTypeTests.swift in Sources */,
 				4F079D6E1D8459D400D08DA0 /* MockURLSession.swift in Sources */,
 				4F079D691D8459D400D08DA0 /* MockNetworkJSONResource.swift in Sources */,
-				4F079D741D8459D400D08DA0 /* NetworkDataTransformableResourceServiceTests.swift in Sources */,
+				4F079D741D8459D400D08DA0 /* NetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6B1D8459D400D08DA0 /* MockObject.swift in Sources */,
 				4F079D671D8459D400D08DA0 /* MockJSONArrayResourceType.swift in Sources */,
 				4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */,

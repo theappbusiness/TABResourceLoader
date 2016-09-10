@@ -18,7 +18,7 @@ public protocol ResourceType {
 /**
  *  Defines a specific ResourceType used for JSON resources
  */
-public protocol JSONResourceType: DataTransformableResourceType {
+public protocol JSONResourceType: DataResourceType {
   func modelFrom(jsonDictionary jsonDictionary: [String : AnyObject]) -> Model?
   func modelFrom(jsonArray jsonArray: [AnyObject]) -> Model?
 }

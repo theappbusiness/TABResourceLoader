@@ -1,5 +1,5 @@
 //
-//  DataTransformableResourceType.swift
+//  DataResourceType.swift
 //  TABResourceLoader
 //
 //  Created by Luciano Marisi on 10/09/2016.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol DataTransformableResourceType: ResourceType {
+public protocol DataResourceType: ResourceType {
   func resultFrom(data data: NSData) -> Result<Model>
 }

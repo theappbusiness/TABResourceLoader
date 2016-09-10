@@ -67,9 +67,9 @@ public extension NetworkResourceType {
   }
 }
 
-public protocol NetworkDataTransformableResourceType: NetworkResourceType, DataTransformableResourceType {}
-public protocol NetworkJSONResourceType: NetworkDataTransformableResourceType, JSONResourceType {}
-public protocol NetworkImageResourceType: NetworkDataTransformableResourceType, ImageResourceType {}
+public protocol NetworkDataResourceType: NetworkResourceType, DataResourceType {}
+public protocol NetworkJSONResourceType: NetworkDataResourceType, JSONResourceType {}
+public protocol NetworkImageResourceType: NetworkDataResourceType, ImageResourceType {}
 
 
 public extension NetworkJSONResourceType {
