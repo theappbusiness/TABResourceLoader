@@ -9,10 +9,18 @@
 import XCTest
 @testable import TABResourceLoader
 
-private let url = NSURL(string: "www.test.com")!
-
 class NetworkResourceTypeTests: XCTestCase {
-
+  
+  let url = NSURL(string: "www.test.com")!
+  
+  func test_NetworkResource_hasCorrectDefaultValues() {
+    let mockDefaultNetworkJSONResource = MockNetworkResource(url: url)
+    XCTAssertEqual(mockDefaultNetworkJSONResource.HTTPRequestMethod, HTTPMethod.GET)
+    XCTAssertEqual(mockDefaultNetworkJSONResource.HTTPHeaderFields!, [:])
+    XCTAssertNil(mockDefaultNetworkJSONResource.JSONBody)
+    XCTAssertNil(mockDefaultNetworkJSONResource.queryItems)
+  }
+  
   func test_NetworkJSONResource_hasCorrectDefaultValues() {
     let mockDefaultNetworkJSONResource = MockDefaultNetworkJSONResource(url: url)
     XCTAssertEqual(mockDefaultNetworkJSONResource.HTTPRequestMethod, HTTPMethod.GET)

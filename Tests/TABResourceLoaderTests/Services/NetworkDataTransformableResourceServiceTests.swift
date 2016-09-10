@@ -9,21 +9,25 @@
 import XCTest
 @testable import TABResourceLoader
 
-private let testURL = NSURL(string: "http://test.com")!
-
 class NetworkDataTransformableResourceServiceTests: XCTestCase {
   
-  var testService: NetworkDataTransformableResourceService<MockDefaultNetworkJSONResource>!
   var mockSession: MockURLSession!
   var mockResource: MockDefaultNetworkJSONResource!
-
-  let testRequest = NSURLRequest(URL: testURL)
-
+  let mockURL = NSURL(string: "http://test.com")!
+  
+  var testService: NetworkDataTransformableResourceService<MockDefaultNetworkJSONResource>!
+  
   override func setUp() {
     super.setUp()
     mockSession = MockURLSession()
+    mockResource = MockDefaultNetworkJSONResource(url: mockURL)
+    
     testService = NetworkDataTransformableResourceService<MockDefaultNetworkJSONResource>(session: mockSession)
-    mockResource = MockDefaultNetworkJSONResource(url: testURL)
+  }
+  
+  func test_publicInitializerUsesNSURLSession() {
+    testService = NetworkDataTransformableResourceService<MockDefaultNetworkJSONResource>()
+    XCTAssert(testService.session is NSURLSession)
   }
   
   func test_fetch_callsPerformRequestOnSessionWithCorrectURLRequest() {
@@ -57,6 +61,8 @@ class NetworkDataTransformableResourceServiceTests: XCTestCase {
       assert_fetch_whenSessionCompletesWithHandledStatusCode_callsFailureWithCorrectError(expectedStatusCode: $0)
     }
   }
+  
+  //MARK: Helpers
 
   private func assert_fetch_whenSessionCompletesWithHandledStatusCode_callsFailureWithCorrectError(expectedStatusCode expectedStatusCode: Int, file: StaticString = #file, lineNumber: UInt = #line) {
     let expectedError = NSError(domain: "test", code: 999, userInfo: nil)

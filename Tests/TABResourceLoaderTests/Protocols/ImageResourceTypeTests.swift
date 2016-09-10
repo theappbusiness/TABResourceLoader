@@ -32,4 +32,15 @@ class ImageResourceTypeTests: XCTestCase {
       XCTFail("Expected ImageDownloadingError.InvalidImageData but got \(error.dynamicType)")
     }
   }
+  
+  func test_resultFromData_whenDataIsValid() {
+    let mockImage = ImageMocker.mock()
+    let imageData = UIImagePNGRepresentation(mockImage)!
+    let testResult = mockImageResourceType.resultFrom(data: imageData)
+    guard case .Success = testResult else {
+      XCTFail("Expected .Success but got .Failure")
+      return
+    }
+  }
+  
 }

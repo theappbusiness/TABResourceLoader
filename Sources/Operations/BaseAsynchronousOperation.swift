@@ -17,7 +17,7 @@ public class BaseAsynchronousOperation: NSOperation {
   }
 
   private var _executing: Bool = false
-  public override var executing:Bool {
+  public override var executing: Bool {
     get { return _executing }
     set {
       willChangeValueForKey("isExecuting")

@@ -35,11 +35,16 @@ public class NetworkDataTransformableResourceService<Resource: NetworkDataTransf
     return [:]
   }
   
-  private let session: URLSessionType
-  
+  /**
+   Designated initilizer for NetworkDataTransformableResourceService
+   
+   - returns: An new instance
+   */
   public required init() {
     self.session = NSURLSession.sharedSession()
   }
+  
+  let session: URLSessionType
   
   init(session: URLSessionType) {
     self.session = session

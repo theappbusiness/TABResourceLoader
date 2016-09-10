@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MockNetworkResource.swift
 //  TABResourceLoader
 //
 //  Created by Luciano Marisi on 10/09/2016.
@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct MockNetworkResource: NetworkResourceType {
+  typealias Model = String
+  let url: NSURL
+}

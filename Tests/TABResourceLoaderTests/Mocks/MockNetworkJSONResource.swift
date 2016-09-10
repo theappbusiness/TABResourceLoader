@@ -12,10 +12,6 @@ import Foundation
 struct MockDefaultNetworkJSONResource: NetworkJSONResourceType {
   typealias Model = String
   let url: NSURL
-
-  init(url: NSURL) {
-    self.url = url
-  }
 }
 
 

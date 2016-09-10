@@ -33,10 +33,9 @@ private let url = NSURL(string: "www.test.com")!
 class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
   var testService: SubclassedNetworkJSONResourceService<MockNetworkJSONResource>!
+  
   var mockSession: MockURLSession!
   var mockResource: MockNetworkJSONResource!
-
-  let testRequest = NSURLRequest(URL: testURL)
 
   override func setUp() {
     super.setUp()
