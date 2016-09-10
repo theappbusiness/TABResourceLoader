@@ -67,10 +67,8 @@ public extension NetworkResourceType {
   }
 }
 
-public protocol NetworkDataResourceType: NetworkResourceType, DataResourceType {}
-public protocol NetworkJSONResourceType: NetworkDataResourceType, JSONResourceType {}
-public protocol NetworkImageResourceType: NetworkDataResourceType, ImageResourceType {}
-
+public protocol NetworkJSONResourceType: NetworkResourceType, JSONResourceType {}
+public protocol NetworkImageResourceType: NetworkResourceType, ImageResourceType {}
 
 public extension NetworkJSONResourceType {
   var HTTPHeaderFields: [String: String]? {

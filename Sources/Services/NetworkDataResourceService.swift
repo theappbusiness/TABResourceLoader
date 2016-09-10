@@ -23,7 +23,7 @@ public enum NetworkServiceError: ErrorType {
   case NoData
 }
 
-public class NetworkDataResourceService<Resource: NetworkDataResourceType>: ResourceServiceType {
+public class NetworkDataResourceService<Resource: protocol<NetworkResourceType, DataResourceType>>: ResourceServiceType {
   
   /**
    Method designed to be implemented on subclasses, these fields will be overriden by any HTTP header field
