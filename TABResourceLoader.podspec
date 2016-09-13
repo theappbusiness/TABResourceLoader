@@ -7,5 +7,5 @@ Pod::Spec.new do |spec|
   spec.summary      = 'Framework for loading resources from a network service'
   spec.source       = { :path => '.' }
   spec.source_files = 'Sources/**/*.swift'
-  spec.ios.deployment_target = '9.0'
+  spec.ios.deployment_target = '8.0'
 end
