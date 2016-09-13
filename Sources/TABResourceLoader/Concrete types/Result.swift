@@ -18,17 +18,17 @@ extension Result {
   // Construct a `Result` from a Swift `throws` error handling function
   public init(_ capturing: () throws -> T) {
     do {
-      self = .Success(try capturing())
+      self = .success(try capturing())
     } catch {
-      self = .Failure(error)
+      self = .failure(error)
     }
   }
   
   // Convert the `Result` back to typical Swift `throws` error handling
   public func unwrap() throws -> T {
     switch self {
-    case .Success(let v): return v
-    case .Failure(let e): throw e
+    case .success(let v): return v
+    case .failure(let e): throw e
     }
   }
 }
