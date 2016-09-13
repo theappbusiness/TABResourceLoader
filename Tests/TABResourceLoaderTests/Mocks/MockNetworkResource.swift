@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import TABResourceLoader
 
 struct MockNetworkResource: NetworkResourceType {
   typealias Model = String
