@@ -65,7 +65,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   //MARK: Helpers
 
   fileprivate func assert_fetch_whenSessionCompletesWithHandledStatusCode_callsFailureWithCorrectError(expectedStatusCode: Int, file: StaticString = #file, lineNumber: UInt = #line) {
-    let expectedError = NSError(domain: "test", code: 999, userInfo: nil)
+    let expectedError = NSError(domain: "test", code: 999, userInfo: nil) as Error
     let mockHTTPURLResponse = HTTPURLResponse(url: URL(string: "www.test.com")!, statusCode: expectedStatusCode, httpVersion: nil, headerFields: nil)
     performAsyncTest(file: file, lineNumber: lineNumber) { expectation in
       testService.fetch(resource: mockResource) { result in
@@ -93,7 +93,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   }
 
   fileprivate func assert_fetch_whenSessionCompletesWithUnhandledStatusCode_callsFailureWithCorrectError(expectedStatusCode: Int, file: StaticString = #file, lineNumber: UInt = #line) {
-    let expectedError = NSError(domain: "test", code: 999, userInfo: nil)
+    let expectedError = NSError(domain: "test", code: 999, userInfo: nil) as Error
     let mockHTTPURLResponse = HTTPURLResponse(url: URL(string: "www.test.com")!, statusCode: expectedStatusCode, httpVersion: nil, headerFields: nil)
     performAsyncTest(file: file, lineNumber: lineNumber) { expectation in
       testService.fetch(resource: mockResource) { result in
@@ -107,14 +107,14 @@ class NetworkDataResourceServiceTests: XCTestCase {
           XCTFail()
           return
         }
-        XCTAssert(testError.domain == expectedError.domain)
+        XCTAssert(testError._domain == expectedError._domain)
       }
       mockSession.capturedCompletion!(nil, mockHTTPURLResponse, expectedError)
     }
   }
 
   func test_fetch_whenSessionCompletesWithNetworkingError_callsFailureWithCorrectError() {
-    let expectedError = NSError(domain: "test", code: 999, userInfo: nil)
+    let expectedError = NSError(domain: "test", code: 999, userInfo: nil) as Error
 
     performAsyncTest() { expectation in
       testService.fetch(resource: mockResource) { result in
@@ -128,7 +128,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
           XCTFail()
           return
         }
-        XCTAssert(testError.domain == expectedError.domain)
+        XCTAssert(testError._domain == expectedError._domain)
       }
       mockSession.capturedCompletion!(nil, nil, expectedError)
     }

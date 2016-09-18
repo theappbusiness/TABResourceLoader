@@ -14,11 +14,11 @@ class TestResourceOperation: ResourceOperationType {
   typealias ResourceService = MockResourceService
 
   var cancelled: Bool = false
-  var capturedFinishedErrors: [NSError]?
+  var capturedFinishedErrors: [Error]?
   var capturedResult: Result<String>?
   var captureDidFinishFetchingResourceThread: Thread?
 
-  func finish(_ errors: [NSError]) {
+  func finish(_ errors: [Error]) {
     capturedFinishedErrors = errors
   }
 

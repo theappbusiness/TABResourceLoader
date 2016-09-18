@@ -19,7 +19,7 @@ import Foundation
 public enum NetworkServiceError: Error {
   case couldNotCreateURLRequest
   case statusCodeError(statusCode: Int)
-  case networkingError(error: NSError)
+  case networkingError(error: Error)
   case noData
 }
 
@@ -75,7 +75,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     return generalHTTPHeaderFields
   }
   
-  fileprivate func resultFrom(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: NSError?) -> Result<Resource.Model> {
+  fileprivate func resultFrom(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> Result<Resource.Model> {
     
     if let HTTPURLResponse = URLResponse as? HTTPURLResponse {
       switch HTTPURLResponse.statusCode {

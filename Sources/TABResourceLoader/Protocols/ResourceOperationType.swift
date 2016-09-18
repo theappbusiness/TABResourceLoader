@@ -20,7 +20,7 @@ public protocol Finishable: class {
 
    - parameter errors: Any error from the work done
    */
-  func finish(_ errors: [NSError])
+  func finish(_ errors: [Error])
 }
 
 public protocol ResourceOperationType: Cancellable, Finishable {

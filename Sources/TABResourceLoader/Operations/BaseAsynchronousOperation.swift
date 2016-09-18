@@ -67,7 +67,7 @@ open class BaseAsynchronousOperation: Operation {
     finish()
   }
 
-  public final func finish(_ errors: [NSError] = []) {
+  public final func finish(_ errors: [Error] = []) {
     self.isFinished = true
     self.isExecuting = false
   }
