@@ -9,11 +9,11 @@
 import Foundation
 
 protocol URLSessionType {
-  func performRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
 }
 
 extension URLSession: URLSessionType {
-  public func performRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+  public func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
     dataTask(with: request, completionHandler: completion).resume()
   }
 }

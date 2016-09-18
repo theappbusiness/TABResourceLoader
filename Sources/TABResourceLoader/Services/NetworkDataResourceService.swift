@@ -60,7 +60,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     
     urlRequest.allHTTPHeaderFields = allHTTPHeaderFields(resourceHTTPHeaderFields: urlRequest.allHTTPHeaderFields)
     
-    session.performRequest(urlRequest) { (data, URLResponse, error) in
+    session.perform(request: urlRequest) { (data, URLResponse, error) in
       completion(self.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
     }
   }
