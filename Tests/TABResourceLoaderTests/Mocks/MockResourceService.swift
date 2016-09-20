@@ -15,12 +15,14 @@ class MockResourceService: ResourceServiceType {
 
   var capturedResource: Resource?
   var capturedCompletion: ((Result<Resource.Model>) -> Void)?
+  var fetchCallCount: Int = 0
 
   required init() {}
 
   func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
     capturedResource = resource
     capturedCompletion = completion
+    fetchCallCount += 1
   }
 
 }

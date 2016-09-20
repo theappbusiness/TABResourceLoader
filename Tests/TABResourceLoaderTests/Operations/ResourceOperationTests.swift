@@ -12,10 +12,14 @@ import XCTest
 class ResourceOperationTests: XCTestCase {
 
   var mockResource: MockResource!
+  var mockService: MockResourceService!
+  var testResourceOperation: ResourceOperation<MockResourceService>!
 
   override func setUp() {
     super.setUp()
     mockResource = MockResource()
+    mockService = MockResourceService()
+    testResourceOperation = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService, didFinishFetchingResourceCallback: { _, _ in })
   }
 
   func test_didFinishFetchingResource_calledWithCorrectResult() {
@@ -27,6 +31,18 @@ class ResourceOperationTests: XCTestCase {
     let resourceOperation = ResourceOperation<MockResourceService>(resource: mockResource, didFinishFetchingResourceCallback: didFinishFetchingResourceCallback)
     resourceOperation.didFinishFetchingResource(result: .success("success"))
     waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func test_createCopy_returnsNewOperation() {
+    let testResourceOperation = ResourceOperation<MockResourceService>(resource: mockResource, didFinishFetchingResourceCallback: { _, _ in })
+    let copiedResourceOperation = testResourceOperation.createCopy()
+    XCTAssertNotEqual(testResourceOperation, copiedResourceOperation)
+  }
+
+  func test_createCopy_usesTheSameServiceInstance() {
+    let copiedResourceOperation = testResourceOperation.createCopy()
+    copiedResourceOperation.execute()
+    XCTAssertEqual(mockService.fetchCallCount, 1)
   }
 
 }
