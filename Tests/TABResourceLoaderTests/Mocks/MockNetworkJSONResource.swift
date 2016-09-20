@@ -31,5 +31,5 @@ struct MockNetworkJSONResource: NetworkJSONResourceType {
     self.JSONBody = JSONBody
     self.queryItems = queryItems
   }
-  
+
 }

@@ -17,4 +17,5 @@ final class MockURLSession: URLSessionType {
     capturedRequest = request
     capturedCompletion = completion
   }
+  
 }

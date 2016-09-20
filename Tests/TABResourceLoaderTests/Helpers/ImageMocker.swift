@@ -9,6 +9,7 @@
 import UIKit
 
 struct ImageMocker {
+
   static func mock() -> UIImage {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     view.backgroundColor = .red
@@ -18,4 +19,5 @@ struct ImageMocker {
     UIGraphicsEndImageContext()
     return image!
   }
+
 }

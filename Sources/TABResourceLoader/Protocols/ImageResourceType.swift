@@ -16,14 +16,14 @@ public enum ImageDownloadingError: Error {
  *  Defines a specific ResourceType for Image resources
  */
 public protocol ImageResourceType: DataResourceType {
-  
+
   associatedtype Model: UIImage
-  
+
   /**
    Takes NSData and returns a result which is either Success with an Image or Failure with an error
-   
+
    - parameter data: Input Image Data
-   
+
    - returns: Result of image decoding.
    */
   func resultFrom(data: Data) -> Result<Model>
@@ -31,10 +31,12 @@ public protocol ImageResourceType: DataResourceType {
 
 // MARK: - Convenince parsing functions
 extension ImageResourceType {
+
   public func resultFrom(data: Data) -> Result<UIImage> {
     guard let image = UIImage(data: data) else {
       return Result.failure(ImageDownloadingError.invalidImageData)
     }
     return .success(image)
   }
+
 }

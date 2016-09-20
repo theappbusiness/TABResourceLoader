@@ -23,7 +23,7 @@ extension Result {
       self = .failure(error)
     }
   }
-  
+
   // Convert the `Result` back to typical Swift `throws` error handling
   public func unwrap() throws -> T {
     switch self {
@@ -34,7 +34,7 @@ extension Result {
 }
 
 extension Result {
-  
+
   /// Returns the success result if it exists, otherwise nil
   func successResult() -> T? {
     switch self {
@@ -44,7 +44,7 @@ extension Result {
       return nil
     }
   }
-  
+
   /// Returns the error if it exists, otherwise nil
   func error() -> Error? {
     switch self {
