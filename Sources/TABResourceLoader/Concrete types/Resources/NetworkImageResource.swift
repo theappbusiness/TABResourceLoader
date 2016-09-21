@@ -14,4 +14,8 @@ import Foundation
 public struct NetworkImageResource: NetworkImageResourceType {
   public typealias Model = UIImage
   public let url: URL
+
+  public init(url: URL) {
+    self.url = url
+  }
 }
