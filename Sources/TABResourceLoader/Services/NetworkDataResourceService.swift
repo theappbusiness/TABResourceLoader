@@ -16,22 +16,24 @@ import Foundation
  - NetworkingError:          Any other networking error
  - NoData:                   No data was returned
  */
-public enum NetworkServiceError: ErrorType {
-  case CouldNotCreateURLRequest
-  case StatusCodeError(statusCode: Int)
-  case NetworkingError(error: NSError)
-  case NoData
+public enum NetworkServiceError: Error {
+  case couldNotCreateURLRequest
+  case statusCodeError(statusCode: Int)
+  case networkingError(error: Error)
+  case noData
 }
 
-public class NetworkDataResourceService<Resource: protocol<NetworkResourceType, DataResourceType>>: ResourceServiceType {
-  
+open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType & DataResourceType>: ResourceServiceType {
+
+  public typealias Resource = NetworkDataResource
+
   /**
    Method designed to be implemented on subclasses, these fields will be overriden by any HTTP header field
    key that is defined in the resource (in case of conflicts)
    
    - returns: Return any additional header fields that need to be added to the url request
    */
-  public func additionalHeaderFields() -> [String: String] {
+  open func additionalHeaderFields() -> [String: String] {
     return [:]
   }
   
@@ -41,7 +43,7 @@ public class NetworkDataResourceService<Resource: protocol<NetworkResourceType, 
    - returns: An new instance
    */
   public required init() {
-    self.session = NSURLSession.sharedSession()
+    self.session = URLSession.shared as URLSessionType
   }
   
   let session: URLSessionType
@@ -50,20 +52,20 @@ public class NetworkDataResourceService<Resource: protocol<NetworkResourceType, 
     self.session = session
   }
   
-  public final func fetch(resource resource: Resource, completion: (Result<Resource.Model>) -> Void) {
-    guard let urlRequest = resource.urlRequest() as? NSMutableURLRequest else {
-      completion(.Failure(NetworkServiceError.CouldNotCreateURLRequest))
+  public final func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
+    guard var urlRequest = resource.urlRequest() else {
+      completion(.failure(NetworkServiceError.couldNotCreateURLRequest))
       return
     }
     
     urlRequest.allHTTPHeaderFields = allHTTPHeaderFields(resourceHTTPHeaderFields: urlRequest.allHTTPHeaderFields)
     
-    session.performRequest(urlRequest) { (data, URLResponse, error) in
+    session.perform(request: urlRequest) { (data, URLResponse, error) in
       completion(self.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
     }
   }
   
-  private func allHTTPHeaderFields(resourceHTTPHeaderFields resourceHTTPHeaderFields: [String: String]?) -> [String: String]? {
+  fileprivate func allHTTPHeaderFields(resourceHTTPHeaderFields: [String: String]?) -> [String: String]? {
     var generalHTTPHeaderFields = additionalHeaderFields()
     if let resourceHTTPHeaderFields = resourceHTTPHeaderFields {
       for (key, value) in resourceHTTPHeaderFields {
@@ -73,22 +75,22 @@ public class NetworkDataResourceService<Resource: protocol<NetworkResourceType, 
     return generalHTTPHeaderFields
   }
   
-  private func resultFrom(resource resource: Resource, data: NSData?, URLResponse: NSURLResponse?, error: NSError?) -> Result<Resource.Model> {
+  fileprivate func resultFrom(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> Result<Resource.Model> {
     
-    if let HTTPURLResponse = URLResponse as? NSHTTPURLResponse {
+    if let HTTPURLResponse = URLResponse as? HTTPURLResponse {
       switch HTTPURLResponse.statusCode {
       case 400..<600:
-        return .Failure(NetworkServiceError.StatusCodeError(statusCode: HTTPURLResponse.statusCode))
+        return .failure(NetworkServiceError.statusCodeError(statusCode: HTTPURLResponse.statusCode))
       default: break
       }
     }
     
     if let error = error {
-      return .Failure(NetworkServiceError.NetworkingError(error: error))
+      return .failure(NetworkServiceError.networkingError(error: error))
     }
     
     guard let data = data else {
-      return .Failure(NetworkServiceError.NoData)
+      return .failure(NetworkServiceError.noData)
     }
     
     return resource.resultFrom(data: data)

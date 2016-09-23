@@ -1,28 +1,22 @@
 //
-//  MockObject.swift
-//  TABResourceLoaderTests
+//  City.swift
+//  Example
 //
-//  Created by Luciano Marisi on 10/09/2016.
+//  Created by Luciano Marisi on 17/09/2016.
 //  Copyright © 2016 Luciano Marisi. All rights reserved.
 //
 
 import Foundation
 
-struct MockObject {
+struct City {
   let name: String
 }
 
-extension MockObject {
+extension City {
   init?(jsonDictionary: [String : Any]) {
     guard let parsedName = jsonDictionary["name"] as? String else {
       return nil
     }
     name = parsedName
   }
-}
-
-extension MockObject: Equatable {}
-
-func ==(lhs: MockObject, rhs: MockObject) -> Bool {
-  return lhs.name == rhs.name
 }

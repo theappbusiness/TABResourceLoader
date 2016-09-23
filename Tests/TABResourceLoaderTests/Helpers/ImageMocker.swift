@@ -9,13 +9,15 @@
 import UIKit
 
 struct ImageMocker {
+
   static func mock() -> UIImage {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    view.backgroundColor = .redColor()
+    view.backgroundColor = .red
     UIGraphicsBeginImageContext(view.bounds.size)
-    view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+    view.layer.render(in: UIGraphicsGetCurrentContext()!)
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    return image
+    return image!
   }
+
 }

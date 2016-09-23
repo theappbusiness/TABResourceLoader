@@ -20,12 +20,12 @@ public protocol Finishable: class {
 
    - parameter errors: Any error from the work done
    */
-  func finish(errors: [NSError])
+  func finish(_ errors: [Error])
 }
 
 public protocol ResourceOperationType: Cancellable, Finishable {
 
-  associatedtype Resource: ResourceType
+  associatedtype ResourceService: ResourceServiceType
 
   /**
    Fetches a resource using the provided service
@@ -33,22 +33,22 @@ public protocol ResourceOperationType: Cancellable, Finishable {
    - parameter resource: The resource to fetch
    - parameter service:  The service to be used for fetching the resource
    */
-  func fetch<Service: ResourceServiceType where Service.Resource == Resource>(resource resource: Resource, usingService service: Service)
+  func fetch(resource: ResourceService.Resource, usingService service: ResourceService)
 
   /**
    Called when the operation has finished, called on Main thread
 
    - parameter result: The result of the operation
    */
-  func didFinishFetchingResource(result result: Result<Resource.Model>)
+  func didFinishFetchingResource(result: Result<ResourceService.Resource.Model>)
 }
 
 public extension ResourceOperationType {
 
-  public func fetch<Service: ResourceServiceType where Service.Resource == Resource>(resource resource: Resource, usingService service: Service) {
+  func fetch(resource: ResourceService.Resource, usingService service: ResourceService) {
     if cancelled { return }
     service.fetch(resource: resource) { [weak self] (result) in
-      NSThread.rl_executeOnMain { [weak self] in
+      Thread.rl_executeOnMain { [weak self] in
         guard let strongSelf = self else { return }
         if strongSelf.cancelled { return }
         strongSelf.didFinishFetchingResource(result: result)

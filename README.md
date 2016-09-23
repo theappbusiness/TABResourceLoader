@@ -4,7 +4,6 @@
 [![](https://img.shields.io/cocoapods/v/TABResourceLoader.svg)](https://cocoapods.org/pods/TABResourceLoader)
 [![](https://img.shields.io/cocoapods/p/TABResourceLoader.svg?style=flat)](https://cocoapods.org/pods/TABResourceLoader)
 [![codecov.io](http://codecov.io/github/theappbusiness/TABResourceLoader/coverage.svg?branch=master)](http://codecov.io/github/theappbusiness/TABResourceLoader?branch=master)
-[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/TABResourceLoader.svg?style=flat)](http://cocoadocs.org/docsets/TABResourceLoader/)
 
 The idea behind this library is for the user to define the resources in their application by conforming to protocols that define where and how to get them. These resources can then be retrieved using a generic service type with or without an operation provided by the library.
 
