@@ -24,7 +24,6 @@
 		4F079D661D8459D400D08DA0 /* MockDefaultJSONResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D411D84599300D08DA0 /* MockDefaultJSONResourceType.swift */; };
 		4F079D671D8459D400D08DA0 /* MockJSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */; };
 		4F079D681D8459D400D08DA0 /* MockJSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */; };
-		4F079D691D8459D400D08DA0 /* MockNetworkJSONResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D441D84599300D08DA0 /* MockNetworkJSONResource.swift */; };
 		4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */; };
 		4F079D6B1D8459D400D08DA0 /* MockObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D461D84599300D08DA0 /* MockObject.swift */; };
 		4F079D6C1D8459D400D08DA0 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D471D84599300D08DA0 /* MockResource.swift */; };
@@ -38,7 +37,6 @@
 		4F079D7A1D84652200D08DA0 /* ImageMocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D781D84650800D08DA0 /* ImageMocker.swift */; };
 		4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */; };
 		4F88C6971D88A122002CAEA2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D341D8457FF00D08DA0 /* Result.swift */; };
-		4F88C6991D88A2D7002CAEA2 /* MockNetworkResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D761D845F7E00D08DA0 /* MockNetworkResource.swift */; };
 		4F8D1FBD1D8DFFD40099DD9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D1FBC1D8DFFD40099DD9A /* AppDelegate.swift */; };
 		4F8D1FBF1D8DFFD40099DD9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D1FBE1D8DFFD40099DD9A /* ViewController.swift */; };
 		4F8D1FC21D8DFFD40099DD9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D1FC01D8DFFD40099DD9A /* Main.storyboard */; };
@@ -51,6 +49,8 @@
 		4F8D1FD71D8E00560099DD9A /* TABResourceLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F079CCF1D84559100D08DA0 /* TABResourceLoader.framework */; };
 		4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */; };
 		4FB4D6D71D84801800A7D1B8 /* ResourceOperationTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */; };
+		4FFA60A31D9BFFF700A91693 /* NetworkJSONResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A11D9BFFDF00A91693 /* NetworkJSONResourceTypeTests.swift */; };
+		4FFA60A51D9C017200A91693 /* NetworkJSONResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A41D9C017200A91693 /* NetworkJSONResourceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +86,6 @@
 		4F079D411D84599300D08DA0 /* MockDefaultJSONResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDefaultJSONResourceType.swift; sourceTree = "<group>"; };
 		4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONArrayResourceType.swift; sourceTree = "<group>"; };
 		4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONDictionaryResourceType.swift; sourceTree = "<group>"; };
-		4F079D441D84599300D08DA0 /* MockNetworkJSONResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkJSONResource.swift; sourceTree = "<group>"; };
 		4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNilURLRequestNetworkJSONResource.swift; sourceTree = "<group>"; };
 		4F079D461D84599300D08DA0 /* MockObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockObject.swift; sourceTree = "<group>"; };
 		4F079D471D84599300D08DA0 /* MockResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockResource.swift; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 		4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceOperationTypeTests.swift; sourceTree = "<group>"; };
 		4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResourceServiceTests.swift; sourceTree = "<group>"; };
 		4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubclassedNetworkDataResourceServiceTests.swift; sourceTree = "<group>"; };
-		4F079D761D845F7E00D08DA0 /* MockNetworkResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkResource.swift; sourceTree = "<group>"; };
 		4F079D781D84650800D08DA0 /* ImageMocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMocker.swift; sourceTree = "<group>"; };
 		4F8D1FBA1D8DFFD30099DD9A /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8D1FBC1D8DFFD40099DD9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +110,8 @@
 		4F8D1FCE1D8E00040099DD9A /* europe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = europe.json; sourceTree = "<group>"; };
 		4F8D1FD01D8E00040099DD9A /* CitiesResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesResource.swift; sourceTree = "<group>"; };
 		4F8D1FD11D8E00040099DD9A /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		4FFA60A11D9BFFDF00A91693 /* NetworkJSONResourceTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONResourceTypeTests.swift; sourceTree = "<group>"; };
+		4FFA60A41D9C017200A91693 /* NetworkJSONResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONResourceType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +225,7 @@
 				4F079D201D84577E00D08DA0 /* ImageResourceType.swift */,
 				4F079D211D84577E00D08DA0 /* JSONResourceType.swift */,
 				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
+				4FFA60A41D9C017200A91693 /* NetworkJSONResourceType.swift */,
 				4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */,
 				4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */,
 			);
@@ -280,8 +281,6 @@
 				4F079D411D84599300D08DA0 /* MockDefaultJSONResourceType.swift */,
 				4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */,
 				4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */,
-				4F079D441D84599300D08DA0 /* MockNetworkJSONResource.swift */,
-				4F079D761D845F7E00D08DA0 /* MockNetworkResource.swift */,
 				4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */,
 				4F079D461D84599300D08DA0 /* MockObject.swift */,
 				4F079D471D84599300D08DA0 /* MockResource.swift */,
@@ -305,6 +304,7 @@
 				4F079D4D1D84599300D08DA0 /* ImageResourceTypeTests.swift */,
 				4F079D4E1D84599300D08DA0 /* JSONResourceTypeTests.swift */,
 				4F079D4F1D84599300D08DA0 /* NetworkResourceTypeTests.swift */,
+				4FFA60A11D9BFFDF00A91693 /* NetworkJSONResourceTypeTests.swift */,
 				4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */,
 			);
 			path = Protocols;
@@ -511,6 +511,7 @@
 				4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */,
 				4F079D3C1D8458E800D08DA0 /* NetworkImageResource.swift in Sources */,
 				4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */,
+				4FFA60A51D9C017200A91693 /* NetworkJSONResourceType.swift in Sources */,
 				4F079D2B1D84577E00D08DA0 /* ImageResourceType.swift in Sources */,
 				4F079D311D84577E00D08DA0 /* URLSessionType.swift in Sources */,
 				4F079D2F1D84577E00D08DA0 /* ResourceServiceType.swift in Sources */,
@@ -531,14 +532,13 @@
 				4F079D6F1D8459D400D08DA0 /* ResourceOperationTests.swift in Sources */,
 				4F079D701D8459D400D08DA0 /* ImageResourceTypeTests.swift in Sources */,
 				4F079D6E1D8459D400D08DA0 /* MockURLSession.swift in Sources */,
-				4F079D691D8459D400D08DA0 /* MockNetworkJSONResource.swift in Sources */,
 				4F079D741D8459D400D08DA0 /* NetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6B1D8459D400D08DA0 /* MockObject.swift in Sources */,
 				4F079D671D8459D400D08DA0 /* MockJSONArrayResourceType.swift in Sources */,
+				4FFA60A31D9BFFF700A91693 /* NetworkJSONResourceTypeTests.swift in Sources */,
 				4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */,
 				4F079D711D8459D400D08DA0 /* JSONResourceTypeTests.swift in Sources */,
 				4F079D681D8459D400D08DA0 /* MockJSONDictionaryResourceType.swift in Sources */,
-				4F88C6991D88A2D7002CAEA2 /* MockNetworkResource.swift in Sources */,
 				4F079D6D1D8459D400D08DA0 /* MockResourceService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

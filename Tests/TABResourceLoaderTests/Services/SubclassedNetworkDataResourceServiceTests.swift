@@ -11,6 +11,17 @@ import XCTest
 
 private let commonKey = "common"
 
+struct MockHTTPHeaderFieldsNetworkDataResource: NetworkResourceType, DataResourceType {
+  typealias Model = String
+  let url: URL
+  let HTTPHeaderFields: [String: String]?
+
+  func resultFrom(data: Data) -> Result<String> {
+    return .success("")
+  }
+}
+
+
 final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: NetworkDataResourceService<Resource> {
 
   // Needed because of https://bugs.swift.org/browse/SR-416
@@ -30,10 +41,10 @@ final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType &
 
 class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
-  var testService: SubclassedNetworkDataResourceService<MockNetworkJSONResource>!
+  var testService: SubclassedNetworkDataResourceService<MockHTTPHeaderFieldsNetworkDataResource>!
   
   var mockSession: MockURLSession!
-  var mockResource: MockNetworkJSONResource!
+  var mockResource: MockHTTPHeaderFieldsNetworkDataResource!
   let mockURL = URL(string: "http://test.com")!
 
   override func setUp() {
@@ -44,14 +55,14 @@ class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
 
   func test_subclassHTTPHeaderFields_areOverridenByResourceHTTPHeaderFields() {
     let resourceHTTPHeaderFields = [commonKey: "resource"]
-    mockResource = MockNetworkJSONResource(url: mockURL, HTTPHeaderFields: resourceHTTPHeaderFields)
+    mockResource = MockHTTPHeaderFieldsNetworkDataResource(url: mockURL, HTTPHeaderFields: resourceHTTPHeaderFields)
     testService.fetch(resource: mockResource) { _ in }
     XCTAssertEqual(mockSession.capturedRequest!.allHTTPHeaderFields!, resourceHTTPHeaderFields)
   }
 
   func test_finalRequestInclude_subclassHTTPHeaderFields_and_resourceHTTPHeaderFields() {
     let resourceHTTPHeaderFields = ["resource_key" : "resource"]
-    mockResource = MockNetworkJSONResource(url: mockURL, HTTPHeaderFields: resourceHTTPHeaderFields)
+    mockResource = MockHTTPHeaderFieldsNetworkDataResource(url: mockURL, HTTPHeaderFields: resourceHTTPHeaderFields)
     testService.fetch(resource: mockResource) { _ in }
     let expectedHeaderFields = [commonKey: "subclass", "resource_key" : "resource"]
     XCTAssertEqual(mockSession.capturedRequest!.allHTTPHeaderFields!, expectedHeaderFields)
