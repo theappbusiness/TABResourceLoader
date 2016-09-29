@@ -51,7 +51,7 @@ public extension NetworkResourceType {
 
   public func urlRequest() -> URLRequest? {
     var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-    urlComponents?.queryItems = queryItems
+    urlComponents?.queryItems = allQueryItems()
 
     guard let urlFromComponents = urlComponents?.url else { return nil }
 
@@ -65,13 +65,21 @@ public extension NetworkResourceType {
 
     return request
   }
-}
 
-public protocol NetworkJSONResourceType: NetworkResourceType, JSONResourceType {}
-public protocol NetworkImageResourceType: NetworkResourceType, ImageResourceType {}
+  private func allQueryItems() -> [URLQueryItem] {
+    var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+    var allQueryItems = [URLQueryItem]()
 
-public extension NetworkJSONResourceType {
-  var HTTPHeaderFields: [String: String]? {
-    return ["Content-Type": "application/json"]
+    if let componentsQueryItems = urlComponents?.queryItems {
+      allQueryItems.append(contentsOf: componentsQueryItems)
+    }
+
+    if let queryItems = queryItems {
+      allQueryItems.append(contentsOf: queryItems)
+    }
+
+    return allQueryItems
   }
 }
+
+public protocol NetworkImageResourceType: NetworkResourceType, ImageResourceType {}
