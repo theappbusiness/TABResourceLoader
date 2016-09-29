@@ -9,5 +9,12 @@
 import Foundation
 
 public protocol DataResourceType: ResourceType {
+  /**
+   Parse this resources Model from some data
+
+   - parameter data: The data to parse
+
+   - returns: An instantiated model if parsing was succesful, otherwise nil
+   */
   func resultFrom(data: Data) -> Result<Model>
 }
