@@ -17,6 +17,7 @@ public extension NetworkJSONResourceType {
   }
 }
 
+/// Defines a resource that can be fetched from a network where the root type is a JSON object
 public protocol NetworkJSONDictionaryResourceType: NetworkResourceType, JSONDictionaryResourceType {}
 
 public extension NetworkJSONDictionaryResourceType {
@@ -25,6 +26,7 @@ public extension NetworkJSONDictionaryResourceType {
   }
 }
 
+/// Defines a resource that can be fetched from a network where the root type is a JSON array
 public protocol NetworkJSONArrayResourceType: NetworkResourceType, JSONArrayResourceType {}
 
 public extension NetworkJSONArrayResourceType {

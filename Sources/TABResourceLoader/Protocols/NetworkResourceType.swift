@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+/// An enum representing the HTTP Method
 public enum HTTPMethod: String {
   case GET
   case POST
@@ -17,6 +19,7 @@ public enum HTTPMethod: String {
   case PUT
 }
 
+/// Defines a resource that can be fetched from a network
 public protocol NetworkResourceType {
   /// The URL of the resource
   var url: URL { get }
