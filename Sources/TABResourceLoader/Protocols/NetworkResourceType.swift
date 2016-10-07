@@ -11,12 +11,29 @@ import Foundation
 
 /// An enum representing the HTTP Method
 public enum HTTPMethod: String {
+  @available(*, deprecated: 2.1.0, renamed: "get")
   case GET
+  @available(*, deprecated: 2.1.0, renamed: "post")
   case POST
+  @available(*, deprecated: 2.1.0, renamed: "patch")
   case PATCH
+  @available(*, deprecated: 2.1.0, renamed: "delete")
   case DELETE
+  @available(*, deprecated: 2.1.0, renamed: "head")
   case HEAD
+  @available(*, deprecated: 2.1.0, renamed: "put")
   case PUT
+
+  case get
+  case post
+  case patch
+  case delete
+  case head
+  case put
+
+  public var rawValue: String {
+    return "\(self)".uppercased()
+  }
 }
 
 /// Defines a resource that can be fetched from a network
@@ -47,7 +64,7 @@ public protocol NetworkResourceType {
 // MARK: - NetworkJSONResource defaults
 public extension NetworkResourceType {
 
-  public var HTTPRequestMethod: HTTPMethod { return .GET }
+  public var HTTPRequestMethod: HTTPMethod { return .get }
   public var HTTPHeaderFields: [String: String]? { return [:] }
   public var JSONBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
@@ -61,7 +78,7 @@ public extension NetworkResourceType {
     var request = URLRequest(url: urlFromComponents)
     request.allHTTPHeaderFields = HTTPHeaderFields
     request.httpMethod = HTTPRequestMethod.rawValue
-    
+
     if let body = JSONBody {
       request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
     }
