@@ -18,10 +18,12 @@ public protocol ResourceType {
 /**
  *  Defines a specific ResourceType used for JSON resources
  */
+@available(*, deprecated: 2.1.0, message: "Use JSONDictionaryResourceType or JSONArrayResourceType")
 public protocol JSONResourceType: DataResourceType {
   func modelFrom(jsonDictionary: [String : Any]) -> Model?
   func modelFrom(jsonArray: [Any]) -> Model?
 }
+
 
 // MARK: - Parsing defaults
 extension JSONResourceType {
@@ -49,6 +51,8 @@ enum JSONParsingError: Error {
   case cannotParseJSONDictionary
   case cannotParseJSONArray
   case unsupportedType
+  case notAJSONDictionary
+  case notAJSONArray
 }
 
 // MARK: - Convenince parsing functions

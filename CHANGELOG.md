@@ -1,5 +1,15 @@
 # Change Log
 
+2.1.0
+
+## Bug fixes
+
+- Issue #3 - Query items on the `URL` for a `NetworkResourceType` are now added to the generated `URLRequest`
+
+## New features
+
+- Issue #4 - Introduced `JSONArrayResourceType` and `JSONDictionaryResourceType` in favour of now deprecated `JSONResourceType` 
+
 2.0.0
 
 - Migrated to Swift 3

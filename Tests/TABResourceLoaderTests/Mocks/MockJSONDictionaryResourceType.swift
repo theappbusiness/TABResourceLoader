@@ -9,7 +9,7 @@
 import Foundation
 @testable import TABResourceLoader
 
-struct MockJSONDictionaryResourceType: JSONResourceType {
+struct MockJSONDictionaryResourceType: JSONDictionaryResourceType {
   typealias Model = MockObject
 
   func modelFrom(jsonDictionary: [String : Any]) -> MockObject? {
