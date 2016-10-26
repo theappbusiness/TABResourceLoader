@@ -42,7 +42,7 @@ public protocol NetworkResourceType {
   var url: URL { get }
 
   /// The HTTP method used to fetch this resource
-  var HTTPRequestMethod: HTTPMethod { get }
+  var httpRequestMethod: HTTPMethod { get }
 
   /// The HTTP header fields used to fetch this resource
   var HTTPHeaderFields: [String: String]? { get }
@@ -64,7 +64,7 @@ public protocol NetworkResourceType {
 // MARK: - NetworkJSONResource defaults
 public extension NetworkResourceType {
 
-  public var HTTPRequestMethod: HTTPMethod { return .get }
+  public var httpRequestMethod: HTTPMethod { return .get }
   public var HTTPHeaderFields: [String: String]? { return [:] }
   public var JSONBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
@@ -77,7 +77,7 @@ public extension NetworkResourceType {
 
     var request = URLRequest(url: urlFromComponents)
     request.allHTTPHeaderFields = HTTPHeaderFields
-    request.httpMethod = HTTPRequestMethod.rawValue
+    request.httpMethod = httpRequestMethod.rawValue
 
     if let body = JSONBody {
       request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
