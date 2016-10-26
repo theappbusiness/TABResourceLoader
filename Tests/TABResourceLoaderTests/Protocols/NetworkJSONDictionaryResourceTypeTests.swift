@@ -13,7 +13,7 @@ struct MockNetworkJSONDictionaryResourceType: NetworkJSONDictionaryResourceType 
   typealias Model = String
   let url: URL
   
-  func modelFrom(jsonDictionary: [String : Any]) -> String? {
+  func model(from jsonDictionary: [String : Any]) -> String? {
     return ""
   }
   
