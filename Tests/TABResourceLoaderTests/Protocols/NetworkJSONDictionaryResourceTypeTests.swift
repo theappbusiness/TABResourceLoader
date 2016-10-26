@@ -27,7 +27,7 @@ class NetworkJSONDictionaryResourceTypeTests: XCTestCase {
     let resource = MockNetworkJSONDictionaryResourceType(url: url)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/json"])
-    XCTAssertNil(resource.JSONBody)
+    XCTAssertNil(resource.jsonBody)
     XCTAssertNil(resource.queryItems)
   }
   
