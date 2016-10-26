@@ -12,7 +12,7 @@ import Foundation
 public protocol NetworkJSONResourceType: NetworkResourceType, JSONResourceType {}
 
 public extension NetworkJSONResourceType {
-  var HTTPHeaderFields: [String: String]? {
+  var httpHeaderFields: [String: String]? {
     return ["Content-Type": "application/json"]
   }
 }
@@ -21,7 +21,7 @@ public extension NetworkJSONResourceType {
 public protocol NetworkJSONDictionaryResourceType: NetworkResourceType, JSONDictionaryResourceType {}
 
 public extension NetworkJSONDictionaryResourceType {
-  var HTTPHeaderFields: [String: String]? {
+  var httpHeaderFields: [String: String]? {
     return ["Content-Type": "application/json"]
   }
 }
@@ -30,7 +30,7 @@ public extension NetworkJSONDictionaryResourceType {
 public protocol NetworkJSONArrayResourceType: NetworkResourceType, JSONArrayResourceType {}
 
 public extension NetworkJSONArrayResourceType {
-  var HTTPHeaderFields: [String: String]? {
+  var httpHeaderFields: [String: String]? {
     return ["Content-Type": "application/json"]
   }
 }

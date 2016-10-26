@@ -45,7 +45,7 @@ public protocol NetworkResourceType {
   var httpRequestMethod: HTTPMethod { get }
 
   /// The HTTP header fields used to fetch this resource
-  var HTTPHeaderFields: [String: String]? { get }
+  var httpHeaderFields: [String: String]? { get }
 
   /// The HTTP body as JSON used to fetch this resource
   var JSONBody: Any? { get }
@@ -65,7 +65,7 @@ public protocol NetworkResourceType {
 public extension NetworkResourceType {
 
   public var httpRequestMethod: HTTPMethod { return .get }
-  public var HTTPHeaderFields: [String: String]? { return [:] }
+  public var httpHeaderFields: [String: String]? { return [:] }
   public var JSONBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
 
@@ -76,7 +76,7 @@ public extension NetworkResourceType {
     guard let urlFromComponents = urlComponents?.url else { return nil }
 
     var request = URLRequest(url: urlFromComponents)
-    request.allHTTPHeaderFields = HTTPHeaderFields
+    request.allHTTPHeaderFields = httpHeaderFields
     request.httpMethod = httpRequestMethod.rawValue
 
     if let body = JSONBody {
