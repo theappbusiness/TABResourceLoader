@@ -58,7 +58,7 @@ enum JSONParsingError: Error {
 // MARK: - Convenince parsing functions
 extension JSONResourceType {
 
-  public func resultFrom(data: Data) -> Result<Model> {
+  public func result(from data: Data) -> Result<Model> {
     guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
       return .failure(JSONParsingError.invalidJSONData)
     }

@@ -20,7 +20,7 @@ class ImageResourceTypeTests: XCTestCase {
   }
   
   func test_resultFromData_whenDataIsInvalid() {
-    let testResult = mockImageResourceType.resultFrom(data: Data())
+    let testResult = mockImageResourceType.result(from: Data())
     guard case .failure(let error) = testResult else {
       XCTFail("Expected .Failure but got .Success")
       return
@@ -36,7 +36,7 @@ class ImageResourceTypeTests: XCTestCase {
   func test_resultFromData_whenDataIsValid() {
     let mockImage = ImageMocker.mock()
     let imageData = UIImagePNGRepresentation(mockImage)!
-    let testResult = mockImageResourceType.resultFrom(data: imageData)
+    let testResult = mockImageResourceType.result(from: imageData)
     guard case .success = testResult else {
       XCTFail("Expected .Success but got .Failure")
       return

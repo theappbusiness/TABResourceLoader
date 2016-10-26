@@ -93,7 +93,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
       return .failure(NetworkServiceError.noData)
     }
     
-    return resource.resultFrom(data: data)
+    return resource.result(from: data)
   }
   
 }

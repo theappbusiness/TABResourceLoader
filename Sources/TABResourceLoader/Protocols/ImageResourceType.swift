@@ -26,13 +26,13 @@ public protocol ImageResourceType: DataResourceType {
 
    - returns: Result of image decoding.
    */
-  func resultFrom(data: Data) -> Result<Model>
+  func result(from data: Data) -> Result<Model>
 }
 
 // MARK: - Convenince parsing functions
 extension ImageResourceType {
 
-  public func resultFrom(data: Data) -> Result<UIImage> {
+  public func result(from data: Data) -> Result<UIImage> {
     guard let image = UIImage(data: data) else {
       return Result.failure(ImageDownloadingError.invalidImageData)
     }
