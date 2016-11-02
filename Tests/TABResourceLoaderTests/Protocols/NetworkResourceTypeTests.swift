@@ -17,16 +17,16 @@ private struct MockDefaultNetworkResource: NetworkResourceType {
 private struct MockCustomNetworkResource: NetworkResourceType {
   typealias Model = String
   let url: URL
-  let HTTPRequestMethod: HTTPMethod
-  let HTTPHeaderFields: [String: String]?
-  let JSONBody: Any?
+  let httpRequestMethod: HTTPMethod
+  let httpHeaderFields: [String: String]?
+  let jsonBody: Any?
   let queryItems: [URLQueryItem]?
 
-  init(url: URL, HTTPRequestMethod: HTTPMethod = .get, HTTPHeaderFields: [String : String]? = nil, JSONBody: Any? = nil, queryItems: [URLQueryItem]? = nil) {
+  init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String : String]? = nil, jsonBody: Any? = nil, queryItems: [URLQueryItem]? = nil) {
     self.url = url
-    self.HTTPRequestMethod = HTTPRequestMethod
-    self.HTTPHeaderFields = HTTPHeaderFields
-    self.JSONBody = JSONBody
+    self.httpRequestMethod = httpRequestMethod
+    self.httpHeaderFields = httpHeaderFields
+    self.jsonBody = jsonBody
     self.queryItems = queryItems
   }
 }
@@ -38,9 +38,9 @@ class NetworkResourceTypeTests: XCTestCase {
 
   func test_correctDefaultValues() {
     let resource = MockDefaultNetworkResource(url: url)
-    XCTAssertEqual(resource.HTTPRequestMethod, HTTPMethod.get)
-    XCTAssertEqual(resource.HTTPHeaderFields!, [:])
-    XCTAssertNil(resource.JSONBody)
+    XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
+    XCTAssertEqual(resource.httpHeaderFields!, [:])
+    XCTAssertNil(resource.jsonBody)
     XCTAssertNil(resource.queryItems)
   }
 
@@ -50,7 +50,7 @@ class NetworkResourceTypeTests: XCTestCase {
     let expectedJSONBody = ["jsonKey": "jsonValue"]
     let mockedURLQueryItems = [URLQueryItem(name: "query-name", value: "query-value")]
     let expectedURL = "\(url)?query-name=query-value"
-    let mockNetworkResource = MockCustomNetworkResource(url: url, HTTPRequestMethod: expectedHTTPMethod, HTTPHeaderFields: expectedAllHTTPHeaderFields, JSONBody: expectedJSONBody, queryItems: mockedURLQueryItems)
+    let mockNetworkResource = MockCustomNetworkResource(url: url, httpRequestMethod: expectedHTTPMethod, httpHeaderFields: expectedAllHTTPHeaderFields, jsonBody: expectedJSONBody, queryItems: mockedURLQueryItems)
 
     let urlRequest = mockNetworkResource.urlRequest()
     XCTAssertNotNil(urlRequest)

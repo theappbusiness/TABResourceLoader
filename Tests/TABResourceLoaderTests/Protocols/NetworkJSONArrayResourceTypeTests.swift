@@ -13,7 +13,7 @@ struct MockNetworkJSONArrayResourceType: NetworkJSONArrayResourceType {
   typealias Model = String
   let url: URL
   
-  func modelFrom(jsonArray: [Any]) -> String? {
+  func model(from jsonArray: [Any]) -> String? {
     return ""
   }
   
@@ -25,9 +25,9 @@ class NetworkJSONArrayResourceTypeTests: XCTestCase {
 
   func test_correctDefaultValues() {
     let resource = MockNetworkJSONArrayResourceType(url: url)
-    XCTAssertEqual(resource.HTTPRequestMethod, HTTPMethod.get)
-    XCTAssertEqual(resource.HTTPHeaderFields!, ["Content-Type": "application/json"])
-    XCTAssertNil(resource.JSONBody)
+    XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
+    XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/json"])
+    XCTAssertNil(resource.jsonBody)
     XCTAssertNil(resource.queryItems)
   }
 

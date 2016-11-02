@@ -12,7 +12,7 @@ import Foundation
 struct MockJSONDictionaryResourceType: JSONDictionaryResourceType {
   typealias Model = MockObject
 
-  func modelFrom(jsonDictionary: [String : Any]) -> MockObject? {
+  func model(from jsonDictionary: [String : Any]) -> MockObject? {
     return MockObject(jsonDictionary: jsonDictionary)
   }
 
