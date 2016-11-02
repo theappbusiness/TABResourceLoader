@@ -12,7 +12,7 @@
 		4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1C1D84577E00D08DA0 /* BaseAsynchronousOperation.swift */; };
 		4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */; };
 		4F079D2B1D84577E00D08DA0 /* ImageResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D201D84577E00D08DA0 /* ImageResourceType.swift */; };
-		4F079D2C1D84577E00D08DA0 /* JSONResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D211D84577E00D08DA0 /* JSONResourceType.swift */; };
+		4F079D2C1D84577E00D08DA0 /* JSONParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D211D84577E00D08DA0 /* JSONParsingError.swift */; };
 		4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */; };
 		4F079D2E1D84577E00D08DA0 /* ResourceOperationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */; };
 		4F079D2F1D84577E00D08DA0 /* ResourceServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */; };
@@ -21,7 +21,6 @@
 		4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D361D84585E00D08DA0 /* NSThread+Additions.swift */; };
 		4F079D3C1D8458E800D08DA0 /* NetworkImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D3B1D8458E800D08DA0 /* NetworkImageResource.swift */; };
 		4F079D651D8459D400D08DA0 /* XCTestCase+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D3F1D84599300D08DA0 /* XCTestCase+Additions.swift */; };
-		4F079D661D8459D400D08DA0 /* MockDefaultJSONResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D411D84599300D08DA0 /* MockDefaultJSONResourceType.swift */; };
 		4F079D671D8459D400D08DA0 /* MockJSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */; };
 		4F079D681D8459D400D08DA0 /* MockJSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */; };
 		4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */; };
@@ -54,8 +53,10 @@
 		4F8D1FD71D8E00560099DD9A /* TABResourceLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F079CCF1D84559100D08DA0 /* TABResourceLoader.framework */; };
 		4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */; };
 		4FB4D6D71D84801800A7D1B8 /* ResourceOperationTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */; };
-		4FFA60A31D9BFFF700A91693 /* NetworkJSONResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A11D9BFFDF00A91693 /* NetworkJSONResourceTypeTests.swift */; };
-		4FFA60A51D9C017200A91693 /* NetworkJSONResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A41D9C017200A91693 /* NetworkJSONResourceType.swift */; };
+		4FC453931DC9FFE600EA1FAE /* MockDefaultNetworkDataResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC453901DC9FF5800EA1FAE /* MockDefaultNetworkDataResource.swift */; };
+		4FF005331DC9F985006BBACE /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF005321DC9F985006BBACE /* ResourceType.swift */; };
+		4FF005351DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */; };
+		4FFA60A51D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +79,7 @@
 		4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceOperation.swift; sourceTree = "<group>"; };
 		4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataResourceType.swift; sourceTree = "<group>"; };
 		4F079D201D84577E00D08DA0 /* ImageResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResourceType.swift; sourceTree = "<group>"; };
-		4F079D211D84577E00D08DA0 /* JSONResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONResourceType.swift; sourceTree = "<group>"; };
+		4F079D211D84577E00D08DA0 /* JSONParsingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsingError.swift; sourceTree = "<group>"; };
 		4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResourceType.swift; sourceTree = "<group>"; };
 		4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceOperationType.swift; sourceTree = "<group>"; };
 		4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceServiceType.swift; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		4F079D361D84585E00D08DA0 /* NSThread+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSThread+Additions.swift"; sourceTree = "<group>"; };
 		4F079D3B1D8458E800D08DA0 /* NetworkImageResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkImageResource.swift; sourceTree = "<group>"; };
 		4F079D3F1D84599300D08DA0 /* XCTestCase+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Additions.swift"; sourceTree = "<group>"; };
-		4F079D411D84599300D08DA0 /* MockDefaultJSONResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDefaultJSONResourceType.swift; sourceTree = "<group>"; };
 		4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONArrayResourceType.swift; sourceTree = "<group>"; };
 		4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockJSONDictionaryResourceType.swift; sourceTree = "<group>"; };
 		4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNilURLRequestNetworkJSONResource.swift; sourceTree = "<group>"; };
@@ -120,8 +120,10 @@
 		4F8D1FCE1D8E00040099DD9A /* europe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = europe.json; sourceTree = "<group>"; };
 		4F8D1FD01D8E00040099DD9A /* CitiesResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesResource.swift; sourceTree = "<group>"; };
 		4F8D1FD11D8E00040099DD9A /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
-		4FFA60A11D9BFFDF00A91693 /* NetworkJSONResourceTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONResourceTypeTests.swift; sourceTree = "<group>"; };
-		4FFA60A41D9C017200A91693 /* NetworkJSONResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONResourceType.swift; sourceTree = "<group>"; };
+		4FC453901DC9FF5800EA1FAE /* MockDefaultNetworkDataResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDefaultNetworkDataResource.swift; sourceTree = "<group>"; };
+		4FF005321DC9F985006BBACE /* ResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
+		4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONArrayResourceType.swift; sourceTree = "<group>"; };
+		4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONDictionaryResourceType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +156,8 @@
 		4F079CC51D84559100D08DA0 = {
 			isa = PBXGroup;
 			children = (
-				4F079CD11D84559100D08DA0 /* Metadata */,
 				4F8D1FBB1D8DFFD40099DD9A /* Example */,
+				4F079CD11D84559100D08DA0 /* Metadata */,
 				4F079CD01D84559100D08DA0 /* Products */,
 				4F079D1A1D84577E00D08DA0 /* Sources */,
 				4F079CE91D84566300D08DA0 /* Tests */,
@@ -233,13 +235,14 @@
 			children = (
 				4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */,
 				4F079D201D84577E00D08DA0 /* ImageResourceType.swift */,
-				4F079D211D84577E00D08DA0 /* JSONResourceType.swift */,
-				4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */,
 				4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */,
+				4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */,
+				4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */,
+				4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */,
 				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
-				4FFA60A41D9C017200A91693 /* NetworkJSONResourceType.swift */,
 				4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */,
 				4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */,
+				4FF005321DC9F985006BBACE /* ResourceType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				4F079D3D1D84590600D08DA0 /* Resources */,
+				4F079D211D84577E00D08DA0 /* JSONParsingError.swift */,
 				4F079D341D8457FF00D08DA0 /* Result.swift */,
 			);
 			path = "Concrete types";
@@ -290,7 +294,7 @@
 		4F079D401D84599300D08DA0 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				4F079D411D84599300D08DA0 /* MockDefaultJSONResourceType.swift */,
+				4FC453901DC9FF5800EA1FAE /* MockDefaultNetworkDataResource.swift */,
 				4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */,
 				4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */,
 				4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */,
@@ -314,12 +318,11 @@
 			isa = PBXGroup;
 			children = (
 				4F079D4D1D84599300D08DA0 /* ImageResourceTypeTests.swift */,
-				4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */,
 				4F36C0B61D9D5B7E00CDFD21 /* JSONArrayResourceTypeTests.swift */,
-				4F079D4F1D84599300D08DA0 /* NetworkResourceTypeTests.swift */,
-				4FFA60A11D9BFFDF00A91693 /* NetworkJSONResourceTypeTests.swift */,
-				4F782C621DA2B08600179638 /* NetworkJSONDictionaryResourceTypeTests.swift */,
+				4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */,
 				4F782C651DA2B10B00179638 /* NetworkJSONArrayResourceTypeTests.swift */,
+				4F782C621DA2B08600179638 /* NetworkJSONDictionaryResourceTypeTests.swift */,
+				4F079D4F1D84599300D08DA0 /* NetworkResourceTypeTests.swift */,
 				4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */,
 			);
 			path = Protocols;
@@ -349,15 +352,15 @@
 		4F8D1FBB1D8DFFD40099DD9A /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				4F8D1FCC1D8E00040099DD9A /* america.json */,
-				4F8D1FCE1D8E00040099DD9A /* europe.json */,
 				4F8D1FCF1D8E00040099DD9A /* Models */,
 				4F8D1FBC1D8DFFD40099DD9A /* AppDelegate.swift */,
-				4F8D1FBE1D8DFFD40099DD9A /* ViewController.swift */,
-				4F8D1FC01D8DFFD40099DD9A /* Main.storyboard */,
 				4F8D1FC31D8DFFD40099DD9A /* Assets.xcassets */,
-				4F8D1FC51D8DFFD40099DD9A /* LaunchScreen.storyboard */,
 				4F8D1FC81D8DFFD40099DD9A /* Info.plist */,
+				4F8D1FC51D8DFFD40099DD9A /* LaunchScreen.storyboard */,
+				4F8D1FC01D8DFFD40099DD9A /* Main.storyboard */,
+				4F8D1FBE1D8DFFD40099DD9A /* ViewController.swift */,
+				4F8D1FCC1D8E00040099DD9A /* america.json */,
+				4F8D1FCE1D8E00040099DD9A /* europe.json */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -522,13 +525,15 @@
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
 				4F88C6971D88A122002CAEA2 /* Result.swift in Sources */,
 				4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */,
-				4F079D2C1D84577E00D08DA0 /* JSONResourceType.swift in Sources */,
+				4F079D2C1D84577E00D08DA0 /* JSONParsingError.swift in Sources */,
 				4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */,
+				4FF005331DC9F985006BBACE /* ResourceType.swift in Sources */,
 				4F079D3C1D8458E800D08DA0 /* NetworkImageResource.swift in Sources */,
 				4F36C0B21D9D52A700CDFD21 /* JSONArrayResourceType.swift in Sources */,
 				4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */,
+				4FF005351DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift in Sources */,
 				4F36C0B01D9D529600CDFD21 /* JSONDictionaryResourceType.swift in Sources */,
-				4FFA60A51D9C017200A91693 /* NetworkJSONResourceType.swift in Sources */,
+				4FFA60A51D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift in Sources */,
 				4F079D2B1D84577E00D08DA0 /* ImageResourceType.swift in Sources */,
 				4F079D311D84577E00D08DA0 /* URLSessionType.swift in Sources */,
 				4F079D2F1D84577E00D08DA0 /* ResourceServiceType.swift in Sources */,
@@ -541,8 +546,8 @@
 			files = (
 				4F079D7A1D84652200D08DA0 /* ImageMocker.swift in Sources */,
 				4F079D651D8459D400D08DA0 /* XCTestCase+Additions.swift in Sources */,
+				4FC453931DC9FFE600EA1FAE /* MockDefaultNetworkDataResource.swift in Sources */,
 				4F782C641DA2B09900179638 /* NetworkJSONDictionaryResourceTypeTests.swift in Sources */,
-				4F079D661D8459D400D08DA0 /* MockDefaultJSONResourceType.swift in Sources */,
 				4F36C0B51D9D5AE400CDFD21 /* JSONDictionaryResourceTypeTests.swift in Sources */,
 				4F079D721D8459D400D08DA0 /* NetworkResourceTypeTests.swift in Sources */,
 				4F079D6C1D8459D400D08DA0 /* MockResource.swift in Sources */,
@@ -556,7 +561,6 @@
 				4F079D741D8459D400D08DA0 /* NetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6B1D8459D400D08DA0 /* MockObject.swift in Sources */,
 				4F079D671D8459D400D08DA0 /* MockJSONArrayResourceType.swift in Sources */,
-				4FFA60A31D9BFFF700A91693 /* NetworkJSONResourceTypeTests.swift in Sources */,
 				4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */,
 				4F079D681D8459D400D08DA0 /* MockJSONDictionaryResourceType.swift in Sources */,
 				4F079D6D1D8459D400D08DA0 /* MockResourceService.swift in Sources */,
@@ -591,6 +595,7 @@
 				4F8D1FC11D8DFFD40099DD9A /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		4F8D1FC51D8DFFD40099DD9A /* LaunchScreen.storyboard */ = {
@@ -599,6 +604,7 @@
 				4F8D1FC61D8DFFD40099DD9A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

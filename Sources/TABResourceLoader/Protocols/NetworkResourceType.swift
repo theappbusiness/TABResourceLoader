@@ -8,22 +8,8 @@
 
 import Foundation
 
-
 /// An enum representing the HTTP Method
 public enum HTTPMethod: String {
-  @available(*, deprecated: 2.1.0, renamed: "get")
-  case GET
-  @available(*, deprecated: 2.1.0, renamed: "post")
-  case POST
-  @available(*, deprecated: 2.1.0, renamed: "patch")
-  case PATCH
-  @available(*, deprecated: 2.1.0, renamed: "delete")
-  case DELETE
-  @available(*, deprecated: 2.1.0, renamed: "head")
-  case HEAD
-  @available(*, deprecated: 2.1.0, renamed: "put")
-  case PUT
-
   case get
   case post
   case patch

@@ -9,12 +9,16 @@
 import Foundation
 @testable import TABResourceLoader
 
-struct MockNilURLRequestNetworkJSONResource: NetworkJSONResourceType {
+struct MockNilURLRequestNetworkJSONResource: NetworkDataResourceType {
   typealias Model = String
   let url: URL = URL(string: "www.test.com")!
 
   func urlRequest() -> URLRequest? {
     return nil
+  }
+  
+  func result(from data: Data) -> Result<String> {
+    return .success("")
   }
 
 }
