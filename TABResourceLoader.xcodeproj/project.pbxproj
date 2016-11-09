@@ -14,7 +14,6 @@
 		4F079D2B1D84577E00D08DA0 /* ImageResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D201D84577E00D08DA0 /* ImageResourceType.swift */; };
 		4F079D2C1D84577E00D08DA0 /* JSONParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D211D84577E00D08DA0 /* JSONParsingError.swift */; };
 		4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */; };
-		4F079D2E1D84577E00D08DA0 /* ResourceOperationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */; };
 		4F079D2F1D84577E00D08DA0 /* ResourceServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */; };
 		4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D261D84577E00D08DA0 /* NetworkDataResourceService.swift */; };
 		4F079D311D84577E00D08DA0 /* URLSessionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D271D84577E00D08DA0 /* URLSessionType.swift */; };
@@ -51,6 +50,7 @@
 		4F8D1FD51D8E00040099DD9A /* CitiesResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D1FD01D8E00040099DD9A /* CitiesResource.swift */; };
 		4F8D1FD61D8E00040099DD9A /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D1FD11D8E00040099DD9A /* City.swift */; };
 		4F8D1FD71D8E00560099DD9A /* TABResourceLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F079CCF1D84559100D08DA0 /* TABResourceLoader.framework */; };
+		4FAB1C1B1DD35ED1009274DA /* ResourceOperationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */; };
 		4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1D1D84577E00D08DA0 /* ResourceOperation.swift */; };
 		4FB4D6D71D84801800A7D1B8 /* ResourceOperationTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D501D84599300D08DA0 /* ResourceOperationTypeTests.swift */; };
 		4FC453931DC9FFE600EA1FAE /* MockDefaultNetworkDataResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC453901DC9FF5800EA1FAE /* MockDefaultNetworkDataResource.swift */; };
@@ -233,16 +233,9 @@
 		4F079D1E1D84577E00D08DA0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */,
-				4F079D201D84577E00D08DA0 /* ImageResourceType.swift */,
-				4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */,
-				4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */,
-				4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */,
-				4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */,
-				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
+				4FAB1C1A1DD35E9A009274DA /* Resource types */,
 				4F079D231D84577E00D08DA0 /* ResourceOperationType.swift */,
 				4F079D241D84577E00D08DA0 /* ResourceServiceType.swift */,
-				4FF005321DC9F985006BBACE /* ResourceType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -372,6 +365,21 @@
 				4F8D1FD11D8E00040099DD9A /* City.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4FAB1C1A1DD35E9A009274DA /* Resource types */ = {
+			isa = PBXGroup;
+			children = (
+				4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */,
+				4F079D201D84577E00D08DA0 /* ImageResourceType.swift */,
+				4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */,
+				4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */,
+				4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */,
+				4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */,
+				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
+				4FF005321DC9F985006BBACE /* ResourceType.swift */,
+			);
+			path = "Resource types";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -519,7 +527,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F079D2E1D84577E00D08DA0 /* ResourceOperationType.swift in Sources */,
 				4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */,
 				4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */,
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
@@ -529,6 +536,7 @@
 				4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */,
 				4FF005331DC9F985006BBACE /* ResourceType.swift in Sources */,
 				4F079D3C1D8458E800D08DA0 /* NetworkImageResource.swift in Sources */,
+				4FAB1C1B1DD35ED1009274DA /* ResourceOperationType.swift in Sources */,
 				4F36C0B21D9D52A700CDFD21 /* JSONArrayResourceType.swift in Sources */,
 				4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */,
 				4FF005351DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift in Sources */,
