@@ -9,6 +9,9 @@
 import UIKit
 import TABResourceLoader
 
+private typealias CitiesResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>
+private typealias NetworkImageResourceOperation = ResourceOperation<NetworkDataResourceService<NetworkImageResource>>
+
 class ViewController: UIViewController {
 
   @IBOutlet private var imageView: UIImageView!
@@ -29,7 +32,7 @@ class ViewController: UIViewController {
       print(result)
     }
     
-    let citiesResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>(resource: americaResource) { operation, result in
+    let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { operation, result in
       print(result)
     }
     operationQueue.addOperation(citiesResourceOperation)
@@ -43,7 +46,7 @@ class ViewController: UIViewController {
       // Do something with result
     }
     
-    let imageOperation = ResourceOperation<NetworkDataResourceService<NetworkImageResource>>(resource: imageResource) { [weak self] _, result in
+    let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, result in
       if case let .success(image) = result {
         self?.imageView.image = image
       }
