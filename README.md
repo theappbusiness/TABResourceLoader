@@ -10,6 +10,7 @@ This is library is designed to fetch resources in a consistent and modular way. 
 ## Example use cases
 
 - [Retriving a JSON object](Documentation/RetrivingJSONObjectExample.md)
+- [Retriving an image](Documentation/RetrivingImageExample.md)
 
 ## Main concepts
 
