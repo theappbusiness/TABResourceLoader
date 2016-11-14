@@ -20,7 +20,7 @@ let imageService = NetworkDataResourceService<NetworkImageResource>()
 ```swift
 imageService.fetch(resource: imageResource) { (result) in
   if case let .success(image) = result {
-    // Do something with the image, called on main thread
+    // Do something with the image. If using UIKit remember to dispatch to the main thread.
   }
 }
 ```
@@ -36,7 +36,7 @@ let operationQueue = OperationQueue()
 ```swift
 let imageOperation = ResourceOperation<NetworkDataResourceService<NetworkImageResource>>(resource: imageResource) { [weak self] _, result in
   if case let .success(image) = result {
-    // Do something with the image, called on main thread
+    // Do something with the image. If using UIKit remember to dispatch to the main thread.
   }
 }
 operationQueue.addOperation(imageOperation)
