@@ -5,112 +5,71 @@
 [![](https://img.shields.io/cocoapods/p/TABResourceLoader.svg?style=flat)](https://cocoapods.org/pods/TABResourceLoader)
 [![codecov.io](http://codecov.io/github/theappbusiness/TABResourceLoader/coverage.svg?branch=master)](http://codecov.io/github/theappbusiness/TABResourceLoader?branch=master)
 
-The idea behind this library is for the user to define the resources in their application by conforming to protocols that define where and how to get them. These resources can then be retrieved using a generic service type with or without an operation provided by the library.
+This is library is designed to fetch resources in a consistent and modular way. The user can define resources by conforming to protocols that define where and how to get them. These resources can then be retrieved using a generic service type with or without an operation provided by the library. By following this approach it's easy to have testable and modular networking stack.
 
-## Simple example
+## Example use cases
 
-Let's say you need to retrieve this JSON from an server, `http://localhost:8000/<continent>.json`:
+- [Retriving a JSON object](Documentation/RetrivingJSONObjectExample.md)
+- [Retriving an image](Documentation/RetrivingImageExample.md)
 
-```json
-{
-  "cities": [{
-    "name": "Paris"
-  }, {
-    "name": "London"
-  }]
-}
-```
+## Main concepts
 
-The Swift model for a city could look something like this:
+This library defines/uses 3 concepts: resource, service and operation
 
-```swift
-struct City {
-  let name: String
-}
-```
+- A **Resource** represents where something is and how it can be retrieved.
+	- For example a resource could define the url of where a JSON file is and how to parse into strongly types model
+- A **Service** represents a type that can retrive resources, generally conforms to `ResourceServiceType`.
+	- For example the library ships with a network service that is responsible for fetching a network resource
+- A **ResourceOperation** can used to manage concurrency and dependencies as services can be defined not to be asynchrnous, generally conforms `ResourceOperationType`.
 
-Some basic parsing logic:
+### Available Resource protocols
 
-```swift
-extension City {
-  init?(jsonDictionary: [String : AnyObject]) {
-    guard let parsedName = jsonDictionary["name"] as? String else {
-      return nil
-    }
-    name = parsedName
-  }
-}
-```
+#### Root protocols
 
-### Defining a `Resource`
+- `ResourceType`
+	- Base type for mapping a resource to a generic `Model` type
+- `NetworkResourceType`
+	- Defines how a resource could be retrieved using a network service. As a bare minimum a `URL` needs to be defined, all other properties (e.g. HTTP method have defaults).
 
-A `CitiesResource` can be created to define where the cities will come from and how the base endpoint should be parsed:
+#### Conforming to `ResourceType`
 
-```swift
-private let baseURL = NSURL(string: "http://localhost:8000/")!
-```
+- `DataResourceType`
+	- Resource for retriving a `Model` from `Data`
 
-```swift
-struct CitiesResource: NetworkJSONResourceType {
-  typealias Model = [City]
-  
-  let url: NSURL
-  
-  init(continent: String) {
-    url = baseURL.URLByAppendingPathComponent("\(continent).json")
-  }
-  
-  //MARK: JSONResource
-  func modelFrom(jsonDictionary jsonDictionary: [String: AnyObject]) -> [City]? {
-    guard let
-      citiesJSONArray = jsonDictionary["cities"] as? [[String: AnyObject]]
-      else {
-        return nil // OR []
-    }
-    return citiesJSONArray.flatMap(City.init)
-  }
-  
-}
-```
+#### Conforming to `DataResourceType`
 
-### Retrieving the resource
+- `ImageResourceType`
+	- Resource for retriving a `UIImage` from `Data`
+- `JSONArrayResourceType`
+	- Resource for retriving a generic `Model` from JSON array `[Any]`
+- `JSONDictionaryResourceType`
+	- Resource for retriving a generic `Model` from JSON dictionary `[String: Any]`
 
-Use the provided `NetworkDataResourceService` to retrieve your `CitiesResource` from a web service:
+#### Combined protocols
 
-```swift
-let europeResource = CitiesResource(continent: "europe")
-let networkJSONService = NetworkDataResourceService<CitiesResource>()
-networkJSONService.fetch(resource: europeResource) { [weak self] result in
-  // do something with the result
-}
-```
+- `NetworkJSONArrayResourceType`
+	- Combines `JSONArrayResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON array. Includes default header values `["Content-Type": "application/json"]`
+- `NetworkJSONDictionaryResourceType`
+ 	- Combines `JSONDictionaryResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON dictionary. Includes default header values `["Content-Type": "application/json"]`
 
-**OR**
+#### Concrete types
 
-Define a typealias for conveniency if you using `NSOperation`s:
+- `NetworkImageResource`
 
-```swift
-private typealias CitiesNetworkResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>
-```
+### Available service types conforming to `ResourceServiceType`
 
-Create the operation using a `CitiesResource`
+- `NetworkDataResourceService`
 
-```swift
-let europeResource = CitiesResource(continent: "europe")
-let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { [weak self] operation, result in
-  // do something with the result
-}
-```
+### Available operation types conforming to `ResourceOperationType`
 
-Add the operation to some queue
-```swift
-let operationQueue = NSOperationQueue()
-operationQueue.addOperation(citiesNetworkResourceOperation)
-```
+- `ResourceOperation`
 
-## Creating your own services and operations
 
-At the moment the only service provided is the `NetworkDataResourceService`. This will change in future updates where it may be relevant to ship this library with more default services. In the meantime the user can create they own service by conforming to `ResourceServiceType`. Similarly, even though the `ResourceOperation` may cater for most needs the developer can choose to have their own resource operation that conforms to `ResourceOperationType`.
+## Advanced configurations
+
+### Creating your own services and operations
+
+At the moment the only service provided is the `NetworkDataResourceService`. This may change in future updates where it could be relevant to ship this library with more default services. In the meantime the user can create their own service by conforming to `ResourceServiceType`. Similarly, even though the `ResourceOperation` may cater for most needs the developer can choose to have their own resource operation that conforms to `ResourceOperationType`.
 
 ## Author
 

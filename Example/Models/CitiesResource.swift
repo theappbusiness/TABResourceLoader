@@ -11,7 +11,7 @@ import TABResourceLoader
 
 private let baseURL = URL(string: "http://localhost:8000/")!
 
-struct CitiesResource: NetworkJSONResourceType {
+struct CitiesResource: NetworkJSONDictionaryResourceType {
   typealias Model = [City]
   
   let url: URL
@@ -20,8 +20,8 @@ struct CitiesResource: NetworkJSONResourceType {
     url = baseURL.appendingPathComponent("\(continent).json")
   }
   
-  //MARK: JSONResource
-  func modelFrom(jsonDictionary: [String: Any]) -> [City]? {
+  // MARK: JSONDictionaryResourceType
+  func model(from jsonDictionary: [String : Any]) -> Array<City>? {
     guard let
       citiesJSONArray = jsonDictionary["cities"] as? [[String: Any]]
       else {
