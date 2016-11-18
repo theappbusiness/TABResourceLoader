@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.0.0
+
+- Removed deprecated `JSONResourceType` and `NetworkJSONResourceType`
+- Issue #9 - Improvements to meet Swift API guidelines
+
 ## 2.1.0
 
 ### Bug fixes

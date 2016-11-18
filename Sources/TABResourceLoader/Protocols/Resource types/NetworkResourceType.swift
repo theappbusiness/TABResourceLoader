@@ -8,22 +8,8 @@
 
 import Foundation
 
-
 /// An enum representing the HTTP Method
 public enum HTTPMethod: String {
-  @available(*, deprecated: 2.1.0, renamed: "get")
-  case GET
-  @available(*, deprecated: 2.1.0, renamed: "post")
-  case POST
-  @available(*, deprecated: 2.1.0, renamed: "patch")
-  case PATCH
-  @available(*, deprecated: 2.1.0, renamed: "delete")
-  case DELETE
-  @available(*, deprecated: 2.1.0, renamed: "head")
-  case HEAD
-  @available(*, deprecated: 2.1.0, renamed: "put")
-  case PUT
-
   case get
   case post
   case patch
@@ -42,13 +28,13 @@ public protocol NetworkResourceType {
   var url: URL { get }
 
   /// The HTTP method used to fetch this resource
-  var HTTPRequestMethod: HTTPMethod { get }
+  var httpRequestMethod: HTTPMethod { get }
 
   /// The HTTP header fields used to fetch this resource
-  var HTTPHeaderFields: [String: String]? { get }
+  var httpHeaderFields: [String: String]? { get }
 
   /// The HTTP body as JSON used to fetch this resource
-  var JSONBody: Any? { get }
+  var jsonBody: Any? { get }
 
   /// The query items to be added to the url to fetch this resource
   var queryItems: [URLQueryItem]? { get }
@@ -64,9 +50,9 @@ public protocol NetworkResourceType {
 // MARK: - NetworkJSONResource defaults
 public extension NetworkResourceType {
 
-  public var HTTPRequestMethod: HTTPMethod { return .get }
-  public var HTTPHeaderFields: [String: String]? { return [:] }
-  public var JSONBody: Any? { return nil }
+  public var httpRequestMethod: HTTPMethod { return .get }
+  public var httpHeaderFields: [String: String]? { return [:] }
+  public var jsonBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
 
   public func urlRequest() -> URLRequest? {
@@ -76,10 +62,10 @@ public extension NetworkResourceType {
     guard let urlFromComponents = urlComponents?.url else { return nil }
 
     var request = URLRequest(url: urlFromComponents)
-    request.allHTTPHeaderFields = HTTPHeaderFields
-    request.httpMethod = HTTPRequestMethod.rawValue
+    request.allHTTPHeaderFields = httpHeaderFields
+    request.httpMethod = httpRequestMethod.rawValue
 
-    if let body = JSONBody {
+    if let body = jsonBody {
       request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
     }
 

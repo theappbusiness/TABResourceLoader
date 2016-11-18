@@ -12,21 +12,21 @@ import XCTest
 class NetworkDataResourceServiceTests: XCTestCase {
 
   var mockSession: MockURLSession!
-  var mockResource: MockDefaultNetworkJSONResource!
+  var mockResource: MockDefaultNetworkDataResource!
   let mockURL = URL(string: "http://test.com")!
 
-  var testService: NetworkDataResourceService<MockDefaultNetworkJSONResource>!
+  var testService: NetworkDataResourceService<MockDefaultNetworkDataResource>!
 
   override func setUp() {
     super.setUp()
     mockSession = MockURLSession()
-    mockResource = MockDefaultNetworkJSONResource(url: mockURL)
+    mockResource = MockDefaultNetworkDataResource(url: mockURL)
 
-    testService = NetworkDataResourceService<MockDefaultNetworkJSONResource>(session: mockSession)
+    testService = NetworkDataResourceService<MockDefaultNetworkDataResource>(session: mockSession)
   }
 
   func test_publicInitializerUsesNSURLSession() {
-    testService = NetworkDataResourceService<MockDefaultNetworkJSONResource>()
+    testService = NetworkDataResourceService<MockDefaultNetworkDataResource>()
     XCTAssert(testService.session is URLSession)
   }
 
@@ -146,21 +146,6 @@ class NetworkDataResourceServiceTests: XCTestCase {
         XCTFail()
       }
       mockSession.capturedCompletion!(nil, nil, nil)
-    }
-  }
-
-  func test_fetch_WhenSessionCompletes_WithInvalidJSON_callsFailureWithCorrectError() {
-    performAsyncTest() { expectation in
-      testService.fetch(resource: mockResource) { result in
-        expectation?.fulfill()
-        guard let error = result.error() else {
-          XCTFail("No error found")
-          return
-        }
-        if case JSONParsingError.invalidJSONData = error { return }
-        XCTFail()
-      }
-      mockSession.capturedCompletion!(Data(), nil, nil)
     }
   }
   
