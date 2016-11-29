@@ -14,9 +14,10 @@ public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOp
   public typealias ResourceService = T
   public typealias DidFinishFetchingResourceCallback = (ResourceOperation<ResourceService>, Result<ResourceService.Resource.Model>) -> Void
   
-  private let resource: ResourceService.Resource
-  private let service: ResourceService
-  private let didFinishFetchingResourceCallback: DidFinishFetchingResourceCallback
+  // These properties are internal for unit testing purposes
+  let resource: ResourceService.Resource
+  let service: ResourceService
+  let didFinishFetchingResourceCallback: DidFinishFetchingResourceCallback
 
   /// Designated initializer
   ///
