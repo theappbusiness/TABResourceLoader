@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.0.1
+
+- `resource`, `service` and `didFinishFetchingResourceCallback` properties in `ResourceOperation` are now `internal` to allow for unit testing purposes
+
 ## 3.0.0
 
 - Removed deprecated `JSONResourceType` and `NetworkJSONResourceType`
