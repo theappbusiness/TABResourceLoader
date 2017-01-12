@@ -26,7 +26,7 @@ public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOp
   /// - parameter didFinishFetchingResourceCallback: The closure to be executed when the resource has been fetch but before the operation is finished
   ///
   /// - returns: A new instance of the ResourceOperation
-  public init(resource: ResourceService.Resource, service: ResourceService = ResourceService(), didFinishFetchingResourceCallback: @escaping DidFinishFetchingResourceCallback) {
+  public init(resource: ResourceService.Resource, service: ResourceService = ResourceService(session: URLSession.shared), didFinishFetchingResourceCallback: @escaping DidFinishFetchingResourceCallback) {
     self.resource = resource
     self.service = service
     self.didFinishFetchingResourceCallback = didFinishFetchingResourceCallback

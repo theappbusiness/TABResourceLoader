@@ -57,6 +57,7 @@
 		4FF005331DC9F985006BBACE /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF005321DC9F985006BBACE /* ResourceType.swift */; };
 		4FF005351DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */; };
 		4FFA60A51D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */; };
+		EA80BE511E2798B300AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		4FF005321DC9F985006BBACE /* ResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
 		4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONArrayResourceType.swift; sourceTree = "<group>"; };
 		4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONDictionaryResourceType.swift; sourceTree = "<group>"; };
+		EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResourceServiceURLSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +164,9 @@
 				4F079D1A1D84577E00D08DA0 /* Sources */,
 				4F079CE91D84566300D08DA0 /* Tests */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 			usesTabs = 0;
 		};
 		4F079CD01D84559100D08DA0 /* Products */ = {
@@ -311,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				4F079D4D1D84599300D08DA0 /* ImageResourceTypeTests.swift */,
+				EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */,
 				4F36C0B61D9D5B7E00CDFD21 /* JSONArrayResourceTypeTests.swift */,
 				4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */,
 				4F782C651DA2B10B00179638 /* NetworkJSONArrayResourceTypeTests.swift */,
@@ -569,6 +574,7 @@
 				4F079D741D8459D400D08DA0 /* NetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6B1D8459D400D08DA0 /* MockObject.swift in Sources */,
 				4F079D671D8459D400D08DA0 /* MockJSONArrayResourceType.swift in Sources */,
+				EA80BE511E2798B300AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift in Sources */,
 				4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */,
 				4F079D681D8459D400D08DA0 /* MockJSONDictionaryResourceType.swift in Sources */,
 				4F079D6D1D8459D400D08DA0 /* MockResourceService.swift in Sources */,
@@ -728,6 +734,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucianomarisi.TABResourceLoader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -746,6 +753,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucianomarisi.TABResourceLoader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

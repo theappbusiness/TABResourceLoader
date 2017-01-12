@@ -37,18 +37,16 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     return [:]
   }
   
+  public let session: URLSessionType
+  
   /**
-   Designated initilizer for NetworkDataResourceService
+   Designated initializer for NetworkDataResourceService
+   
+   - parameter session: The session that will be used to make network requests.
    
    - returns: An new instance
    */
-  public required init() {
-    self.session = URLSession.shared as URLSessionType
-  }
-  
-  let session: URLSessionType
-  
-  init(session: URLSessionType) {
+  public required init(session: URLSessionType = URLSession.shared) {
     self.session = session
   }
   

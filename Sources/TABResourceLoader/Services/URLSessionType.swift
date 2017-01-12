@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol URLSessionType {
+public protocol URLSessionType {
   func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
 }
 
