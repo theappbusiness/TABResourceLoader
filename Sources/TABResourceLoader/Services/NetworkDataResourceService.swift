@@ -38,7 +38,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
   }
   
   /**
-   Designated initilizer for NetworkDataResourceService
+   Designated initializer for NetworkDataResourceService
    
    - returns: An new instance
    */
@@ -46,9 +46,14 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     self.session = URLSession.shared as URLSessionType
   }
   
-  let session: URLSessionType
+  public let session: URLSessionType
   
-  init(session: URLSessionType) {
+  /// Additional initializer allowing a custom `URLSessionType`.
+  ///
+  /// - parameter session: The session that will be used to make network requests.
+  ///
+  /// - returns: A new instance.
+  public init(session: URLSessionType) {
     self.session = session
   }
   
