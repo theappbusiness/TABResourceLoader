@@ -14,7 +14,7 @@ public protocol ResourceServiceType {
   /**
    Designated initialzer for constructing a ResourceServiceType
    */
-  init()
+  init(session: URLSessionType)
 
   /**
    Fetch a resource

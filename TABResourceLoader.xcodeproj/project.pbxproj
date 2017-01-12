@@ -734,6 +734,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucianomarisi.TABResourceLoader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -752,6 +753,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lucianomarisi.TABResourceLoader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

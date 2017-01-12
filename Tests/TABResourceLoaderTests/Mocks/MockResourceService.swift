@@ -9,6 +9,12 @@
 import Foundation
 @testable import TABResourceLoader
 
+class MockSessionThatDoesNothing: URLSessionType {
+  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    // does nothing!
+  }
+}
+
 class MockResourceService: ResourceServiceType {
 
   typealias Resource = MockResource
@@ -17,7 +23,7 @@ class MockResourceService: ResourceServiceType {
   var capturedCompletion: ((Result<Resource.Model>) -> Void)?
   var fetchCallCount: Int = 0
 
-  required init() {}
+  required init(session: URLSessionType = MockSessionThatDoesNothing()) {}
 
   func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
     capturedResource = resource
