@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.0.2
+
+- `URLSession` used by `NetworkDataResourceService` is now exposed in the initializer
+
 ## 3.0.1
 
 - `resource`, `service` and `didFinishFetchingResourceCallback` properties in `ResourceOperation` are now `internal` to allow for unit testing purposes
