@@ -14,12 +14,12 @@ class TestResourceOperation: ResourceOperationType {
   typealias ResourceService = MockResourceService
 
   var cancelled: Bool = false
-  var capturedFinishedErrors: [Error]?
+  var finishCallCount = 0
   var capturedResult: Result<String>?
   var captureDidFinishFetchingResourceThread: Thread?
 
-  func finish(_ errors: [Error]) {
-    capturedFinishedErrors = errors
+  func finish() {
+    finishCallCount += 1
   }
 
   func didFinishFetchingResource(result: Result<String>) {
@@ -44,8 +44,7 @@ class ResourceOperationTypeTests: XCTestCase {
     testResourceOperation.fetch(resource: MockResource(), usingService: mockService)
     let expectedResult = Result.success("some result")
     mockService.capturedCompletion!(expectedResult)
-    XCTAssertNotNil(testResourceOperation.capturedFinishedErrors)
-    XCTAssertEqual(testResourceOperation.capturedFinishedErrors!.count, 0)
+    XCTAssertEqual(testResourceOperation.finishCallCount, 1)
     guard let successResult = testResourceOperation.capturedResult?.successResult() else {
       XCTFail("Result was not succesful")
       return
@@ -65,7 +64,7 @@ class ResourceOperationTypeTests: XCTestCase {
     testResourceOperation.cancelled = true
     let expectedResult = Result.success("some result")
     mockService.capturedCompletion!(expectedResult)
-    XCTAssertNil(testResourceOperation.capturedFinishedErrors)
+    XCTAssertEqual(testResourceOperation.finishCallCount, 0)
     XCTAssertNil(testResourceOperation.capturedResult)
   }
 

@@ -17,10 +17,8 @@ public protocol Cancellable: class {
 public protocol Finishable: class {
   /**
    Method to be called when the type finished all it's work
-
-   - parameter errors: Any error from the work done
    */
-  func finish(_ errors: [Error])
+  func finish()
 }
 
 public protocol ResourceOperationType: Cancellable, Finishable {
@@ -52,7 +50,7 @@ public extension ResourceOperationType {
         guard let strongSelf = self else { return }
         if strongSelf.cancelled { return }
         strongSelf.didFinishFetchingResource(result: result)
-        strongSelf.finish([])
+        strongSelf.finish()
       }
     }
   }

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Base class for setting up KVO boilerplate code of an Operation
 open class BaseAsynchronousOperation: Operation {
 
   open override var isAsynchronous: Bool {
@@ -62,12 +63,14 @@ open class BaseAsynchronousOperation: Operation {
     execute()
   }
 
+  /// Method to be overriden with the implemenation of the work done on the operation
   open func execute() {
     assertionFailure("execute must overriden")
     finish()
   }
 
-  public final func finish(_ errors: [Error] = []) {
+  /// Call this method after all the work is done signal the completion of this operation
+  public final func finish() {
     self.isFinished = true
     self.isExecuting = false
   }

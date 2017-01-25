@@ -29,7 +29,7 @@ final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType &
     super.init()
   }
 
-  override required init(session: URLSessionType) {
+  required init(session: URLSessionType) {
     super.init(session: session)
   }
 
