@@ -2,7 +2,7 @@
 
 ## 3.0.3
 
-- Added documented on `BaseAsynchronousOperation`
+- Added documentation on `BaseAsynchronousOperation`
 - Removed errors parameter from `finish()` in `BaseAsynchronousOperation`
 
 ## 3.0.2
