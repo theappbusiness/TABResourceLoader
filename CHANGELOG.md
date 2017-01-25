@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.0.3
+
+- Added documented on `BaseAsynchronousOperation`
+- Removed errors parameter from `finish()` in `BaseAsynchronousOperation`
+
 ## 3.0.2
 
 - `URLSession` used by `NetworkDataResourceService` is now exposed in the initializer
