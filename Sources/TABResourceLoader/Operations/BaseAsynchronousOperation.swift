@@ -63,13 +63,13 @@ open class BaseAsynchronousOperation: Operation {
     execute()
   }
 
-  /// Method to be overriden with the implemenation of the work done on the operation
-  open func execute() {
+  /// Method to be overridden with the implementation of the work done on the operation
+   open func execute() {
     assertionFailure("execute must overriden")
     finish()
   }
 
-  /// Call this method after all the work is done signal the completion of this operation
+  /// Call this method after all the work is done to signal the completion of this operation
   public final func finish() {
     self.isFinished = true
     self.isExecuting = false
