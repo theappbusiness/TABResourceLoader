@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.1.0
+
+- Added support for listen to network activity changes, useful for setting up `isNetworkActivityIndicatorVisible` on `UIApplication`
+
 ## 3.0.3
 
 - Added documentation on `BaseAsynchronousOperation`
