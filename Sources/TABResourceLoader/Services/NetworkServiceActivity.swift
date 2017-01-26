@@ -23,7 +23,7 @@ public struct NetworkServiceActivity {
     }
   }
 
-  private static let serialQueue = DispatchQueue(label: "TABResourceLoader.NetworkServiceActivity.serialQueu")
+  private static let serialQueue = DispatchQueue(label: "TABResourceLoader.NetworkServiceActivity.serialQueue")
 
   /// Call this method every time a request starts
   static func increaseActiveRequest() {
