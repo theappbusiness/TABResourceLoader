@@ -39,9 +39,9 @@ class ViewController: UIViewController {
   }
   
   func fetchImageExample() {
-    let imageURL = URL(string: "http://www.theappbusiness.com/apple-touch-icon-180x180.png")!
-    let imageResource = NetworkImageResource(url: imageURL)
-    
+    let largeImageURL = URL(string: "https://static.pexels.com/photos/4164/landscape-mountains-nature-mountain.jpeg")!
+    let imageResource = NetworkImageResource(url: largeImageURL)
+
     imageService.fetch(resource: imageResource) { (result) in
       // Do something with result
     }

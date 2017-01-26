@@ -57,9 +57,11 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     }
     
     urlRequest.allHTTPHeaderFields = allHTTPHeaderFields(resourceHTTPHeaderFields: urlRequest.allHTTPHeaderFields)
-    
-    session.perform(request: urlRequest) { (data, URLResponse, error) in
-      completion(self.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
+    NetworkServiceActivity.increaseActiveRequest()
+    session.perform(request: urlRequest) { [weak self] (data, URLResponse, error) in
+      guard let strongSelf = self else { return }
+      NetworkServiceActivity.decreaseActiveRequest()
+      completion(strongSelf.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
     }
   }
   
