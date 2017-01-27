@@ -49,18 +49,23 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
   public required init(session: URLSessionType = URLSession.shared) {
     self.session = session
   }
-  
-  public final func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
+
+  open func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
+    fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
+  }
+
+  // Method used for injecting the NetworkServiceActivity for testing
+  final func fetch(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (Result<Resource.Model>) -> Void) {
     guard var urlRequest = resource.urlRequest() else {
       completion(.failure(NetworkServiceError.couldNotCreateURLRequest))
       return
     }
     
     urlRequest.allHTTPHeaderFields = allHTTPHeaderFields(resourceHTTPHeaderFields: urlRequest.allHTTPHeaderFields)
-    NetworkServiceActivity.increaseActiveRequest()
+    networkServiceActivity.increaseActiveRequest()
     session.perform(request: urlRequest) { [weak self] (data, URLResponse, error) in
+      networkServiceActivity.decreaseActiveRequest()
       guard let strongSelf = self else { return }
-      NetworkServiceActivity.decreaseActiveRequest()
       completion(strongSelf.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
     }
   }

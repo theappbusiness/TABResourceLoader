@@ -10,30 +10,32 @@ import Foundation
 
 /// Type used to expose an API to listen to activity changes of network calls, i.e whether network 
 // calls are being made or not
-public struct NetworkServiceActivity {
+public class NetworkServiceActivity {
 
   /// Set this property to listen to changes on the network activity status,
   /// useful for setting the isNetworkActivityIndicatorVisible on UIApplication for example
   public static var activityChangeHandler: ((_ isActive: Bool) -> ())?
 
-  private static var numberOfActiveRequests = 0 {
+  static let shared = NetworkServiceActivity()
+
+  private(set)var numberOfActiveRequests = 0 {
     didSet {
       let hasOutstandingRequests = numberOfActiveRequests > 0
-      activityChangeHandler?(hasOutstandingRequests)
+      NetworkServiceActivity.activityChangeHandler?(hasOutstandingRequests)
     }
   }
 
-  private static let serialQueue = DispatchQueue(label: "TABResourceLoader.NetworkServiceActivity.serialQueue")
+  private let serialQueue = DispatchQueue(label: "TABResourceLoader.NetworkServiceActivity.serialQueue")
 
   /// Call this method every time a request starts
-  static func increaseActiveRequest() {
+  func increaseActiveRequest() {
     serialQueue.sync {
       numberOfActiveRequests += 1
     }
   }
   
   /// Call this method every time a request ends
-  static func decreaseActiveRequest() {
+  func decreaseActiveRequest() {
     serialQueue.sync {
       numberOfActiveRequests -= 1
     }
