@@ -49,7 +49,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
     XCTAssertEqual(capturedRequest, expectedRequest)
   }
 
-  func test_fetch_fetchIncresesAndCompletionDecreaseNumberOfActiveRequests() {
+  func test_fetch_incresesAndCompletionDecreaseNumberOfActiveRequests() {
     XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 0)
     testService.fetch(resource: mockResource, networkServiceActivity: mockNetworkServiceActivity) { _ in }
     XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 1)
@@ -57,7 +57,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
     XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 0)
   }
 
-  func test_fetchIncresesAndCompletionDecreaseNumberOfActiveRequests_evenWhenServiceGoesOutOfMemory() {
+  func test_fetch_incresesAndCompletionDecreaseNumberOfActiveRequests_evenWhenServiceGoesOutOfMemory() {
     let mockNetworkServiceActivity = MockNetworkServiceActivity()
     XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 0)
     testService.fetch(resource: mockResource, networkServiceActivity: mockNetworkServiceActivity) { _ in }
