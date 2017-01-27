@@ -9,10 +9,13 @@
 import XCTest
 @testable import TABResourceLoader
 
+class MockNetworkServiceActivity: NetworkServiceActivity { }
+
 class NetworkDataResourceServiceTests: XCTestCase {
 
   var mockSession: MockURLSession!
   var mockResource: MockDefaultNetworkDataResource!
+  var mockNetworkServiceActivity: MockNetworkServiceActivity!
   let mockURL = URL(string: "http://test.com")!
 
   var testService: NetworkDataResourceService<MockDefaultNetworkDataResource>!
@@ -21,8 +24,16 @@ class NetworkDataResourceServiceTests: XCTestCase {
     super.setUp()
     mockSession = MockURLSession()
     mockResource = MockDefaultNetworkDataResource(url: mockURL)
-
+    mockNetworkServiceActivity = MockNetworkServiceActivity()
     testService = NetworkDataResourceService<MockDefaultNetworkDataResource>(session: mockSession)
+  }
+
+  override func tearDown() {
+    mockSession = nil
+    mockResource = nil
+    mockNetworkServiceActivity = nil
+    testService = nil
+    super.tearDown()
   }
 
   func test_publicInitializerUsesNSURLSession() {
@@ -36,6 +47,24 @@ class NetworkDataResourceServiceTests: XCTestCase {
     let expectedRequest = mockResource.urlRequest()
     XCTAssertNotNil(expectedRequest?.allHTTPHeaderFields)
     XCTAssertEqual(capturedRequest, expectedRequest)
+  }
+
+  func test_fetch_fetchIncresesAndCompletionDecreaseNumberOfActiveRequests() {
+    XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 0)
+    testService.fetch(resource: mockResource, networkServiceActivity: mockNetworkServiceActivity) { _ in }
+    XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 1)
+    mockSession.capturedCompletion!(nil, nil, nil)
+    XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 0)
+  }
+
+  func test_fetchIncresesAndCompletionDecreaseNumberOfActiveRequests_evenWhenServiceGoesOutOfMemory() {
+    let mockNetworkServiceActivity = MockNetworkServiceActivity()
+    XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 0)
+    testService.fetch(resource: mockResource, networkServiceActivity: mockNetworkServiceActivity) { _ in }
+    testService = nil
+    XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 1)
+    mockSession.capturedCompletion!(nil, nil, nil)
+    XCTAssertEqual(mockNetworkServiceActivity.numberOfActiveRequests, 0)
   }
 
   func test_fetch_withInvalidURLRequest_callsFailureWithCorrectError() {
