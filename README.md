@@ -11,6 +11,7 @@ This is library is designed to fetch resources in a consistent and modular way. 
 
 - [Retriving a JSON object](Documentation/RetrivingJSONObjectExample.md)
 - [Retriving an image](Documentation/RetrivingImageExample.md)
+- [Responding to network activity](Documentation/RespondingToNetworkActivity.md)
 
 ## Main concepts
 

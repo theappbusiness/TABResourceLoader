@@ -1,11 +1,16 @@
-//
-//  AppDelegate.swift
-//  Example
-//
-//  Created by Luciano Marisi on 17/09/2016.
-//  Copyright © 2016 Luciano Marisi. All rights reserved.
-//
+# Responding to network activity
 
+To listen to changes on the network activity a closure can be set, for example:
+
+```swift
+NetworkServiceActivity.activityChangeHandler = { isActive in
+  application.isNetworkActivityIndicatorVisible = isActive
+}
+```
+
+It is recommended that this is setup on application launch, for example:
+
+```swift
 import UIKit
 import TABResourceLoader
 
@@ -26,4 +31,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
 }
-
+```
