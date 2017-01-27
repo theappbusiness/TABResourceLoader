@@ -3,6 +3,7 @@
 ## 3.1.0
 
 - Added support for listen to network activity changes, useful for setting up `isNetworkActivityIndicatorVisible` on `UIApplication`
+- `fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void)` method on `NetworkDataResourceService` is now `open` for overriding
 
 ## 3.0.3
 
