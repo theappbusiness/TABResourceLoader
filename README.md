@@ -72,6 +72,10 @@ This library defines/uses 3 concepts: resource, service and operation
 
 At the moment the only service provided is the `NetworkDataResourceService`. This may change in future updates where it could be relevant to ship this library with more default services. In the meantime the user can create their own service by conforming to `ResourceServiceType`. Similarly, even though the `ResourceOperation` may cater for most needs the developer can choose to have their own resource operation that conforms to `ResourceOperationType`.
 
+## Contributing
+
+Guidelines for contributing can be found [here](CONTRIBUTING.md).
+
 ## Author
 
 Luciano Marisi [@lucianomarisi](http://twitter.com/lucianomarisi)
