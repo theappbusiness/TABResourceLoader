@@ -33,4 +33,11 @@ extension XCTestCase {
       }
     }
   }
+  
+  /// Convenience function for waiting for an expectation, timeout defaults to 1
+  func waitForExpectation(file: StaticString = #file, line: UInt = #line) {
+    waitForExpectations(timeout: 1) { error in
+      if let error = error { XCTFail("\(error)", file: file, line: line) }
+    }
+  }
 }

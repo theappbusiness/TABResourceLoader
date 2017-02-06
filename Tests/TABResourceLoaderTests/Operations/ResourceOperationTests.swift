@@ -13,36 +13,82 @@ class ResourceOperationTests: XCTestCase {
 
   var mockResource: MockResource!
   var mockService: MockResourceService!
-  var testResourceOperation: ResourceOperation<MockResourceService>!
+  var sut: ResourceOperation<MockResourceService>!
 
   override func setUp() {
     super.setUp()
     mockResource = MockResource()
     mockService = MockResourceService()
-    testResourceOperation = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService, didFinishFetchingResourceCallback: { _, _ in })
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService, didFinishFetchingResourceCallback: { _, _ in })
   }
-
-  func test_didFinishFetchingResource_calledWithCorrectResult() {
-    weak var expectation = self.expectation(description: "didFinishFetchingResourceCallback expectation")
-    let didFinishFetchingResourceCallback: (ResourceOperation<MockResourceService>, Result<String>) -> Void = { (operation, result) in
-      XCTAssertEqual(result.successResult(), "success")
-      expectation?.fulfill()
-    }
-    let resourceOperation = ResourceOperation<MockResourceService>(resource: mockResource, didFinishFetchingResourceCallback: didFinishFetchingResourceCallback)
-    resourceOperation.didFinishFetchingResource(result: .success("success"))
-    waitForExpectations(timeout: 1, handler: nil)
+  
+  override func tearDown() {
+    mockResource = nil
+    mockService = nil
+    sut = nil
+    super.tearDown()
   }
 
   func test_createCopy_returnsNewOperation() {
-    let testResourceOperation = ResourceOperation<MockResourceService>(resource: mockResource, didFinishFetchingResourceCallback: { _, _ in })
-    let copiedResourceOperation = testResourceOperation.createCopy()
-    XCTAssertNotEqual(testResourceOperation, copiedResourceOperation)
+    let copiedResourceOperation = sut.createCopy()
+    XCTAssertNotEqual(sut, copiedResourceOperation)
   }
 
   func test_createCopy_usesTheSameServiceInstance() {
-    let copiedResourceOperation = testResourceOperation.createCopy()
-    copiedResourceOperation.execute()
+    let copiedResourceOperation = sut.createCopy()
+    XCTAssert(copiedResourceOperation.service === mockService)
+  }
+  
+  func test_executeCallsFetchOnService() {
+    sut.execute()
     XCTAssertEqual(mockService.fetchCallCount, 1)
+  }
+  
+  func test_execute_callsDidFinishFetchingResourceCallback_withCorrectResultOnSuccess() {
+    let finishExpectation = expectation(description: #function)
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _ , result in
+      XCTAssertEqual(result.successResult(), "some result")
+      finishExpectation.fulfill()
+    }
+    sut.execute()
+    mockService.capturedCompletion!(.success("some result"))
+    waitForExpectation()
+  }
+  
+  func test_execute_callsDidFinishFetchingResourceCallback_onMainThread() {
+    let finishExpectation = expectation(description: #function)
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _ , result in
+      XCTAssert(Thread.isMainThread)
+      finishExpectation.fulfill()
+    }
+    DispatchQueue.global().async {
+      self.sut.execute()
+      self.mockService.capturedCompletion!(.success(""))
+    }
+    waitForExpectation()
+  }
+  
+  func test_executeCallsFinishOnCompletion() {
+    sut.execute()
+    mockService.capturedCompletion!(.success("some result"))
+    XCTAssert(sut.isFinished)
+  }
+  
+  func test_execute_doesNotCallFetchOnService_whenOperationIsCancelled_beforeServiceFetches() {
+    sut.cancel()
+    sut.execute()
+    XCTAssertNil(mockService.capturedCompletion)
+  }
+
+  func test_execute_doesNotCallFinishAndDidFinish_whenOperationIsCancelled_afterServiceFetches() {
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _ , result in
+      XCTFail("Operation was cancelled, so this should not have been executed")
+    }
+    sut.execute()
+    sut.cancel()
+    let expectedResult = Result.success("some result")
+    mockService.capturedCompletion!(expectedResult)
+    XCTAssertFalse(sut.isFinished)
   }
 
 }
