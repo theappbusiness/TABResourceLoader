@@ -18,7 +18,7 @@ import Foundation
  */
 public enum NetworkServiceError: Error {
   case couldNotCreateURLRequest
-  case statusCodeError(statusCode: Int)
+  case statusCodeError(statusCode: Int, data: Data?)
   case networkingError(error: Error)
   case noData
 }
@@ -85,7 +85,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     if let HTTPURLResponse = URLResponse as? HTTPURLResponse {
       switch HTTPURLResponse.statusCode {
       case 400..<600:
-        return .failure(NetworkServiceError.statusCodeError(statusCode: HTTPURLResponse.statusCode))
+        return .failure(NetworkServiceError.statusCodeError(statusCode: HTTPURLResponse.statusCode, data: data))
       default: break
       }
     }

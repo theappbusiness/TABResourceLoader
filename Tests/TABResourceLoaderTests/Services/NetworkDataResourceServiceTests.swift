@@ -104,7 +104,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
           return
         }
 
-        guard case NetworkServiceError.statusCodeError(let statusCode) = error else {
+        guard case NetworkServiceError.statusCodeError(let statusCode, _) = error else {
           XCTFail()
           return
         }
