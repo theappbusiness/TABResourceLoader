@@ -36,3 +36,7 @@ Each release should be tagged using [semantic version](http://semver.org/), for 
 - The CHANGELOG is updated to reflect the changes from the previous version
 - The README is updated if it's relevant to do so
 - The `.podspec` is updated to use the latest version
+
+The people authorised to release a podspec can be found by running:
+
+`pod trunk info TABResourceLoader`
