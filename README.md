@@ -9,8 +9,8 @@ This is library is designed to fetch resources in a consistent and modular way. 
 
 ## Example use cases
 
-- [Retriving a JSON object](Documentation/RetrivingJSONObjectExample.md)
-- [Retriving an image](Documentation/RetrivingImageExample.md)
+- [Retrieving a JSON object](Documentation/RetrivingJSONObjectExample.md)
+- [Retrieving an image](Documentation/RetrivingImageExample.md)
 - [Responding to network activity](Documentation/RespondingToNetworkActivity.md)
 
 ## Main concepts
@@ -19,9 +19,9 @@ This library defines/uses 3 concepts: resource, service and operation
 
 - A **Resource** represents where something is and how it can be retrieved.
 	- For example a resource could define the url of where a JSON file is and how to parse into strongly types model
-- A **Service** represents a type that can retrive resources, generally conforms to `ResourceServiceType`.
+- A **Service** represents a type that can retrieve resources, generally conforms to `ResourceServiceType`.
 	- For example the library ships with a network service that is responsible for fetching a network resource
-- A **ResourceOperation** can used to manage concurrency and dependencies as services can be defined not to be asynchrnous, generally conforms `ResourceOperationType`.
+- A **ResourceOperation** can used to manage concurrency and dependencies as services can be defined not to be asynchronous, generally conforms `ResourceOperationType`.
 
 ### Available Resource protocols
 
@@ -35,16 +35,16 @@ This library defines/uses 3 concepts: resource, service and operation
 #### Conforming to `ResourceType`
 
 - `DataResourceType`
-	- Resource for retriving a `Model` from `Data`
+	- Resource for retrieving a `Model` from `Data`
 
 #### Conforming to `DataResourceType`
 
 - `ImageResourceType`
-	- Resource for retriving a `UIImage` from `Data`
+	- Resource for retrieving a `UIImage` from `Data`
 - `JSONArrayResourceType`
-	- Resource for retriving a generic `Model` from JSON array `[Any]`
+	- Resource for retrieving a generic `Model` from JSON array `[Any]`
 - `JSONDictionaryResourceType`
-	- Resource for retriving a generic `Model` from JSON dictionary `[String: Any]`
+	- Resource for retrieving a generic `Model` from JSON dictionary `[String: Any]`
 
 #### Combined protocols
 
