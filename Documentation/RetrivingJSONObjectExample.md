@@ -24,7 +24,7 @@ Some basic parsing logic:
 
 ```swift
 extension City {
-  init?(jsonDictionary: [String : AnyObject]) {
+  init?(jsonDictionary: [String : Any]) {
     guard let parsedName = jsonDictionary["name"] as? String else {
       return nil
     }
@@ -38,25 +38,25 @@ extension City {
 A `CitiesResource` can be created to define where the cities will come from and how the base endpoint should be parsed:
 
 ```swift
-private let baseURL = NSURL(string: "http://localhost:8000/")!
+private let baseURL = URL(string: "http://localhost:8000/")!
 ```
 
 ```swift
 struct CitiesResource: NetworkJSONDictionaryResourceType {
   typealias Model = [City]
   
-  let url: NSURL
+  let url: URL
   
   init(continent: String) {
-    url = baseURL.URLByAppendingPathComponent("\(continent).json")
+    url = baseURL.appendingPathComponent("\(continent).json")
   }
   
-  //MARK: JSONResource
-  func modelFrom(jsonDictionary jsonDictionary: [String: AnyObject]) -> [City]? {
+  // MARK: JSONDictionaryResourceType
+  func model(from jsonDictionary: [String : Any]) -> Model? {
     guard let
-      citiesJSONArray = jsonDictionary["cities"] as? [[String: AnyObject]]
+      citiesJSONArray = jsonDictionary["cities"] as? [[String: Any]]
       else {
-        return nil // OR []
+        return []
     }
     return citiesJSONArray.flatMap(City.init)
   }
@@ -78,7 +78,7 @@ networkJSONService.fetch(resource: europeResource) { [weak self] result in
 
 **OR**
 
-Define a `typealias` for conveniency if you using `NSOperation`s:
+Define a `typealias` for conveniency if you using `(NS)Operation`s:
 
 ```swift
 private typealias CitiesNetworkResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>
@@ -95,6 +95,6 @@ let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: eu
 
 Add the operation to some queue
 ```swift
-let operationQueue = NSOperationQueue()
+let operationQueue = OperationQueue()
 operationQueue.addOperation(citiesNetworkResourceOperation)
 ```
