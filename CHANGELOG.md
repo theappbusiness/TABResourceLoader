@@ -1,5 +1,9 @@
 # Change Log
 
+## 4.0.0
+
+- Made the response data available when a `statusCodeError` occurs
+
 ## 3.1.0
 
 - Added support for listen to network activity changes, useful for setting up `isNetworkActivityIndicatorVisible` on `UIApplication`
