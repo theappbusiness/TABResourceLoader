@@ -9,7 +9,7 @@
 import Foundation
 
 /// Operation used for the sole purpose of fetching a resource using a service
-public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOperation, ResourceOperationType {
+public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOperation {
   
   public typealias ResourceService = T
   public typealias DidFinishFetchingResourceCallback = (ResourceOperation<ResourceService>, Result<ResourceService.Resource.Model>) -> Void
@@ -33,19 +33,26 @@ public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOp
     super.init()
   }
   
-  override public func execute() {
-    fetch(resource: resource, usingService: service)
-  }
-
-  public func didFinishFetchingResource(result: Result<ResourceService.Resource.Model>) {
-    didFinishFetchingResourceCallback(self, result)
-  }
-
-  /// Creates a shallow copy of this operation, reuse the original instance of the service, the resource and the didFinishFetchingResourceCallback
+  /// Creates a shallow copy of this operation, reuse the original instance of the service, 
+  /// the resource and the didFinishFetchingResourceCallback
   ///
   /// - returns: A new ResourceOperation
   public func createCopy() -> ResourceOperation<ResourceService> {
     return ResourceOperation(resource: resource, service: service, didFinishFetchingResourceCallback: didFinishFetchingResourceCallback)
+  }
+  
+  override public func execute() {
+    if isCancelled { return }
+    service.fetch(resource: resource, completion: handleFetchCompletion)
+  }
+
+  private func handleFetchCompletion(with result: Result<ResourceService.Resource.Model>) {
+    Thread.rl_executeOnMain { [weak self] in
+      guard let strongSelf = self else { return }
+      if strongSelf.isCancelled { return }
+      strongSelf.didFinishFetchingResourceCallback(strongSelf, result)
+      strongSelf.finish()
+    }
   }
   
 }

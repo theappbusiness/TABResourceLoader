@@ -59,18 +59,18 @@ This library defines/uses 3 concepts: resource, service and operation
 
 ### Available service types conforming to `ResourceServiceType`
 
-- `NetworkDataResourceService`
+- `NetworkDataResourceService`: Used to retrieve a resource that conforms to `NetworkResourceType` and `DataResourceType`
 
-### Available operation types conforming to `ResourceOperationType`
+### `ResourceOperation`
 
-- `ResourceOperation`
-
+- Subclass of `(NS)Operation` used to retrieve a resource with specific service
+- Uses a completion handler when the operation is finished to pass it's `Result`
 
 ## Advanced configurations
 
-### Creating your own services and operations
+### Creating your own services
 
-At the moment the only service provided is the `NetworkDataResourceService`. This may change in future updates where it could be relevant to ship this library with more default services. In the meantime the user can create their own service by conforming to `ResourceServiceType`. Similarly, even though the `ResourceOperation` may cater for most needs the developer can choose to have their own resource operation that conforms to `ResourceOperationType`.
+At the moment the only service provided is the `NetworkDataResourceService`. This may change in future updates where it could be relevant to ship this library with more default services. In the meantime the user can create their own service by conforming to `ResourceServiceType`.
 
 ## Contributing
 
