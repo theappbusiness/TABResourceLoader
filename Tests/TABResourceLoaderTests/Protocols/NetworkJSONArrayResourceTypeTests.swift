@@ -12,11 +12,11 @@ import XCTest
 struct MockNetworkJSONArrayResourceType: NetworkJSONArrayResourceType {
   typealias Model = String
   let url: URL
-  
+
   func model(from jsonArray: [Any]) -> String? {
     return ""
   }
-  
+
 }
 
 class NetworkJSONArrayResourceTypeTests: XCTestCase {

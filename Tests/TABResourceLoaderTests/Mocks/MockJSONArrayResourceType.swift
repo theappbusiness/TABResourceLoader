@@ -20,5 +20,5 @@ struct MockJSONArrayResourceType: JSONArrayResourceType {
     guard parsedMockObjects.count > 0 else { return nil }
     return parsedMockObjects
   }
-  
+
 }

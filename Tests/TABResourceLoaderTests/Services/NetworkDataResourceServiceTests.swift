@@ -165,7 +165,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
 
   func test_fetch_whenSessionCompletes_WithNoData_callsFailureWithCorrectError() {
     performAsyncTest() { expectation in
-      testService.fetch(resource: mockResource)  { result in
+      testService.fetch(resource: mockResource) { result in
         expectation?.fulfill()
         guard let error = result.error() else {
           XCTFail("No error found")
@@ -177,5 +177,5 @@ class NetworkDataResourceServiceTests: XCTestCase {
       mockSession.capturedCompletion!(nil, nil, nil)
     }
   }
-  
+
 }

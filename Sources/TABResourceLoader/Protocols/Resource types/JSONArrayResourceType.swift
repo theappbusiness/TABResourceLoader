@@ -39,5 +39,5 @@ extension JSONArrayResourceType {
 
     return .success(parsedResults)
   }
-  
+
 }

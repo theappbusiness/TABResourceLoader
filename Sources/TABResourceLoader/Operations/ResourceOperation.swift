@@ -10,10 +10,10 @@ import Foundation
 
 /// Operation used for the sole purpose of fetching a resource using a service
 public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOperation {
-  
+
   public typealias ResourceService = T
   public typealias DidFinishFetchingResourceCallback = (ResourceOperation<ResourceService>, Result<ResourceService.Resource.Model>) -> Void
-  
+
   // These properties are internal for unit testing purposes
   let resource: ResourceService.Resource
   let service: ResourceService
@@ -32,7 +32,7 @@ public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOp
     self.didFinishFetchingResourceCallback = didFinishFetchingResourceCallback
     super.init()
   }
-  
+
   /// Creates a shallow copy of this operation, reuse the original instance of the service, 
   /// the resource and the didFinishFetchingResourceCallback
   ///
@@ -40,7 +40,7 @@ public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOp
   public func createCopy() -> ResourceOperation<ResourceService> {
     return ResourceOperation(resource: resource, service: service, didFinishFetchingResourceCallback: didFinishFetchingResourceCallback)
   }
-  
+
   override public func execute() {
     if isCancelled { return }
     service.fetch(resource: resource, completion: handleFetchCompletion)
@@ -54,5 +54,5 @@ public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOp
       strongSelf.finish()
     }
   }
-  
+
 }

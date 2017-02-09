@@ -10,15 +10,15 @@ import XCTest
 @testable import TABResourceLoader
 
 class ImageResourceTypeTests: XCTestCase {
-  
+
   struct MockImageResourceType: ImageResourceType {}
   var mockImageResourceType: MockImageResourceType!
-  
+
   override func setUp() {
     super.setUp()
     mockImageResourceType = MockImageResourceType()
   }
-  
+
   func test_resultFromData_whenDataIsInvalid() {
     let testResult = mockImageResourceType.result(from: Data())
     guard case .failure(let error) = testResult else {
@@ -32,7 +32,7 @@ class ImageResourceTypeTests: XCTestCase {
       XCTFail("Expected ImageDownloadingError.InvalidImageData but got \(type(of: error))")
     }
   }
-  
+
   func test_resultFromData_whenDataIsValid() {
     let mockImage = ImageMocker.mock()
     let imageData = UIImagePNGRepresentation(mockImage)!
@@ -42,5 +42,5 @@ class ImageResourceTypeTests: XCTestCase {
       return
     }
   }
-  
+
 }

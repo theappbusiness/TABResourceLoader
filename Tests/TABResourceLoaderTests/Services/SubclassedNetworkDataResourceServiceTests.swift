@@ -21,7 +21,6 @@ struct MockHTTPHeaderFieldsNetworkDataResource: NetworkResourceType, DataResourc
   }
 }
 
-
 final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: NetworkDataResourceService<Resource> {
 
   // Needed because of https://bugs.swift.org/browse/SR-416
@@ -38,11 +37,10 @@ final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType &
   }
 }
 
-
-class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
+class SubclassedNetworkJSONResourceServiceTests: XCTestCase { //swiftlint:disable:this type_name
 
   var testService: SubclassedNetworkDataResourceService<MockHTTPHeaderFieldsNetworkDataResource>!
-  
+
   var mockSession: MockURLSession!
   var mockResource: MockHTTPHeaderFieldsNetworkDataResource!
   let mockURL = URL(string: "http://test.com")!
@@ -69,4 +67,3 @@ class SubclassedNetworkJSONResourceServiceTests: XCTestCase {
   }
 
 }
-
