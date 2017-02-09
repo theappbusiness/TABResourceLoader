@@ -16,7 +16,7 @@ struct MockNilURLRequestNetworkJSONResource: NetworkDataResourceType {
   func urlRequest() -> URLRequest? {
     return nil
   }
-  
+
   func result(from data: Data) -> Result<String> {
     return .success("")
   }

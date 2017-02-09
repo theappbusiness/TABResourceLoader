@@ -402,6 +402,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4F079CE31D84559200D08DA0 /* Build configuration list for PBXNativeTarget "TABResourceLoader" */;
 			buildPhases = (
+				4F86496F1E4CE4A100E1559E /* swiftlint */,
 				4F079CCA1D84559100D08DA0 /* Sources */,
 				4F079CCB1D84559100D08DA0 /* Frameworks */,
 				4F079CCC1D84559100D08DA0 /* Headers */,
@@ -523,6 +524,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4F86496F1E4CE4A100E1559E /* swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n    swiftlint autocorrect\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4F079CCA1D84559100D08DA0 /* Sources */ = {

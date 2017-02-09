@@ -23,6 +23,6 @@ extension MockObject {
 
 extension MockObject: Equatable {}
 
-func ==(lhs: MockObject, rhs: MockObject) -> Bool {
+func == (lhs: MockObject, rhs: MockObject) -> Bool {
   return lhs.name == rhs.name
 }
