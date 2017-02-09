@@ -6,7 +6,7 @@
 //  Copyright © 2016 Luciano Marisi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public enum ImageDownloadingError: Error {
   case invalidImageData
