@@ -41,9 +41,9 @@ extension XCTestCase {
     }
   }
 
-  /// Convenience function to serialize a JSON object, if serilization fails an XCTest assertion is raised
+  /// Convenience function to serialize a JSON object, if serialization fails an XCTest assertion is raised
   ///
-  /// - Parameter obj: The object to serialize
+  /// - Parameter jsonObject: The object to serialize
   /// - Returns: Returns the serialized data or Data() if serialization fails
   func serialize(jsonObject: Any, file: StaticString = #file, line: UInt = #line) -> Data {
     guard let data = try? JSONSerialization.data(withJSONObject: jsonObject, options: JSONSerialization.WritingOptions.prettyPrinted) else {
