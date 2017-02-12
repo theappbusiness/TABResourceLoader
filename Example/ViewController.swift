@@ -9,16 +9,28 @@
 import UIKit
 import TABResourceLoader
 
-private typealias CitiesResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>
-private typealias NetworkImageResourceOperation = ResourceOperation<NetworkDataResourceService<NetworkImageResource>>
+class Subclass: NetworkDataResourceService {
+
+  override init(session: URLSessionType) {
+    super.init(session: session)
+  }
+
+  override func fetch<Resource: DataResourceType & NetworkResourceType>(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
+    return super.fetch(resource: resource, completion: completion)
+  }
+}
+
+private typealias CitiesResourceOperation = ResourceOperation<GenericNetworkDataResourceService<CitiesResource>>
+private typealias NetworkImageResourceOperation = ResourceOperation<GenericNetworkDataResourceService<NetworkImageResource>>
 
 class ViewController: UIViewController {
 
   @IBOutlet private var imageView: UIImageView!
 
   private let operationQueue = OperationQueue()
-  private let citiesService = NetworkDataResourceService<CitiesResource>()
-  private let imageService = NetworkDataResourceService<NetworkImageResource>()
+  private let generalService = NetworkDataResourceService()
+  private let citiesService = GenericNetworkDataResourceService<CitiesResource>()
+  private let imageService = GenericNetworkDataResourceService<NetworkImageResource>()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,6 +41,10 @@ class ViewController: UIViewController {
   func fetchJSONExample() {
     let americaResource = CitiesResource(continent: "america")
     citiesService.fetch(resource: americaResource) { (result) in
+      print(result)
+    }
+
+    generalService.fetch(resource: americaResource) { result in
       print(result)
     }
 

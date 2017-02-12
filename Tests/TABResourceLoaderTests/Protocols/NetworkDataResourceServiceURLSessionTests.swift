@@ -28,7 +28,7 @@ class NetworkDataResourceServiceURLSessionTests: XCTestCase { //swiftlint:disabl
   }
 
   func test_initWithURLSession() {
-    let service = NetworkDataResourceService<MockResource>(session: MockSessionToTestExposed())
+    let service = GenericNetworkDataResourceService<MockResource>(session: MockSessionToTestExposed())
     let resource = MockResource()
 
     var hasFetched = false
