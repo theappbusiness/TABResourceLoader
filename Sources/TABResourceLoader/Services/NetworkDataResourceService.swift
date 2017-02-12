@@ -50,6 +50,10 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     self.session = session
   }
 
+  deinit {
+    session.invalidateAndCancel()
+  }
+
   open func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
     fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
   }

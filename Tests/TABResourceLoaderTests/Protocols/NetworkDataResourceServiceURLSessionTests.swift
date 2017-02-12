@@ -13,6 +13,7 @@ class MockSessionToTestExposed: URLSessionType {
   func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
     completion(Data(), nil, nil)
   }
+  func invalidateAndCancel() { /* not implemented */ }
 }
 
 class NetworkDataResourceServiceURLSessionTests: XCTestCase { //swiftlint:disable:this type_name
@@ -31,7 +32,7 @@ class NetworkDataResourceServiceURLSessionTests: XCTestCase { //swiftlint:disabl
 
     var hasFetched = false
     performAsyncTest { expectation in
-      service.fetch(resource: resource) { result in
+      service.fetch(resource: resource) { _ in
         hasFetched = true
         expectation?.fulfill()
       }

@@ -59,10 +59,10 @@ class SubclassedNetworkJSONResourceServiceTests: XCTestCase { //swiftlint:disabl
   }
 
   func test_finalRequestInclude_subclassHTTPHeaderFields_and_resourceHTTPHeaderFields() {
-    let resourceHTTPHeaderFields = ["resource_key" : "resource"]
+    let resourceHTTPHeaderFields = ["resource_key": "resource"]
     mockResource = MockHTTPHeaderFieldsNetworkDataResource(url: mockURL, httpHeaderFields: resourceHTTPHeaderFields)
     testService.fetch(resource: mockResource) { _ in }
-    let expectedHeaderFields = [commonKey: "subclass", "resource_key" : "resource"]
+    let expectedHeaderFields = [commonKey: "subclass", "resource_key": "resource"]
     XCTAssertEqual(mockSession.capturedRequest!.allHTTPHeaderFields!, expectedHeaderFields)
   }
 

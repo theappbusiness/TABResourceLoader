@@ -13,6 +13,7 @@ class MockSessionThatDoesNothing: URLSessionType {
   func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
     // does nothing!
   }
+  func invalidateAndCancel() { /* not implemented */ }
 }
 
 class MockResourceService: ResourceServiceType {

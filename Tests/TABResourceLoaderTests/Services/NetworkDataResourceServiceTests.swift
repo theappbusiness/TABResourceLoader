@@ -71,7 +71,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
     let mockInvalidURLResource = MockNilURLRequestNetworkJSONResource()
     let newTestRequestManager = NetworkDataResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
     XCTAssertNil(mockInvalidURLResource.urlRequest())
-    performAsyncTest() { expectation in
+    performAsyncTest { expectation in
       newTestRequestManager.fetch(resource: mockInvalidURLResource) { result in
         expectation?.fulfill()
         guard let error = result.error() else {
@@ -145,7 +145,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   func test_fetch_whenSessionCompletesWithNetworkingError_callsFailureWithCorrectError() {
     let expectedError = NSError(domain: "test", code: 999, userInfo: nil) as Error
 
-    performAsyncTest() { expectation in
+    performAsyncTest { expectation in
       testService.fetch(resource: mockResource) { result in
         expectation?.fulfill()
         guard let error = result.error() else {
@@ -164,7 +164,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   }
 
   func test_fetch_whenSessionCompletes_WithNoData_callsFailureWithCorrectError() {
-    performAsyncTest() { expectation in
+    performAsyncTest { expectation in
       testService.fetch(resource: mockResource) { result in
         expectation?.fulfill()
         guard let error = result.error() else {
@@ -177,5 +177,10 @@ class NetworkDataResourceServiceTests: XCTestCase {
       mockSession.capturedCompletion!(nil, nil, nil)
     }
   }
-
+  
+  func testSessionIsInvalidatedOnDeinit() {
+    XCTAssertEqual(mockSession.invalidateAndCancelCallCount, 0)
+    testService = nil
+    XCTAssertEqual(mockSession.invalidateAndCancelCallCount, 1)
+  }
 }

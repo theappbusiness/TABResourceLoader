@@ -57,7 +57,7 @@ class ResourceOperationTests: XCTestCase {
 
   func test_execute_callsDidFinishFetchingResourceCallback_onMainThread() {
     let finishExpectation = expectation(description: #function)
-    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _, result in
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _, _ in
       XCTAssert(Thread.isMainThread)
       finishExpectation.fulfill()
     }
@@ -81,7 +81,7 @@ class ResourceOperationTests: XCTestCase {
   }
 
   func test_execute_doesNotCallFinishAndDidFinish_whenOperationIsCancelled_afterServiceFetches() {
-    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _, result in
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _, _ in
       XCTFail("Operation was cancelled, so this should not have been executed")
     }
     sut.execute()
