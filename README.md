@@ -21,7 +21,7 @@ This library defines/uses 3 concepts: resource, service and operation
 	- For example a resource could define the url of where a JSON file is and how to parse into strongly types model
 - A **Service** represents a type that can retrieve resources, generally conforms to `ResourceServiceType`.
 	- For example the library ships with a network service that is responsible for fetching a network resource
-- A **ResourceOperation** can used to manage concurrency and dependencies as services can be defined not to be asynchronous, generally conforms `ResourceOperationType`.
+- A **ResourceOperation** can used to manage concurrency and dependencies as services can be defined not to be asynchronous.
 
 ### Available Resource protocols
 

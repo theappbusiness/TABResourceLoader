@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.1.1
+
+- Removed unnecessary `ResourceOperationType` protocol
+- `NetworkDataResourceService` now invalidates it's session on deinit
+
 ## 3.1.0
 
 - Added support for listen to network activity changes, useful for setting up `isNetworkActivityIndicatorVisible` on `UIApplication`
