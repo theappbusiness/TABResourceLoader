@@ -33,6 +33,7 @@
 		4F079D741D8459D400D08DA0 /* NetworkDataResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */; };
 		4F079D7A1D84652200D08DA0 /* ImageMocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D781D84650800D08DA0 /* ImageMocker.swift */; };
 		4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */; };
+		4F26D6621E5224D400F22BAB /* MockCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26D6601E52245500F22BAB /* MockCancellable.swift */; };
 		4F36C0B01D9D529600CDFD21 /* JSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */; };
 		4F36C0B21D9D52A700CDFD21 /* JSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */; };
 		4F36C0B51D9D5AE400CDFD21 /* JSONDictionaryResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */; };
@@ -101,6 +102,7 @@
 		4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResourceServiceTests.swift; sourceTree = "<group>"; };
 		4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubclassedNetworkDataResourceServiceTests.swift; sourceTree = "<group>"; };
 		4F079D781D84650800D08DA0 /* ImageMocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMocker.swift; sourceTree = "<group>"; };
+		4F26D6601E52245500F22BAB /* MockCancellable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCancellable.swift; sourceTree = "<group>"; };
 		4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDictionaryResourceType.swift; sourceTree = "<group>"; };
 		4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONArrayResourceType.swift; sourceTree = "<group>"; };
 		4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDictionaryResourceTypeTests.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				4F079D471D84599300D08DA0 /* MockResource.swift */,
 				4F079D481D84599300D08DA0 /* MockResourceService.swift */,
 				4F079D491D84599300D08DA0 /* MockURLSession.swift */,
+				4F26D6601E52245500F22BAB /* MockCancellable.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -538,7 +541,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n    swiftlint autocorrect\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -580,6 +583,7 @@
 				4F079D721D8459D400D08DA0 /* NetworkResourceTypeTests.swift in Sources */,
 				4F079D6C1D8459D400D08DA0 /* MockResource.swift in Sources */,
 				4F36C0B81D9D5BD200CDFD21 /* JSONArrayResourceTypeTests.swift in Sources */,
+				4F26D6621E5224D400F22BAB /* MockCancellable.swift in Sources */,
 				4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6F1D8459D400D08DA0 /* ResourceOperationTests.swift in Sources */,
 				4F079D701D8459D400D08DA0 /* ImageResourceTypeTests.swift in Sources */,

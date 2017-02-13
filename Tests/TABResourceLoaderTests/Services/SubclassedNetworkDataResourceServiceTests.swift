@@ -23,11 +23,6 @@ struct MockHTTPHeaderFieldsNetworkDataResource: NetworkResourceType, DataResourc
 
 final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: NetworkDataResourceService<Resource> {
 
-  // Needed because of https://bugs.swift.org/browse/SR-416
-  required init() {
-    super.init()
-  }
-
   required init(session: URLSessionType) {
     super.init(session: session)
   }

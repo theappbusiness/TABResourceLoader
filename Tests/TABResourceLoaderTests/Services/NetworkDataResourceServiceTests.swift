@@ -183,4 +183,10 @@ class NetworkDataResourceServiceTests: XCTestCase {
     testService = nil
     XCTAssertEqual(mockSession.invalidateAndCancelCallCount, 1)
   }
+
+  func test_fetch_returnsANonNilCancellable() {
+    let cancellable = testService.fetch(resource: mockResource) { _ in }
+    XCTAssertNotNil(cancellable)
+  }
+
 }

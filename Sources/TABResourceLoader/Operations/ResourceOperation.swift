@@ -9,15 +9,15 @@
 import Foundation
 
 /// Operation used for the sole purpose of fetching a resource using a service
-public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOperation {
+public final class ResourceOperation<ResourceService: ResourceServiceType>: BaseAsynchronousOperation {
 
-  public typealias ResourceService = T
   public typealias DidFinishFetchingResourceCallback = (ResourceOperation<ResourceService>, Result<ResourceService.Resource.Model>) -> Void
 
   // These properties are internal for unit testing purposes
   let resource: ResourceService.Resource
   let service: ResourceService
   let didFinishFetchingResourceCallback: DidFinishFetchingResourceCallback
+  weak private(set)var cancellable: Cancellable? // Operation should not retain the cancellable item as it does not own it
 
   /// Designated initializer
   ///
@@ -43,7 +43,12 @@ public final class ResourceOperation<T: ResourceServiceType>: BaseAsynchronousOp
 
   override public func execute() {
     if isCancelled { return }
-    service.fetch(resource: resource, completion: handleFetchCompletion)
+    cancellable = service.fetch(resource: resource, completion: handleFetchCompletion)
+  }
+
+  public override func cancel() {
+    cancellable?.cancel()
+    super.cancel()
   }
 
   private func handleFetchCompletion(with result: Result<ResourceService.Resource.Model>) {

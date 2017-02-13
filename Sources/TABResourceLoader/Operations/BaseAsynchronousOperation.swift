@@ -73,7 +73,7 @@ open class BaseAsynchronousOperation: Operation {
     self.isExecuting = false
   }
 
-  public final override func cancel() {
+  open override func cancel() {
     super.cancel()
     isCancelled = true
     if isExecuting {

@@ -9,12 +9,16 @@
 import Foundation
 
 public protocol URLSessionType {
-  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
   func invalidateAndCancel()
 }
 
 extension URLSession: URLSessionType {
-  public func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-    dataTask(with: request, completionHandler: completion).resume()
+  public func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    let task = dataTask(with: request, completionHandler: completion)
+    task.resume()
+    return task
   }
 }
+
+extension URLSessionDataTask: Cancellable {}

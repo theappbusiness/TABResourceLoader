@@ -60,6 +60,7 @@ This library defines/uses 3 concepts: resource, service and operation
 ### Available service types conforming to `ResourceServiceType`
 
 - `NetworkDataResourceService`: Used to retrieve a resource that conforms to `NetworkResourceType` and `DataResourceType`
+- `fetch` function now returns a `Cancellable` object which can be used to cancel the network request
 
 ### `ResourceOperation`
 
