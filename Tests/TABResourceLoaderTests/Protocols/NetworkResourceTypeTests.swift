@@ -32,7 +32,7 @@ private struct MockCustomNetworkResource: NetworkResourceType {
 }
 
 class NetworkResourceTypeTests: XCTestCase {
-  
+
   let url = URL(string: "www.test.com")!
   let urlWithQueryItem = URL(string: "www.test.com?query-name=query-value")!
 
@@ -57,8 +57,8 @@ class NetworkResourceTypeTests: XCTestCase {
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURL)
     XCTAssertEqual(urlRequest?.httpMethod, expectedHTTPMethod.rawValue)
     XCTAssertEqual(urlRequest!.allHTTPHeaderFields!, expectedAllHTTPHeaderFields)
-    let expectedJSONData = try! JSONSerialization.data(withJSONObject: expectedJSONBody, options: JSONSerialization.WritingOptions.prettyPrinted)
-    XCTAssertEqual(urlRequest!.httpBody!, expectedJSONData)
+    let expectedJSONData = try? JSONSerialization.data(withJSONObject: expectedJSONBody, options: JSONSerialization.WritingOptions.prettyPrinted)
+    XCTAssertEqual(urlRequest!.httpBody, expectedJSONData)
   }
 
   func test_urlRequest_resourceURLWithQueryParameters() {

@@ -36,9 +36,9 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
   open func additionalHeaderFields() -> [String: String] {
     return [:]
   }
-  
+
   public let session: URLSessionType
-  
+
   /**
    Designated initializer for NetworkDataResourceService
    
@@ -60,7 +60,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
       completion(.failure(NetworkServiceError.couldNotCreateURLRequest))
       return
     }
-    
+
     urlRequest.allHTTPHeaderFields = allHTTPHeaderFields(resourceHTTPHeaderFields: urlRequest.allHTTPHeaderFields)
     networkServiceActivity.increaseActiveRequest()
     session.perform(request: urlRequest) { [weak self] (data, URLResponse, error) in
@@ -69,7 +69,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
       completion(strongSelf.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
     }
   }
-  
+
   fileprivate func allHTTPHeaderFields(resourceHTTPHeaderFields: [String: String]?) -> [String: String]? {
     var generalHTTPHeaderFields = additionalHeaderFields()
     if let resourceHTTPHeaderFields = resourceHTTPHeaderFields {
@@ -79,9 +79,9 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     }
     return generalHTTPHeaderFields
   }
-  
+
   fileprivate func resultFrom(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> Result<Resource.Model> {
-    
+
     if let HTTPURLResponse = URLResponse as? HTTPURLResponse {
       switch HTTPURLResponse.statusCode {
       case 400..<600:
@@ -89,16 +89,16 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
       default: break
       }
     }
-    
+
     if let error = error {
       return .failure(NetworkServiceError.networkingError(error: error))
     }
-    
+
     guard let data = data else {
       return .failure(NetworkServiceError.noData)
     }
-    
+
     return resource.result(from: data)
   }
-  
+
 }

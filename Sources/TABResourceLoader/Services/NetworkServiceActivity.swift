@@ -33,7 +33,7 @@ public class NetworkServiceActivity {
       numberOfActiveRequests += 1
     }
   }
-  
+
   /// Call this method every time a request ends
   func decreaseActiveRequest() {
     serialQueue.sync {

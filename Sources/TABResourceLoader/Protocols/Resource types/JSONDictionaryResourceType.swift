@@ -39,5 +39,5 @@ extension JSONDictionaryResourceType {
 
     return .success(parsedResults)
   }
-  
+
 }

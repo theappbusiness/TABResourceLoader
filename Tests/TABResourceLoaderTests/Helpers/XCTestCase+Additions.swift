@@ -33,11 +33,24 @@ extension XCTestCase {
       }
     }
   }
-  
+
   /// Convenience function for waiting for an expectation, timeout defaults to 1
   func waitForExpectation(file: StaticString = #file, line: UInt = #line) {
     waitForExpectations(timeout: 1) { error in
       if let error = error { XCTFail("\(error)", file: file, line: line) }
     }
   }
+
+  /// Convenience function to serialize a JSON object, if serialization fails an XCTest assertion is raised
+  ///
+  /// - Parameter jsonObject: The object to serialize
+  /// - Returns: Returns the serialized data or Data() if serialization fails
+  func serialize(jsonObject: Any, file: StaticString = #file, line: UInt = #line) -> Data {
+    guard let data = try? JSONSerialization.data(withJSONObject: jsonObject, options: JSONSerialization.WritingOptions.prettyPrinted) else {
+      XCTFail("Failed to serialize data")
+      return Data()
+    }
+    return data
+  }
+
 }

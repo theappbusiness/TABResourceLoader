@@ -16,5 +16,3 @@ public extension NetworkJSONDictionaryResourceType {
     return ["Content-Type": "application/json"]
   }
 }
-
-

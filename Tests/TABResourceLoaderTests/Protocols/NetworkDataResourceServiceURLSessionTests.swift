@@ -15,8 +15,8 @@ class MockSessionToTestExposed: URLSessionType {
   }
 }
 
-class NetworkDataResourceServiceURLSessionTests: XCTestCase {
-  
+class NetworkDataResourceServiceURLSessionTests: XCTestCase { //swiftlint:disable:this type_name
+
   struct MockResource: NetworkResourceType, DataResourceType {
     typealias Model = String
     var url = URL(string: "test")!
@@ -24,11 +24,11 @@ class NetworkDataResourceServiceURLSessionTests: XCTestCase {
       return .success("done")
     }
   }
-  
+
   func test_initWithURLSession() {
     let service = NetworkDataResourceService<MockResource>(session: MockSessionToTestExposed())
     let resource = MockResource()
-    
+
     var hasFetched = false
     performAsyncTest { expectation in
       service.fetch(resource: resource) { result in
@@ -38,5 +38,5 @@ class NetworkDataResourceServiceURLSessionTests: XCTestCase {
     }
     XCTAssertTrue(hasFetched)
   }
-  
+
 }

@@ -18,13 +18,13 @@ extension Thread {
     if self.current == self.main {
       mainThreadClosure()
     } else {
-      
+
       let queue = DispatchQueue.main
       queue.sync(execute: {
         mainThreadClosure()
       })
-      
+
     }
   }
-  
+
 }

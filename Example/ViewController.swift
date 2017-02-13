@@ -15,29 +15,29 @@ private typealias NetworkImageResourceOperation = ResourceOperation<NetworkDataR
 class ViewController: UIViewController {
 
   @IBOutlet private var imageView: UIImageView!
-  
+
   private let operationQueue = OperationQueue()
   private let citiesService = NetworkDataResourceService<CitiesResource>()
   private let imageService = NetworkDataResourceService<NetworkImageResource>()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     fetchJSONExample()
     fetchImageExample()
   }
-  
+
   func fetchJSONExample() {
     let americaResource = CitiesResource(continent: "america")
     citiesService.fetch(resource: americaResource) { (result) in
       print(result)
     }
-    
+
     let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { operation, result in
       print(result)
     }
     operationQueue.addOperation(citiesResourceOperation)
   }
-  
+
   func fetchImageExample() {
     let largeImageURL = URL(string: "https://static.pexels.com/photos/4164/landscape-mountains-nature-mountain.jpeg")!
     let imageResource = NetworkImageResource(url: largeImageURL)
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     imageService.fetch(resource: imageResource) { (result) in
       // Do something with result
     }
-    
+
     let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, result in
       if case let .success(image) = result {
         self?.imageView.image = image
@@ -55,4 +55,3 @@ class ViewController: UIViewController {
   }
 
 }
-

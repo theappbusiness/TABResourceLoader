@@ -21,7 +21,7 @@ class ResourceOperationTests: XCTestCase {
     mockService = MockResourceService()
     sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService, didFinishFetchingResourceCallback: { _, _ in })
   }
-  
+
   override func tearDown() {
     mockResource = nil
     mockService = nil
@@ -38,15 +38,15 @@ class ResourceOperationTests: XCTestCase {
     let copiedResourceOperation = sut.createCopy()
     XCTAssert(copiedResourceOperation.service === mockService)
   }
-  
+
   func test_executeCallsFetchOnService() {
     sut.execute()
     XCTAssertEqual(mockService.fetchCallCount, 1)
   }
-  
+
   func test_execute_callsDidFinishFetchingResourceCallback_withCorrectResultOnSuccess() {
     let finishExpectation = expectation(description: #function)
-    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _ , result in
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _, result in
       XCTAssertEqual(result.successResult(), "some result")
       finishExpectation.fulfill()
     }
@@ -54,10 +54,10 @@ class ResourceOperationTests: XCTestCase {
     mockService.capturedCompletion!(.success("some result"))
     waitForExpectation()
   }
-  
+
   func test_execute_callsDidFinishFetchingResourceCallback_onMainThread() {
     let finishExpectation = expectation(description: #function)
-    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _ , result in
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _, result in
       XCTAssert(Thread.isMainThread)
       finishExpectation.fulfill()
     }
@@ -67,13 +67,13 @@ class ResourceOperationTests: XCTestCase {
     }
     waitForExpectation()
   }
-  
+
   func test_executeCallsFinishOnCompletion() {
     sut.execute()
     mockService.capturedCompletion!(.success("some result"))
     XCTAssert(sut.isFinished)
   }
-  
+
   func test_execute_doesNotCallFetchOnService_whenOperationIsCancelled_beforeServiceFetches() {
     sut.cancel()
     sut.execute()
@@ -81,7 +81,7 @@ class ResourceOperationTests: XCTestCase {
   }
 
   func test_execute_doesNotCallFinishAndDidFinish_whenOperationIsCancelled_afterServiceFetches() {
-    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _ , result in
+    sut = ResourceOperation<MockResourceService>(resource: mockResource, service: mockService) { _, result in
       XCTFail("Operation was cancelled, so this should not have been executed")
     }
     sut.execute()

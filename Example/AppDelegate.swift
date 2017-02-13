@@ -24,6 +24,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       application.isNetworkActivityIndicatorVisible = isActive
     }
   }
-  
-}
 
+}

@@ -13,13 +13,13 @@ private let baseURL = URL(string: "http://localhost:8000/")!
 
 struct CitiesResource: NetworkJSONDictionaryResourceType {
   typealias Model = [City]
-  
+
   let url: URL
-  
+
   init(continent: String) {
     url = baseURL.appendingPathComponent("\(continent).json")
   }
-  
+
   // MARK: JSONDictionaryResourceType
   func model(from jsonDictionary: [String : Any]) -> Model? {
     guard let
@@ -29,5 +29,5 @@ struct CitiesResource: NetworkJSONDictionaryResourceType {
     }
     return citiesJSONArray.flatMap(City.init)
   }
-  
+
 }
