@@ -17,7 +17,7 @@ public final class ResourceOperation<ResourceService: ResourceServiceType>: Base
   let resource: ResourceService.Resource
   let service: ResourceService
   let didFinishFetchingResourceCallback: DidFinishFetchingResourceCallback
-  weak private(set)var cancellable: Cancellable? // Operation should not retain the cancellable item as it does not own it
+  weak private(set) var cancellable: Cancellable? // Operation should not retain the cancellable item as it does not own it
 
   /// Designated initializer
   ///
