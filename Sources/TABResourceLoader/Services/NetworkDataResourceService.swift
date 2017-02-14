@@ -54,24 +54,28 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     session.invalidateAndCancel()
   }
 
-  open func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
-    fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
+  @discardableResult
+  open func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
+    let cancellable = fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
+    return cancellable
   }
 
   // Method used for injecting the NetworkServiceActivity for testing
-  final func fetch(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (Result<Resource.Model>) -> Void) {
+  @discardableResult
+  final func fetch(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
     guard var urlRequest = resource.urlRequest() else {
       completion(.failure(NetworkServiceError.couldNotCreateURLRequest))
-      return
+      return nil
     }
 
     urlRequest.allHTTPHeaderFields = allHTTPHeaderFields(resourceHTTPHeaderFields: urlRequest.allHTTPHeaderFields)
     networkServiceActivity.increaseActiveRequest()
-    session.perform(request: urlRequest) { [weak self] (data, URLResponse, error) in
+    let cancellable = session.perform(request: urlRequest) { [weak self] (data, URLResponse, error) in
       networkServiceActivity.decreaseActiveRequest()
       guard let strongSelf = self else { return }
       completion(strongSelf.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
     }
+    return cancellable
   }
 
   fileprivate func allHTTPHeaderFields(resourceHTTPHeaderFields: [String: String]?) -> [String: String]? {

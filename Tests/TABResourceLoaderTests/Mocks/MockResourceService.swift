@@ -10,8 +10,8 @@ import Foundation
 @testable import TABResourceLoader
 
 class MockSessionThatDoesNothing: URLSessionType {
-  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-    // does nothing!
+  public func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    return URLSessionDataTask()
   }
   func invalidateAndCancel() { /* not implemented */ }
 }
@@ -23,13 +23,15 @@ class MockResourceService: ResourceServiceType {
   var capturedResource: Resource?
   var capturedCompletion: ((Result<Resource.Model>) -> Void)?
   var fetchCallCount: Int = 0
+  var mockReturnedCancellable: Cancellable?
 
   required init(session: URLSessionType = MockSessionThatDoesNothing()) {}
 
-  func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) {
+  func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
     capturedResource = resource
     capturedCompletion = completion
     fetchCallCount += 1
+    return mockReturnedCancellable
   }
 
 }

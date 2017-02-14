@@ -91,4 +91,13 @@ class ResourceOperationTests: XCTestCase {
     XCTAssertFalse(sut.isFinished)
   }
 
+  func test_cancellingOperationCallsCancelsCancellable() {
+    let mockCancellable = MockCancellable()
+    mockService.mockReturnedCancellable = mockCancellable
+    sut.execute()
+    XCTAssertEqual(mockCancellable.cancelCallCount, 0)
+    sut.cancel()
+    XCTAssertEqual(mockCancellable.cancelCallCount, 1)
+  }
+
 }

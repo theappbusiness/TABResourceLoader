@@ -17,9 +17,10 @@ final class MockURLSession: URLSessionType {
   var capturedCompletion: URLSessionCompletionHandler?
   var invalidateAndCancelCallCount = 0
 
-  func perform(request: URLRequest, completion: @escaping URLSessionCompletionHandler) {
+  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
     capturedRequest = request
     capturedCompletion = completion
+    return URLSessionDataTask()
   }
 
   func invalidateAndCancel() {

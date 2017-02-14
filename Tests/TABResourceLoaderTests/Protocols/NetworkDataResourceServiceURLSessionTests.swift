@@ -10,8 +10,9 @@ import XCTest
 import TABResourceLoader // note this is intentionally *not* @testable, so we can confirm URLSession is exposed
 
 class MockSessionToTestExposed: URLSessionType {
-  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+  public func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
     completion(Data(), nil, nil)
+    return URLSessionDataTask()
   }
   func invalidateAndCancel() { /* not implemented */ }
 }

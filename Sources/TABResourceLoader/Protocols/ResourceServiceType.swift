@@ -8,6 +8,12 @@
 
 import Foundation
 
+/// Defines a type that can be cancelled
+public protocol Cancellable: class {
+  func cancel()
+}
+
+/// Defines a type that can fetch resources
 public protocol ResourceServiceType {
   associatedtype Resource: ResourceType
 
@@ -22,5 +28,6 @@ public protocol ResourceServiceType {
    - parameter resource:   The resource to fetch
    - parameter completion: A completion handler called with a Result type of the fetching computation
    */
-  func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void)
+  @discardableResult
+  func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable?
 }

@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.2.0
+
+- Issue #21 - Added support for cancelling request
+	- `NetworkDataResourceService` now returns a `Cancellable` type
+
 ## 3.1.1
 
 - Removed unnecessary `ResourceOperationType` protocol
