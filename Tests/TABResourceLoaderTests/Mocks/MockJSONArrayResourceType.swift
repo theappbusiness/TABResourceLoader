@@ -12,12 +12,12 @@ import Foundation
 struct MockJSONArrayResourceType: JSONArrayResourceType {
   typealias Model = [MockObject]
 
-  func model(from jsonArray: [Any]) -> [MockObject]? {
+  func model(from jsonArray: [Any]) throws -> [MockObject] {
     let parsedMockObjects: [MockObject] = jsonArray.flatMap {
       guard let jsonDictionary = $0 as? [String: Any] else { return nil }
       return MockObject(jsonDictionary: jsonDictionary)
     }
-    guard parsedMockObjects.count > 0 else { return nil }
+    guard parsedMockObjects.count > 0 else { throw JSONParsingError.cannotParseJSONArray }
     return parsedMockObjects
   }
 

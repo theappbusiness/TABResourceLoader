@@ -11,6 +11,10 @@ import TABResourceLoader
 
 private let baseURL = URL(string: "http://localhost:8000/")!
 
+enum CitiesResourceError: Error {
+  case parsingFailed
+}
+
 struct CitiesResource: NetworkJSONDictionaryResourceType {
   typealias Model = [City]
 
@@ -21,11 +25,11 @@ struct CitiesResource: NetworkJSONDictionaryResourceType {
   }
 
   // MARK: JSONDictionaryResourceType
-  func model(from jsonDictionary: [String : Any]) -> Model? {
+  func model(from jsonDictionary: [String : Any]) throws -> Model {
     guard let
       citiesJSONArray = jsonDictionary["cities"] as? [[String: Any]]
       else {
-        return []
+        throw CitiesResourceError.parsingFailed
     }
     return citiesJSONArray.flatMap(City.init)
   }
