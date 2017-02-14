@@ -9,9 +9,10 @@
 import Foundation
 @testable import TABResourceLoader
 
-typealias URLSessionCompletionHandler = (Data?, URLResponse?, Error?) -> Void
-
 final class MockURLSession: URLSessionType {
+
+  typealias URLSessionCompletionHandler = (Data?, URLResponse?, Error?) -> Void
+
   var capturedRequest: URLRequest?
   var capturedCompletion: URLSessionCompletionHandler?
   var invalidateAndCancelCallCount = 0

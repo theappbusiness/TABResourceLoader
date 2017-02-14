@@ -177,8 +177,8 @@ class NetworkDataResourceServiceTests: XCTestCase {
       mockSession.capturedCompletion!(nil, nil, nil)
     }
   }
-  
-  func testSessionIsInvalidatedOnDeinit() {
+
+  func test_sessionIsInvalidatedOnDeinit() {
     XCTAssertEqual(mockSession.invalidateAndCancelCallCount, 0)
     testService = nil
     XCTAssertEqual(mockSession.invalidateAndCancelCallCount, 1)
