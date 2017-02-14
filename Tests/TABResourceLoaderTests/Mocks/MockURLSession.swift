@@ -10,12 +10,19 @@ import Foundation
 @testable import TABResourceLoader
 
 final class MockURLSession: URLSessionType {
-  var capturedRequest: URLRequest?
-  var capturedCompletion: ((Data?, URLResponse?, Error?) -> Void)?
 
-  func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+  typealias URLSessionCompletionHandler = (Data?, URLResponse?, Error?) -> Void
+
+  var capturedRequest: URLRequest?
+  var capturedCompletion: URLSessionCompletionHandler?
+  var invalidateAndCancelCallCount = 0
+
+  func perform(request: URLRequest, completion: @escaping URLSessionCompletionHandler) {
     capturedRequest = request
     capturedCompletion = completion
   }
 
+  func invalidateAndCancel() {
+    invalidateAndCancelCallCount += 1
+  }
 }

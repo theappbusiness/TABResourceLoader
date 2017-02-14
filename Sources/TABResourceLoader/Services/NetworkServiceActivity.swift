@@ -14,7 +14,7 @@ public class NetworkServiceActivity {
 
   /// Set this property to listen to changes on the network activity status,
   /// useful for setting the isNetworkActivityIndicatorVisible on UIApplication for example
-  public static var activityChangeHandler: ((_ isActive: Bool) -> ())?
+  public static var activityChangeHandler: ((_ isActive: Bool) -> Void)?
 
   static let shared = NetworkServiceActivity()
 

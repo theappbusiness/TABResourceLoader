@@ -32,7 +32,7 @@ class ViewController: UIViewController {
       print(result)
     }
 
-    let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { operation, result in
+    let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { _, result in
       print(result)
     }
     operationQueue.addOperation(citiesResourceOperation)
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     let largeImageURL = URL(string: "https://static.pexels.com/photos/4164/landscape-mountains-nature-mountain.jpeg")!
     let imageResource = NetworkImageResource(url: largeImageURL)
 
-    imageService.fetch(resource: imageResource) { (result) in
+    imageService.fetch(resource: imageResource) { (_) in
       // Do something with result
     }
 

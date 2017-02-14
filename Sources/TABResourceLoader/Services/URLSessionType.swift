@@ -10,6 +10,7 @@ import Foundation
 
 public protocol URLSessionType {
   func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+  func invalidateAndCancel()
 }
 
 extension URLSession: URLSessionType {

@@ -12,9 +12,7 @@ import Foundation
 open class BaseAsynchronousOperation: Operation {
 
   open override var isAsynchronous: Bool {
-    get {
-      return true
-    }
+    return true
   }
 
   fileprivate var _executing: Bool = false //swiftlint:disable:this variable_name
