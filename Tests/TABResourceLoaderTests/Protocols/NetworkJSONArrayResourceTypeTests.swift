@@ -13,7 +13,7 @@ struct MockNetworkJSONArrayResourceType: NetworkJSONArrayResourceType {
   typealias Model = String
   let url: URL
 
-  func model(from jsonArray: [Any]) -> String? {
+  func model(from jsonArray: [Any]) throws -> String {
     return ""
   }
 

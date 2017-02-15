@@ -19,7 +19,7 @@ public protocol JSONArrayResourceType: DataResourceType {
 
    - returns: An instantiated model if parsing was succesful, otherwise nil
    */
-  func model(from jsonArray: [Any]) -> Model?
+  func model(from jsonArray: [Any]) throws -> Model
 }
 
 extension JSONArrayResourceType {
@@ -32,12 +32,12 @@ extension JSONArrayResourceType {
     guard let jsonArray = jsonObject as? [Any] else {
       return .failure(JSONParsingError.notAJSONArray)
     }
-
-    guard let parsedResults = model(from: jsonArray) else {
-      return .failure(JSONParsingError.cannotParseJSONArray)
+    do {
+      let parsedResult = try model(from: jsonArray)
+      return .success(parsedResult)
+    } catch {
+      return .failure(error)
     }
-
-    return .success(parsedResults)
   }
 
 }

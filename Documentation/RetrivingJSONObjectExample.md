@@ -42,25 +42,29 @@ private let baseURL = URL(string: "http://localhost:8000/")!
 ```
 
 ```swift
+enum CitiesResourceError: Error {
+  case parsingFailed
+}
+
 struct CitiesResource: NetworkJSONDictionaryResourceType {
   typealias Model = [City]
-  
+
   let url: URL
-  
+
   init(continent: String) {
     url = baseURL.appendingPathComponent("\(continent).json")
   }
-  
+
   // MARK: JSONDictionaryResourceType
-  func model(from jsonDictionary: [String : Any]) -> Model? {
+  func model(from jsonDictionary: [String : Any]) throws -> Model {
     guard let
       citiesJSONArray = jsonDictionary["cities"] as? [[String: Any]]
       else {
-        return []
+        throw CitiesResourceError.parsingFailed
     }
     return citiesJSONArray.flatMap(City.init)
   }
-  
+
 }
 ```
 

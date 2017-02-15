@@ -1,5 +1,9 @@
 # Change Log
 
+## 4.0.0
+
+- `JSONDictionaryResourceType` and `JSONArrayResourceType` now throw on failure
+
 ## 3.2.0
 
 - Issue #21 - Added support for cancelling request
