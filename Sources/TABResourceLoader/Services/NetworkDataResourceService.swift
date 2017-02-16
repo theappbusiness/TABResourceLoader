@@ -35,7 +35,7 @@ open class NetworkDataResourceService {
     return [:]
   }
 
-  public let session: URLSessionType
+  let session: URLSessionType
 
   /**
    Designated initializer for NetworkDataResourceService
