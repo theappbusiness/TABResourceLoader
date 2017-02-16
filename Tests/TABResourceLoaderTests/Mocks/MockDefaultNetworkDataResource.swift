@@ -15,7 +15,7 @@ struct MockDefaultNetworkDataResource: NetworkDataResourceType {
   typealias Model = String
   let url: URL
 
-  func result(from data: Data) -> Result<String> {
-    return .success("")
+  func result(from data: Data) throws -> String {
+    return ""
   }
 }

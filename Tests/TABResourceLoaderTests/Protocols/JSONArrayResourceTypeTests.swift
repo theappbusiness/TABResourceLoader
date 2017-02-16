@@ -12,56 +12,52 @@ import XCTest
 class JSONArrayResourceTypeTests: XCTestCase {
 
   func test_invalidJSONData() {
-    let mockJSONObjectResourceType = MockJSONArrayResourceType()
-    let result = mockJSONObjectResourceType.result(from: Data())
-    guard let error = result.error() else {
+    let mockJSONArrayResourceType = MockJSONArrayResourceType()
+    do {
+      let _ = try mockJSONArrayResourceType.result(from: Data())
       XCTFail("No error found")
-      return
+    } catch {
+      XCTAssertEqual(error as? JSONParsingError, JSONParsingError.invalidJSONData)
     }
-    if case JSONParsingError.invalidJSONData = error { return }
-    XCTFail()
   }
 
   func test_invalidJSONDictionary() {
-    let mockJSONObjectResourceType = MockJSONArrayResourceType()
+    let mockJSONArrayResourceType = MockJSONArrayResourceType()
     let jsonDictionary = ["invalid_key": "mock"]
     let data = serialize(jsonObject: jsonDictionary)
-    let result = mockJSONObjectResourceType.result(from: data)
-    guard let error = result.error() else {
+    do {
+      let _ = try mockJSONArrayResourceType.result(from: data)
       XCTFail("No error found")
-      return
+    } catch {
+      XCTAssertEqual(error as? JSONParsingError, JSONParsingError.notAJSONArray)
     }
-    if case JSONParsingError.notAJSONArray = error { return }
-    XCTFail("Did not match correct error: \(error)")
   }
 
   func test_cannotParseJSONArray() {
-    let mockJSONObjectResourceType = MockJSONArrayResourceType()
+    let mockJSONArrayResourceType = MockJSONArrayResourceType()
     let jsonArray = [["invalid-key"]]
     let data = serialize(jsonObject: jsonArray)
-    let result = mockJSONObjectResourceType.result(from: data)
-    guard let error = result.error() else {
+    do {
+      let _ = try mockJSONArrayResourceType.result(from: data)
       XCTFail("No error found")
-      return
+    } catch {
+      XCTAssertEqual(error as? JSONParsingError, JSONParsingError.cannotParseJSONArray)
     }
-    if case JSONParsingError.cannotParseJSONArray = error { return }
-    XCTFail()
   }
 
   func test_validJSONArray() {
-    let mockJSONObjectResourceType = MockJSONArrayResourceType()
+    let mockJSONArrayResourceType = MockJSONArrayResourceType()
     let jsonArray = [
       ["name": "mock 1"],
       ["name": "mock 2"]
     ]
     let data = serialize(jsonObject: jsonArray)
-    let result = mockJSONObjectResourceType.result(from: data)
-    guard let calculatedMockObjectsArray = result.successResult() else {
+    guard let result = try? mockJSONArrayResourceType.result(from: data) else {
       XCTFail("No error found")
       return
     }
     let expectedMockObjectsArray = [MockObject(name: "mock 1"), MockObject(name: "mock 2")]
-    XCTAssertEqual(calculatedMockObjectsArray, expectedMockObjectsArray)
+    XCTAssertEqual(result, expectedMockObjectsArray)
   }
 
 }

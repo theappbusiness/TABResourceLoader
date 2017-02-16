@@ -24,20 +24,19 @@ public protocol JSONDictionaryResourceType: DataResourceType {
 
 extension JSONDictionaryResourceType {
 
-  public func result(from data: Data) -> Result<Model> {
+  public func result(from data: Data) throws -> Model {
     guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
-      return .failure(JSONParsingError.invalidJSONData)
+      throw JSONParsingError.invalidJSONData
     }
 
     guard let jsonDictionary = jsonObject as? [String: Any] else {
-      return .failure(JSONParsingError.notAJSONDictionary)
+      throw JSONParsingError.notAJSONDictionary
     }
 
     do {
-      let parsedResult = try model(from: jsonDictionary)
-      return .success(parsedResult)
+      return try model(from: jsonDictionary)
     } catch {
-      return .failure(error)
+      throw error
     }
   }
 
