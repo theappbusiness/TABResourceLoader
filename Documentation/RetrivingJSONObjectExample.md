@@ -74,8 +74,8 @@ Use the provided `NetworkDataResourceService` to retrieve your `CitiesResource` 
 
 ```swift
 let europeResource = CitiesResource(continent: "europe")
-let networkJSONService = NetworkDataResourceService<CitiesResource>()
-networkJSONService.fetch(resource: europeResource) { [weak self] result in
+let networkService = NetworkDataResourceService()
+networkService.fetch(resource: europeResource) { result in
   // do something with the result
 }
 ```
@@ -85,14 +85,14 @@ networkJSONService.fetch(resource: europeResource) { [weak self] result in
 Define a `typealias` for conveniency if you using `(NS)Operation`s:
 
 ```swift
-private typealias CitiesNetworkResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>
+private typealias CitiesNetworkResourceOperation = ResourceOperation<GenericNetworkDataResourceService<CitiesResource>>
 ```
 
 Create the operation using a `CitiesResource`
 
 ```swift
 let europeResource = CitiesResource(continent: "europe")
-let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { [weak self] operation, result in
+let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { operation, result in
   // do something with the result
 }
 ```

@@ -57,10 +57,11 @@ This library defines/uses 3 concepts: resource, service and operation
 
 - `NetworkImageResource`
 
-### Available service types conforming to `ResourceServiceType`
+### Available services
 
 - `NetworkDataResourceService`: Used to retrieve a resource that conforms to `NetworkResourceType` and `DataResourceType`
-- `fetch` function now returns a `Cancellable` object which can be used to cancel the network request
+	- `fetch` function returns a `Cancellable` object which can be used to cancel the network request
+- `GenericNetworkDataResourceService`: Inherits `NetworkDataResourceService` and conforms to`ResourceServiceType`. The purpose of this service is to be use with `ResourceOperation`
 
 ### `ResourceOperation`
 
