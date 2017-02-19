@@ -1,5 +1,5 @@
 //
-//  CommonFunctions.swift
+//  GlobalFunctions.swift
 //  TABResourceLoader
 //
 //  Created by Luciano Marisi on 11/02/2017.

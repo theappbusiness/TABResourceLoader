@@ -9,17 +9,6 @@
 import UIKit
 import TABResourceLoader
 
-class Subclass: NetworkDataResourceService {
-
-  override init(session: URLSessionType) {
-    super.init(session: session)
-  }
-
-  override func fetch<Resource: DataResourceType & NetworkResourceType>(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
-    return super.fetch(resource: resource, completion: completion)
-  }
-}
-
 private typealias CitiesResourceOperation = ResourceOperation<GenericNetworkDataResourceService<CitiesResource>>
 private typealias NetworkImageResourceOperation = ResourceOperation<GenericNetworkDataResourceService<NetworkImageResource>>
 
