@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     }
 
     let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, result in
-      if case let .success(image) = result {
+      if case let .success(image, _) = result {
         self?.imageView.image = image
       }
     }

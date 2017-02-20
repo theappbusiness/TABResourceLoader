@@ -18,11 +18,13 @@ import Foundation
  */
 public enum NetworkServiceError: Error {
   case couldNotCreateURLRequest
+  case noHTTPURLResponse
+  case sessionError(error: Error)
   case statusCodeError(statusCode: Int)
-  case networkingError(error: Error)
-  case noData
+  case couldNotParseData(error: Error)
 }
 
+/// Object used to retrive types that conform to both @NetworkResourceType and DataResourceType
 open class NetworkDataResourceService {
 
   /**
@@ -59,16 +61,17 @@ open class NetworkDataResourceService {
    - parameter completion: A completion handler called with a Result type of the fetching computation
    */
   @discardableResult
-  open func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
+  open func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
     let cancellable = fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
     return cancellable
   }
 
   // Method used for injecting the NetworkServiceActivity for testing
   @discardableResult
-  func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
+  func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
     guard var urlRequest = resource.urlRequest() else {
-      completion(.failure(NetworkServiceError.couldNotCreateURLRequest))
+      let parsedResult = Result<Resource.Model>.failure(NetworkResponseHandlerError.noDataProvided)
+      completion(.failure(parsedResult, nil, NetworkServiceError.couldNotCreateURLRequest))
       return nil
     }
 
