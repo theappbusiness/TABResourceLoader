@@ -14,7 +14,7 @@ public protocol DataResourceType: ResourceType {
 
    - parameter data: The data to parse
 
-   - returns: An instantiated model if parsing was succesful, otherwise nil
+   - returns: An instantiated model if parsing was successful, otherwise throws
    */
-  func result(from data: Data) -> Result<Model>
+  func model(from data: Data) throws -> Model
 }

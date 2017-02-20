@@ -28,6 +28,11 @@ struct NetworkResponseHandler {
       return .failure(NetworkServiceError.noData)
     }
 
-    return resource.result(from: data)
+    do {
+      let model = try resource.model(from: data)
+      return .success(model)
+    } catch {
+      return .failure(error)
+    }
   }
 }
