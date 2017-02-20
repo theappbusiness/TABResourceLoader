@@ -49,7 +49,7 @@ struct NetworkResponseHandler {
 
   static func resultFrom<Resource: NetworkResourceType & DataResourceType>(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> NetworkResponse<Resource.Model> {
 
-    let parsedResult = transform(data, using: resource)
+    let parsedResult = self.parsedResult(transformedFrom: data, using: resource)
 
     guard let HTTPURLResponse = URLResponse as? HTTPURLResponse else {
       if let error = error {
@@ -77,7 +77,7 @@ struct NetworkResponseHandler {
     }
   }
 
-  private static func transform<Resource: DataResourceType>(_ data: Data?, using resource: Resource) -> Result<Resource.Model> {
+  private static func parsedResult<Resource: DataResourceType>(transformedFrom data: Data?, using resource: Resource) -> Result<Resource.Model> {
     guard let data = data else {
       return .failure(NetworkResponseHandlerError.noDataProvided)
     }
