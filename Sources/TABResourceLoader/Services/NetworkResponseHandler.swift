@@ -32,7 +32,7 @@ struct NetworkResponseHandler {
       let model = try resource.model(from: data)
       return .success(model)
     } catch {
-      return .failure(NetworkServiceError.networkingError(error: error))
+      return .failure(error)
     }
   }
 }
