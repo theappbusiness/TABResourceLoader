@@ -18,6 +18,8 @@ class MockSessionThatDoesNothing: URLSessionType {
 
 class MockResourceService: ResourceServiceType {
 
+  required init() {}
+
   typealias Resource = MockResource
 
   var capturedResource: Resource?

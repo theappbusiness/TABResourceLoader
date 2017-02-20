@@ -21,9 +21,13 @@ struct MockHTTPHeaderFieldsNetworkDataResource: NetworkResourceType, DataResourc
   }
 }
 
-final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: NetworkDataResourceService<Resource> {
+final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: GenericNetworkDataResourceService<Resource> {
 
-  required init(session: URLSessionType) {
+  required init() {
+    super.init()
+  }
+
+  override init(session: URLSessionType) {
     super.init(session: session)
   }
 

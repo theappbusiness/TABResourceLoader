@@ -18,14 +18,14 @@ class NetworkDataResourceServiceTests: XCTestCase {
   var mockNetworkServiceActivity: MockNetworkServiceActivity!
   let mockURL = URL(string: "http://test.com")!
 
-  var testService: NetworkDataResourceService<MockDefaultNetworkDataResource>!
+  var testService: GenericNetworkDataResourceService<MockDefaultNetworkDataResource>!
 
   override func setUp() {
     super.setUp()
     mockSession = MockURLSession()
     mockResource = MockDefaultNetworkDataResource(url: mockURL)
     mockNetworkServiceActivity = MockNetworkServiceActivity()
-    testService = NetworkDataResourceService<MockDefaultNetworkDataResource>(session: mockSession)
+    testService = GenericNetworkDataResourceService<MockDefaultNetworkDataResource>(session: mockSession)
   }
 
   override func tearDown() {
@@ -37,7 +37,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   }
 
   func test_publicInitializerUsesNSURLSession() {
-    testService = NetworkDataResourceService<MockDefaultNetworkDataResource>()
+    testService = GenericNetworkDataResourceService<MockDefaultNetworkDataResource>()
     XCTAssert(testService.session is URLSession)
   }
 
@@ -69,7 +69,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
 
   func test_fetch_withInvalidURLRequest_callsFailureWithCorrectError() {
     let mockInvalidURLResource = MockNilURLRequestNetworkJSONResource()
-    let newTestRequestManager = NetworkDataResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
+    let newTestRequestManager = GenericNetworkDataResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
     XCTAssertNil(mockInvalidURLResource.urlRequest())
     performAsyncTest { expectation in
       newTestRequestManager.fetch(resource: mockInvalidURLResource) { result in

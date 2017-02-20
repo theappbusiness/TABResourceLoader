@@ -3,6 +3,9 @@
 ## 4.0.0
 
 - `JSONDictionaryResourceType` and `JSONArrayResourceType` now throw on failure
+- Refactores network service
+	- Renamed `NetworkDataResourceService` to `GenericNetworkDataResourceService`, this is useful when using it with `ResourceOperation`
+	- New `NetworkDataResourceService` uses a generic fetching function
 
 ## 3.2.0
 

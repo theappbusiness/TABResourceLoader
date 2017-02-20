@@ -23,9 +23,7 @@ public enum NetworkServiceError: Error {
   case noData
 }
 
-open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType & DataResourceType>: ResourceServiceType {
-
-  public typealias Resource = NetworkDataResource
+open class NetworkDataResourceService {
 
   /**
    Method designed to be implemented on subclasses, these fields will be overriden by any HTTP header field
@@ -37,7 +35,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     return [:]
   }
 
-  public let session: URLSessionType
+  let session: URLSessionType
 
   /**
    Designated initializer for NetworkDataResourceService
@@ -46,7 +44,7 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
    
    - returns: An new instance
    */
-  public required init(session: URLSessionType = URLSession.shared) {
+  public init(session: URLSessionType = URLSession.shared) {
     self.session = session
   }
 
@@ -54,59 +52,34 @@ open class NetworkDataResourceService<NetworkDataResource: NetworkResourceType &
     session.invalidateAndCancel()
   }
 
+  /**
+   Fetches a resource conforming to both NetworkResourceType & DataResourceType
+   
+   - parameter resource:   The resource to fetch
+   - parameter completion: A completion handler called with a Result type of the fetching computation
+   */
   @discardableResult
-  open func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
+  open func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
     let cancellable = fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
     return cancellable
   }
 
   // Method used for injecting the NetworkServiceActivity for testing
   @discardableResult
-  final func fetch(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
+  func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
     guard var urlRequest = resource.urlRequest() else {
       completion(.failure(NetworkServiceError.couldNotCreateURLRequest))
       return nil
     }
 
-    urlRequest.allHTTPHeaderFields = allHTTPHeaderFields(resourceHTTPHeaderFields: urlRequest.allHTTPHeaderFields)
+    urlRequest.allHTTPHeaderFields = merge(additionalHeaderFields(), urlRequest.allHTTPHeaderFields)
     networkServiceActivity.increaseActiveRequest()
-    let cancellable = session.perform(request: urlRequest) { [weak self] (data, URLResponse, error) in
+    let cancellable = session.perform(request: urlRequest) { (data, URLResponse, error) in
       networkServiceActivity.decreaseActiveRequest()
-      guard let strongSelf = self else { return }
-      completion(strongSelf.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error))
+      let result = NetworkResponseHandler.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error)
+      completion(result)
     }
     return cancellable
-  }
-
-  fileprivate func allHTTPHeaderFields(resourceHTTPHeaderFields: [String: String]?) -> [String: String]? {
-    var generalHTTPHeaderFields = additionalHeaderFields()
-    if let resourceHTTPHeaderFields = resourceHTTPHeaderFields {
-      for (key, value) in resourceHTTPHeaderFields {
-        generalHTTPHeaderFields[key] = value
-      }
-    }
-    return generalHTTPHeaderFields
-  }
-
-  fileprivate func resultFrom(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> Result<Resource.Model> {
-
-    if let HTTPURLResponse = URLResponse as? HTTPURLResponse {
-      switch HTTPURLResponse.statusCode {
-      case 400..<600:
-        return .failure(NetworkServiceError.statusCodeError(statusCode: HTTPURLResponse.statusCode))
-      default: break
-      }
-    }
-
-    if let error = error {
-      return .failure(NetworkServiceError.networkingError(error: error))
-    }
-
-    guard let data = data else {
-      return .failure(NetworkServiceError.noData)
-    }
-
-    return resource.result(from: data)
   }
 
 }
