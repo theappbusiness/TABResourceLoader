@@ -17,14 +17,14 @@ public protocol JSONDictionaryResourceType: DataResourceType {
 
    - parameter jsonDictionary: The JSON dictionary to parse
 
-   - returns: An instantiated model if parsing was succesful, otherwise nil
+   - returns: An instantiated model if parsing was successful, otherwise throws
    */
   func model(from jsonDictionary: [String : Any]) throws -> Model
 }
 
 extension JSONDictionaryResourceType {
 
-  public func result(from data: Data) throws -> Model {
+  public func model(from data: Data) throws -> Model {
     guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
       throw JSONParsingError.invalidJSONData
     }
@@ -33,11 +33,7 @@ extension JSONDictionaryResourceType {
       throw JSONParsingError.notAJSONDictionary
     }
 
-    do {
-      return try model(from: jsonDictionary)
-    } catch {
-      throw error
-    }
+    return try model(from: jsonDictionary)
   }
 
 }

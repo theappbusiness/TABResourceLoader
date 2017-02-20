@@ -22,7 +22,7 @@ class NetworkDataResourceServiceURLSessionTests: XCTestCase { //swiftlint:disabl
   struct MockResource: NetworkResourceType, DataResourceType {
     typealias Model = String
     var url = URL(string: "test")!
-    func result(from data: Data) throws -> Model {
+    func model(from data: Data) throws -> Model {
       return "done"
     }
   }

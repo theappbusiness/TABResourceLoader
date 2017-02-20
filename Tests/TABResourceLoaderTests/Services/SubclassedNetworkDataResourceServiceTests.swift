@@ -16,7 +16,7 @@ struct MockHTTPHeaderFieldsNetworkDataResource: NetworkResourceType, DataResourc
   let url: URL
   let httpHeaderFields: [String: String]?
 
-  func result(from data: Data) throws -> String {
+  func model(from data: Data) throws -> String {
     return ""
   }
 }

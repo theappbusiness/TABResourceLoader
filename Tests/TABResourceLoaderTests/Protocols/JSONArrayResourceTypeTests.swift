@@ -14,7 +14,7 @@ class JSONArrayResourceTypeTests: XCTestCase {
   func test_invalidJSONData() {
     let mockJSONArrayResourceType = MockJSONArrayResourceType()
     do {
-      let _ = try mockJSONArrayResourceType.result(from: Data())
+      let _ = try mockJSONArrayResourceType.model(from: Data())
       XCTFail("No error found")
     } catch {
       XCTAssertEqual(error as? JSONParsingError, JSONParsingError.invalidJSONData)
@@ -26,7 +26,7 @@ class JSONArrayResourceTypeTests: XCTestCase {
     let jsonDictionary = ["invalid_key": "mock"]
     let data = serialize(jsonObject: jsonDictionary)
     do {
-      let _ = try mockJSONArrayResourceType.result(from: data)
+      let _ = try mockJSONArrayResourceType.model(from: data)
       XCTFail("No error found")
     } catch {
       XCTAssertEqual(error as? JSONParsingError, JSONParsingError.notAJSONArray)
@@ -38,7 +38,7 @@ class JSONArrayResourceTypeTests: XCTestCase {
     let jsonArray = [["invalid-key"]]
     let data = serialize(jsonObject: jsonArray)
     do {
-      let _ = try mockJSONArrayResourceType.result(from: data)
+      let _ = try mockJSONArrayResourceType.model(from: data)
       XCTFail("No error found")
     } catch {
       XCTAssertEqual(error as? JSONParsingError, JSONParsingError.cannotParseJSONArray)
@@ -52,7 +52,7 @@ class JSONArrayResourceTypeTests: XCTestCase {
       ["name": "mock 2"]
     ]
     let data = serialize(jsonObject: jsonArray)
-    guard let result = try? mockJSONArrayResourceType.result(from: data) else {
+    guard let result = try? mockJSONArrayResourceType.model(from: data) else {
       XCTFail("No error found")
       return
     }

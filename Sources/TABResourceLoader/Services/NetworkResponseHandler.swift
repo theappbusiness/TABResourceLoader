@@ -29,8 +29,8 @@ struct NetworkResponseHandler {
     }
 
     do {
-      let parsedResult = try resource.result(from: data)
-      return .success(parsedResult)
+      let model = try resource.model(from: data)
+      return .success(model)
     } catch {
       return .failure(NetworkServiceError.networkingError(error: error))
     }
