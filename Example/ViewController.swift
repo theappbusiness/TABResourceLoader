@@ -29,16 +29,13 @@ class ViewController: UIViewController {
 
   func fetchJSONExample() {
     let americaResource = CitiesResource(continent: "america")
-    citiesService.fetch(resource: americaResource) { (result) in
-      print(result)
+
+    generalService.fetch(resource: americaResource) { networkResponse in
+      print(networkResponse)
     }
 
-    generalService.fetch(resource: americaResource) { result in
-      print(result)
-    }
-
-    let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { _, result in
-      print(result)
+    let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { _, networkResponse in
+      print(networkResponse)
     }
     operationQueue.addOperation(citiesResourceOperation)
   }
@@ -47,12 +44,12 @@ class ViewController: UIViewController {
     let largeImageURL = URL(string: "https://static.pexels.com/photos/4164/landscape-mountains-nature-mountain.jpeg")!
     let imageResource = NetworkImageResource(url: largeImageURL)
 
-    imageService.fetch(resource: imageResource) { (_) in
-      // Do something with result
+    imageService.fetch(resource: imageResource) { networkResponse in
+      print(networkResponse)
     }
 
-    let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, result in
-      if case let .success(image, _) = result {
+    let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, networkResponse in
+      if case let .success(image, _) = networkResponse {
         self?.imageView.image = image
       }
     }

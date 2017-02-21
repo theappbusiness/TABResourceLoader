@@ -9,70 +9,67 @@ This is library is designed to fetch resources in a consistent and modular way. 
 
 ## Example use cases
 
+### Working with a web service
+
 - [Retrieving a JSON object](Documentation/RetrivingJSONObjectExample.md)
 - [Retrieving an image](Documentation/RetrivingImageExample.md)
 - [Responding to network activity](Documentation/RespondingToNetworkActivity.md)
+- [Handling a request with multiple response objects](Documentation/RetrivingJSONObjectExample.md)
 
-## Main concepts
+## High level architecture
 
-This library defines/uses 3 concepts: resource, service and operation
+This library defines/uses 4 concepts: model, resource, service and operation:
 
-- A **Resource** represents where something is and how it can be retrieved.
-	- For example a resource could define the url of where a JSON file is and how to parse into strongly types model
-- A **Service** represents a type that can retrieve resources, generally conforms to `ResourceServiceType`.
-	- For example the library ships with a network service that is responsible for fetching a network resource
-- A **ResourceOperation** can used to manage concurrency and dependencies as services can be defined not to be asynchronous.
+1. **Model**: Strongly typed object in your codebase, may or may not be mapped 121 to the server model
+2. **Resource**: Defines through protocol conformance *where* and *how* to fetch a **Model**. For example a resource could define the URL of where a JSON file is and how to parse into strongly types model.
+3. **Service**: A type that knows how to retrieve a specific kind of **Resource**
+4. **Operation**: Provides a concurrency model when using a **Service**. Useful when implementing custom business logic such as throttling of fetches.
 
-### Available Resource protocols
+## Resource protocols
 
-#### Root protocols
+### Root protocols
 
-- `ResourceType`
-	- Base type for mapping a resource to a generic `Model` type
-- `NetworkResourceType`
-	- Defines how a resource could be retrieved using a network service. As a bare minimum a `URL` needs to be defined, all other properties (e.g. HTTP method have defaults).
+- `ResourceType`: Defines a generic `Model`
+- `NetworkResourceType`: Defines how an endpoint can be accessed. Using specifying the following properties:
+	- **URL** *(Required)* 
+	- **HTTP method** *(Optional, default GET)* 
+	- **HTTP header fields** *(Optional)* 
+	- **Body of request (JSON encoded)** *(Optional)* 
+	- **URL query strings** *(Optional)* 
 
-#### Conforming to `ResourceType`
+### Conforming to `ResourceType`
 
-- `DataResourceType`
-	- Resource for retrieving a `Model` from `Data`
+- `DataResourceType`: Defines a resource that can create a generic `Model` from `(NS)Data`
 
-#### Conforming to `DataResourceType`
+### Conforming to `DataResourceType`
 
-- `ImageResourceType`
-	- Resource for retrieving a `UIImage` from `Data`
-- `JSONArrayResourceType`
-	- Resource for retrieving a generic `Model` from JSON array `[Any]`
-- `JSONDictionaryResourceType`
-	- Resource for retrieving a generic `Model` from JSON dictionary `[String: Any]`
+- `JSONDictionaryResourceType`: Defines the transformation from a JSON object, i.e. `[String: Any]` to a generic `Model`
+- `JSONArrayResourceType `: Defines the transformation from a JSON array, i.e. `[Any]` to a generic `Model`
+- `ImageResourceType`: Defines the transformation from `(NS)Data` to a `UIImage`
 
-#### Combined protocols
+### Protocols that inherit from multiple protocols
 
-- `NetworkJSONArrayResourceType`
-	- Combines `JSONArrayResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON array. Includes default header values `["Content-Type": "application/json"]`
-- `NetworkJSONDictionaryResourceType`
- 	- Combines `JSONDictionaryResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON dictionary. Includes default header values `["Content-Type": "application/json"]`
+- `NetworkJSONDictionaryResourceType`: Combines `JSONDictionaryResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON dictionary from a web service.
+- `NetworkJSONArrayResourceType`: Combines `JSONArrayResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON array from a web service.
 
-#### Concrete types
+Note: Both include `["Content-Type": "application/json"]` as default header fields. 
 
-- `NetworkImageResource`
+### Concrete types
 
-### Available services
+- `NetworkImageResource`: Conforms to `ImageResourceType` and can be initialized with a `URL`
+
+## Services
 
 - `NetworkDataResourceService`: Used to retrieve a resource that conforms to `NetworkResourceType` and `DataResourceType`
 	- `fetch` function returns a `Cancellable` object which can be used to cancel the network request
+	- On completion it provides with a `NetworkResponse<Model>` object
 - `GenericNetworkDataResourceService`: Inherits `NetworkDataResourceService` and conforms to`ResourceServiceType`. The purpose of this service is to be use with `ResourceOperation`
 
-### `ResourceOperation`
+## ResourceOperation
 
+- Uses a service that conforms to `ResourceServiceType` to retrieve a resource that conforms to `ResourceType`
 - Subclass of `(NS)Operation` used to retrieve a resource with specific service
 - Uses a completion handler when the operation is finished to pass it's `Result`
-
-## Advanced configurations
-
-### Creating your own services
-
-At the moment the only service provided is the `NetworkDataResourceService`. This may change in future updates where it could be relevant to ship this library with more default services. In the meantime the user can create their own service by conforming to `ResourceServiceType`.
 
 ## Contributing
 
