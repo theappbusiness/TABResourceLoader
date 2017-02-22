@@ -14,7 +14,6 @@ This is library is designed to fetch resources in a consistent and modular way. 
 - [Retrieving a JSON object](Documentation/RetrivingJSONObjectExample.md)
 - [Retrieving an image](Documentation/RetrivingImageExample.md)
 - [Responding to network activity](Documentation/RespondingToNetworkActivity.md)
-- [Handling a request with multiple response objects](Documentation/RetrivingJSONObjectExample.md)
 
 ## High level architecture
 
@@ -62,7 +61,7 @@ Note: Both include `["Content-Type": "application/json"]` as default header fiel
 
 - `NetworkDataResourceService`: Used to retrieve a resource that conforms to `NetworkResourceType` and `DataResourceType`
 	- `fetch` function returns a `Cancellable` object which can be used to cancel the network request
-	- On completion it provides with a `NetworkResponse<Model>` object
+	- When the network request finishes a completion handler is called with a `NetworkResponse<Model>` enum
 - `GenericNetworkDataResourceService`: Inherits `NetworkDataResourceService` and conforms to`ResourceServiceType`. The purpose of this service is to be use with `ResourceOperation`
 
 ## ResourceOperation

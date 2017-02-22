@@ -97,7 +97,8 @@ let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: eu
 }
 ```
 
-Add the operation to some queue
+Add the operation to some queue:
+
 ```swift
 let operationQueue = OperationQueue()
 operationQueue.addOperation(citiesNetworkResourceOperation)

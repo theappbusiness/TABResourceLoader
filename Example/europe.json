@@ -1,7 +1,3 @@
 {
-  "cities": [{
-    "name": "Paris"
-  }, {
-    "name": "London"
-  }]
+  "errorMessage": "failed to load european cities"
 }

@@ -23,8 +23,9 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    fetchJSONExample()
-    fetchImageExample()
+//    fetchJSONExample()
+//    fetchImageExample()
+    fetchMultipleResponseExample()
   }
 
   func fetchJSONExample() {
@@ -38,6 +39,26 @@ class ViewController: UIViewController {
       print(networkResponse)
     }
     operationQueue.addOperation(citiesResourceOperation)
+  }
+
+  func fetchMultipleResponseExample() {
+    let americaResource = MultipleResponseResource(continent: "america")
+
+    generalService.fetch(resource: americaResource) { networkResponse in
+      print(networkResponse)
+    }
+
+    let europeResource = MultipleResponseResource(continent: "europe")
+
+    generalService.fetch(resource: europeResource) { networkResponse in
+      print(networkResponse)
+    }
+
+    let singleCityResource = MultipleResponseResource(continent: "single_city")
+
+    generalService.fetch(resource: singleCityResource) { networkResponse in
+      print(networkResponse)
+    }
   }
 
   func fetchImageExample() {
