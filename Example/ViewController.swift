@@ -23,36 +23,54 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    fetchJSONExample()
-    fetchImageExample()
+//    fetchJSONExample()
+//    fetchImageExample()
+    fetchMultipleResponseExample()
   }
 
   func fetchJSONExample() {
     let americaResource = CitiesResource(continent: "america")
-    citiesService.fetch(resource: americaResource) { (result) in
-      print(result)
+
+    generalService.fetch(resource: americaResource) { networkResponse in
+      print(networkResponse)
     }
 
-    generalService.fetch(resource: americaResource) { result in
-      print(result)
-    }
-
-    let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { _, result in
-      print(result)
+    let citiesResourceOperation = CitiesResourceOperation(resource: americaResource) { _, networkResponse in
+      print(networkResponse)
     }
     operationQueue.addOperation(citiesResourceOperation)
+  }
+
+  func fetchMultipleResponseExample() {
+    let americaResource = MultipleResponseResource(continent: "america")
+
+    generalService.fetch(resource: americaResource) { networkResponse in
+      print(networkResponse)
+    }
+
+    let europeResource = MultipleResponseResource(continent: "europe")
+
+    generalService.fetch(resource: europeResource) { networkResponse in
+      print(networkResponse)
+    }
+
+    let singleCityResource = MultipleResponseResource(continent: "single_city")
+
+    generalService.fetch(resource: singleCityResource) { networkResponse in
+      print(networkResponse)
+    }
   }
 
   func fetchImageExample() {
     let largeImageURL = URL(string: "https://static.pexels.com/photos/4164/landscape-mountains-nature-mountain.jpeg")!
     let imageResource = NetworkImageResource(url: largeImageURL)
 
-    imageService.fetch(resource: imageResource) { (_) in
-      // Do something with result
+    imageService.fetch(resource: imageResource) { networkResponse in
+      print(networkResponse)
     }
 
-    let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, result in
-      if case let .success(image, _) = result {
+    let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, networkResponse in
+      if case let .success(image, _) = networkResponse {
         self?.imageView.image = image
       }
     }
