@@ -8,14 +8,13 @@
 
 import Foundation
 
-/**
- Enum representing an error from a network service
-
- - CouldNotCreateURLRequest: The URL request could be formed
- - StatusCodeError:          A status code error between 400 and 600 (not including 600) was returned
- - NetworkingError:          Any other networking error
- - NoData:                   No data was returned
- */
+/// Enum representing an error from a network service
+///
+/// - couldNotCreateURLRequest: The URL request could be formed
+/// - noHTTPURLResponse:        No HTTPURLResponse exists
+/// - sessionError:             The networking error returned by the URLSession
+/// - statusCodeError:          A status code error between 400 and 600 (not including 600) was returned
+/// - couldNotParseData:        The Data could not be parsed
 public enum NetworkServiceError: Error {
   case couldNotCreateURLRequest
   case noHTTPURLResponse

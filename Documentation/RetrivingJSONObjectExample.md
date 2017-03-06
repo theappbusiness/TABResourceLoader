@@ -75,8 +75,8 @@ Use the provided `NetworkDataResourceService` to retrieve your `CitiesResource` 
 ```swift
 let europeResource = CitiesResource(continent: "europe")
 let networkService = NetworkDataResourceService()
-networkService.fetch(resource: europeResource) { result in
-  // do something with the result
+networkService.fetch(resource: europeResource) { networkResponse in
+  // do something with the networkResponse
 }
 ```
 
@@ -92,12 +92,13 @@ Create the operation using a `CitiesResource`
 
 ```swift
 let europeResource = CitiesResource(continent: "europe")
-let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { operation, result in
-  // do something with the result
+let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { operation, networkResponse in
+  // do something with the networkResponse
 }
 ```
 
-Add the operation to some queue
+Add the operation to some queue:
+
 ```swift
 let operationQueue = OperationQueue()
 operationQueue.addOperation(citiesNetworkResourceOperation)
