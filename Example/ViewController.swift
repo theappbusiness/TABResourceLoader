@@ -23,8 +23,8 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-//    fetchJSONExample()
-//    fetchImageExample()
+    fetchJSONExample()
+    fetchImageExample()
     fetchMultipleResponseExample()
     failureModelExample()
   }
