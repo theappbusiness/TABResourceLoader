@@ -1,6 +1,6 @@
 # Using failure model example
 
-In some cases your request might return a server error, but you may still want to parse the data into a failure model.
+In some cases your request might return a server error (i.e. 4xx or 5xx), but you may still want to parse the data into a failure model.
 
 For example, the server returns response code 400, with JSON body:
 
@@ -10,7 +10,7 @@ For example, the server returns response code 400, with JSON body:
 }
 ```
 
-TAB resource loader will still return a `.failure` case for this request but it may still contain the required model.
+TAB resource loader will still return a `NetworkResponse` enum with a `.failure` case for this request but it may still contain the required model.
 
 ### Defining the failure model
 
@@ -49,35 +49,41 @@ enum RegistrationErrorType {
 
 ```
 
-When parsing, we can now check the data for errors, in our case for `"errorCode"`:
+When parsing, we can check the data for errors, in our case for `"errorCode"`:
 ```swift
-  func model(from jsonDictionary: [String : Any]) throws -> Model {
-    if let error = jsonDictionary["errorCode"] as? String {
-        let error = try RegistrationErrorType(error: error)
-        return .failure(type: error)
-    }
-
-    return .success(id: 123)
+func model(from jsonDictionary: [String : Any]) throws -> Model {
+  if let error = jsonDictionary["errorCode"] as? String {
+    let error = try RegistrationErrorType(error: error)
+    return .failure(type: error)
   }
+
+  return .success(id: 123)
+}
 ```
 
 ### Making the request
 
-When handling the request, we can now get the failure model even if the request returns a failure case:
+When handling the request, we can get the failure model even if the request returns a failure case:
 
 ```swift
-      switch result {
-      case .success(let successResult, _):
-        self?.handleRegistrationResult(successResult)
-      case .failure(let registrationResult, _, let error):
-        if case let .success(errorResult) = registrationResult {
-          /// This is saying, the original `result` failed (maybe because of status code 400 etc...) but we have been able to successfully parse a model (`RegistrationResult`), which we can then handle within our app
-          self?.handleRegistrationResult(errorResult)
-        } else {
-          print(error)
-        }
+private func failureModelExample() {
+  let resource = RegistrationResource(emailAddress: "not an email")
+  generalService.fetch(resource: resource) { [weak self] (result) in
+
+    switch result {
+    case .success(let successResult, _):
+      self?.handleRegistgrationResult(successResult)
+    case .failure(let reistrationResult, _, let error):
+      if case let .success(errorResult) = registrationResult {
+        self?.handleRegistrationResult(errorResult)
+      } else {
+        print(error)
       }
+    }
+  }
+}
 
+private func handleRegistrationResult(_ result: RegistrationResult) {
+  // Handle registration result enum
+}
 ```
-
-
