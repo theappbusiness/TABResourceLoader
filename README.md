@@ -14,6 +14,7 @@ This library is designed to fetch resources in a consistent and modular way. The
 - [Retrieving a JSON object](Documentation/RetrivingJSONObjectExample.md)
 - [Retrieving an image](Documentation/RetrivingImageExample.md)
 - [Responding to network activity](Documentation/RespondingToNetworkActivity.md)
+- [Using failure model example](Documentation/Using failure models.md)
 
 ## High level architecture
 

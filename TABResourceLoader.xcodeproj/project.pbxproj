@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23825A651E6062B5008C0E65 /* RegistrationResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23825A641E6062B5008C0E65 /* RegistrationResource.swift */; };
+		23B7B5DA1E6D7E3400E77160 /* registration.json in Resources */ = {isa = PBXBuildFile; fileRef = 23B7B5D91E6D7E3400E77160 /* registration.json */; };
 		4F079CD31D84559200D08DA0 /* TABResourceLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F079CD21D84559100D08DA0 /* TABResourceLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F079CDA1D84559200D08DA0 /* TABResourceLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F079CCF1D84559100D08DA0 /* TABResourceLoader.framework */; };
 		4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F079D1C1D84577E00D08DA0 /* BaseAsynchronousOperation.swift */; };
@@ -79,6 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23825A641E6062B5008C0E65 /* RegistrationResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationResource.swift; sourceTree = "<group>"; };
+		23B7B5D91E6D7E3400E77160 /* registration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = registration.json; sourceTree = "<group>"; };
 		4F079CCF1D84559100D08DA0 /* TABResourceLoader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TABResourceLoader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F079CD21D84559100D08DA0 /* TABResourceLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TABResourceLoader.h; sourceTree = "<group>"; };
 		4F079CD41D84559200D08DA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +175,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23825A631E60628B008C0E65 /* Failure model example */ = {
+			isa = PBXGroup;
+			children = (
+				23825A641E6062B5008C0E65 /* RegistrationResource.swift */,
+			);
+			path = "Failure model example";
+			sourceTree = "<group>";
+		};
 		4F079CC51D84559100D08DA0 = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +388,7 @@
 		4F57E8951E5E04870082DF87 /* Example JSON files */ = {
 			isa = PBXGroup;
 			children = (
+				23B7B5D91E6D7E3400E77160 /* registration.json */,
 				4F8D1FCC1D8E00040099DD9A /* america.json */,
 				4F8D1FCE1D8E00040099DD9A /* europe.json */,
 				4F57E8931E5E047D0082DF87 /* single_city.json */,
@@ -432,6 +445,7 @@
 			children = (
 				4F57E88D1E5DFFE40082DF87 /* Simple example */,
 				4F57E88E1E5DFFFF0082DF87 /* Multiple response examples */,
+				23825A631E60628B008C0E65 /* Failure model example */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -582,6 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B7B5DA1E6D7E3400E77160 /* registration.json in Resources */,
 				4F57E8941E5E047D0082DF87 /* single_city.json in Resources */,
 				4F8D1FC71D8DFFD40099DD9A /* LaunchScreen.storyboard in Resources */,
 				4F8D1FC41D8DFFD40099DD9A /* Assets.xcassets in Resources */,
@@ -674,6 +689,7 @@
 			files = (
 				4F57E8921E5E007B0082DF87 /* ServerError.swift in Sources */,
 				4F8D1FBF1D8DFFD40099DD9A /* ViewController.swift in Sources */,
+				23825A651E6062B5008C0E65 /* RegistrationResource.swift in Sources */,
 				4F8D1FBD1D8DFFD40099DD9A /* AppDelegate.swift in Sources */,
 				4F8D1FD61D8E00040099DD9A /* City.swift in Sources */,
 				4F57E8901E5E000E0082DF87 /* CitiesResponse.swift in Sources */,

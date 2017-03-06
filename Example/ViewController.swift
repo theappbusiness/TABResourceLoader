@@ -23,9 +23,10 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-//    fetchJSONExample()
-//    fetchImageExample()
+    fetchJSONExample()
+    fetchImageExample()
     fetchMultipleResponseExample()
+    failureModelExample()
   }
 
   func fetchJSONExample() {
@@ -75,6 +76,33 @@ class ViewController: UIViewController {
       }
     }
     operationQueue.addOperation(imageOperation)
+  }
+
+  private func failureModelExample() {
+    let resource = RegistrationResource(emailAddress: "not an email")
+    generalService.fetch(resource: resource) { [weak self] (result) in
+
+      switch result {
+      case .success(let successResult, _):
+        self?.handleRegistrationResult(successResult)
+      case .failure(let registrationResult, _, let error):
+        if case let .success(errorResult) = registrationResult {
+          self?.handleRegistrationResult(errorResult)
+        } else {
+          print(error)
+        }
+      }
+
+    }
+  }
+
+  private func handleRegistrationResult(_ result: RegistrationResult) {
+    switch result {
+    case .success(let id):
+      print(id)
+    case .failure(let registrationError):
+      print(registrationError.description)
+    }
   }
 
 }
