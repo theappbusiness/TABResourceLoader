@@ -16,14 +16,18 @@ struct MockHTTPHeaderFieldsNetworkDataResource: NetworkResourceType, DataResourc
   let url: URL
   let httpHeaderFields: [String: String]?
 
-  func result(from data: Data) -> Result<String> {
-    return .success("")
+  func model(from data: Data) throws -> String {
+    return ""
   }
 }
 
-final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: NetworkDataResourceService<Resource> {
+final class SubclassedNetworkDataResourceService<Resource: NetworkResourceType & DataResourceType>: GenericNetworkDataResourceService<Resource> {
 
-  required init(session: URLSessionType) {
+  required init() {
+    super.init()
+  }
+
+  override init(session: URLSessionType) {
     super.init(session: session)
   }
 

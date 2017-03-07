@@ -31,7 +31,7 @@ import Foundation
 /// Operation used for the sole purpose of fetching a resource using a service
 public final class ResourceOperation<ResourceService: ResourceServiceType>: BaseAsynchronousOperation {
 
-  public typealias DidFinishFetchingResourceCallback = (ResourceOperation<ResourceService>, Result<ResourceService.Resource.Model>) -> Void
+  public typealias DidFinishFetchingResourceCallback = (ResourceOperation<ResourceService>, ResourceService.ResultType) -> Void
 
   // These properties are internal for unit testing purposes
   let resource: ResourceService.Resource
@@ -46,7 +46,7 @@ public final class ResourceOperation<ResourceService: ResourceServiceType>: Base
   /// - parameter didFinishFetchingResourceCallback: The closure to be executed when the resource has been fetch but before the operation is finished
   ///
   /// - returns: A new instance of the ResourceOperation
-  public init(resource: ResourceService.Resource, service: ResourceService = ResourceService(session: URLSession.shared), didFinishFetchingResourceCallback: @escaping DidFinishFetchingResourceCallback) {
+  public init(resource: ResourceService.Resource, service: ResourceService = ResourceService(), didFinishFetchingResourceCallback: @escaping DidFinishFetchingResourceCallback) {
     self.resource = resource
     self.service = service
     self.didFinishFetchingResourceCallback = didFinishFetchingResourceCallback
@@ -71,7 +71,7 @@ public final class ResourceOperation<ResourceService: ResourceServiceType>: Base
     super.cancel()
   }
 
-  private func handleFetchCompletion(with result: Result<ResourceService.Resource.Model>) {
+  private func handleFetchCompletion(with result: ResourceService.ResultType) {
     Thread.rl_executeOnMain { [weak self] in
       guard let strongSelf = self else { return }
       if strongSelf.isCancelled { return }

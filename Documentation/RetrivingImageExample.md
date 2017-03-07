@@ -14,12 +14,12 @@ let imageResource = NetworkImageResource(url: imageURL)
 Use a `NetworkDataResourceService` directly:
 
 ```swift
-let imageService = NetworkDataResourceService<NetworkImageResource>()
+let networkService = NetworkDataResourceService()
 ```
 
 ```swift
-imageService.fetch(resource: imageResource) { (result) in
-  if case let .success(image) = result {
+networkService.fetch(resource: imageResource) { (result) in
+  if case let .success(image, _) = result {
     // Do something with the image. If using UIKit remember to dispatch to the main thread.
   }
 }
@@ -27,12 +27,12 @@ imageService.fetch(resource: imageResource) { (result) in
 
 **OR**
 
-Use a `ResourceOperation` with `NetworkDataResourceService`:
+Use a `ResourceOperation` with `GenericNetworkDataResourceService`:
 
 Optionally create a typealias of NetworkImageResourceOperation
 
 ```swift
-typealias NetworkImageResourceOperation = ResourceOperation<NetworkDataResourceService<NetworkImageResource>>
+typealias NetworkImageResourceOperation = ResourceOperation<GenericNetworkDataResourceService<NetworkImageResource>>
 ```
 
 ```swift
@@ -40,8 +40,8 @@ let operationQueue = OperationQueue()
 ```
 
 ```swift
-let imageOperation = NetworkImageResourceOperation(resource: imageResource) { [weak self] _, result in
-  if case let .success(image) = result {
+let imageOperation = NetworkImageResourceOperation(resource: imageResource) { operation, result in
+  if case let .success(image, _) = result {
     // Do something with the image. If using UIKit remember to dispatch to the main thread.
   }
 }

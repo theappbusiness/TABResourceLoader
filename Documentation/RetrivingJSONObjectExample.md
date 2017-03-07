@@ -42,25 +42,29 @@ private let baseURL = URL(string: "http://localhost:8000/")!
 ```
 
 ```swift
+enum CitiesResourceError: Error {
+  case parsingFailed
+}
+
 struct CitiesResource: NetworkJSONDictionaryResourceType {
   typealias Model = [City]
-  
+
   let url: URL
-  
+
   init(continent: String) {
     url = baseURL.appendingPathComponent("\(continent).json")
   }
-  
+
   // MARK: JSONDictionaryResourceType
-  func model(from jsonDictionary: [String : Any]) -> Model? {
+  func model(from jsonDictionary: [String : Any]) throws -> Model {
     guard let
       citiesJSONArray = jsonDictionary["cities"] as? [[String: Any]]
       else {
-        return []
+        throw CitiesResourceError.parsingFailed
     }
     return citiesJSONArray.flatMap(City.init)
   }
-  
+
 }
 ```
 
@@ -70,9 +74,9 @@ Use the provided `NetworkDataResourceService` to retrieve your `CitiesResource` 
 
 ```swift
 let europeResource = CitiesResource(continent: "europe")
-let networkJSONService = NetworkDataResourceService<CitiesResource>()
-networkJSONService.fetch(resource: europeResource) { [weak self] result in
-  // do something with the result
+let networkService = NetworkDataResourceService()
+networkService.fetch(resource: europeResource) { networkResponse in
+  // do something with the networkResponse
 }
 ```
 
@@ -81,19 +85,20 @@ networkJSONService.fetch(resource: europeResource) { [weak self] result in
 Define a `typealias` for conveniency if you using `(NS)Operation`s:
 
 ```swift
-private typealias CitiesNetworkResourceOperation = ResourceOperation<NetworkDataResourceService<CitiesResource>>
+private typealias CitiesNetworkResourceOperation = ResourceOperation<GenericNetworkDataResourceService<CitiesResource>>
 ```
 
 Create the operation using a `CitiesResource`
 
 ```swift
 let europeResource = CitiesResource(continent: "europe")
-let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { [weak self] operation, result in
-  // do something with the result
+let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { operation, networkResponse in
+  // do something with the networkResponse
 }
 ```
 
-Add the operation to some queue
+Add the operation to some queue:
+
 ```swift
 let operationQueue = OperationQueue()
 operationQueue.addOperation(citiesNetworkResourceOperation)

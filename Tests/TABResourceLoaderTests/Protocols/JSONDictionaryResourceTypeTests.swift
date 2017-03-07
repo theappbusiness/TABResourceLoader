@@ -13,47 +13,43 @@ class JSONDictionaryResourceTypeTests: XCTestCase {
 
   func test_invalidJSONData() {
     let mockJSONObjectResourceType = MockJSONDictionaryResourceType()
-    let result = mockJSONObjectResourceType.result(from: Data())
-    guard let error = result.error() else {
+    do {
+      let _ = try mockJSONObjectResourceType.model(from: Data())
       XCTFail("No error found")
-      return
+    } catch {
+      XCTAssertEqual(error as? JSONParsingError, JSONParsingError.invalidJSONData)
     }
-    if case JSONParsingError.invalidJSONData = error { return }
-    XCTFail()
   }
 
   func test_notAJSONDictionary() {
     let mockJSONObjectResourceType = MockJSONDictionaryResourceType()
     let jsonArray = ["invalid_key"]
     let data = serialize(jsonObject: jsonArray)
-    let result = mockJSONObjectResourceType.result(from: data)
-    guard let error = result.error() else {
-      XCTFail(#function)
-      return
+    do {
+      let _ = try mockJSONObjectResourceType.model(from: data)
+      XCTFail("No error found")
+    } catch {
+      XCTAssertEqual(error as? JSONParsingError, JSONParsingError.notAJSONDictionary)
     }
-    if case JSONParsingError.notAJSONDictionary = error { return }
-    XCTFail("Did not match correct error: \(error)")
   }
 
   func test_cannotParseJSONDictionary() {
     let mockJSONObjectResourceType = MockJSONDictionaryResourceType()
     let jsonDictionary = ["invalid_key": "mock"]
     let data = serialize(jsonObject: jsonDictionary)
-    let result = mockJSONObjectResourceType.result(from: data)
-    guard let error = result.error() else {
+    do {
+      let _ = try mockJSONObjectResourceType.model(from: data)
       XCTFail("No error found")
-      return
+    } catch {
+      XCTAssertEqual(error as? JSONParsingError, JSONParsingError.cannotParseJSONDictionary)
     }
-    if case JSONParsingError.cannotParseJSONDictionary = error { return }
-    XCTFail("Did not match correct error: \(error)")
   }
 
   func test_validJSONDictionary() {
     let mockJSONObjectResourceType = MockJSONDictionaryResourceType()
     let jsonDictionary = ["name": "mock"]
     let data = serialize(jsonObject: jsonDictionary)
-    let result = mockJSONObjectResourceType.result(from: data)
-    guard let calculatedMockObject = result.successResult() else {
+    guard let calculatedMockObject = try? mockJSONObjectResourceType.model(from: data) else {
       XCTFail("No error found")
       return
     }

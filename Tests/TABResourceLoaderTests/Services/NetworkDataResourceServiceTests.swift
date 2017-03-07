@@ -18,14 +18,14 @@ class NetworkDataResourceServiceTests: XCTestCase {
   var mockNetworkServiceActivity: MockNetworkServiceActivity!
   let mockURL = URL(string: "http://test.com")!
 
-  var testService: NetworkDataResourceService<MockDefaultNetworkDataResource>!
+  var testService: GenericNetworkDataResourceService<MockDefaultNetworkDataResource>!
 
   override func setUp() {
     super.setUp()
     mockSession = MockURLSession()
     mockResource = MockDefaultNetworkDataResource(url: mockURL)
     mockNetworkServiceActivity = MockNetworkServiceActivity()
-    testService = NetworkDataResourceService<MockDefaultNetworkDataResource>(session: mockSession)
+    testService = GenericNetworkDataResourceService<MockDefaultNetworkDataResource>(session: mockSession)
   }
 
   override func tearDown() {
@@ -37,7 +37,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   }
 
   func test_publicInitializerUsesNSURLSession() {
-    testService = NetworkDataResourceService<MockDefaultNetworkDataResource>()
+    testService = GenericNetworkDataResourceService<MockDefaultNetworkDataResource>()
     XCTAssert(testService.session is URLSession)
   }
 
@@ -69,17 +69,20 @@ class NetworkDataResourceServiceTests: XCTestCase {
 
   func test_fetch_withInvalidURLRequest_callsFailureWithCorrectError() {
     let mockInvalidURLResource = MockNilURLRequestNetworkJSONResource()
-    let newTestRequestManager = NetworkDataResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
+    let newTestRequestManager = GenericNetworkDataResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
     XCTAssertNil(mockInvalidURLResource.urlRequest())
     performAsyncTest { expectation in
       newTestRequestManager.fetch(resource: mockInvalidURLResource) { result in
-        expectation?.fulfill()
-        guard let error = result.error() else {
+        switch result {
+        case .success:
           XCTFail("No error found")
-          return
+        case .failure(_, _, let error):
+          guard case NetworkServiceError.couldNotCreateURLRequest = error else {
+            XCTFail("Unexpected error: \(error)")
+            return
+          }
         }
-        if case NetworkServiceError.couldNotCreateURLRequest = error { return }
-        XCTFail("Unexpected error: \(error)")
+        expectation?.fulfill()
       }
     }
   }
@@ -98,19 +101,34 @@ class NetworkDataResourceServiceTests: XCTestCase {
     let mockHTTPURLResponse = HTTPURLResponse(url: URL(string: "www.test.com")!, statusCode: expectedStatusCode, httpVersion: nil, headerFields: nil)
     performAsyncTest(file: file, lineNumber: lineNumber) { expectation in
       testService.fetch(resource: mockResource) { result in
-        expectation?.fulfill()
-        guard let error = result.error() else {
+        switch result {
+        case .success:
           XCTFail("No error found")
-          return
+        case .failure(_, _, let error):
+          guard case NetworkServiceError.statusCodeError(let statusCode) = error else {
+            XCTFail("Unexpected error: \(error)")
+            return
+          }
+          XCTAssertEqual(statusCode, expectedStatusCode)
+          expectation?.fulfill()
         }
-
-        guard case NetworkServiceError.statusCodeError(let statusCode) = error else {
-          XCTFail()
-          return
-        }
-        XCTAssert(statusCode == expectedStatusCode)
       }
       mockSession.capturedCompletion!(nil, mockHTTPURLResponse, expectedError)
+    }
+  }
+
+  func test_fetch_whenSessionCompletesDataAndHTTPURLResponse_callsSuccess() {
+    performAsyncTest { expectation in
+      testService.fetch(resource: mockResource) { result in
+        switch result {
+        case .success(let model, _):
+          XCTAssertEqual(model, "")
+          expectation?.fulfill()
+        case .failure(_, _, let error):
+          XCTFail("Unexpected error: \(error)")
+        }
+      }
+      mockSession.capturedCompletion!(Data(), HTTPURLResponse(), nil)
     }
   }
 
@@ -126,17 +144,17 @@ class NetworkDataResourceServiceTests: XCTestCase {
     let mockHTTPURLResponse = HTTPURLResponse(url: URL(string: "www.test.com")!, statusCode: expectedStatusCode, httpVersion: nil, headerFields: nil)
     performAsyncTest(file: file, lineNumber: lineNumber) { expectation in
       testService.fetch(resource: mockResource) { result in
-        expectation?.fulfill()
-        guard let error = result.error() else {
+        switch result {
+        case .success:
           XCTFail("No error found")
-          return
+        case .failure(_, _, let error):
+          guard case NetworkServiceError.sessionError(let testError) = error else {
+            XCTFail("Unexpected error: \(error)")
+            return
+          }
+          XCTAssertEqual(testError._domain, expectedError._domain)
+          expectation?.fulfill()
         }
-
-        guard case NetworkServiceError.networkingError(let testError) = error else {
-          XCTFail()
-          return
-        }
-        XCTAssert(testError._domain == expectedError._domain)
       }
       mockSession.capturedCompletion!(nil, mockHTTPURLResponse, expectedError)
     }
@@ -147,17 +165,17 @@ class NetworkDataResourceServiceTests: XCTestCase {
 
     performAsyncTest { expectation in
       testService.fetch(resource: mockResource) { result in
-        expectation?.fulfill()
-        guard let error = result.error() else {
+        switch result {
+        case .success:
           XCTFail("No error found")
-          return
+        case .failure(_, _, let error):
+          guard case NetworkServiceError.sessionError(let testError) = error else {
+            XCTFail("Unexpected error: \(error)")
+            return
+          }
+          XCTAssertEqual(testError._domain, expectedError._domain)
+          expectation?.fulfill()
         }
-
-        guard case NetworkServiceError.networkingError(let testError) = error else {
-          XCTFail()
-          return
-        }
-        XCTAssert(testError._domain == expectedError._domain)
       }
       mockSession.capturedCompletion!(nil, nil, expectedError)
     }
@@ -166,15 +184,18 @@ class NetworkDataResourceServiceTests: XCTestCase {
   func test_fetch_whenSessionCompletes_WithNoData_callsFailureWithCorrectError() {
     performAsyncTest { expectation in
       testService.fetch(resource: mockResource) { result in
-        expectation?.fulfill()
-        guard let error = result.error() else {
+        switch result {
+        case .success:
           XCTFail("No error found")
-          return
+        case .failure(_, _, let error):
+          guard case NetworkServiceError.couldNotParseData(error: NetworkResponseHandlerError.noDataProvided) = error else {
+            XCTFail("Unexpected error: \(error)")
+            return
+          }
+          expectation?.fulfill()
         }
-        if case NetworkServiceError.noData = error { return }
-        XCTFail()
       }
-      mockSession.capturedCompletion!(nil, nil, nil)
+      mockSession.capturedCompletion!(nil, HTTPURLResponse(), nil)
     }
   }
 

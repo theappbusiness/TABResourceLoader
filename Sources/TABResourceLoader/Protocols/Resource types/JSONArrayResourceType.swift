@@ -37,27 +37,23 @@ public protocol JSONArrayResourceType: DataResourceType {
 
    - parameter jsonArray: The JSON array to parse
 
-   - returns: An instantiated model if parsing was succesful, otherwise nil
+   - returns: An instantiated model if parsing was successful, otherwise throws
    */
-  func model(from jsonArray: [Any]) -> Model?
+  func model(from jsonArray: [Any]) throws -> Model
 }
 
 extension JSONArrayResourceType {
 
-  public func result(from data: Data) -> Result<Model> {
+  public func model(from data: Data) throws -> Model {
     guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
-      return .failure(JSONParsingError.invalidJSONData)
+      throw JSONParsingError.invalidJSONData
     }
 
     guard let jsonArray = jsonObject as? [Any] else {
-      return .failure(JSONParsingError.notAJSONArray)
+      throw JSONParsingError.notAJSONArray
     }
 
-    guard let parsedResults = model(from: jsonArray) else {
-      return .failure(JSONParsingError.cannotParseJSONArray)
-    }
-
-    return .success(parsedResults)
+    return try model(from: jsonArray)
   }
 
 }
