@@ -2,11 +2,37 @@
 
 ## 4.0.0
 
-- `DataResourceType`, `JSONDictionaryResourceType` and `JSONArrayResourceType` now throw on failure
-- Renamed function on `DataResourceType` from `func result(from data: Data) -> Result<Model>` to `func model(from data: Data) throws -> Model`
+- `DataResourceType` transformation function now throws on failure instead of returning `Result<Model>`:
+
+	```swift
+	// Old interface
+	func result(from data: Data) -> Result<Model>
+	// New interface
+	func model(from data: Data) throws -> Model
+	```
+	
+- `JSONDictionaryResourceType` transformation function now throws on failure instead of returning `Model?`:
+
+	```swift
+	// Old interface
+	func model(from jsonDictionary: [String : Any]) -> Model?
+	// New interface
+	func model(from jsonDictionary: [String : Any]) throws -> Model
+	```
+
+- `JSONArrayResourceType` transformation function now throws on failure instead of returning `Model?`:
+
+	```swift
+	// Old interface
+	func model(from jsonArray: [Any]) -> Model?
+	// New interface
+	func model(from jsonArray: [Any]) throws -> Model
+	```
+	
 - Refactored network service
 	- Renamed `NetworkDataResourceService` to `GenericNetworkDataResourceService`, this is useful when using it with `ResourceOperation`
 	- New `NetworkDataResourceService` uses a generic fetching function
+	- `NetworkDataResourceService` now uses `NetworkResponse` as the result type in the completion handler
 
 ## 3.2.0
 
