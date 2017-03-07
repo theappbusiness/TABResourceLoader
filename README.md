@@ -1,3 +1,5 @@
+![The App Business](Assets/logo.png)
+
 # TABResourceLoader
 
 [![Build Status](https://travis-ci.org/theappbusiness/TABResourceLoader.svg?branch=master)](https://travis-ci.org/theappbusiness/TABResourceLoader)
