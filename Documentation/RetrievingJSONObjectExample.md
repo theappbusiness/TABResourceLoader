@@ -1,4 +1,4 @@
-# Retriving a JSON object example
+# Retrieving a JSON object example
 
 Let's say you need to retrieve this JSON from an server, `http://localhost:8000/<continent>.json`:
 

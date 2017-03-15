@@ -1,8 +1,8 @@
-# Retriving an image from a web service example
+# Retrieving an image from a web service example
 
 The library comes with a concrete type, `NetworkImageResource`, which represents a simple image resource.
 
-To retrive an image, first create and `NetworkImageResource` with the relevant `URL`: 
+To retrieve an image, first create and `NetworkImageResource` with the relevant `URL`: 
 
 ```swift
 let imageURL = URL(string: "http://www.theappbusiness.com/apple-touch-icon-180x180.png")!
