@@ -30,7 +30,7 @@ import Foundation
 
 /// Enum representing an error from a network service
 ///
-/// - couldNotCreateURLRequest: The URL request could be formed
+/// - couldNotCreateURLRequest: The URL request could not be formed
 /// - noHTTPURLResponse:        No HTTPURLResponse exists
 /// - sessionError:             The networking error returned by the URLSession
 /// - statusCodeError:          A status code error between 400 and 600 (not including 600) was returned
