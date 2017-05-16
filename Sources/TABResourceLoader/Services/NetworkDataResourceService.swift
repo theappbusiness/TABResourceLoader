@@ -40,8 +40,7 @@ public enum NetworkServiceError: Error {
   case noHTTPURLResponse
   case sessionError(error: Error)
   case statusCodeError(statusCode: Int)
-  case couldNotParseData(error: Error) // Could not parse model?
-  case noDataProvided
+  case couldNotParseData(error: Error)
 }
 
 /// Object used to retrive types that conform to both @NetworkResourceType and DataResourceType

@@ -46,17 +46,8 @@ public enum NetworkResponseMultipleError<Model> {
   case failure(parsingError: Error?, NetworkServiceError, HTTPURLResponse?)
 }
 
-public enum NetworkResponseSingleError<Model> {
-  case success(Model, HTTPURLResponse)
-  case failure(Error, HTTPURLResponse?)
-}
-
 enum NetworkResponseHandlerError: Error {
   case noDataProvided
-}
-
-public protocol ErrorResourceType {
-  func error(from data: Data) -> Error?
 }
 
 struct NetworkResponseHandler {
