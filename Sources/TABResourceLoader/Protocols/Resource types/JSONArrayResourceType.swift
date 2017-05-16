@@ -41,7 +41,6 @@ public protocol JSONArrayResourceType: DataResourceType {
    */
   func model(from jsonArray: [Any]) throws -> Model
 
-
   /**
    Optionally returns an error from the JSON array provided
    
