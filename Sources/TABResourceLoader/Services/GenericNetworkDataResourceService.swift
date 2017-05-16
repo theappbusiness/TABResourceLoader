@@ -11,7 +11,7 @@ import Foundation
 open class GenericNetworkDataResourceService<NetworkDataResource: NetworkResourceType & DataResourceType>: NetworkDataResourceService, ResourceServiceType {
 
   public typealias Resource = NetworkDataResource
-  public typealias ResultType = NetworkResponse<Resource.Model>
+  public typealias ResultType = NetworkResponseSingleError<Resource.Model>
 
   /// Designated initializer for NetworkDataResourceService, uses the shared URLSession
   public required init() {

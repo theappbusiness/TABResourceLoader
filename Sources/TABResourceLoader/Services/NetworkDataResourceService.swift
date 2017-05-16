@@ -80,17 +80,16 @@ open class NetworkDataResourceService {
    - parameter completion: A completion handler called with a Result type of the fetching computation
    */
   @discardableResult
-  open func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
+  open func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, completion: @escaping (NetworkResponseSingleError<Resource.Model>) -> Void) -> Cancellable? {
     let cancellable = fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
     return cancellable
   }
 
   // Method used for injecting the NetworkServiceActivity for testing
   @discardableResult
-  func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
+  func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponseSingleError<Resource.Model>) -> Void) -> Cancellable? {
     guard var urlRequest = resource.urlRequest() else {
-      let parsedResult = Result<Resource.Model>.failure(NetworkResponseHandlerError.noDataProvided)
-      completion(.failure(parsedResult, nil, NetworkServiceError.couldNotCreateURLRequest))
+      completion(.failure(NetworkServiceError.couldNotCreateURLRequest, nil))
       return nil
     }
 
@@ -99,6 +98,30 @@ open class NetworkDataResourceService {
     let cancellable = session.perform(request: urlRequest) { (data, URLResponse, error) in
       networkServiceActivity.decreaseActiveRequest()
       let result = NetworkResponseHandler.resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error)
+      completion(result)
+    }
+    return cancellable
+  }
+
+  @discardableResult
+  open func fetch<Resource: NetworkResourceType & DataResourceType & ErrorResourceType>(resource: Resource, completion: @escaping (NetworkResponseSingleError<Resource.Model>) -> Void) -> Cancellable? {
+    let cancellable = fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
+    return cancellable
+  }
+
+  // Method used for injecting the NetworkServiceActivity for testing
+  @discardableResult
+  func fetch<Resource: NetworkResourceType & DataResourceType & ErrorResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponseSingleError<Resource.Model>) -> Void) -> Cancellable? {
+    guard var urlRequest = resource.urlRequest() else {
+      completion(.failure(NetworkServiceError.couldNotCreateURLRequest, nil))
+      return nil
+    }
+
+    urlRequest.allHTTPHeaderFields = merge(additionalHeaderFields(), urlRequest.allHTTPHeaderFields)
+    networkServiceActivity.increaseActiveRequest()
+    let cancellable = session.perform(request: urlRequest) { (data, URLResponse, error) in
+      networkServiceActivity.decreaseActiveRequest()
+      let result = NetworkResponseHandler.errorableResultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error)
       completion(result)
     }
     return cancellable
