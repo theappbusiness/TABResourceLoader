@@ -37,4 +37,12 @@ public protocol DataResourceType: ResourceType {
    - returns: An instantiated model if parsing was successful, otherwise throws
    */
   func model(from data: Data) throws -> Model
+
+  func error(from data: Data) -> Error?
+}
+
+public extension DataResourceType {
+  func error(from data: Data) -> Error? {
+    return nil
+  }
 }
