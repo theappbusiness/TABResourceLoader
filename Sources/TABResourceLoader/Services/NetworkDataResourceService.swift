@@ -34,13 +34,15 @@ import Foundation
 /// - noHTTPURLResponse:        No HTTPURLResponse exists
 /// - sessionError:             The networking error returned by the URLSession
 /// - statusCodeError:          A status code error between 400 and 600 (not including 600) was returned
-/// - couldNotParseData:        The Data could not be parsed
+/// - noDataProvided:           No data was returned
+/// - couldNotParseModel:       Could not parse Model from the response
 public enum NetworkServiceError: Error {
   case couldNotCreateURLRequest
   case noHTTPURLResponse
   case sessionError(error: Error)
   case statusCodeError(statusCode: Int)
-  case couldNotParseData(error: Error)
+  case noDataProvided
+  case couldNotParseModel(error: Error)
 }
 
 /// Object used to retrive types that conform to both @NetworkResourceType and DataResourceType
@@ -89,7 +91,7 @@ open class NetworkDataResourceService {
   @discardableResult
   func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
     guard var urlRequest = resource.urlRequest() else {
-      completion(.failure(parsingError: nil, .couldNotCreateURLRequest, nil))
+      completion(.failure(.couldNotCreateURLRequest, nil))
       return nil
     }
 
