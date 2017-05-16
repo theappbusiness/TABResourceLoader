@@ -76,7 +76,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
         switch result {
         case .success:
           XCTFail("No error found")
-        case .failure(_, let error, _):
+        case .failure(let error, _):
           guard case NetworkServiceError.couldNotCreateURLRequest = error else {
             XCTFail("Unexpected error: \(error)")
             return
@@ -104,7 +104,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
         switch result {
         case .success:
           XCTFail("No error found")
-        case .failure(_, let error, _):
+        case .failure(let error, _):
           guard case NetworkServiceError.statusCodeError(let statusCode) = error else {
             XCTFail("Unexpected error: \(error)", file: file, line: lineNumber)
             return
@@ -124,11 +124,12 @@ class NetworkDataResourceServiceTests: XCTestCase {
         case .success(let model, _):
           XCTAssertEqual(model, "")
           expectation?.fulfill()
-        case .failure(_, let error, _):
+        case .failure(let error, _):
           XCTFail("Unexpected error: \(error)")
         }
       }
-      mockSession.capturedCompletion!(Data(), HTTPURLResponse(), nil)
+      let successResponse = HTTPURLResponse(url: mockURL, statusCode: 200, httpVersion: nil, headerFields: nil)
+      mockSession.capturedCompletion!(Data(), successResponse, nil)
     }
   }
 
@@ -147,7 +148,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
         switch result {
         case .success:
           XCTFail("No error found")
-        case .failure(_, let error, _):
+        case .failure(let error, _):
           guard case NetworkServiceError.sessionError(let testError) = error else {
             XCTFail("Unexpected error: \(error)", file: file, line: lineNumber)
             return
@@ -168,7 +169,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
         switch result {
         case .success:
           XCTFail("No error found")
-        case .failure(_, let error, _):
+        case .failure(let error, _):
           guard case NetworkServiceError.sessionError(let testError) = error else {
             XCTFail("Unexpected error: \(error)")
             return
@@ -187,8 +188,8 @@ class NetworkDataResourceServiceTests: XCTestCase {
         switch result {
         case .success:
           XCTFail("No error found")
-        case .failure(_, let error, _):
-          guard case NetworkServiceError.couldNotParseData(error: NetworkResponseHandlerError.noDataProvided) = error else {
+        case .failure(let error, _):
+          guard case NetworkServiceError.noDataProvided = error else {
             XCTFail("Unexpected error: \(error)")
             return
           }
