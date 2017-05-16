@@ -57,4 +57,9 @@ class JSONDictionaryResourceTypeTests: XCTestCase {
     XCTAssertEqual(calculatedMockObject, expectedMockObject)
   }
 
+  func test_defaultErrorIsNil() {
+    let mockJSONObjectResourceType = MockJSONDictionaryResourceType()
+    XCTAssertNil(mockJSONObjectResourceType.error(from: [:]))
+  }
+
 }

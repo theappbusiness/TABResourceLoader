@@ -60,4 +60,9 @@ class JSONArrayResourceTypeTests: XCTestCase {
     XCTAssertEqual(result, expectedMockObjectsArray)
   }
 
+  func test_defaultErrorIsNil() {
+    let mockJSONArrayResourceType = MockJSONArrayResourceType()
+    XCTAssertNil(mockJSONArrayResourceType.error(from: []))
+  }
+
 }

@@ -1,5 +1,17 @@
 # Change Log
 
+
+## 5.0.0
+
+- The error from a failed `NetworkResponse` is now flattened and moved into the `NetworkServiceError` `couldNotParseModel` case to avoid nested switch statements: 
+
+```swift
+enum NetworkResponse<Model> {
+  case success(Model, HTTPURLResponse)
+  case failure(NetworkServiceError, HTTPURLResponse?)
+}
+```
+
 ## 4.0.0
 
 - `DataResourceType` transformation function now throws on failure instead of returning `Result<Model>`:

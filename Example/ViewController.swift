@@ -85,12 +85,8 @@ class ViewController: UIViewController {
       switch result {
       case .success(let successResult, _):
         self?.handleRegistrationResult(successResult)
-      case .failure(let registrationResult, _, let error):
-        if case let .success(errorResult) = registrationResult {
-          self?.handleRegistrationResult(errorResult)
-        } else {
-          print(error)
-        }
+      case .failure(let error, _):
+        print(error)
       }
 
     }

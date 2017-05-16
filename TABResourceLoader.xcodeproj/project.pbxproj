@@ -40,6 +40,8 @@
 		4F36C0B21D9D52A700CDFD21 /* JSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */; };
 		4F36C0B51D9D5AE400CDFD21 /* JSONDictionaryResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */; };
 		4F36C0B81D9D5BD200CDFD21 /* JSONArrayResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0B61D9D5B7E00CDFD21 /* JSONArrayResourceTypeTests.swift */; };
+		4F4BE52A1ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE5291ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift */; };
+		4F4BE52C1ECB415500C2CC56 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE52B1ECB415500C2CC56 /* String+Error.swift */; };
 		4F57E88C1E5DFDEB0082DF87 /* MultipleResponseResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E88B1E5DFDEB0082DF87 /* MultipleResponseResource.swift */; };
 		4F57E8901E5E000E0082DF87 /* CitiesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E88F1E5E000E0082DF87 /* CitiesResponse.swift */; };
 		4F57E8921E5E007B0082DF87 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E8911E5E007B0082DF87 /* ServerError.swift */; };
@@ -119,6 +121,8 @@
 		4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONArrayResourceType.swift; sourceTree = "<group>"; };
 		4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDictionaryResourceTypeTests.swift; sourceTree = "<group>"; };
 		4F36C0B61D9D5B7E00CDFD21 /* JSONArrayResourceTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONArrayResourceTypeTests.swift; sourceTree = "<group>"; };
+		4F4BE5291ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponseHandlerTests.swift; sourceTree = "<group>"; };
+		4F4BE52B1ECB415500C2CC56 /* String+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		4F57E88B1E5DFDEB0082DF87 /* MultipleResponseResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleResponseResource.swift; sourceTree = "<group>"; };
 		4F57E88F1E5E000E0082DF87 /* CitiesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesResponse.swift; sourceTree = "<group>"; };
 		4F57E8911E5E007B0082DF87 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
@@ -315,6 +319,7 @@
 			children = (
 				4F079D781D84650800D08DA0 /* ImageMocker.swift */,
 				4F079D3F1D84599300D08DA0 /* XCTestCase+Additions.swift */,
+				4F4BE52B1ECB415500C2CC56 /* String+Error.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 			children = (
 				4F079D521D84599300D08DA0 /* NetworkDataResourceServiceTests.swift */,
 				4F079D531D84599300D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift */,
+				4F4BE5291ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -633,6 +639,7 @@
 				4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */,
 				4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */,
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
+				4F4BE52C1ECB415500C2CC56 /* String+Error.swift in Sources */,
 				4F88C6971D88A122002CAEA2 /* Result.swift in Sources */,
 				4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */,
 				4F079D2C1D84577E00D08DA0 /* JSONParsingError.swift in Sources */,
@@ -679,6 +686,7 @@
 				4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */,
 				4F079D681D8459D400D08DA0 /* MockJSONDictionaryResourceType.swift in Sources */,
 				4F6CDC191E5AF5B7001BF320 /* GlobalFunctionsTests.swift in Sources */,
+				4F4BE52A1ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift in Sources */,
 				4F079D6D1D8459D400D08DA0 /* MockResourceService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
