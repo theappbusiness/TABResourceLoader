@@ -42,7 +42,7 @@ public enum NetworkServiceError: Error {
   case sessionError(error: Error)
   case statusCodeError(statusCode: Int)
   case noDataProvided
-  case statusCodeCustomError(error: Error)
+  case statusCodeCustomError(statusCode: Int, error: Error)
 }
 
 /// Object used to retrive types that conform to both @NetworkResourceType and DataResourceType
