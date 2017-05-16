@@ -89,8 +89,7 @@ open class NetworkDataResourceService {
   @discardableResult
   func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
     guard var urlRequest = resource.urlRequest() else {
-      let parsedResult = Result<Resource.Model>.failure(NetworkResponseHandlerError.noDataProvided)
-      completion(.failure(parsedResult, nil, NetworkServiceError.couldNotCreateURLRequest))
+      completion(.failure(parsingError: nil, .couldNotCreateURLRequest, nil))
       return nil
     }
 
