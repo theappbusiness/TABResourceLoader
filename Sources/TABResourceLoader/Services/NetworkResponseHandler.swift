@@ -26,9 +26,8 @@ import Foundation
 /// # Failure case
 ///
 /// Defines a response that failed, contains:
-///   - Contains the error produced when attempting to parse the Model
-///   - A HTTPURLResponse if it exists
 ///   - A NetworkServiceError
+///   - A HTTPURLResponse if it exists
 ///
 /// ## Reasons for failure can be (in order):
 ///   1. No HTTPURLResponse with a URLSession error
@@ -39,10 +38,6 @@ import Foundation
 public enum NetworkResponse<Model> {
   case success(Model, HTTPURLResponse)
   case failure(NetworkServiceError, HTTPURLResponse?)
-}
-
-enum NetworkResponseHandlerError: Error {
-  case noDataProvided
 }
 
 struct NetworkResponseHandler {
@@ -59,7 +54,7 @@ struct NetworkResponseHandler {
 
     guard let data = data else {
       let networkError = self.networkServiceError(HTTPURLResponse: HTTPURLResponse, error: error) ?? NetworkServiceError.noDataProvided
-      return .failure(networkError, URLResponse as? HTTPURLResponse)
+      return .failure(networkError, HTTPURLResponse)
     }
 
     switch HTTPURLResponse.statusCode {
@@ -74,9 +69,8 @@ struct NetworkResponseHandler {
         return .failure(.statusCodeError(statusCode: HTTPURLResponse.statusCode), HTTPURLResponse)
       }
     default:
-      let errorResult = resource.error(from: data)
-      if let errorResult = errorResult {
-        return .failure(.couldNotParseModel(error: errorResult), HTTPURLResponse)
+      if let error = resource.error(from: data) {
+        return .failure(.couldNotParseModel(error: error), HTTPURLResponse)
       } else {
         return .failure(.statusCodeError(statusCode: HTTPURLResponse.statusCode), HTTPURLResponse)
       }
@@ -88,13 +82,12 @@ struct NetworkResponseHandler {
     switch HTTPURLResponse.statusCode {
     case 400..<600:
       return .statusCodeError(statusCode: HTTPURLResponse.statusCode)
-    default: break
+    default:
+      if let error = error {
+        return .sessionError(error: error)
+      }
+      return nil
     }
-
-    if let error = error {
-      return .sessionError(error: error)
-    }
-    return nil
   }
 
 }
