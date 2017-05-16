@@ -117,7 +117,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
     }
   }
 
-  func test_fetch_whenSessionCompletesDataAndHTTPURLResponse_callsSuccess() {
+  func test_fetch_whenSessionCompletesDataAndHTTPURLResponse_callsSuccessWhenParsingSucceed() {
     performAsyncTest { expectation in
       testService.fetch(resource: mockResource) { result in
         switch result {
