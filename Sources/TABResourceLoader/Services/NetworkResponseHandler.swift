@@ -70,7 +70,7 @@ struct NetworkResponseHandler {
       }
     default:
       if let error = resource.error(from: data) {
-        return .failure(.couldNotParseModel(error: error), HTTPURLResponse)
+        return .failure(.statusCodeCustomError(error: error), HTTPURLResponse)
       } else {
         return .failure(.statusCodeError(statusCode: HTTPURLResponse.statusCode), HTTPURLResponse)
       }

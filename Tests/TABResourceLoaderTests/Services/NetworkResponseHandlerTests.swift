@@ -49,11 +49,11 @@ class NetworkResponseHandlerTests: XCTestCase {
     XCTAssertEqual(successResponse, urlResponse)
   }
 
-  func test_resultIsCouldNotParseModelWhenErrorParsingSucceedsForErrorStatusCodes() {
+  func test_resultIsStatusCodeCustomErrorWhenErrorParsingSucceedsForErrorStatusCodes() {
     let successResponse = HTTPURLResponse(url: mockURL, statusCode: 504, httpVersion: nil, headerFields: nil)
     let response = NetworkResponseHandler.resultFrom(resource: MockErrorResponseResource(), data: Data(), URLResponse: successResponse, error: nil)
     guard case NetworkResponse.failure(let error, let urlResponse) = response,
-          case NetworkServiceError.couldNotParseModel(let errorModel) = error else {
+          case NetworkServiceError.statusCodeCustomError(let errorModel) = error else {
         XCTFail("Unexpected response: \(response)")
         return
     }

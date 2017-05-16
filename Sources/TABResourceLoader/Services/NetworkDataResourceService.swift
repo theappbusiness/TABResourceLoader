@@ -35,14 +35,14 @@ import Foundation
 /// - sessionError:             The networking error returned by the URLSession
 /// - statusCodeError:          A status code error between 400 and 600 (not including 600) was returned
 /// - noDataProvided:           No data was returned
-/// - couldNotParseModel:       Could not parse Model from the response
+/// - statusCodeCustomError:    Contains the custom error for failed status code
 public enum NetworkServiceError: Error {
   case couldNotCreateURLRequest
   case noHTTPURLResponse
   case sessionError(error: Error)
   case statusCodeError(statusCode: Int)
   case noDataProvided
-  case couldNotParseModel(error: Error)
+  case statusCodeCustomError(error: Error)
 }
 
 /// Object used to retrive types that conform to both @NetworkResourceType and DataResourceType
