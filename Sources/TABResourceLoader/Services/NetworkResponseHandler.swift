@@ -43,7 +43,7 @@ public enum NetworkResponse<ParsedType> {
 
 public enum NetworkResponseMultipleError<Model> {
   case success(Model, HTTPURLResponse)
-  case failure(parsingError: Error, NetworkServiceError, HTTPURLResponse?)
+  case failure(parsingError: Error?, NetworkServiceError, HTTPURLResponse?)
 }
 
 public enum NetworkResponseSingleError<Model> {
@@ -61,49 +61,44 @@ public protocol ErrorResourceType {
 
 struct NetworkResponseHandler {
 
-  static func errorableResultFrom<Resource: NetworkResourceType & DataResourceType & ErrorResourceType>(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> NetworkResponseSingleError<Resource.Model> {
+  static func resultFrom<Resource: NetworkResourceType & DataResourceType>(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> NetworkResponseMultipleError<Resource.Model> {
     guard let data = data else {
-      return NetworkResponseSingleError.failure(NetworkResponseHandlerError.noDataProvided, URLResponse as? HTTPURLResponse)
-    }
-    if let error = resource.error(from: data) {
-      return NetworkResponseSingleError.failure(error, URLResponse as? HTTPURLResponse)
-    }
-    return resultFrom(resource: resource, data: data, URLResponse: URLResponse, error: error)
-
-  }
-
-  static func resultFrom<Resource: NetworkResourceType & DataResourceType>(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> NetworkResponseSingleError<Resource.Model> {
-    guard let data = data else {
-      return NetworkResponseSingleError.failure(NetworkResponseHandlerError.noDataProvided, URLResponse as? HTTPURLResponse)
+      let networkError = NetworkServiceError.couldNotParseData(error: NetworkResponseHandlerError.noDataProvided)
+      return NetworkResponseMultipleError.failure(parsingError: nil, networkError, URLResponse as? HTTPURLResponse)
     }
 
     guard let HTTPURLResponse = URLResponse as? HTTPURLResponse else {
       if let error = error {
-        return .failure(NetworkServiceError.sessionError(error: error), nil)
+        return NetworkResponseMultipleError.failure(parsingError: nil, .sessionError(error: error), nil)
       } else {
-        return .failure(NetworkServiceError.noHTTPURLResponse, nil)
+        return NetworkResponseMultipleError.failure(parsingError: nil, .noHTTPURLResponse, nil)
       }
-    }
-
-    switch HTTPURLResponse.statusCode {
-    case 400..<600:
-      return .failure(NetworkServiceError.statusCodeError(statusCode: HTTPURLResponse.statusCode), HTTPURLResponse)
-    default: break
-    }
-
-    if let error = error {
-      return .failure(NetworkServiceError.sessionError(error: error), HTTPURLResponse)
     }
 
     let parsedResult = Result<Resource.Model> {
       return try resource.model(from: data)
     }
+
     switch parsedResult {
     case .success(let model):
       return .success(model, HTTPURLResponse)
     case .failure(let parsingError):
-       return .failure(parsingError, HTTPURLResponse)
+      let networkError: NetworkServiceError = self.networkServiceError(HTTPURLResponse: HTTPURLResponse, error: error) ?? .couldNotParseData(error: parsingError)
+      return .failure(parsingError: parsingError, networkError, HTTPURLResponse)
     }
+  }
+
+  private static func networkServiceError(HTTPURLResponse: HTTPURLResponse, error: Error?) -> NetworkServiceError? {
+    switch HTTPURLResponse.statusCode {
+    case 400..<600:
+      return .statusCodeError(statusCode: HTTPURLResponse.statusCode)
+    default: break
+    }
+
+    if let error = error {
+      return .sessionError(error: error)
+    }
+    return nil
   }
 
 }
