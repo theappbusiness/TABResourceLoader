@@ -41,7 +41,7 @@
 		4F36C0B51D9D5AE400CDFD21 /* JSONDictionaryResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */; };
 		4F36C0B81D9D5BD200CDFD21 /* JSONArrayResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36C0B61D9D5B7E00CDFD21 /* JSONArrayResourceTypeTests.swift */; };
 		4F4BE52A1ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE5291ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift */; };
-		4F4BE52C1ECB415500C2CC56 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE52B1ECB415500C2CC56 /* String+Error.swift */; };
+		4F4BE52D1ECB4CF200C2CC56 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE52B1ECB415500C2CC56 /* String+Error.swift */; };
 		4F57E88C1E5DFDEB0082DF87 /* MultipleResponseResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E88B1E5DFDEB0082DF87 /* MultipleResponseResource.swift */; };
 		4F57E8901E5E000E0082DF87 /* CitiesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E88F1E5E000E0082DF87 /* CitiesResponse.swift */; };
 		4F57E8921E5E007B0082DF87 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E8911E5E007B0082DF87 /* ServerError.swift */; };
@@ -639,7 +639,6 @@
 				4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */,
 				4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */,
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
-				4F4BE52C1ECB415500C2CC56 /* String+Error.swift in Sources */,
 				4F88C6971D88A122002CAEA2 /* Result.swift in Sources */,
 				4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */,
 				4F079D2C1D84577E00D08DA0 /* JSONParsingError.swift in Sources */,
@@ -666,6 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F079D7A1D84652200D08DA0 /* ImageMocker.swift in Sources */,
+				4F4BE52D1ECB4CF200C2CC56 /* String+Error.swift in Sources */,
 				4F079D651D8459D400D08DA0 /* XCTestCase+Additions.swift in Sources */,
 				4FC453931DC9FFE600EA1FAE /* MockDefaultNetworkDataResource.swift in Sources */,
 				4F782C641DA2B09900179638 /* NetworkJSONDictionaryResourceTypeTests.swift in Sources */,
