@@ -26,7 +26,7 @@ import Foundation
 /// # Failure case
 ///
 /// Defines a response that failed, contains:
-///   - The Result of parsing the model, success case contains the model and failure case contains the parsing error
+///   - Contains the error produced when attempting to parse the Model
 ///   - A HTTPURLResponse if it exists
 ///   - A NetworkServiceError
 ///
@@ -36,12 +36,7 @@ import Foundation
 ///   3. The HTTP status code is 4xx or 5xx
 ///   4. A URLSession error exists
 ///   5. Could not parse the data
-public enum NetworkResponse<ParsedType> {
-  case success(ParsedType, HTTPURLResponse)
-  case failure(Result<ParsedType>, HTTPURLResponse?, NetworkServiceError)
-}
-
-public enum NetworkResponseMultipleError<Model> {
+public enum NetworkResponse<Model> {
   case success(Model, HTTPURLResponse)
   case failure(parsingError: Error?, NetworkServiceError, HTTPURLResponse?)
 }
@@ -52,18 +47,19 @@ enum NetworkResponseHandlerError: Error {
 
 struct NetworkResponseHandler {
 
-  static func resultFrom<Resource: NetworkResourceType & DataResourceType>(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> NetworkResponseMultipleError<Resource.Model> {
-    guard let data = data else {
-      let networkError = NetworkServiceError.couldNotParseData(error: NetworkResponseHandlerError.noDataProvided)
-      return NetworkResponseMultipleError.failure(parsingError: nil, networkError, URLResponse as? HTTPURLResponse)
-    }
+  static func resultFrom<Resource: NetworkResourceType & DataResourceType>(resource: Resource, data: Data?, URLResponse: Foundation.URLResponse?, error: Error?) -> NetworkResponse<Resource.Model> {
 
     guard let HTTPURLResponse = URLResponse as? HTTPURLResponse else {
       if let error = error {
-        return NetworkResponseMultipleError.failure(parsingError: nil, .sessionError(error: error), nil)
+        return NetworkResponse.failure(parsingError: nil, .sessionError(error: error), nil)
       } else {
-        return NetworkResponseMultipleError.failure(parsingError: nil, .noHTTPURLResponse, nil)
+        return NetworkResponse.failure(parsingError: nil, .noHTTPURLResponse, nil)
       }
+    }
+
+    guard let data = data else {
+      let networkError: NetworkServiceError = self.networkServiceError(HTTPURLResponse: HTTPURLResponse, error: error) ?? .couldNotParseData(error: NetworkResponseHandlerError.noDataProvided)
+      return NetworkResponse.failure(parsingError: nil, networkError, URLResponse as? HTTPURLResponse)
     }
 
     let parsedResult = Result<Resource.Model> {

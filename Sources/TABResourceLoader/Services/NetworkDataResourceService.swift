@@ -80,14 +80,14 @@ open class NetworkDataResourceService {
    - parameter completion: A completion handler called with a Result type of the fetching computation
    */
   @discardableResult
-  open func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, completion: @escaping (NetworkResponseMultipleError<Resource.Model>) -> Void) -> Cancellable? {
+  open func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
     let cancellable = fetch(resource: resource, networkServiceActivity: NetworkServiceActivity.shared, completion: completion)
     return cancellable
   }
 
   // Method used for injecting the NetworkServiceActivity for testing
   @discardableResult
-  func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponseMultipleError<Resource.Model>) -> Void) -> Cancellable? {
+  func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
     guard var urlRequest = resource.urlRequest() else {
       completion(.failure(parsingError: nil, .couldNotCreateURLRequest, nil))
       return nil
