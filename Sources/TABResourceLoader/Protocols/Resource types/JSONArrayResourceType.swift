@@ -41,6 +41,14 @@ public protocol JSONArrayResourceType: DataResourceType {
    */
   func model(from jsonArray: [Any]) throws -> Model
 
+
+  /**
+   Optionally returns an error from the JSON array provided
+   
+   - parameter jsonArray: The JSON array to parse
+   
+   - returns: An error from the jsonArray
+   */
   func error(from jsonArray: [Any]) -> Error?
 }
 
@@ -71,6 +79,7 @@ extension JSONArrayResourceType {
 
 }
 
+// No errors are returned by default
 public extension JSONArrayResourceType {
   func error(from jsonArray: [Any]) -> Error? {
     return nil

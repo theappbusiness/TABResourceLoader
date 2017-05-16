@@ -41,6 +41,13 @@ public protocol JSONDictionaryResourceType: DataResourceType {
    */
   func model(from jsonDictionary: [String : Any]) throws -> Model
 
+  /**
+   Optionally returns an error from the JSON dictionary provided
+   
+   - parameter jsonDictionary: The JSON dictionary to parse
+   
+   - returns: An error from the jsonDictionary
+   */
   func error(from jsonDictionary: [String : Any]) -> Error?
 }
 
@@ -72,6 +79,7 @@ extension JSONDictionaryResourceType {
 
 }
 
+// No errors are returned by default
 public extension JSONDictionaryResourceType {
   func error(from jsonDictionary: [String : Any]) -> Error? {
     return nil
