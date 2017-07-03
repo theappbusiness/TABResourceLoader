@@ -1,5 +1,8 @@
 # Change Log
 
+## 5.0.1
+
+Moved internal `Result` to test target
 
 ## 5.0.0
 
