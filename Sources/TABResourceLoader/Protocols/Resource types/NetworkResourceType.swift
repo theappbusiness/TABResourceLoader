@@ -93,9 +93,9 @@ public extension NetworkResourceType {
   }
 
   private func allQueryItems(initialItems: [URLQueryItem]?) -> [URLQueryItem]? {
-    let allQueryItems = (initialItems ?? []) + (queryItems ?? [])
-    let final = allQueryItems.isEmpty ? nil : allQueryItems
-    return final
+    let combinedQueryItems = (initialItems ?? []) + (queryItems ?? [])
+    let allQueryItems = combinedQueryItems.isEmpty ? nil : combinedQueryItems
+    return allQueryItems
   }
 }
 
