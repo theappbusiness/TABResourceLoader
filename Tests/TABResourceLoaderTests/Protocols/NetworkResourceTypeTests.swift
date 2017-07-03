@@ -69,6 +69,14 @@ class NetworkResourceTypeTests: XCTestCase {
     XCTAssertEqual(urlRequest?.url?.absoluteString, urlWithQueryParameters.absoluteString)
   }
 
+  func test_urlRequest_resourceURLWithNoQueryItemsHasNoQuestionMark() {
+    let urlWithQueryParameters = URL(string: "www.test.com")!
+    let resource = MockCustomNetworkResource(url: urlWithQueryParameters)
+
+    let urlRequest = resource.urlRequest()
+    XCTAssertEqual(urlRequest?.url?.absoluteString, "www.test.com")
+  }
+
   func test_urlRequest_resourceURLWithQueryParametersAndQueryItems() {
     let mockedURLQueryItems = [URLQueryItem(name: "query-name-a", value: "query-value-a")]
     let resource = MockCustomNetworkResource(url: urlWithQueryItem, queryItems: mockedURLQueryItems)
