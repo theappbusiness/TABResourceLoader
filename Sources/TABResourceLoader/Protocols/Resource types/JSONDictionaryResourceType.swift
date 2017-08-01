@@ -85,3 +85,7 @@ public extension JSONDictionaryResourceType {
     return nil
   }
 }
+
+public extension JSONDictionaryResourceType where Model == Void {
+  func model(from jsonDictionary: [String: Any]) throws {}
+}

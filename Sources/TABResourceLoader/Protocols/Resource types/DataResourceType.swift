@@ -54,3 +54,7 @@ public extension DataResourceType {
     return nil
   }
 }
+
+public extension DataResourceType where Model == Void {
+  func model(from data: Data) throws {}
+}
