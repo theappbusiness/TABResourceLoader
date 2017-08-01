@@ -3,7 +3,7 @@
 ## 6.0.0
 
 - Migrated to Swift 4
-
+- Added default extension for handling resources where the response does not need to be parsed, i.e. resources `Void` `Model`s
 
 ## 5.0.1
 
