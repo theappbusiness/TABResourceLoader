@@ -42,7 +42,7 @@ class NetworkResponseHandlerTests: XCTestCase {
     let response = NetworkResponseHandler.resultFrom(resource: MockParsingFailedResource(), data: Data(), URLResponse: successResponse, error: nil)
     guard case NetworkResponse.failure(let error, let urlResponse) = response,
           case NetworkServiceError.statusCodeError(let statusCode) = error else {
-        XCTFail()
+        XCTFail(#function)
         return
     }
     XCTAssertEqual(statusCode, 204)

@@ -35,9 +35,7 @@ public enum ImageDownloadingError: Error {
 /**
  *  Defines a specific ResourceType for Image resources
  */
-public protocol ImageResourceType: DataResourceType {
-
-  associatedtype Model: UIImage
+public protocol ImageResourceType: DataResourceType where Model: UIImage {
 
   /**
    Takes NSData and returns a result which is either Success with an Image or Failure with an error
