@@ -41,7 +41,9 @@ public class NetworkServiceActivity {
   private(set)var numberOfActiveRequests = 0 {
     didSet {
       let hasOutstandingRequests = numberOfActiveRequests > 0
-      NetworkServiceActivity.activityChangeHandler?(hasOutstandingRequests)
+      DispatchQueue.main.async {
+        NetworkServiceActivity.activityChangeHandler?(hasOutstandingRequests)
+      }
     }
   }
 
