@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   private func setupNetworkActivityHandler(for application: UIApplication) {
     NetworkServiceActivity.activityChangeHandler = { isActive in
-      application.isNetworkActivityIndicatorVisible = isActive
+      DispatchQueue.main.async {
+        application.isNetworkActivityIndicatorVisible = isActive
+      }
     }
   }
 
