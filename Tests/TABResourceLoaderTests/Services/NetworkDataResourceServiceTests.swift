@@ -33,6 +33,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
     mockResource = nil
     mockNetworkServiceActivity = nil
     testService = nil
+    MockNetworkServiceActivity.activityChangeHandler = nil
     super.tearDown()
   }
 
@@ -209,6 +210,19 @@ class NetworkDataResourceServiceTests: XCTestCase {
   func test_fetch_returnsANonNilCancellable() {
     let cancellable = testService.fetch(resource: mockResource) { _ in }
     XCTAssertNotNil(cancellable)
+  }
+
+  func test_activityChangeHandlerIsCalledOnMainThread() {
+    let mockNetworkServiceActivity = MockNetworkServiceActivity()
+    let expectation = self.expectation(description: #function)
+    MockNetworkServiceActivity.activityChangeHandler = { _ in
+      XCTAssertEqual(Thread.current, Thread.main)
+      expectation.fulfill()
+    }
+    DispatchQueue.global().async {
+      self.testService.fetch(resource: self.mockResource, networkServiceActivity: mockNetworkServiceActivity) { _ in }
+    }
+    waitForExpectation()
   }
 
 }

@@ -77,7 +77,8 @@ public extension NetworkResourceType {
 
   public func urlRequest() -> URLRequest? {
     var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-    urlComponents?.queryItems = allQueryItems(initialItems: urlComponents?.queryItems)
+    let initialItems = urlComponents?.queryItems
+    urlComponents?.queryItems = allQueryItems(initialItems: initialItems)
 
     guard let urlFromComponents = urlComponents?.url else { return nil }
 
