@@ -15,21 +15,21 @@ import Foundation
 
 struct MockPropertyListCodableResource: PropertyListDecodableResourceType {
   typealias Model = MockObject
-  typealias TopLevel = Model
+  typealias Root = Model
 }
 
 struct MockNestedPropertyListCodableResource: PropertyListDecodableResourceType {
   typealias Model = MockObject
 
-  struct TopLevelObject: Codable {
+  struct ResponseRoot: Codable {
     let data: NestedData
     struct NestedData: Codable {
       let mock: MockObject
     }
   }
 
-  func modelFromTopLevel(_ topLevel: TopLevelObject) throws -> MockObject {
-    return topLevel.data.mock
+  func model(mappedFrom root: ResponseRoot) throws -> MockObject {
+    return root.data.mock
   }
 }
 
@@ -37,21 +37,21 @@ struct MockNestedPropertyListCodableResource: PropertyListDecodableResourceType 
 
 struct MockPropertyListArrayCodableResource: PropertyListDecodableResourceType {
   typealias Model = [MockObject]
-  typealias TopLevel = Model
+  typealias Root = Model
 }
 
 struct MockNestedPropertyListArrayCodableResource: PropertyListDecodableResourceType { // swiftlint:disable:this type_name
   typealias Model = [MockObject]
 
-  struct TopLevelObject: Codable {
+  struct ResponseRoot: Codable {
     let data: NestedData
     struct NestedData: Codable {
       let mocks: [MockObject]
     }
   }
 
-  func modelFromTopLevel(_ topLevel: TopLevelObject) throws -> [MockObject] {
-    return topLevel.data.mocks
+  func model(mappedFrom root: ResponseRoot) throws -> [MockObject] {
+    return root.data.mocks
   }
 }
 
@@ -61,9 +61,9 @@ struct MockNestedPropertyListArrayCodableResource: PropertyListDecodableResource
 // object, but doesn't provide the mapping between TopLevel and Model.
 struct MockPropertyListCodableInvalidResource: PropertyListDecodableResourceType {
   typealias Model = [MockObject]
-  typealias TopLevel = TopLevelObject
+  typealias Root = ResponseRoot
 
-  struct TopLevelObject: Codable {
+  struct ResponseRoot: Codable {
     let data: NestedData
     struct NestedData: Codable {
       let mock: MockObject

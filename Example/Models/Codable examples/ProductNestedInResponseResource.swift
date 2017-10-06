@@ -11,7 +11,6 @@ import TABResourceLoader
 
 struct ProductNestedInResponseResource: NetworkJSONCodableResourceType {
   typealias Model = Product
-  typealias TopLevel = Model
 
   // swiftlint:disable nesting
   struct TopLevelObject: Codable {

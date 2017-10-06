@@ -33,7 +33,7 @@ public protocol PropertyListDecodableResourceType: DataResourceType where Model:
 
   /// This typealias represents the decodable object at the root of the response.
   /// This may match the model type, or the model may be nested within another decodable type.
-  associatedtype TopLevel: Decodable
+  associatedtype Root: Decodable
 
   /// You may optionally provide a custom decoder. By default this is a new PropertyListDecoder() instance.
   var decoder: PropertyListDecoder { get }
@@ -42,15 +42,15 @@ public protocol PropertyListDecodableResourceType: DataResourceType where Model:
   /// be returned by this resource. Your model type may be nested several levels deep, or even
   /// constructed from various objects within the root response.
   ///
-  /// - Parameter topLevel: The top-level root object of the response.
+  /// - Parameter root: The object at the root of the response.
   /// - Returns: The model object that has been mapped.
   /// - Throws: Throw an error if you cannot construct the model object to return.
-  func modelFromTopLevel(_ topLevel: TopLevel) throws -> Model
+  func model(mappedFrom root: Root) throws -> Model
 }
 
-/// This error is thrown by the default mapping of top-level root object to model. If the top level
-/// differs from the model type, but no mapping method has been implemented in your resource, then
-/// this error is thrown.
+/// This error is thrown by the default mapping of response's root object to the model. If the root
+/// type differs from the model type, but no mapping method has been implemented in your resource,
+/// then this error is thrown.
 public struct PropertyListCodableModelNestingUnspecifiedError: Error {} // swiftlint:disable:this type_name
 
 extension PropertyListDecodableResourceType {
@@ -62,12 +62,12 @@ extension PropertyListDecodableResourceType {
 
   /// implement the parsing method inherited from `DataResourceType`
   public func model(from data: Data) throws -> Model {
-    let topLevel = try decoder.decode(TopLevel.self, from: data)
-    return try modelFromTopLevel(topLevel)
+    let root = try decoder.decode(Root.self, from: data)
+    return try model(mappedFrom: root)
   }
 
-  public func modelFromTopLevel(_ topLevel: TopLevel) throws -> Model {
-    guard let model = topLevel as? Model else {
+  public func model(mappedFrom root: Root) throws -> Model {
+    guard let model = root as? Model else {
       throw PropertyListCodableModelNestingUnspecifiedError()
     }
     return model

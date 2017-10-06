@@ -15,21 +15,21 @@ import Foundation
 
 struct MockJSONCodableResource: JSONDecodableResourceType {
   typealias Model = MockObject
-  typealias TopLevel = Model
+  typealias Root = Model
 }
 
 struct MockNestedJSONCodableResource: JSONDecodableResourceType {
   typealias Model = MockObject
 
-  struct TopLevelObject: Codable {
+  struct ResponseRoot: Codable {
     let data: NestedData
     struct NestedData: Codable {
       let mock: MockObject
     }
   }
 
-  func modelFromTopLevel(_ topLevel: TopLevelObject) throws -> MockObject {
-    return topLevel.data.mock
+  func model(mappedFrom root: ResponseRoot) throws -> MockObject {
+    return root.data.mock
   }
 }
 
@@ -37,21 +37,21 @@ struct MockNestedJSONCodableResource: JSONDecodableResourceType {
 
 struct MockJSONArrayCodableResource: JSONDecodableResourceType {
   typealias Model = [MockObject]
-  typealias TopLevel = Model
+  typealias Root = Model
 }
 
 struct MockNestedJSONArrayCodableResource: JSONDecodableResourceType {
   typealias Model = [MockObject]
 
-  struct TopLevelObject: Codable {
+  struct ResponseRoot: Codable {
     let data: NestedData
     struct NestedData: Codable {
       let mocks: [MockObject]
     }
   }
 
-  func modelFromTopLevel(_ topLevel: TopLevelObject) throws -> [MockObject] {
-    return topLevel.data.mocks
+  func model(mappedFrom root: ResponseRoot) throws -> [MockObject] {
+    return root.data.mocks
   }
 }
 
@@ -61,9 +61,9 @@ struct MockNestedJSONArrayCodableResource: JSONDecodableResourceType {
 // object, but doesn't provide the mapping between TopLevel and Model.
 struct MockJSONCodableInvalidResource: JSONDecodableResourceType {
   typealias Model = [MockObject]
-  typealias TopLevel = TopLevelObject
+  typealias Root = ResponseRoot
 
-  struct TopLevelObject: Codable {
+  struct ResponseRoot: Codable {
     let data: NestedData
     struct NestedData: Codable {
       let mock: MockObject
