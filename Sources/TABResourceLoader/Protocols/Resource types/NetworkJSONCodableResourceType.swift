@@ -28,7 +28,7 @@
 
 import Foundation
 
-/// Defines a resource that can be fetched from a network where the root type is a JSON array
+/// Defines a resource that can be fetched from a network where the root type is Decodable JSON
 public protocol NetworkJSONCodableResourceType: NetworkResourceType, JSONCodableResourceType {}
 
 public extension NetworkJSONCodableResourceType {
