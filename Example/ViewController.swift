@@ -61,6 +61,20 @@ class ViewController: UIViewController {
       print(networkResponse)
     }
   }
+  
+  func fetchCodable() {
+    let productsResource = ProductsResource()
+    
+    generalService.fetch(resource: productsResource) { networkResponse in
+      print(networkResponse)
+    }
+    
+    let nestedResponseResource = ProductNestedInResponseResource()
+    
+    generalService.fetch(resource: nestedResponseResource) { networkResponse in
+      print(networkResponse)
+    }
+  }
 
   func fetchImageExample() {
     let largeImageURL = URL(string: "https://static.pexels.com/photos/4164/landscape-mountains-nature-mountain.jpeg")!
@@ -88,7 +102,6 @@ class ViewController: UIViewController {
       case .failure(let error, _):
         print(error)
       }
-
     }
   }
 

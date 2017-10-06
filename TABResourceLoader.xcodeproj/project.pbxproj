@@ -70,6 +70,16 @@
 		4FF005351DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */; };
 		4FF581761F051F8F008D0A20 /* Result+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF581741F051F23008D0A20 /* Result+Additions.swift */; };
 		4FFA60A51D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */; };
+		EA1EE0C81F87DD8500902527 /* JSONCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0C71F87DD8500902527 /* JSONCodableResourceType.swift */; };
+		EA1EE0CA1F87DE6600902527 /* PropertyListCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0C91F87DE6600902527 /* PropertyListCodableResourceType.swift */; };
+		EA1EE0CC1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0CB1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift */; };
+		EA1EE0CE1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0CD1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift */; };
+		EA1EE0D01F881AF300902527 /* JSONCodableResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0CF1F881AF300902527 /* JSONCodableResourceTypeTests.swift */; };
+		EA1EE0D31F881BCC00902527 /* MockJSONCodableResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0D11F881B6B00902527 /* MockJSONCodableResource.swift */; };
+		EA1EE0D61F881CFB00902527 /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0D41F881CF000902527 /* String+Additions.swift */; };
+		EA1EE0DB1F882B1600902527 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0DA1F882B1600902527 /* Product.swift */; };
+		EA1EE0DD1F882B2300902527 /* ProductsResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0DC1F882B2300902527 /* ProductsResource.swift */; };
+		EA1EE0DF1F882D5D00902527 /* ProductNestedInResponseResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0DE1F882D5D00902527 /* ProductNestedInResponseResource.swift */; };
 		EA80BE511E2798B300AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +161,16 @@
 		4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONArrayResourceType.swift; sourceTree = "<group>"; };
 		4FF581741F051F23008D0A20 /* Result+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Additions.swift"; sourceTree = "<group>"; };
 		4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONDictionaryResourceType.swift; sourceTree = "<group>"; };
+		EA1EE0C71F87DD8500902527 /* JSONCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCodableResourceType.swift; sourceTree = "<group>"; };
+		EA1EE0C91F87DE6600902527 /* PropertyListCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListCodableResourceType.swift; sourceTree = "<group>"; };
+		EA1EE0CB1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONCodableResourceType.swift; sourceTree = "<group>"; };
+		EA1EE0CD1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPropertyListCodableResourceType.swift; sourceTree = "<group>"; };
+		EA1EE0CF1F881AF300902527 /* JSONCodableResourceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCodableResourceTypeTests.swift; sourceTree = "<group>"; };
+		EA1EE0D11F881B6B00902527 /* MockJSONCodableResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJSONCodableResource.swift; sourceTree = "<group>"; };
+		EA1EE0D41F881CF000902527 /* String+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Additions.swift"; sourceTree = "<group>"; };
+		EA1EE0DA1F882B1600902527 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		EA1EE0DC1F882B2300902527 /* ProductsResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsResource.swift; sourceTree = "<group>"; };
+		EA1EE0DE1F882D5D00902527 /* ProductNestedInResponseResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNestedInResponseResource.swift; sourceTree = "<group>"; };
 		EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResourceServiceURLSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,6 +342,7 @@
 				4F079D781D84650800D08DA0 /* ImageMocker.swift */,
 				4F079D3F1D84599300D08DA0 /* XCTestCase+Additions.swift */,
 				4F4BE52B1ECB415500C2CC56 /* String+Error.swift */,
+				EA1EE0D41F881CF000902527 /* String+Additions.swift */,
 				4FF581741F051F23008D0A20 /* Result+Additions.swift */,
 			);
 			path = Helpers;
@@ -334,6 +355,7 @@
 				4FC453901DC9FF5800EA1FAE /* MockDefaultNetworkDataResource.swift */,
 				4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */,
 				4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */,
+				EA1EE0D11F881B6B00902527 /* MockJSONCodableResource.swift */,
 				4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */,
 				4F079D461D84599300D08DA0 /* MockObject.swift */,
 				4F079D471D84599300D08DA0 /* MockResource.swift */,
@@ -357,6 +379,7 @@
 				4F079D4D1D84599300D08DA0 /* ImageResourceTypeTests.swift */,
 				4F36C0B61D9D5B7E00CDFD21 /* JSONArrayResourceTypeTests.swift */,
 				4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */,
+				EA1EE0CF1F881AF300902527 /* JSONCodableResourceTypeTests.swift */,
 				EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */,
 				4F782C651DA2B10B00179638 /* NetworkJSONArrayResourceTypeTests.swift */,
 				4F782C621DA2B08600179638 /* NetworkJSONDictionaryResourceTypeTests.swift */,
@@ -381,7 +404,7 @@
 				4F8D1FD01D8E00040099DD9A /* CitiesResource.swift */,
 				4F8D1FD11D8E00040099DD9A /* City.swift */,
 			);
-			name = "Simple example";
+			path = "Simple example";
 			sourceTree = "<group>";
 		};
 		4F57E88E1E5DFFFF0082DF87 /* Multiple response examples */ = {
@@ -392,6 +415,7 @@
 				4F57E8911E5E007B0082DF87 /* ServerError.swift */,
 			);
 			name = "Multiple response examples";
+			path = "Multiple responses example";
 			sourceTree = "<group>";
 		};
 		4F57E8951E5E04870082DF87 /* Example JSON files */ = {
@@ -402,7 +426,7 @@
 				4F8D1FCE1D8E00040099DD9A /* europe.json */,
 				4F57E8931E5E047D0082DF87 /* single_city.json */,
 			);
-			name = "Example JSON files";
+			path = "Example JSON files";
 			sourceTree = "<group>";
 		};
 		4F6CDC141E5AF58F001BF320 /* Helper functions */ = {
@@ -455,6 +479,7 @@
 				4F57E88D1E5DFFE40082DF87 /* Simple example */,
 				4F57E88E1E5DFFFF0082DF87 /* Multiple response examples */,
 				23825A631E60628B008C0E65 /* Failure model example */,
+				EA1EE0D71F882A2D00902527 /* Codable examples */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -462,16 +487,30 @@
 		4FAB1C1A1DD35E9A009274DA /* Resource types */ = {
 			isa = PBXGroup;
 			children = (
+				4FF005321DC9F985006BBACE /* ResourceType.swift */,
 				4F079D1F1D84577E00D08DA0 /* DataResourceType.swift */,
 				4F079D201D84577E00D08DA0 /* ImageResourceType.swift */,
 				4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */,
 				4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */,
+				EA1EE0C71F87DD8500902527 /* JSONCodableResourceType.swift */,
+				EA1EE0CB1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift */,
+				EA1EE0C91F87DE6600902527 /* PropertyListCodableResourceType.swift */,
+				EA1EE0CD1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift */,
+				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
 				4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */,
 				4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */,
-				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
-				4FF005321DC9F985006BBACE /* ResourceType.swift */,
 			);
 			path = "Resource types";
+			sourceTree = "<group>";
+		};
+		EA1EE0D71F882A2D00902527 /* Codable examples */ = {
+			isa = PBXGroup;
+			children = (
+				EA1EE0DA1F882B1600902527 /* Product.swift */,
+				EA1EE0DC1F882B2300902527 /* ProductsResource.swift */,
+				EA1EE0DE1F882D5D00902527 /* ProductNestedInResponseResource.swift */,
+			);
+			path = "Codable examples";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -641,17 +680,21 @@
 			files = (
 				4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */,
 				4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */,
+				EA1EE0C81F87DD8500902527 /* JSONCodableResourceType.swift in Sources */,
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
 				4F88C6971D88A122002CAEA2 /* Result.swift in Sources */,
+				EA1EE0CE1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift in Sources */,
 				4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */,
 				4F079D2C1D84577E00D08DA0 /* JSONParsingError.swift in Sources */,
 				4FBC07481E4F67F200D14EBA /* NetworkResponseHandler.swift in Sources */,
 				4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */,
 				4FF005331DC9F985006BBACE /* ResourceType.swift in Sources */,
 				4FD11C011E3A6A99004C7B0A /* NetworkServiceActivity.swift in Sources */,
+				EA1EE0CA1F87DE6600902527 /* PropertyListCodableResourceType.swift in Sources */,
 				4F079D3C1D8458E800D08DA0 /* NetworkImageResource.swift in Sources */,
 				4F36C0B21D9D52A700CDFD21 /* JSONArrayResourceType.swift in Sources */,
 				4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */,
+				EA1EE0CC1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift in Sources */,
 				4FF005351DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift in Sources */,
 				4FBC07461E4F66E500D14EBA /* GlobalFunctions.swift in Sources */,
 				4F36C0B01D9D529600CDFD21 /* JSONDictionaryResourceType.swift in Sources */,
@@ -673,12 +716,15 @@
 				4FC453931DC9FFE600EA1FAE /* MockDefaultNetworkDataResource.swift in Sources */,
 				4F782C641DA2B09900179638 /* NetworkJSONDictionaryResourceTypeTests.swift in Sources */,
 				4F36C0B51D9D5AE400CDFD21 /* JSONDictionaryResourceTypeTests.swift in Sources */,
+				EA1EE0D01F881AF300902527 /* JSONCodableResourceTypeTests.swift in Sources */,
 				4F079D721D8459D400D08DA0 /* NetworkResourceTypeTests.swift in Sources */,
 				4F079D6C1D8459D400D08DA0 /* MockResource.swift in Sources */,
 				4F36C0B81D9D5BD200CDFD21 /* JSONArrayResourceTypeTests.swift in Sources */,
 				4F26D6621E5224D400F22BAB /* MockCancellable.swift in Sources */,
 				4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6F1D8459D400D08DA0 /* ResourceOperationTests.swift in Sources */,
+				EA1EE0D31F881BCC00902527 /* MockJSONCodableResource.swift in Sources */,
+				EA1EE0D61F881CFB00902527 /* String+Additions.swift in Sources */,
 				4F079D701D8459D400D08DA0 /* ImageResourceTypeTests.swift in Sources */,
 				4FF581761F051F8F008D0A20 /* Result+Additions.swift in Sources */,
 				4F079D6E1D8459D400D08DA0 /* MockURLSession.swift in Sources */,
@@ -701,10 +747,13 @@
 			files = (
 				4F57E8921E5E007B0082DF87 /* ServerError.swift in Sources */,
 				4F8D1FBF1D8DFFD40099DD9A /* ViewController.swift in Sources */,
+				EA1EE0DB1F882B1600902527 /* Product.swift in Sources */,
 				23825A651E6062B5008C0E65 /* RegistrationResource.swift in Sources */,
 				4F8D1FBD1D8DFFD40099DD9A /* AppDelegate.swift in Sources */,
+				EA1EE0DF1F882D5D00902527 /* ProductNestedInResponseResource.swift in Sources */,
 				4F8D1FD61D8E00040099DD9A /* City.swift in Sources */,
 				4F57E8901E5E000E0082DF87 /* CitiesResponse.swift in Sources */,
+				EA1EE0DD1F882B2300902527 /* ProductsResource.swift in Sources */,
 				4F57E88C1E5DFDEB0082DF87 /* MultipleResponseResource.swift in Sources */,
 				4F8D1FD51D8E00040099DD9A /* CitiesResource.swift in Sources */,
 			);
