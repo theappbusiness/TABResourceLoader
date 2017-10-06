@@ -12,16 +12,18 @@ import TABResourceLoader
 struct ProductNestedInResponseResource: NetworkJSONCodableResourceType {
   typealias Model = Product
   typealias TopLevel = Model
-  
+
+  // swiftlint:disable nesting
   struct TopLevelObject: Codable {
     let data: NestedData
     struct NestedData: Codable {
       let product: Product
     }
   }
-  
+  //swiftlint:enable nesting
+
   let url = URL(string: "http://localhost:8000/product/1234")!
-  
+
   func modelFromTopLevel(_ topLevel: TopLevelObject) throws -> Product {
     return topLevel.data.product
   }

@@ -61,16 +61,16 @@ class ViewController: UIViewController {
       print(networkResponse)
     }
   }
-  
+
   func fetchCodable() {
     let productsResource = ProductsResource()
-    
+
     generalService.fetch(resource: productsResource) { networkResponse in
       print(networkResponse)
     }
-    
+
     let nestedResponseResource = ProductNestedInResponseResource()
-    
+
     generalService.fetch(resource: nestedResponseResource) { networkResponse in
       print(networkResponse)
     }

@@ -1,5 +1,5 @@
 //
-//  MockJSONCodableResource.swift
+//  MockPropertyListCodableResource.swift
 //  TABResourceLoader
 //
 //  Created by Sam Dods on 06/10/2017.
@@ -13,12 +13,12 @@ import Foundation
 
 // MARK: - Object
 
-struct MockJSONCodableResource: JSONCodableResourceType {
+struct MockPropertyListCodableResource: PropertyListCodableResourceType {
   typealias Model = MockObject
   typealias TopLevel = Model
 }
 
-struct MockNestedJSONCodableResource: JSONCodableResourceType {
+struct MockNestedPropertyListCodableResource: PropertyListCodableResourceType {
   typealias Model = MockObject
 
   struct TopLevelObject: Codable {
@@ -35,12 +35,12 @@ struct MockNestedJSONCodableResource: JSONCodableResourceType {
 
 // MARK: - Array
 
-struct MockJSONArrayCodableResource: JSONCodableResourceType {
+struct MockPropertyListArrayCodableResource: PropertyListCodableResourceType {
   typealias Model = [MockObject]
   typealias TopLevel = Model
 }
 
-struct MockNestedJSONArrayCodableResource: JSONCodableResourceType {
+struct MockNestedPropertyListArrayCodableResource: PropertyListCodableResourceType { // swiftlint:disable:this type_name
   typealias Model = [MockObject]
 
   struct TopLevelObject: Codable {
@@ -59,7 +59,7 @@ struct MockNestedJSONArrayCodableResource: JSONCodableResourceType {
 
 // The following is invalid because it declares a different type of top level
 // object, but doesn't provide the mapping between TopLevel and Model.
-struct MockJSONCodableInvalidResource: JSONCodableResourceType {
+struct MockPropertyListCodableInvalidResource: PropertyListCodableResourceType {
   typealias Model = [MockObject]
   typealias TopLevel = TopLevelObject
 

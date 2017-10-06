@@ -34,7 +34,7 @@ public protocol PropertyListCodableResourceType: DataResourceType where Model: C
   func modelFromTopLevel(_ topLevel: TopLevel) throws -> Model
 }
 
-public struct PropertyListModelNotFoundAtTopLevelError: Error {}
+public struct PropertyListCodableModelNestingUnspecifiedError: Error {} // swiftlint:disable:this type_name
 
 extension PropertyListCodableResourceType {
 
@@ -51,7 +51,7 @@ extension PropertyListCodableResourceType {
 
   public func modelFromTopLevel(_ topLevel: TopLevel) throws -> Model {
     guard let model = topLevel as? Model else {
-      throw PropertyListModelNotFoundAtTopLevelError()
+      throw PropertyListCodableModelNestingUnspecifiedError()
     }
     return model
   }

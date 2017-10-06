@@ -12,6 +12,6 @@ import TABResourceLoader
 struct ProductsResource: NetworkJSONCodableResourceType {
   typealias Model = [Product]
   typealias TopLevel = Model
-  
+
   let url = URL(string: "http://localhost:8000/products")!
 }

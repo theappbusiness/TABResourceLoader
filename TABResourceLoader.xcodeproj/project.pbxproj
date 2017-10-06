@@ -80,6 +80,8 @@
 		EA1EE0DB1F882B1600902527 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0DA1F882B1600902527 /* Product.swift */; };
 		EA1EE0DD1F882B2300902527 /* ProductsResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0DC1F882B2300902527 /* ProductsResource.swift */; };
 		EA1EE0DF1F882D5D00902527 /* ProductNestedInResponseResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0DE1F882D5D00902527 /* ProductNestedInResponseResource.swift */; };
+		EA1EE0E11F882F3B00902527 /* PropertyListCodableResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0E01F882F3B00902527 /* PropertyListCodableResourceTypeTests.swift */; };
+		EA1EE0E31F882F8F00902527 /* MockPropertyListCodableResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0E21F882F8F00902527 /* MockPropertyListCodableResource.swift */; };
 		EA80BE511E2798B300AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +173,8 @@
 		EA1EE0DA1F882B1600902527 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		EA1EE0DC1F882B2300902527 /* ProductsResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsResource.swift; sourceTree = "<group>"; };
 		EA1EE0DE1F882D5D00902527 /* ProductNestedInResponseResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNestedInResponseResource.swift; sourceTree = "<group>"; };
+		EA1EE0E01F882F3B00902527 /* PropertyListCodableResourceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListCodableResourceTypeTests.swift; sourceTree = "<group>"; };
+		EA1EE0E21F882F8F00902527 /* MockPropertyListCodableResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPropertyListCodableResource.swift; sourceTree = "<group>"; };
 		EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataResourceServiceURLSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -356,6 +360,7 @@
 				4F079D421D84599300D08DA0 /* MockJSONArrayResourceType.swift */,
 				4F079D431D84599300D08DA0 /* MockJSONDictionaryResourceType.swift */,
 				EA1EE0D11F881B6B00902527 /* MockJSONCodableResource.swift */,
+				EA1EE0E21F882F8F00902527 /* MockPropertyListCodableResource.swift */,
 				4F079D451D84599300D08DA0 /* MockNilURLRequestNetworkJSONResource.swift */,
 				4F079D461D84599300D08DA0 /* MockObject.swift */,
 				4F079D471D84599300D08DA0 /* MockResource.swift */,
@@ -380,6 +385,7 @@
 				4F36C0B61D9D5B7E00CDFD21 /* JSONArrayResourceTypeTests.swift */,
 				4F36C0B31D9D5ABE00CDFD21 /* JSONDictionaryResourceTypeTests.swift */,
 				EA1EE0CF1F881AF300902527 /* JSONCodableResourceTypeTests.swift */,
+				EA1EE0E01F882F3B00902527 /* PropertyListCodableResourceTypeTests.swift */,
 				EA80BE4F1E27985D00AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift */,
 				4F782C651DA2B10B00179638 /* NetworkJSONArrayResourceTypeTests.swift */,
 				4F782C621DA2B08600179638 /* NetworkJSONDictionaryResourceTypeTests.swift */,
@@ -721,10 +727,12 @@
 				4F079D6C1D8459D400D08DA0 /* MockResource.swift in Sources */,
 				4F36C0B81D9D5BD200CDFD21 /* JSONArrayResourceTypeTests.swift in Sources */,
 				4F26D6621E5224D400F22BAB /* MockCancellable.swift in Sources */,
+				EA1EE0E31F882F8F00902527 /* MockPropertyListCodableResource.swift in Sources */,
 				4F079D7B1D846DD400D08DA0 /* SubclassedNetworkDataResourceServiceTests.swift in Sources */,
 				4F079D6F1D8459D400D08DA0 /* ResourceOperationTests.swift in Sources */,
 				EA1EE0D31F881BCC00902527 /* MockJSONCodableResource.swift in Sources */,
 				EA1EE0D61F881CFB00902527 /* String+Additions.swift in Sources */,
+				EA1EE0E11F882F3B00902527 /* PropertyListCodableResourceTypeTests.swift in Sources */,
 				4F079D701D8459D400D08DA0 /* ImageResourceTypeTests.swift in Sources */,
 				4FF581761F051F8F008D0A20 /* Result+Additions.swift in Sources */,
 				4F079D6E1D8459D400D08DA0 /* MockURLSession.swift in Sources */,
