@@ -1,12 +1,12 @@
 //
-//  JSONDictionaryResourceType.swift
+//  JSONDecodableResourceType.swift
 //  TABResourceLoader
 //
-//  Created by Luciano Marisi on 29/09/2016.
+//  Created by Sam Dods on 06/10/2017.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Luciano Marisi
+//  Copyright (c) 2017 The App Business
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -29,15 +29,15 @@
 import Foundation
 
 /// Defines a specific ResourceType used for data that can be decoded from JSON format.
-public protocol JSONCodableResourceType: DataResourceType where Model: Codable {
-  
+public protocol JSONDecodableResourceType: DataResourceType where Model: Decodable {
+
   /// This typealias represents the decodable object at the root of the response.
   /// This may match the model type, or the model may be nested within another decodable type.
-  associatedtype TopLevel: Codable
-  
+  associatedtype TopLevel: Decodable
+
   /// You may optionally provide a custom decoder. By default this is a new JSONDecoder() instance.
   var decoder: JSONDecoder { get }
-  
+
   /// This optional method allows you to map from the root of the response to the model type to
   /// be returned by this resource. Your model type may be nested several levels deep, or even
   /// constructed from various objects within the root response.
@@ -53,7 +53,7 @@ public protocol JSONCodableResourceType: DataResourceType where Model: Codable {
 /// this error is thrown.
 public struct JSONCodableModelNestingUnspecifiedError: Error {}
 
-extension JSONCodableResourceType {
+extension JSONDecodableResourceType {
 
   /// Use a normal JSONDecoder by default, but allow customisation for dates, etc.
   public var decoder: JSONDecoder {
@@ -62,7 +62,7 @@ extension JSONCodableResourceType {
 
   /// implement the parsing method inherited from `DataResourceType`
   public func model(from data: Data) throws -> Model {
-    let topLevel = try JSONDecoder().decode(TopLevel.self, from: data)
+    let topLevel = try decoder.decode(TopLevel.self, from: data)
     return try modelFromTopLevel(topLevel)
   }
 

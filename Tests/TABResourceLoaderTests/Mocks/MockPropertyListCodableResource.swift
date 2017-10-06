@@ -13,12 +13,12 @@ import Foundation
 
 // MARK: - Object
 
-struct MockPropertyListCodableResource: PropertyListCodableResourceType {
+struct MockPropertyListCodableResource: PropertyListDecodableResourceType {
   typealias Model = MockObject
   typealias TopLevel = Model
 }
 
-struct MockNestedPropertyListCodableResource: PropertyListCodableResourceType {
+struct MockNestedPropertyListCodableResource: PropertyListDecodableResourceType {
   typealias Model = MockObject
 
   struct TopLevelObject: Codable {
@@ -35,12 +35,12 @@ struct MockNestedPropertyListCodableResource: PropertyListCodableResourceType {
 
 // MARK: - Array
 
-struct MockPropertyListArrayCodableResource: PropertyListCodableResourceType {
+struct MockPropertyListArrayCodableResource: PropertyListDecodableResourceType {
   typealias Model = [MockObject]
   typealias TopLevel = Model
 }
 
-struct MockNestedPropertyListArrayCodableResource: PropertyListCodableResourceType { // swiftlint:disable:this type_name
+struct MockNestedPropertyListArrayCodableResource: PropertyListDecodableResourceType { // swiftlint:disable:this type_name
   typealias Model = [MockObject]
 
   struct TopLevelObject: Codable {
@@ -59,7 +59,7 @@ struct MockNestedPropertyListArrayCodableResource: PropertyListCodableResourceTy
 
 // The following is invalid because it declares a different type of top level
 // object, but doesn't provide the mapping between TopLevel and Model.
-struct MockPropertyListCodableInvalidResource: PropertyListCodableResourceType {
+struct MockPropertyListCodableInvalidResource: PropertyListDecodableResourceType {
   typealias Model = [MockObject]
   typealias TopLevel = TopLevelObject
 

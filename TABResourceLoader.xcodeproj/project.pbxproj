@@ -70,8 +70,8 @@
 		4FF005351DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */; };
 		4FF581761F051F8F008D0A20 /* Result+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF581741F051F23008D0A20 /* Result+Additions.swift */; };
 		4FFA60A51D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */; };
-		EA1EE0C81F87DD8500902527 /* JSONCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0C71F87DD8500902527 /* JSONCodableResourceType.swift */; };
-		EA1EE0CA1F87DE6600902527 /* PropertyListCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0C91F87DE6600902527 /* PropertyListCodableResourceType.swift */; };
+		EA1EE0C81F87DD8500902527 /* JSONDecodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0C71F87DD8500902527 /* JSONDecodableResourceType.swift */; };
+		EA1EE0CA1F87DE6600902527 /* PropertyListDecodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0C91F87DE6600902527 /* PropertyListDecodableResourceType.swift */; };
 		EA1EE0CC1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0CB1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift */; };
 		EA1EE0CE1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0CD1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift */; };
 		EA1EE0D01F881AF300902527 /* JSONCodableResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0CF1F881AF300902527 /* JSONCodableResourceTypeTests.swift */; };
@@ -163,8 +163,8 @@
 		4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONArrayResourceType.swift; sourceTree = "<group>"; };
 		4FF581741F051F23008D0A20 /* Result+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Additions.swift"; sourceTree = "<group>"; };
 		4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONDictionaryResourceType.swift; sourceTree = "<group>"; };
-		EA1EE0C71F87DD8500902527 /* JSONCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCodableResourceType.swift; sourceTree = "<group>"; };
-		EA1EE0C91F87DE6600902527 /* PropertyListCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListCodableResourceType.swift; sourceTree = "<group>"; };
+		EA1EE0C71F87DD8500902527 /* JSONDecodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodableResourceType.swift; sourceTree = "<group>"; };
+		EA1EE0C91F87DE6600902527 /* PropertyListDecodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListDecodableResourceType.swift; sourceTree = "<group>"; };
 		EA1EE0CB1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONCodableResourceType.swift; sourceTree = "<group>"; };
 		EA1EE0CD1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPropertyListCodableResourceType.swift; sourceTree = "<group>"; };
 		EA1EE0CF1F881AF300902527 /* JSONCodableResourceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCodableResourceTypeTests.swift; sourceTree = "<group>"; };
@@ -498,9 +498,9 @@
 				4F079D201D84577E00D08DA0 /* ImageResourceType.swift */,
 				4F36C0B11D9D52A700CDFD21 /* JSONArrayResourceType.swift */,
 				4F36C0AF1D9D529600CDFD21 /* JSONDictionaryResourceType.swift */,
-				EA1EE0C71F87DD8500902527 /* JSONCodableResourceType.swift */,
+				EA1EE0C71F87DD8500902527 /* JSONDecodableResourceType.swift */,
 				EA1EE0CB1F87DF3F00902527 /* NetworkJSONCodableResourceType.swift */,
-				EA1EE0C91F87DE6600902527 /* PropertyListCodableResourceType.swift */,
+				EA1EE0C91F87DE6600902527 /* PropertyListDecodableResourceType.swift */,
 				EA1EE0CD1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift */,
 				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
 				4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */,
@@ -686,7 +686,7 @@
 			files = (
 				4FB4D6D51D8476B000A7D1B8 /* ResourceOperation.swift in Sources */,
 				4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */,
-				EA1EE0C81F87DD8500902527 /* JSONCodableResourceType.swift in Sources */,
+				EA1EE0C81F87DD8500902527 /* JSONDecodableResourceType.swift in Sources */,
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
 				4F88C6971D88A122002CAEA2 /* Result.swift in Sources */,
 				EA1EE0CE1F87DF9C00902527 /* NetworkPropertyListCodableResourceType.swift in Sources */,
@@ -696,7 +696,7 @@
 				4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */,
 				4FF005331DC9F985006BBACE /* ResourceType.swift in Sources */,
 				4FD11C011E3A6A99004C7B0A /* NetworkServiceActivity.swift in Sources */,
-				EA1EE0CA1F87DE6600902527 /* PropertyListCodableResourceType.swift in Sources */,
+				EA1EE0CA1F87DE6600902527 /* PropertyListDecodableResourceType.swift in Sources */,
 				4F079D3C1D8458E800D08DA0 /* NetworkImageResource.swift in Sources */,
 				4F36C0B21D9D52A700CDFD21 /* JSONArrayResourceType.swift in Sources */,
 				4F079D301D84577E00D08DA0 /* NetworkDataResourceService.swift in Sources */,

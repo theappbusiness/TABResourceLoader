@@ -1,12 +1,12 @@
 //
-//  JSONDictionaryResourceType.swift
+//  NetworkJSONCodableResourceType.swift
 //  TABResourceLoader
 //
-//  Created by Luciano Marisi on 29/09/2016.
+//  Created by Sam Dods on 06/10/2017.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Luciano Marisi
+//  Copyright (c) 2017 The App Business
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 import Foundation
 
 /// Defines a resource that can be fetched from a network where the root type is Decodable JSON
-public protocol NetworkJSONCodableResourceType: NetworkResourceType, JSONCodableResourceType {}
+public protocol NetworkJSONCodableResourceType: NetworkResourceType, JSONDecodableResourceType {}
 
 public extension NetworkJSONCodableResourceType {
   var httpHeaderFields: [String: String]? {
