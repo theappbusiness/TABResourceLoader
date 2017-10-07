@@ -48,11 +48,6 @@ public protocol JSONDecodableResourceType: DataResourceType where Model: Decodab
   func model(mappedFrom root: Root) throws -> Model
 }
 
-/// This error is thrown by the default mapping of response's root object to the model. If the root
-/// type differs from the model type, but no mapping method has been implemented in your resource,
-/// then this error is thrown.
-public struct JSONCodableModelNestingUnspecifiedError: Error {}
-
 extension JSONDecodableResourceType {
 
   /// Use a normal JSONDecoder by default, but allow customisation for dates, etc.
@@ -65,11 +60,10 @@ extension JSONDecodableResourceType {
     let root = try decoder.decode(Root.self, from: data)
     return try model(mappedFrom: root)
   }
+}
 
+extension JSONDecodableResourceType where Model == Root {
   public func model(mappedFrom root: Root) throws -> Model {
-    guard let model = root as? Model else {
-      throw JSONCodableModelNestingUnspecifiedError()
-    }
-    return model
+    return root
   }
 }

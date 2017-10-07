@@ -55,20 +55,4 @@ struct MockNestedPropertyListArrayCodableResource: PropertyListDecodableResource
   }
 }
 
-// MARK: - Invalid
-
-// The following is invalid because it declares a different type of top level
-// object, but doesn't provide the mapping between TopLevel and Model.
-struct MockPropertyListCodableInvalidResource: PropertyListDecodableResourceType {
-  typealias Model = [MockObject]
-  typealias Root = ResponseRoot
-
-  struct ResponseRoot: Codable {
-    let data: NestedData
-    struct NestedData: Codable {
-      let mock: MockObject
-    }
-  }
-}
-
 // swiftlint:enable nesting

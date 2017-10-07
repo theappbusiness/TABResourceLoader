@@ -9,7 +9,7 @@
 import Foundation
 import TABResourceLoader
 
-struct ProductsResource: NetworkJSONCodableResourceType {
+struct ProductsResource: NetworkJSONDecodableResourceType {
   typealias Model = [Product]
   typealias Root = Model
 

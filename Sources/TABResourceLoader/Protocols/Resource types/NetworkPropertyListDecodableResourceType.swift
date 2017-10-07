@@ -1,5 +1,5 @@
 //
-//  NetworkPropertyListCodableResourceType.swift
+//  NetworkPropertyListDecodableResourceType.swift
 //  TABResourceLoader
 //
 //  Created by Sam Dods on 06/10/2017.
@@ -29,9 +29,9 @@
 import Foundation
 
 /// Defines a resource that can be fetched from a network where the root type is a Decodable Property List
-public protocol NetworkPropertyListCodableResourceType: NetworkResourceType, PropertyListDecodableResourceType {}
+public protocol NetworkPropertyListDecodableResourceType: NetworkResourceType, PropertyListDecodableResourceType {}
 
-public extension NetworkPropertyListCodableResourceType {
+public extension NetworkPropertyListDecodableResourceType {
   var httpHeaderFields: [String: String]? {
     return ["Content-Type": "application/json"]
   }

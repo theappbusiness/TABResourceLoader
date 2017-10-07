@@ -48,14 +48,9 @@ public protocol PropertyListDecodableResourceType: DataResourceType where Model:
   func model(mappedFrom root: Root) throws -> Model
 }
 
-/// This error is thrown by the default mapping of response's root object to the model. If the root
-/// type differs from the model type, but no mapping method has been implemented in your resource,
-/// then this error is thrown.
-public struct PropertyListCodableModelNestingUnspecifiedError: Error {} // swiftlint:disable:this type_name
-
 extension PropertyListDecodableResourceType {
 
-  /// Use a normal JSONDecoder by default, but allow customisation for dates, etc.
+  /// Use a normal PropertyListDecoder by default, but allow customisation for dates, etc.
   public var decoder: PropertyListDecoder {
     return PropertyListDecoder()
   }
@@ -65,11 +60,10 @@ extension PropertyListDecodableResourceType {
     let root = try decoder.decode(Root.self, from: data)
     return try model(mappedFrom: root)
   }
+}
 
+extension PropertyListDecodableResourceType where Model == Root {
   public func model(mappedFrom root: Root) throws -> Model {
-    guard let model = root as? Model else {
-      throw PropertyListCodableModelNestingUnspecifiedError()
-    }
-    return model
+    return root
   }
 }

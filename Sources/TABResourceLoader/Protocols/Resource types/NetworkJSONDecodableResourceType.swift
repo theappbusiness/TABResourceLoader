@@ -29,9 +29,9 @@
 import Foundation
 
 /// Defines a resource that can be fetched from a network where the root type is Decodable JSON
-public protocol NetworkJSONCodableResourceType: NetworkResourceType, JSONDecodableResourceType {}
+public protocol NetworkJSONDecodableResourceType: NetworkResourceType, JSONDecodableResourceType {}
 
-public extension NetworkJSONCodableResourceType {
+public extension NetworkJSONDecodableResourceType {
   var httpHeaderFields: [String: String]? {
     return ["Content-Type": "application/json"]
   }

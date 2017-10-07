@@ -135,25 +135,4 @@ class JSONCodableResourceTypeTests: XCTestCase {
       }
     }
   }
-
-  func test_modelNotFoundAtTopLevel() throws {
-    let mockResource = MockJSONCodableInvalidResource()
-    let data = try """
-      {
-        "data": {
-          "mock": {
-            "name": "nestedMock"
-          }
-        }
-      }
-      """.serialized()
-
-    do {
-      _ = try mockResource.model(from: data)
-      XCTFail("Expected parsing to fail. Succeeded unexpectedly.")
-    } catch let error {
-      XCTAssertTrue(error is JSONCodableModelNestingUnspecifiedError)
-    }
-  }
-
 }

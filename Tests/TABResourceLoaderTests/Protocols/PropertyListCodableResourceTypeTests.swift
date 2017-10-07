@@ -138,25 +138,4 @@ class PropertyListCodableResourceTypeTests: XCTestCase {
       }
     }
   }
-
-  func test_modelNotFoundAtTopLevel() throws {
-    let mockResource = MockPropertyListCodableInvalidResource()
-    let data = try """
-      <plist version="1.0"><dict>
-        <key>data</key><dict>
-          <key>mock</key><dict>
-            <key>name</key><string>nestedMock</string>
-          </dict>
-        </dict>
-      </dict></plist>
-      """.serialized()
-
-    do {
-      _ = try mockResource.model(from: data)
-      XCTFail("Expected parsing to fail. Succeeded unexpectedly.")
-    } catch let error {
-      XCTAssertTrue(error is PropertyListCodableModelNestingUnspecifiedError)
-    }
-  }
-
 }

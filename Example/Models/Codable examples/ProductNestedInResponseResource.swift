@@ -9,7 +9,7 @@
 import Foundation
 import TABResourceLoader
 
-struct ProductNestedInResponseResource: NetworkJSONCodableResourceType {
+struct ProductNestedInResponseResource: NetworkJSONDecodableResourceType {
   typealias Model = Product
 
   // swiftlint:disable nesting
@@ -23,7 +23,7 @@ struct ProductNestedInResponseResource: NetworkJSONCodableResourceType {
 
   let url = URL(string: "http://localhost:8000/product/1234")!
 
-  func modelFromTopLevel(_ topLevel: TopLevelObject) throws -> Product {
-    return topLevel.data.product
+  func model(mappedFrom root: TopLevelObject) throws -> Product {
+    return root.data.product
   }
 }
