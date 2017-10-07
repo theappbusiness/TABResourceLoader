@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MockObject: Codable {
+struct MockObject: Decodable {
   let name: String
 }
 

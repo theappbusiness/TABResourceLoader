@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     }
   }
 
-  func fetchCodable() {
+  func fetchDecodable() {
     let productsResource = ProductsResource()
 
     generalService.fetch(resource: productsResource) { networkResponse in

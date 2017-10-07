@@ -1,5 +1,5 @@
 //
-//  MockPropertyListCodableResource.swift
+//  MockPropertyListDecodableResource.swift
 //  TABResourceLoader
 //
 //  Created by Sam Dods on 06/10/2017.
@@ -13,17 +13,17 @@ import Foundation
 
 // MARK: - Object
 
-struct MockPropertyListCodableResource: PropertyListDecodableResourceType {
+struct MockPropertyListDecodableResource: PropertyListDecodableResourceType {
   typealias Model = MockObject
   typealias Root = Model
 }
 
-struct MockNestedPropertyListCodableResource: PropertyListDecodableResourceType {
+struct MockNestedPropertyListDecodableResource: PropertyListDecodableResourceType {
   typealias Model = MockObject
 
-  struct ResponseRoot: Codable {
+  struct ResponseRoot: Decodable {
     let data: NestedData
-    struct NestedData: Codable {
+    struct NestedData: Decodable {
       let mock: MockObject
     }
   }
@@ -35,17 +35,17 @@ struct MockNestedPropertyListCodableResource: PropertyListDecodableResourceType 
 
 // MARK: - Array
 
-struct MockPropertyListArrayCodableResource: PropertyListDecodableResourceType {
+struct MockPropertyListArrayDecodableResource: PropertyListDecodableResourceType {
   typealias Model = [MockObject]
   typealias Root = Model
 }
 
-struct MockNestedPropertyListArrayCodableResource: PropertyListDecodableResourceType { // swiftlint:disable:this type_name
+struct MockNestedPropertyListArrayDecodableResource: PropertyListDecodableResourceType { // swiftlint:disable:this type_name
   typealias Model = [MockObject]
 
-  struct ResponseRoot: Codable {
+  struct ResponseRoot: Decodable {
     let data: NestedData
-    struct NestedData: Codable {
+    struct NestedData: Decodable {
       let mocks: [MockObject]
     }
   }

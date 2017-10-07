@@ -1,5 +1,5 @@
 //
-//  NetworkJSONCodableResourceType.swift
+//  NetworkJSONDecodableResourceType.swift
 //  TABResourceLoader
 //
 //  Created by Sam Dods on 06/10/2017.

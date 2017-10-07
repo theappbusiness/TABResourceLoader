@@ -13,9 +13,9 @@ struct ProductNestedInResponseResource: NetworkJSONDecodableResourceType {
   typealias Model = Product
 
   // swiftlint:disable nesting
-  struct TopLevelObject: Codable {
+  struct TopLevelObject: Decodable {
     let data: NestedData
-    struct NestedData: Codable {
+    struct NestedData: Decodable {
       let product: Product
     }
   }

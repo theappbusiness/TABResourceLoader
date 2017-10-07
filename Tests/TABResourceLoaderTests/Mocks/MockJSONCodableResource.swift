@@ -1,5 +1,5 @@
 //
-//  MockJSONCodableResource.swift
+//  MockJSONDecodableResource.swift
 //  TABResourceLoader
 //
 //  Created by Sam Dods on 06/10/2017.
@@ -13,17 +13,17 @@ import Foundation
 
 // MARK: - Object
 
-struct MockJSONCodableResource: JSONDecodableResourceType {
+struct MockJSONDecodableResource: JSONDecodableResourceType {
   typealias Model = MockObject
   typealias Root = Model
 }
 
-struct MockNestedJSONCodableResource: JSONDecodableResourceType {
+struct MockNestedJSONDecodableResource: JSONDecodableResourceType {
   typealias Model = MockObject
 
-  struct ResponseRoot: Codable {
+  struct ResponseRoot: Decodable {
     let data: NestedData
-    struct NestedData: Codable {
+    struct NestedData: Decodable {
       let mock: MockObject
     }
   }
@@ -35,17 +35,17 @@ struct MockNestedJSONCodableResource: JSONDecodableResourceType {
 
 // MARK: - Array
 
-struct MockJSONArrayCodableResource: JSONDecodableResourceType {
+struct MockJSONArrayDecodableResource: JSONDecodableResourceType {
   typealias Model = [MockObject]
   typealias Root = Model
 }
 
-struct MockNestedJSONArrayCodableResource: JSONDecodableResourceType {
+struct MockNestedJSONArrayDecodableResource: JSONDecodableResourceType {
   typealias Model = [MockObject]
 
-  struct ResponseRoot: Codable {
+  struct ResponseRoot: Decodable {
     let data: NestedData
-    struct NestedData: Codable {
+    struct NestedData: Decodable {
       let mocks: [MockObject]
     }
   }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Product: Codable {
+struct Product: Decodable {
   let title: String
   let price: Double
   let imageURL: URL

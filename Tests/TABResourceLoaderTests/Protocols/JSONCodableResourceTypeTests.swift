@@ -1,5 +1,5 @@
 //
-//  JSONCodableResourceTypeTests.swift
+//  JSONDecodableResourceTypeTests.swift
 //  TABResourceLoaderTests
 //
 //  Created by Sam Dods on 06/10/2017.
@@ -9,12 +9,12 @@
 import XCTest
 @testable import TABResourceLoader
 
-class JSONCodableResourceTypeTests: XCTestCase {
+class JSONDecodableResourceTypeTests: XCTestCase {
 
   // MARK: - Valid objects
 
-  func test_validCodableObject() throws {
-    let mockResource = MockJSONCodableResource()
+  func test_validDecodableObject() throws {
+    let mockResource = MockJSONDecodableResource()
     let data = try """
       {
         "name": "mock"
@@ -29,8 +29,8 @@ class JSONCodableResourceTypeTests: XCTestCase {
     XCTAssertEqual(result, expectedResult)
   }
 
-  func test_validCodableObject_nested() throws {
-    let mockResource = MockNestedJSONCodableResource()
+  func test_validDecodableObject_nested() throws {
+    let mockResource = MockNestedJSONDecodableResource()
     let data = try """
       {
         "data": {
@@ -51,8 +51,8 @@ class JSONCodableResourceTypeTests: XCTestCase {
 
   // MARK: Valid arrays
 
-  func test_validCodableArray() throws {
-    let mockResource = MockJSONArrayCodableResource()
+  func test_validDecodableArray() throws {
+    let mockResource = MockJSONArrayDecodableResource()
     let data = try """
       [
         {
@@ -72,8 +72,8 @@ class JSONCodableResourceTypeTests: XCTestCase {
     XCTAssertEqual(result, expectedResult)
   }
 
-  func test_validCodableArray_nested() throws {
-    let mockResource = MockNestedJSONArrayCodableResource()
+  func test_validDecodableArray_nested() throws {
+    let mockResource = MockNestedJSONArrayDecodableResource()
     let data = try """
       {
         "data": {
@@ -100,7 +100,7 @@ class JSONCodableResourceTypeTests: XCTestCase {
   // MARK: Errors
 
   func test_invalidJSON() throws {
-    let mockResource = MockJSONCodableResource()
+    let mockResource = MockJSONDecodableResource()
     let data = try """
       {
         "id": "mo
@@ -118,7 +118,7 @@ class JSONCodableResourceTypeTests: XCTestCase {
   }
 
   func test_jsonFailsDecoding() throws {
-    let mockResource = MockJSONCodableResource()
+    let mockResource = MockJSONDecodableResource()
     let data = try """
       {
         "id": "mock"

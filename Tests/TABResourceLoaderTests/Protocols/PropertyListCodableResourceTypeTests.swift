@@ -1,5 +1,5 @@
 //
-//  PropertyListCodableResourceTypeTests.swift
+//  PropertyListDecodableResourceTypeTests.swift
 //  TABResourceLoaderTests
 //
 //  Created by Sam Dods on 06/10/2017.
@@ -9,12 +9,12 @@
 import XCTest
 @testable import TABResourceLoader
 
-class PropertyListCodableResourceTypeTests: XCTestCase {
+class PropertyListDecodableResourceTypeTests: XCTestCase {
 
   // MARK: - Valid objects
 
-  func test_validCodableObject() throws {
-    let mockResource = MockPropertyListCodableResource()
+  func test_validDecodableObject() throws {
+    let mockResource = MockPropertyListDecodableResource()
     let data = try """
       <plist version="1.0"><dict>
         <key>name</key><string>mock</string>
@@ -29,8 +29,8 @@ class PropertyListCodableResourceTypeTests: XCTestCase {
     XCTAssertEqual(result, expectedResult)
   }
 
-  func test_validCodableObject_nested() throws {
-    let mockResource = MockNestedPropertyListCodableResource()
+  func test_validDecodableObject_nested() throws {
+    let mockResource = MockNestedPropertyListDecodableResource()
     let data = try """
       <plist version="1.0"><dict>
         <key>data</key><dict>
@@ -51,8 +51,8 @@ class PropertyListCodableResourceTypeTests: XCTestCase {
 
   // MARK: Valid arrays
 
-  func test_validCodableArray() throws {
-    let mockResource = MockPropertyListArrayCodableResource()
+  func test_validDecodableArray() throws {
+    let mockResource = MockPropertyListArrayDecodableResource()
     let data = try """
       <plist version="1.0"><array>
         <dict>
@@ -72,8 +72,8 @@ class PropertyListCodableResourceTypeTests: XCTestCase {
     XCTAssertEqual(result, expectedResult)
   }
 
-  func test_validCodableArray_nested() throws {
-    let mockResource = MockNestedPropertyListArrayCodableResource()
+  func test_validDecodableArray_nested() throws {
+    let mockResource = MockNestedPropertyListArrayDecodableResource()
     let data = try """
       <plist version="1.0"><dict>
         <key>data</key><dict>
@@ -100,7 +100,7 @@ class PropertyListCodableResourceTypeTests: XCTestCase {
   // MARK: Errors
 
   func test_invalidPropertyList() throws {
-    let mockResource = MockPropertyListCodableResource()
+    let mockResource = MockPropertyListDecodableResource()
     let data = try """
       <plist version="1.0"><dict>
         <key>data</key><dict>
@@ -121,7 +121,7 @@ class PropertyListCodableResourceTypeTests: XCTestCase {
   }
 
   func test_PropertyListFailsDecoding() throws {
-    let mockResource = MockPropertyListCodableResource()
+    let mockResource = MockPropertyListDecodableResource()
     let data = try """
       <plist version="1.0"><dict>
         <key>id</key><string>mock</string>
