@@ -33,6 +33,6 @@ public protocol NetworkPropertyListDecodableResourceType: NetworkResourceType, P
 
 public extension NetworkPropertyListDecodableResourceType {
   var httpHeaderFields: [String: String]? {
-    return ["Content-Type": "application/json"]
+    return ["Content-Type": "application/x-plist"]
   }
 }

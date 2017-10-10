@@ -74,6 +74,7 @@ class ViewController: UIViewController {
     generalService.fetch(resource: nestedResponseResource) { networkResponse in
       print(networkResponse)
     }
+
   }
 
   func fetchImageExample() {
