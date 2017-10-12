@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     fetchJSONExample()
     fetchImageExample()
     fetchMultipleResponseExample()
+    fetchDecodableExample()
     failureModelExample()
   }
 
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
     }
   }
 
-  func fetchDecodable() {
+  func fetchDecodableExample() {
     let productsResource = ProductsResource()
 
     generalService.fetch(resource: productsResource) { networkResponse in

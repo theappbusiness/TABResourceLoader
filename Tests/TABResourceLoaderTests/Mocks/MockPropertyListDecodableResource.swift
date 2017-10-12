@@ -9,8 +9,6 @@
 import Foundation
 @testable import TABResourceLoader
 
-// swiftlint:disable nesting
-
 // MARK: - Object
 
 struct MockPropertyListDecodableResource: PropertyListDecodableResourceType {
@@ -54,5 +52,3 @@ struct MockNestedPropertyListArrayDecodableResource: PropertyListDecodableResour
     return root.data.mocks
   }
 }
-
-// swiftlint:enable nesting

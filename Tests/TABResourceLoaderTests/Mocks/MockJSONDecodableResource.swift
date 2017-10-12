@@ -9,8 +9,6 @@
 import Foundation
 @testable import TABResourceLoader
 
-// swiftlint:disable nesting
-
 // MARK: - Object
 
 struct MockJSONDecodableResource: JSONDecodableResourceType {
@@ -54,5 +52,3 @@ struct MockNestedJSONArrayDecodableResource: JSONDecodableResourceType {
     return root.data.mocks
   }
 }
-
-// swiftlint:enable nesting

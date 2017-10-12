@@ -12,14 +12,12 @@ import TABResourceLoader
 struct ProductNestedInResponseResource: NetworkJSONDecodableResourceType {
   typealias Model = Product
 
-  // swiftlint:disable nesting
   struct TopLevelObject: Decodable {
     let data: NestedData
     struct NestedData: Decodable {
       let product: Product
     }
   }
-  //swiftlint:enable nesting
 
   let url = URL(string: "http://localhost:8000/product/1234")!
 
