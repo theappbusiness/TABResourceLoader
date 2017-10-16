@@ -100,8 +100,53 @@ struct CitiesResource: NetworkJSONDecodableResourceType {
   typealias Model = [City]
   typealias Root = Model
   
-  let url = URL(string: "http://localhost:8000/cities")!
+  let url = URL
+  
+  init(continent: String) {
+    url = URL(string: "http://localhost:8000/cities/\(continent)")!
+  }
 }
 ```
 
 This works the same whether the array comes at the root of the response or nested. See the nesting example above.
+
+
+# Retrieving the resource
+
+Use the provided `NetworkDataResourceService` to retrieve your `SingleCityResource` or `CitiesResource` from a web service. For example:
+
+```swift
+// declared somewhere that will remain in scope, e.g. at instance level
+let networkService = NetworkDataResourceService()
+
+// later, when needing to access the network
+let europeResource = CitiesResource(continent: "europe")
+networkService.fetch(resource: europeResource) { networkResponse in
+  // handle repsonse, e.g.
+  // switch networkResponse { case let .success(cities, _): // do something with cities
+}
+```
+
+**OR**
+
+Define a `typealias` for conveniency if you using `(NS)Operation`s:
+
+```swift
+private typealias CitiesNetworkResourceOperation = ResourceOperation<GenericNetworkDataResourceService<CitiesResource>>
+```
+
+Create the operation using a `CitiesResource`
+
+```swift
+let europeResource = CitiesResource(continent: "europe")
+let citiesNetworkResourceOperation = CitiesNetworkResourceOperation(resource: europeResource) { operation, networkResponse in
+  // do something with the networkResponse
+}
+```
+
+Add the operation to some queue:
+
+```swift
+let operationQueue = OperationQueue()
+operationQueue.addOperation(citiesNetworkResourceOperation)
+```
