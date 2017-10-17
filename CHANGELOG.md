@@ -1,5 +1,9 @@
 # Change Log
 
+## 6.1.0
+
+- Added Codable support (`JSONDecodableResourceType`, et al)
+
 ## 6.0.0
 
 - Migrated to Swift 4
@@ -7,7 +11,7 @@
 
 ## 5.0.1
 
-Moved internal `Result` to test target
+- Moved internal `Result` to test target
 
 ## 5.0.0
 
