@@ -13,6 +13,7 @@ This library is designed to fetch resources in a consistent and modular way. The
 
 ### Working with a web service
 
+- [Retrieving a `Decodable` object](Documentation/RetrievingDecodableObjectExample.md)
 - [Retrieving a JSON object](Documentation/RetrievingJSONObjectExample.md)
 - [Retrieving an image](Documentation/RetrievingImageExample.md)
 - [Responding to network activity](Documentation/RespondingToNetworkActivity.md)
@@ -32,7 +33,7 @@ This library defines/uses 4 concepts: model, resource, service and operation:
 ### Root protocols
 
 - `ResourceType`: Defines a generic `Model`
-- `NetworkResourceType`: Defines how an endpoint can be accessed. Using specifying the following properties:
+- `NetworkResourceType`: Defines how an endpoint can be accessed. By specifying the following properties:
 	- **URL** *(Required)* 
 	- **HTTP method** *(Optional, default GET)* 
 	- **HTTP header fields** *(Optional)* 
@@ -45,16 +46,21 @@ This library defines/uses 4 concepts: model, resource, service and operation:
 
 ### Conforming to `DataResourceType`
 
+- `JSONDecodableResourceType`: Defines the transformation from a JSON response into an object that conforms to `Decodable`
 - `JSONDictionaryResourceType`: Defines the transformation from a JSON object, i.e. `[String: Any]` to a generic `Model`
 - `JSONArrayResourceType `: Defines the transformation from a JSON array, i.e. `[Any]` to a generic `Model`
 - `ImageResourceType`: Defines the transformation from `(NS)Data` to a `UIImage`
+- `PropertyListDecodableResourceType`: 
 
 ### Protocols that inherit from multiple protocols
 
 - `NetworkJSONDictionaryResourceType`: Combines `JSONDictionaryResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON dictionary from a web service.
 - `NetworkJSONArrayResourceType`: Combines `JSONArrayResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON array from a web service.
+- `NetworkJSONDecodableResourceType`: Combines `JSONDecodableResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a JSON response from a web service.
 
-Note: Both include `["Content-Type": "application/json"]` as default header fields. 
+Note: The above all include `["Content-Type": "application/json"]` as default header fields.
+
+- `NetworkPropertyListDecodableResourceType`: Combines `PropertyListDecodableResourceType` and `NetworkResourceType` to allow for retrieving a generic `Model` from a Property List format XML response from a web service. It includes the `["Content-Type": "application/x-plist"]` as default header fields.
 
 ### Concrete types
 

@@ -24,13 +24,11 @@ extension XCTestCase {
     weak var expectation = self.expectation(description: "Async test expectation")
     runTest(expectation)
     waitForExpectations(timeout: timeout) { error in
-      if let error = error {
-        if let failureMessage = failureMessage {
-          XCTFail(failureMessage, file: file, line: lineNumber)
-        } else {
-          XCTFail(error.localizedDescription, file: file, line: lineNumber)
-        }
+      guard let error = error else {
+        return
       }
+      let failureMessage = failureMessage ?? error.localizedDescription
+      XCTFail(failureMessage, file: file, line: lineNumber)
     }
   }
 
@@ -47,7 +45,7 @@ extension XCTestCase {
   /// - Returns: Returns the serialized data or Data() if serialization fails
   func serialize(jsonObject: Any, file: StaticString = #file, line: UInt = #line) -> Data {
     guard let data = try? JSONSerialization.data(withJSONObject: jsonObject, options: JSONSerialization.WritingOptions.prettyPrinted) else {
-      XCTFail("Failed to serialize data")
+      XCTFail("Failed to serialize data", file: file, line: line)
       return Data()
     }
     return data
