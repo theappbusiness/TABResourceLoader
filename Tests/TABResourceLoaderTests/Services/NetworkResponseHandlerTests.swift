@@ -41,11 +41,12 @@ class NetworkResponseHandlerTests: XCTestCase {
     let successResponse = HTTPURLResponse(url: mockURL, statusCode: 204, httpVersion: nil, headerFields: nil)
     let response = NetworkResponseHandler.resultFrom(resource: MockParsingFailedResource(), data: Data(), URLResponse: successResponse, error: nil)
     guard case NetworkResponse.failure(let error, let urlResponse) = response,
-          case NetworkServiceError.statusCodeError(let statusCode) = error else {
+          case NetworkServiceError.parsingModel(let parsingError) = error else {
         XCTFail(#function)
         return
     }
-    XCTAssertEqual(statusCode, 204)
+    XCTAssertEqual(parsingError as? String, "Parsing failed")
+    XCTAssertEqual(urlResponse?.statusCode, 204)
     XCTAssertEqual(successResponse, urlResponse)
   }
 
