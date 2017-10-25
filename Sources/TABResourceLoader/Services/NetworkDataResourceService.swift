@@ -43,6 +43,7 @@ public enum NetworkServiceError: Error {
   case statusCodeError(statusCode: Int)
   case noDataProvided
   case statusCodeCustomError(statusCode: Int, error: Error)
+  case parsingModel(error: Error)
 }
 
 /// Object used to retrive types that conform to both @NetworkResourceType and DataResourceType

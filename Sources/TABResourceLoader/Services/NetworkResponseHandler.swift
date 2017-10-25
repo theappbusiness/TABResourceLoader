@@ -65,8 +65,8 @@ struct NetworkResponseHandler {
       switch parsedResult {
       case .success(let model):
         return .success(model, HTTPURLResponse)
-      case .failure:
-        return .failure(.statusCodeError(statusCode: HTTPURLResponse.statusCode), HTTPURLResponse)
+      case .failure(let error):
+        return .failure(.parsingModel(error: error), HTTPURLResponse)
       }
     default:
       if let error = resource.error(from: data) {
