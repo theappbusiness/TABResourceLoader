@@ -35,7 +35,7 @@ open class BaseAsynchronousOperation: Operation {
     return true
   }
 
-  fileprivate var _executing: Bool = false //swiftlint:disable:this variable_name
+  fileprivate var _executing: Bool = false
   open override var isExecuting: Bool {
     get { return _executing }
     set {
@@ -47,7 +47,7 @@ open class BaseAsynchronousOperation: Operation {
       }
     }
   }
-  fileprivate var _finished: Bool = false //swiftlint:disable:this variable_name
+  fileprivate var _finished: Bool = false
   open override var isFinished: Bool {
     get { return _finished }
     set {
@@ -57,7 +57,7 @@ open class BaseAsynchronousOperation: Operation {
     }
   }
 
-  fileprivate var _cancelled: Bool = false //swiftlint:disable:this variable_name
+  fileprivate var _cancelled: Bool = false
   open override var isCancelled: Bool {
     get { return _cancelled }
     set {
