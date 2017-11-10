@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.0.1
+
+- Removed superfluous SwiftLint disablement.
+
 ## 7.0.0
 
 - Handle failure to parse model in a dedicated failure case. If the response is successful, but an error is thrown during parsing, then a `NetworkServiceError.parsingModel` failure case is passed along to the completion.
