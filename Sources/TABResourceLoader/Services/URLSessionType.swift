@@ -31,6 +31,7 @@ import Foundation
 public protocol URLSessionType {
   func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
   func invalidateAndCancel()
+  func cancelAllRequests()
 }
 
 extension URLSession: URLSessionType {
@@ -38,6 +39,28 @@ extension URLSession: URLSessionType {
     let task = dataTask(with: request, completionHandler: completion)
     task.resume()
     return task
+  }
+  
+  public func cancelAllRequests() {
+    guard #available(iOS 9.0, *) else {
+      cancelRequestsByType()
+      return
+    }
+    
+    getAllTasks { (tasks) in
+     URLSession.cancelTasks(tasks) }
+  }
+  
+  private func cancelRequestsByType() {
+    getTasksWithCompletionHandler { (dataTasks, uploadTasks, downloadTasks) in
+      URLSession.cancelTasks(dataTasks)
+      URLSession.cancelTasks(uploadTasks)
+      URLSession.cancelTasks(downloadTasks)
+    }
+  }
+  
+  private static func cancelTasks(_ tasks: [URLSessionTask]) {
+     tasks.forEach { $0.cancel() }
   }
 }
 
