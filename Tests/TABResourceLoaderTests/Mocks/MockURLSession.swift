@@ -10,7 +10,7 @@ import Foundation
 @testable import TABResourceLoader
 
 final class MockURLSession: URLSessionType {
-
+  
   typealias URLSessionCompletionHandler = (Data?, URLResponse?, Error?) -> Void
 
   var capturedRequest: URLRequest?
@@ -26,4 +26,6 @@ final class MockURLSession: URLSessionType {
   func invalidateAndCancel() {
     invalidateAndCancelCallCount += 1
   }
+  
+ func cancelAllRequests() { /* not implemented */ }
 }
