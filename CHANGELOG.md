@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.1.0
+
+- Adds the ability to cancel all requests from the resource service.
+
 ## 7.0.1
 
 - Removed superfluous SwiftLint disablement.
