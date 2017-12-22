@@ -15,6 +15,7 @@ class MockSessionToTestExposed: URLSessionType {
     return URLSessionDataTask()
   }
   func invalidateAndCancel() { /* not implemented */ }
+  func cancelAllRequests() { /* not implemented */ }
 }
 
 class NetworkDataResourceServiceURLSessionTests: XCTestCase { //swiftlint:disable:this type_name
