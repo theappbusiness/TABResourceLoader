@@ -26,9 +26,7 @@ class URLSessionTests: XCTestCase {
       }
     }
     dataTask.resume()
-   	urlSession.cancelAllRequests()
-  
+    urlSession.cancelAllRequests()
     waitForExpectations(timeout: 1)
   }
-    
 }
