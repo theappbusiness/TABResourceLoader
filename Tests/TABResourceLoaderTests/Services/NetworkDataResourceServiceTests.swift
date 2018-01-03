@@ -16,7 +16,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   var mockSession: MockURLSession!
   var mockResource: MockDefaultNetworkDataResource!
   var mockNetworkServiceActivity: MockNetworkServiceActivity!
-  let mockURL = URL(string: "http://test.com")!
+  let mockURL = URL(string: "https://test.com")!
 
   var testService: GenericNetworkDataResourceService<MockDefaultNetworkDataResource>!
 
@@ -224,5 +224,21 @@ class NetworkDataResourceServiceTests: XCTestCase {
     }
     waitForExpectation()
   }
-
+  
+  func testCancelAllRequests() {
+    testService = GenericNetworkDataResourceService<MockDefaultNetworkDataResource>()
+    performAsyncTest { expectation in
+      testService.fetch(resource: mockResource) { result in
+        switch result {
+        case .failure(.sessionError(let error), _):
+          if error._code == NSURLErrorCancelled && error._domain == NSURLErrorDomain {
+            expectation?.fulfill()
+          }
+        default:
+          XCTFail("No error found")
+        }
+      }
+      testService.cancelAllRequests()
+    }
+  }
 }
