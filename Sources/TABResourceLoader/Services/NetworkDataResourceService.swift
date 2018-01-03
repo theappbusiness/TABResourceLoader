@@ -109,7 +109,7 @@ open class NetworkDataResourceService {
   /**
    Cancels all requests associated with this service's session
    */
-  func cancelAllRequests() {
+  open func cancelAllRequests() {
     session.cancelAllRequests()
   }
 
