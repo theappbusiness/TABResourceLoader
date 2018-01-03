@@ -105,5 +105,12 @@ open class NetworkDataResourceService {
     }
     return cancellable
   }
+  
+  /**
+   Cancels all requests associated with this service's session
+   */
+  func cancelAllRequests() {
+    session.cancelAllRequests()
+  }
 
 }
