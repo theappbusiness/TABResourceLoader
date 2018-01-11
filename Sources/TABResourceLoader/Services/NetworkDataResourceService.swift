@@ -51,12 +51,23 @@ open class NetworkDataResourceService {
 
   /**
    Method designed to be implemented on subclasses, these fields will be overriden by any HTTP header field
-   key that is defined in the resource (in case of conflicts)
+   key that is defined in the resource (in case of conflicts). This gives the resource service subclass a chance to add query parameters based on information retrieved from the resource
    
-   - returns: Return any additional header fields that need to be added to the url request
+   - parameter resource: The resource being used to create the URL request
+   - returns: Return any additional header fields that need to be added to the URL request
    */
-  open func additionalHeaderFields() -> [String: String] {
+  open func additionalHeaderFields<Resource: NetworkResourceType & DataResourceType>(for resource: Resource) -> [String: String] {
     return [:]
+  }
+  
+  /**
+   Method designed to be implemented on subclasses to provide additional query parameters to be added to the URL. This gives the resource service subclass a chance to add query parameters based on information retrieved from the resource
+   
+   - parameter resource: The resource that provides the URL for the URL request
+   - returns: Return any query parameters that need to be appended to the URL
+   */
+  open func additionalQueryParameters<Resource: NetworkResourceType & DataResourceType>(for resource: Resource) -> [URLQueryItem] {
+    return []
   }
 
   let session: URLSessionType
@@ -91,12 +102,14 @@ open class NetworkDataResourceService {
   // Method used for injecting the NetworkServiceActivity for testing
   @discardableResult
   func fetch<Resource: NetworkResourceType & DataResourceType>(resource: Resource, networkServiceActivity: NetworkServiceActivity, completion: @escaping (NetworkResponse<Resource.Model>) -> Void) -> Cancellable? {
-    guard var urlRequest = resource.urlRequest() else {
+    let queryParameters = additionalQueryParameters(for: resource)
+    guard var urlRequest = resource.urlRequest(with: queryParameters) else {
       completion(.failure(.couldNotCreateURLRequest, nil))
       return nil
     }
 
-    urlRequest.allHTTPHeaderFields = merge(additionalHeaderFields(), urlRequest.allHTTPHeaderFields)
+    let additionalHeaderFields = self.additionalHeaderFields(for: resource)
+    urlRequest.allHTTPHeaderFields = merge(additionalHeaderFields, urlRequest.allHTTPHeaderFields)
     networkServiceActivity.increaseActiveRequest()
     let cancellable = session.perform(request: urlRequest) { (data, URLResponse, error) in
       networkServiceActivity.decreaseActiveRequest()

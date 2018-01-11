@@ -62,9 +62,11 @@ public protocol NetworkResourceType {
   /**
    Convenience function that builds a URLRequest for this resource
 
+   - parameter additionalQueryParameters: Query parameters to be added to the URL
    - returns: A URLRequest or nil if the construction of the request failed
    */
-  func urlRequest() -> URLRequest?
+  
+  func urlRequest(with: [URLQueryItem]) -> URLRequest?
 }
 
 // MARK: - NetworkJSONResource defaults
@@ -75,10 +77,10 @@ public extension NetworkResourceType {
   public var jsonBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
 
-  public func urlRequest() -> URLRequest? {
+  public func urlRequest(with additionalQueryParameters: [URLQueryItem]) -> URLRequest? {
     var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
     let initialItems = urlComponents?.queryItems
-    urlComponents?.queryItems = allQueryItems(initialItems: initialItems)
+    urlComponents?.queryItems = allQueryItems(initialItems: initialItems, additional: additionalQueryParameters)
 
     guard let urlFromComponents = urlComponents?.url else { return nil }
 
@@ -93,10 +95,9 @@ public extension NetworkResourceType {
     return request
   }
 
-  private func allQueryItems(initialItems: [URLQueryItem]?) -> [URLQueryItem]? {
-    let combinedQueryItems = (initialItems ?? []) + (queryItems ?? [])
-    let allQueryItems = combinedQueryItems.isEmpty ? nil : combinedQueryItems
-    return allQueryItems
+  private func allQueryItems(initialItems: [URLQueryItem]?, additional: [URLQueryItem]) -> [URLQueryItem]? {
+    let combinedQueryItems = (initialItems ?? []) + (queryItems ?? []) + additional
+    return combinedQueryItems.isEmpty ? nil : combinedQueryItems
   }
 }
 

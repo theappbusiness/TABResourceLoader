@@ -52,7 +52,7 @@ class NetworkResourceTypeTests: XCTestCase {
     let expectedURL = "\(url)?query-name=query-value"
     let mockNetworkResource = MockCustomNetworkResource(url: url, httpRequestMethod: expectedHTTPMethod, httpHeaderFields: expectedAllHTTPHeaderFields, jsonBody: expectedJSONBody, queryItems: mockedURLQueryItems)
 
-    let urlRequest = mockNetworkResource.urlRequest()
+    let urlRequest = mockNetworkResource.urlRequest(with: [])
     XCTAssertNotNil(urlRequest)
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURL)
     XCTAssertEqual(urlRequest?.httpMethod, expectedHTTPMethod.rawValue)
@@ -65,7 +65,7 @@ class NetworkResourceTypeTests: XCTestCase {
     let urlWithQueryParameters = URL(string: "www.test.com?query-name=query-value")!
     let resource = MockCustomNetworkResource(url: urlWithQueryParameters)
 
-    let urlRequest = resource.urlRequest()
+    let urlRequest = resource.urlRequest(with: [])
     XCTAssertEqual(urlRequest?.url?.absoluteString, urlWithQueryParameters.absoluteString)
   }
 
@@ -73,7 +73,7 @@ class NetworkResourceTypeTests: XCTestCase {
     let urlWithQueryParameters = URL(string: "www.test.com")!
     let resource = MockCustomNetworkResource(url: urlWithQueryParameters)
 
-    let urlRequest = resource.urlRequest()
+    let urlRequest = resource.urlRequest(with: [])
     XCTAssertEqual(urlRequest?.url?.absoluteString, "www.test.com")
   }
 
@@ -82,7 +82,7 @@ class NetworkResourceTypeTests: XCTestCase {
     let resource = MockCustomNetworkResource(url: urlWithQueryItem, queryItems: mockedURLQueryItems)
 
     let expectedURLString = "\(urlWithQueryItem)&query-name-a=query-value-a"
-    let urlRequest = resource.urlRequest()
+    let urlRequest = resource.urlRequest(with: [])
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
   }
 
@@ -91,7 +91,7 @@ class NetworkResourceTypeTests: XCTestCase {
     let resource = MockCustomNetworkResource(url: urlWithQueryItem, queryItems: mockedURLQueryItems)
 
     let expectedURLString = "\(urlWithQueryItem)&query-name=query-value-a"
-    let urlRequest = resource.urlRequest()
+    let urlRequest = resource.urlRequest(with: [])
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
   }
 
