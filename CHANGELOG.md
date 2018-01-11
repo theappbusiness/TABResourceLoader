@@ -1,5 +1,19 @@
 # Change Log
 
+## 8.0.0
+
+- Adding a `resource` argument to the "additional" functions of the resource service - the functions that are intended to be overridden by subclasses.
+
+Providing the subclass with the resource gives that subclass an opportunity to set parameters of the URL request based on the resource. This is different to the resource providing those parameters itself, e.g. the resource could implement the `httpHeaderFields` and `queryItems` properties.
+
+Consider a subclass that adds the requirement that its resources must conform to a protocol `GraphQLResouce`. The `GraphQLResouce` protocol requires a property `queryName: String` to be implemented by its conformers.
+
+The `NetworkDataResourceService` can now add in the `queryName` to either the HTTP header fields or the URL query items. It would be unreliable to expect all resources to implement the `queryItems` and `httpHeaderFields` to add the `queryName` key/value.
+
+> _**NOTE:** This only impacts consumers that subclass `NetworkDataResourceService` and override the `additionalHeaderFields` implementation._
+
+API-Breaking Change: This release modifies the `NetworkDataResourceService.additionalHeaderFields` function by adding an argument to the function.
+
 ## 7.2.0
 
 - Adds the ability to cancel all requests from the resource service.

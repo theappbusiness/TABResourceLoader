@@ -13,7 +13,7 @@ struct MockNilURLRequestNetworkJSONResource: NetworkDataResourceType {
   typealias Model = String
   let url: URL = URL(string: "www.test.com")!
 
-  func urlRequest() -> URLRequest? {
+  func urlRequest(with: [URLQueryItem]) -> URLRequest? {
     return nil
   }
 

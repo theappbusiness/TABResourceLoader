@@ -45,7 +45,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   func test_fetch_callsPerformRequestOnSessionWithCorrectURLRequest() {
     testService.fetch(resource: mockResource) { _ in }
     let capturedRequest = mockSession.capturedRequest
-    let expectedRequest = mockResource.urlRequest()
+    let expectedRequest = mockResource.urlRequest(with: [])
     XCTAssertNotNil(expectedRequest?.allHTTPHeaderFields)
     XCTAssertEqual(capturedRequest, expectedRequest)
   }
@@ -71,7 +71,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
   func test_fetch_withInvalidURLRequest_callsFailureWithCorrectError() {
     let mockInvalidURLResource = MockNilURLRequestNetworkJSONResource()
     let newTestRequestManager = GenericNetworkDataResourceService<MockNilURLRequestNetworkJSONResource>(session: mockSession)
-    XCTAssertNil(mockInvalidURLResource.urlRequest())
+    XCTAssertNil(mockInvalidURLResource.urlRequest(with: []))
     performAsyncTest { expectation in
       newTestRequestManager.fetch(resource: mockInvalidURLResource) { result in
         switch result {
