@@ -68,8 +68,8 @@ open class BaseAsynchronousOperation: Operation {
   }
 
   public final override func start() {
-    super.start()
     self.isExecuting = true
+    main()
   }
 
   public final override func main() {
