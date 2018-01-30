@@ -47,15 +47,3 @@ public extension NetworkFormDataResourceType {
     return nil
   }
 }
-
-public extension Dictionary where Key == String, Value == Any {
-
-  public var formDataPostString: String {
-    var data = [String]()
-    self.forEach { (key, value) in
-      data.append(key + "=\(value)")
-    }
-    return data.map { String($0) }.joined(separator: "&")
-  }
-
-}
