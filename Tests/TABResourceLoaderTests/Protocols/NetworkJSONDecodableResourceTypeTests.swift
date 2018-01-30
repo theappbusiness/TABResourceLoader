@@ -23,7 +23,7 @@ class NetworkPropertyListDecodableResourceTypeTests: XCTestCase {
     let resource = MockNetworkPropertyListDecodableResourceType(url: url)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/x-plist"])
-    XCTAssertNil(resource.jsonBody)
+    XCTAssertNil(resource.body)
     XCTAssertNil(resource.queryItems)
   }
 

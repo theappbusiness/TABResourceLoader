@@ -1,8 +1,8 @@
 //
-//  NetworkJSONDecodableResourceType.swift
+//  NetworkFormDataResourceType.swift
 //  TABResourceLoader
 //
-//  Created by Sam Dods on 06/10/2017.
+//  Created by John Sanderson on 30/01/2018.
 //
 //  The MIT License (MIT)
 //
@@ -28,5 +28,34 @@
 
 import Foundation
 
-/// Defines a resource that can be fetched from a network where the root type is Decodable JSON
-public protocol NetworkJSONDecodableResourceType: NetworkJSONResourceType, JSONDecodableResourceType {}
+/// Defines a resource that can be used to POST form data to a network
+public protocol NetworkFormDataResourceType: NetworkResourceType, DataResourceType {}
+
+public extension NetworkFormDataResourceType {
+  var httpRequestMethod: HTTPMethod {
+    return .post
+  }
+
+  var httpHeaderFields: [String: String]? {
+    return ["Content-Type": "application/x-www-form-urlencoded"]
+  }
+
+  var bodyData: Data? {
+    if let body = body as? [String: Any] {
+      return body.formDataPostString.data(using: .utf8)
+    }
+    return nil
+  }
+}
+
+public extension Dictionary where Key == String, Value == Any {
+
+  public var formDataPostString: String {
+    var data = [String]()
+    self.forEach { (key, value) in
+      data.append(key + "=\(value)")
+    }
+    return data.map { String($0) }.joined(separator: "&")
+  }
+
+}

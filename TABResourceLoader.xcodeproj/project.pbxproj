@@ -71,6 +71,10 @@
 		4FF581761F051F8F008D0A20 /* Result+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF581741F051F23008D0A20 /* Result+Additions.swift */; };
 		4FFA60A51D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */; };
 		5F26A0A21FED1F6A0075BDFD /* URLSession+URLSessionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F26A0A11FED1F6A0075BDFD /* URLSession+URLSessionTypeTests.swift */; };
+		910C1FFD202091B400573BBE /* NetworkFormDataResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C1FFC202091B400573BBE /* NetworkFormDataResourceType.swift */; };
+		910C2000202097AF00573BBE /* NetworkFormDataResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C1FFE2020977700573BBE /* NetworkFormDataResourceTypeTests.swift */; };
+		910C200220209E3E00573BBE /* NetworkJSONResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C200120209E3E00573BBE /* NetworkJSONResourceType.swift */; };
+		910C20052020A06500573BBE /* NetworkJSONResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C20032020A02E00573BBE /* NetworkJSONResourceTypeTests.swift */; };
 		EA00EEB11F8D286900166ABA /* NetworkJSONDecodableResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00EEAF1F8D27D900166ABA /* NetworkJSONDecodableResourceTypeTests.swift */; };
 		EA00EEB31F8D293C00166ABA /* NetworkPropertyListDecodableResourceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00EEB21F8D293C00166ABA /* NetworkPropertyListDecodableResourceTypeTests.swift */; };
 		EA1EE0C81F87DD8500902527 /* JSONDecodableResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE0C71F87DD8500902527 /* JSONDecodableResourceType.swift */; };
@@ -167,6 +171,10 @@
 		4FF581741F051F23008D0A20 /* Result+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Additions.swift"; sourceTree = "<group>"; };
 		4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkJSONDictionaryResourceType.swift; sourceTree = "<group>"; };
 		5F26A0A11FED1F6A0075BDFD /* URLSession+URLSessionTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+URLSessionTypeTests.swift"; sourceTree = "<group>"; };
+		910C1FFC202091B400573BBE /* NetworkFormDataResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFormDataResourceType.swift; sourceTree = "<group>"; };
+		910C1FFE2020977700573BBE /* NetworkFormDataResourceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFormDataResourceTypeTests.swift; sourceTree = "<group>"; };
+		910C200120209E3E00573BBE /* NetworkJSONResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONResourceType.swift; sourceTree = "<group>"; };
+		910C20032020A02E00573BBE /* NetworkJSONResourceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONResourceTypeTests.swift; sourceTree = "<group>"; };
 		EA00EEAF1F8D27D900166ABA /* NetworkJSONDecodableResourceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJSONDecodableResourceTypeTests.swift; sourceTree = "<group>"; };
 		EA00EEB21F8D293C00166ABA /* NetworkPropertyListDecodableResourceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPropertyListDecodableResourceTypeTests.swift; sourceTree = "<group>"; };
 		EA1EE0C71F87DD8500902527 /* JSONDecodableResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodableResourceType.swift; sourceTree = "<group>"; };
@@ -398,6 +406,8 @@
 				EA00EEAF1F8D27D900166ABA /* NetworkJSONDecodableResourceTypeTests.swift */,
 				EA00EEB21F8D293C00166ABA /* NetworkPropertyListDecodableResourceTypeTests.swift */,
 				4F079D4F1D84599300D08DA0 /* NetworkResourceTypeTests.swift */,
+				910C1FFE2020977700573BBE /* NetworkFormDataResourceTypeTests.swift */,
+				910C20032020A02E00573BBE /* NetworkJSONResourceTypeTests.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -512,8 +522,10 @@
 				EA1EE0C91F87DE6600902527 /* PropertyListDecodableResourceType.swift */,
 				EA1EE0CD1F87DF9C00902527 /* NetworkPropertyListDecodableResourceType.swift */,
 				4F079D221D84577E00D08DA0 /* NetworkResourceType.swift */,
+				910C200120209E3E00573BBE /* NetworkJSONResourceType.swift */,
 				4FF005341DC9F9E0006BBACE /* NetworkJSONArrayResourceType.swift */,
 				4FFA60A41D9C017200A91693 /* NetworkJSONDictionaryResourceType.swift */,
+				910C1FFC202091B400573BBE /* NetworkFormDataResourceType.swift */,
 			);
 			path = "Resource types";
 			sourceTree = "<group>";
@@ -697,12 +709,14 @@
 				4F079D2D1D84577E00D08DA0 /* NetworkResourceType.swift in Sources */,
 				EA1EE0C81F87DD8500902527 /* JSONDecodableResourceType.swift in Sources */,
 				4F079D371D84585E00D08DA0 /* NSThread+Additions.swift in Sources */,
+				910C1FFD202091B400573BBE /* NetworkFormDataResourceType.swift in Sources */,
 				4F88C6971D88A122002CAEA2 /* Result.swift in Sources */,
 				EA1EE0CE1F87DF9C00902527 /* NetworkPropertyListDecodableResourceType.swift in Sources */,
 				4F079D281D84577E00D08DA0 /* BaseAsynchronousOperation.swift in Sources */,
 				4F079D2C1D84577E00D08DA0 /* JSONParsingError.swift in Sources */,
 				4FBC07481E4F67F200D14EBA /* NetworkResponseHandler.swift in Sources */,
 				4F079D2A1D84577E00D08DA0 /* DataResourceType.swift in Sources */,
+				910C200220209E3E00573BBE /* NetworkJSONResourceType.swift in Sources */,
 				4FF005331DC9F985006BBACE /* ResourceType.swift in Sources */,
 				4FD11C011E3A6A99004C7B0A /* NetworkServiceActivity.swift in Sources */,
 				EA1EE0CA1F87DE6600902527 /* PropertyListDecodableResourceType.swift in Sources */,
@@ -755,9 +769,11 @@
 				EA80BE511E2798B300AA83F7 /* NetworkDataResourceServiceURLSessionTests.swift in Sources */,
 				4F079D6A1D8459D400D08DA0 /* MockNilURLRequestNetworkJSONResource.swift in Sources */,
 				4F079D681D8459D400D08DA0 /* MockJSONDictionaryResourceType.swift in Sources */,
+				910C2000202097AF00573BBE /* NetworkFormDataResourceTypeTests.swift in Sources */,
 				4F6CDC191E5AF5B7001BF320 /* GlobalFunctionsTests.swift in Sources */,
 				4F4BE52A1ECB40AC00C2CC56 /* NetworkResponseHandlerTests.swift in Sources */,
 				4F079D6D1D8459D400D08DA0 /* MockResourceService.swift in Sources */,
+				910C20052020A06500573BBE /* NetworkJSONResourceTypeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

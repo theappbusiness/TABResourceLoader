@@ -35,4 +35,11 @@ public extension NetworkPropertyListDecodableResourceType {
   var httpHeaderFields: [String: String]? {
     return ["Content-Type": "application/x-plist"]
   }
+
+  var bodyData: Data? {
+    if let body = body {
+      return try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
+    }
+    return nil
+  }
 }
