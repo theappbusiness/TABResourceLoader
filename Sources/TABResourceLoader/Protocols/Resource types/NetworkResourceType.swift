@@ -53,9 +53,6 @@ public protocol NetworkResourceType {
   /// The HTTP header fields used to fetch this resource
   var httpHeaderFields: [String: String]? { get }
 
-  /// The HTTP body used to fetch this resource
-  var body: Any? { get }
-
   /// The HTTP body as Data used to fetch this resource
   var bodyData: Data? { get }
 
@@ -75,7 +72,6 @@ public extension NetworkResourceType {
 
   public var httpRequestMethod: HTTPMethod { return .get }
   public var httpHeaderFields: [String: String]? { return [:] }
-  public var body: Any? { return nil }
   public var bodyData: Data? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
 

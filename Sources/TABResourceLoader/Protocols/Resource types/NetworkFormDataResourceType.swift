@@ -29,7 +29,11 @@
 import Foundation
 
 /// Defines a resource that can be used to POST form data to a network
-public protocol NetworkFormDataResourceType: NetworkResourceType, DataResourceType {}
+public protocol NetworkFormDataResourceType: NetworkResourceType, DataResourceType {
+
+  /// The form data body used to fetch this resource
+  var formDataBody: Any? { get }
+}
 
 public extension NetworkFormDataResourceType {
   var httpRequestMethod: HTTPMethod {
@@ -41,7 +45,7 @@ public extension NetworkFormDataResourceType {
   }
 
   var bodyData: Data? {
-    if let body = body as? [String: Any] {
+    if let body = formDataBody as? [String: Any] {
       return body.formDataPostString.data(using: .utf8)
     }
     return nil

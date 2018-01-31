@@ -13,6 +13,7 @@ struct MockNetworkPropertyListDecodableResourceType: NetworkPropertyListDecodabl
   typealias Model = String
   typealias Root = Model
   let url: URL
+  let jsonBody: Any? = nil
 }
 
 class NetworkPropertyListDecodableResourceTypeTests: XCTestCase {
@@ -23,7 +24,7 @@ class NetworkPropertyListDecodableResourceTypeTests: XCTestCase {
     let resource = MockNetworkPropertyListDecodableResourceType(url: url)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/x-plist"])
-    XCTAssertNil(resource.body)
+    XCTAssertNil(resource.jsonBody)
     XCTAssertNil(resource.queryItems)
   }
 

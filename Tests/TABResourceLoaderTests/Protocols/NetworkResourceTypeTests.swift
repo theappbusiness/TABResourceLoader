@@ -38,7 +38,6 @@ class NetworkResourceTypeTests: XCTestCase {
     let resource = MockDefaultNetworkResource(url: url)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, [:])
-    XCTAssertNil(resource.body)
     XCTAssertNil(resource.queryItems)
   }
 

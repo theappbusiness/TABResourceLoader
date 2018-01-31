@@ -12,6 +12,7 @@ import XCTest
 struct MockNetworkJSONDictionaryResourceType: NetworkJSONDictionaryResourceType {
   typealias Model = String
   let url: URL
+  let jsonBody: Any? = nil
 
   func model(from jsonDictionary: [String : Any]) throws -> String {
     return ""
@@ -27,7 +28,7 @@ class NetworkJSONDictionaryResourceTypeTests: XCTestCase {
     let resource = MockNetworkJSONDictionaryResourceType(url: url)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/json"])
-    XCTAssertNil(resource.body)
+    XCTAssertNil(resource.jsonBody)
     XCTAssertNil(resource.queryItems)
   }
 

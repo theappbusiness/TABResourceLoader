@@ -13,7 +13,7 @@ struct MockNetworkFormDataResourceType: NetworkFormDataResourceType {
 
   typealias Model = String
   let url: URL
-  let body: Any?
+  let formDataBody: Any?
 
   func model(from data: Data) throws -> String {
     return ""
@@ -28,7 +28,7 @@ class NetworkFormDataResourceTypeTests: XCTestCase {
                                          "anotherKey": "withAnotherValue"]
 
   func test_correctDefaultValues() {
-    let resource = MockNetworkFormDataResourceType(url: url, body: expectedData)
+    let resource = MockNetworkFormDataResourceType(url: url, formDataBody: expectedData)
     let expectedFormData = expectedData.formDataPostString.data(using: .utf8)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.post)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/x-www-form-urlencoded"])

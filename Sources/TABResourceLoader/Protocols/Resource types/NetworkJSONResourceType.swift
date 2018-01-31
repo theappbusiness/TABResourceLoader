@@ -29,7 +29,11 @@
 import Foundation
 
 /// Defines a resource that can be fetched from a network where the root type is a JSON array
-public protocol NetworkJSONResourceType: NetworkResourceType {}
+public protocol NetworkJSONResourceType: NetworkResourceType {
+
+  /// The JSON body used to fetch this resource
+  var jsonBody: Any? { get }
+}
 
 public extension NetworkJSONResourceType {
   var httpHeaderFields: [String: String]? {
@@ -37,7 +41,7 @@ public extension NetworkJSONResourceType {
   }
 
   var bodyData: Data? {
-    if let body = body {
+    if let body = jsonBody {
       return try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
     }
     return nil

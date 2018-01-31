@@ -13,19 +13,19 @@ private struct MockNetworkJSONResourceType: NetworkJSONResourceType {
 
   typealias Model = String
   let url: URL
-  let body: Any?
+  let jsonBody: Any?
 
 }
 
 class NetworkJSONResourceTypeTests: XCTestCase {
 
   let url = URL(string: "www.test.com")!
-  let expectedBody: [String: Any] = ["testKey": "withATestValue",
+  let expectedJSONBody: [String: Any] = ["testKey": "withATestValue",
                                      "anotherKey": "withAnotherValue"]
 
   func test_correctDefaultValues() {
-    let resource = MockNetworkJSONResourceType(url: url, body: expectedBody)
-    let expectedJSONData = try? JSONSerialization.data(withJSONObject: expectedBody, options: JSONSerialization.WritingOptions.prettyPrinted)
+    let resource = MockNetworkJSONResourceType(url: url, jsonBody: expectedJSONBody)
+    let expectedJSONData = try? JSONSerialization.data(withJSONObject: expectedJSONBody, options: JSONSerialization.WritingOptions.prettyPrinted)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/json"])
     XCTAssertNil(resource.queryItems)
