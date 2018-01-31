@@ -12,7 +12,6 @@ import XCTest
 struct MockNetworkJSONArrayResourceType: NetworkJSONArrayResourceType {
   typealias Model = String
   let url: URL
-  let jsonBody: Any? = nil
 
   func model(from jsonArray: [Any]) throws -> String {
     return ""

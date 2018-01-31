@@ -13,7 +13,6 @@ struct MockNetworkJSONDecodableResourceType: NetworkJSONDecodableResourceType {
   typealias Model = String
   typealias Root = Model
   let url: URL
-  let jsonBody: Any? = nil
 }
 
 class NetworkJSONDecodableResourceTypeTests: XCTestCase {

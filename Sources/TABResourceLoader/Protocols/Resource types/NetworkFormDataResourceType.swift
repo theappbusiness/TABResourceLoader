@@ -36,6 +36,8 @@ public protocol NetworkFormDataResourceType: NetworkResourceType, DataResourceTy
 }
 
 public extension NetworkFormDataResourceType {
+  var formDataBody: Any? { return nil }
+
   var httpRequestMethod: HTTPMethod {
     return .post
   }

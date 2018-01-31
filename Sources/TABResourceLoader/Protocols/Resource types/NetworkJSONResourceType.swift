@@ -36,6 +36,8 @@ public protocol NetworkJSONResourceType: NetworkResourceType {
 }
 
 public extension NetworkJSONResourceType {
+  var jsonBody: Any? { return nil }
+
   var httpHeaderFields: [String: String]? {
     return ["Content-Type": "application/json"]
   }
