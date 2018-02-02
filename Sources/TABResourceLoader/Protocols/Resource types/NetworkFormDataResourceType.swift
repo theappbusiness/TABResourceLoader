@@ -32,7 +32,7 @@ import Foundation
 public protocol NetworkFormDataResourceType: NetworkResourceType, DataResourceType {
 
   /// The form data body used to fetch this resource
-  var formDataBody: Any? { get }
+  var formDataBody: [String: Any]? { get }
 }
 
 public extension NetworkFormDataResourceType {
@@ -47,7 +47,7 @@ public extension NetworkFormDataResourceType {
   }
 
   var bodyData: Data? {
-    if let body = formDataBody as? [String: Any] {
+    if let body = formDataBody {
       return body.formDataPostString.data(using: .utf8)
     }
     return nil

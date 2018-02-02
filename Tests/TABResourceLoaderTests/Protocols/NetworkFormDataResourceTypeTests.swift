@@ -13,7 +13,7 @@ struct MockNetworkFormDataResourceType: NetworkFormDataResourceType {
 
   typealias Model = String
   let url: URL
-  let formDataBody: Any?
+  let formDataBody: [String: Any]?
 
   func model(from data: Data) throws -> String {
     return ""
