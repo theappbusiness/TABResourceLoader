@@ -3,8 +3,10 @@
 //  TABResourceLoader
 //
 //  Created by John Sanderson on 30/01/2018.
-//  Copyright © 2018 Luciano Marisi. All rights reserved.
 //
+//  The MIT License (MIT)
+//
+//  Copyright (c) 2018 The App Business
 
 import XCTest
 @testable import TABResourceLoader
@@ -29,7 +31,7 @@ class NetworkJSONResourceTypeTests: XCTestCase {
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/json"])
     XCTAssertNil(resource.queryItems)
-    XCTAssertEqual(resource.bodyData, expectedJSONData)
+    XCTAssertEqual(resource.httpBody, expectedJSONData)
 
     let urlRequest = resource.urlRequest()
     XCTAssertNotNil(urlRequest)

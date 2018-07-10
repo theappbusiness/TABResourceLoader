@@ -10,7 +10,7 @@ import XCTest
 import TABResourceLoader
 
 class URLSessionTests: XCTestCase {
-    
+
   func testCancelAllRequests() {
     let config = URLSessionConfiguration.default
     let urlSession = URLSession(configuration: config)

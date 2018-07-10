@@ -54,7 +54,7 @@ public protocol NetworkResourceType {
   var httpHeaderFields: [String: String]? { get }
 
   /// The HTTP body as Data used to fetch this resource
-  var bodyData: Data? { get }
+  var httpBody: Data? { get }
 
   /// The query items to be added to the url to fetch this resource
   var queryItems: [URLQueryItem]? { get }
@@ -72,7 +72,7 @@ public extension NetworkResourceType {
 
   public var httpRequestMethod: HTTPMethod { return .get }
   public var httpHeaderFields: [String: String]? { return [:] }
-  public var bodyData: Data? { return nil }
+  public var httpBody: Data? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
 
   public func urlRequest() -> URLRequest? {
@@ -85,7 +85,7 @@ public extension NetworkResourceType {
     var request = URLRequest(url: urlFromComponents)
     request.allHTTPHeaderFields = httpHeaderFields
     request.httpMethod = httpRequestMethod.rawValue
-    request.httpBody = bodyData
+    request.httpBody = httpBody
 
     return request
   }

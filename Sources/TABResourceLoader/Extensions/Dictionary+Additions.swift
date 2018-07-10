@@ -3,8 +3,10 @@
 //  TABResourceLoader
 //
 //  Created by John Sanderson on 30/01/2018.
-//  Copyright © 2018 Luciano Marisi. All rights reserved.
 //
+//  The MIT License (MIT)
+//
+//  Copyright (c) 2018 The App Business
 
 import Foundation
 
@@ -12,12 +14,10 @@ public extension Dictionary where Key == String, Value == CustomStringConvertibl
 
   /// Returns dictionary as string used to POST Form Data
   public var formDataPostString: String {
-    var data = [String]()
-    forEach { (key, value) in
-      let stringValue = String(describing: value)
-      data.append(key + "=" + stringValue)
+    return reduce(into: "") { (result, dictionaryEntry) in
+      let parameter = dictionaryEntry.key + "=" + String(describing: dictionaryEntry.value)
+      result += result.isEmpty ? parameter : "&" + parameter
     }
-    return data.map(String.init(_:)).joined(separator: "&")
   }
 
 }

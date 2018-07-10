@@ -33,7 +33,7 @@ class NetworkFormDataResourceTypeTests: XCTestCase {
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.post)
     XCTAssertEqual(resource.httpHeaderFields!, ["Content-Type": "application/x-www-form-urlencoded"])
     XCTAssertNil(resource.queryItems)
-    XCTAssertEqual(resource.bodyData, expectedFormData)
+    XCTAssertEqual(resource.httpBody, expectedFormData)
 
     let urlRequest = resource.urlRequest()
     XCTAssertNotNil(urlRequest)

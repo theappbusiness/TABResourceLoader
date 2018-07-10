@@ -46,7 +46,7 @@ public extension NetworkFormDataResourceType {
     return ["Content-Type": "application/x-www-form-urlencoded"]
   }
 
-  var bodyData: Data? {
+  var httpBody: Data? {
     if let body = formDataBody {
       return body.formDataPostString.data(using: .utf8)
     }
