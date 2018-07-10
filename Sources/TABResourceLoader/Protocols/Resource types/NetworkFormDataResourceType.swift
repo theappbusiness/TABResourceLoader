@@ -32,7 +32,7 @@ import Foundation
 public protocol NetworkFormDataResourceType: NetworkResourceType, DataResourceType {
 
   /// The form data body used to fetch this resource
-  var formDataBody: [String: Any]? { get }
+  var formDataBody: [String: CustomStringConvertible]? { get }
 }
 
 public extension NetworkFormDataResourceType {

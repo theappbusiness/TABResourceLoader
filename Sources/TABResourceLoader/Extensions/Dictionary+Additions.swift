@@ -8,13 +8,14 @@
 
 import Foundation
 
-public extension Dictionary where Key == String, Value == Any {
+public extension Dictionary where Key == String, Value == CustomStringConvertible {
 
   /// Returns dictionary as string used to POST Form Data
   public var formDataPostString: String {
     var data = [String]()
     forEach { (key, value) in
-      data.append(key + "=\(value)")
+      let stringValue = String(describing: value)
+      data.append(key + "=" + stringValue)
     }
     return data.map(String.init(_:)).joined(separator: "&")
   }

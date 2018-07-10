@@ -12,9 +12,9 @@ import XCTest
 class DictionaryAdditionsTests: XCTestCase {
 
   func testDictionary_returnedAsFormDataString() {
-    let dictionary: [String: Any] = ["firstKey": "withAValue",
-                                     "secondKey": true,
-                                     "lastKey": 4]
+    let dictionary: [String: CustomStringConvertible] = ["firstKey": "withAValue",
+                                                         "secondKey": true,
+                                                         "lastKey": 4]
     let formDataString = dictionary.formDataPostString
     XCTAssertEqual(formDataString, "firstKey=withAValue&secondKey=true&lastKey=4")
   }

@@ -13,7 +13,7 @@ struct MockNetworkFormDataResourceType: NetworkFormDataResourceType {
 
   typealias Model = String
   let url: URL
-  let formDataBody: [String: Any]?
+  let formDataBody: [String: CustomStringConvertible]?
 
   func model(from data: Data) throws -> String {
     return ""
@@ -24,8 +24,8 @@ struct MockNetworkFormDataResourceType: NetworkFormDataResourceType {
 class NetworkFormDataResourceTypeTests: XCTestCase {
 
   let url = URL(string: "www.test.com")!
-  let expectedData: [String: Any] = ["testKey": "withATestValue",
-                                         "anotherKey": "withAnotherValue"]
+  let expectedData: [String: CustomStringConvertible] = ["testKey": "withATestValue",
+                                                         "anotherKey": "withAnotherValue"]
 
   func test_correctDefaultValues() {
     let resource = MockNetworkFormDataResourceType(url: url, formDataBody: expectedData)
