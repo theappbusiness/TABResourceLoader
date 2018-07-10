@@ -29,7 +29,7 @@
 import Foundation
 
 /// Defines a resource that can be fetched from a network where the root type is a Decodable Property List
-public protocol NetworkPropertyListDecodableResourceType: NetworkResourceType, PropertyListDecodableResourceType {}
+public protocol NetworkPropertyListDecodableResourceType: NetworkJSONResourceType, PropertyListDecodableResourceType {}
 
 public extension NetworkPropertyListDecodableResourceType {
   var httpHeaderFields: [String: String]? {

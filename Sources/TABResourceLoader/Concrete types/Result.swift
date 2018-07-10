@@ -47,8 +47,8 @@ extension Result {
   // Convert the `Result` back to typical Swift `throws` error handling
   public func unwrap() throws -> T {
     switch self {
-    case .success(let v): return v
-    case .failure(let e): throw e
+    case .success(let value): return value
+    case .failure(let error): throw error
     }
   }
 }

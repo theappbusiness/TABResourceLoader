@@ -10,13 +10,13 @@ import XCTest
 import TABResourceLoader
 
 class URLSessionTests: XCTestCase {
-    
+
   func testCancelAllRequests() {
     let config = URLSessionConfiguration.default
     let urlSession = URLSession(configuration: config)
     let url = URL(string: "https://www.test.com")!
     let wait = expectation(description: "URLSession cancels request")
-    let dataTask = urlSession.dataTask(with: url) { (data, response, error) in
+    let dataTask = urlSession.dataTask(with: url) { (_, _, error) in
       guard let error = error else {
         XCTFail("Did not receive expected cancellation error")
         return

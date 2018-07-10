@@ -10,7 +10,7 @@ import Foundation
 @testable import TABResourceLoader
 
 class MockSessionThatDoesNothing: URLSessionType {
-  
+
   public func perform(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
     return URLSessionDataTask()
   }

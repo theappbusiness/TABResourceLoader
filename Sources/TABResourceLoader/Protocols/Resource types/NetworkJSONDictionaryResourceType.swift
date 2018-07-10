@@ -29,10 +29,4 @@
 import Foundation
 
 /// Defines a resource that can be fetched from a network where the root type is a JSON object
-public protocol NetworkJSONDictionaryResourceType: NetworkResourceType, JSONDictionaryResourceType {}
-
-public extension NetworkJSONDictionaryResourceType {
-  var httpHeaderFields: [String: String]? {
-    return ["Content-Type": "application/json"]
-  }
-}
+public protocol NetworkJSONDictionaryResourceType: NetworkJSONResourceType, JSONDictionaryResourceType {}

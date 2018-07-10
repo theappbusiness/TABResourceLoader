@@ -19,14 +19,12 @@ private struct MockCustomNetworkResource: NetworkResourceType {
   let url: URL
   let httpRequestMethod: HTTPMethod
   let httpHeaderFields: [String: String]?
-  let jsonBody: Any?
   let queryItems: [URLQueryItem]?
 
-  init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String : String]? = nil, jsonBody: Any? = nil, queryItems: [URLQueryItem]? = nil) {
+  init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String : String]? = nil, queryItems: [URLQueryItem]? = nil) {
     self.url = url
     self.httpRequestMethod = httpRequestMethod
     self.httpHeaderFields = httpHeaderFields
-    self.jsonBody = jsonBody
     self.queryItems = queryItems
   }
 }
@@ -40,25 +38,21 @@ class NetworkResourceTypeTests: XCTestCase {
     let resource = MockDefaultNetworkResource(url: url)
     XCTAssertEqual(resource.httpRequestMethod, HTTPMethod.get)
     XCTAssertEqual(resource.httpHeaderFields!, [:])
-    XCTAssertNil(resource.jsonBody)
     XCTAssertNil(resource.queryItems)
   }
 
   func test_urlRequest_allProperties() {
     let expectedHTTPMethod = HTTPMethod.post
     let expectedAllHTTPHeaderFields = ["key": "value"]
-    let expectedJSONBody = ["jsonKey": "jsonValue"]
     let mockedURLQueryItems = [URLQueryItem(name: "query-name", value: "query-value")]
     let expectedURL = "\(url)?query-name=query-value"
-    let mockNetworkResource = MockCustomNetworkResource(url: url, httpRequestMethod: expectedHTTPMethod, httpHeaderFields: expectedAllHTTPHeaderFields, jsonBody: expectedJSONBody, queryItems: mockedURLQueryItems)
+    let mockNetworkResource = MockCustomNetworkResource(url: url, httpRequestMethod: expectedHTTPMethod, httpHeaderFields: expectedAllHTTPHeaderFields, queryItems: mockedURLQueryItems)
 
     let urlRequest = mockNetworkResource.urlRequest()
     XCTAssertNotNil(urlRequest)
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURL)
     XCTAssertEqual(urlRequest?.httpMethod, expectedHTTPMethod.rawValue)
     XCTAssertEqual(urlRequest!.allHTTPHeaderFields!, expectedAllHTTPHeaderFields)
-    let expectedJSONData = try? JSONSerialization.data(withJSONObject: expectedJSONBody, options: JSONSerialization.WritingOptions.prettyPrinted)
-    XCTAssertEqual(urlRequest!.httpBody, expectedJSONData)
   }
 
   func test_urlRequest_resourceURLWithQueryParameters() {
