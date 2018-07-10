@@ -28,7 +28,7 @@
 
 import Foundation
 
-/// Defines a resource that can be fetched from a network where the root type is a JSON array
+/// Defines a resource that can be used to POST JSON bodt to a network
 public protocol NetworkJSONResourceType: NetworkResourceType {
 
   /// The JSON body used to fetch this resource
