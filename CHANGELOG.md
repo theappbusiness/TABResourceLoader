@@ -1,8 +1,16 @@
 # Change Log
 
-## 7.1.0
+## 7.2.1
+
+- Fixes an issue where `super.start()` was being called unnecessarily.
+
+## 7.2.0
 
 - Adds the ability to cancel all requests from the resource service.
+
+## 7.1.0
+
+- Adds the ability to cancel all requests from the URLSessionType.
 
 ## 7.0.1
 
@@ -27,7 +35,7 @@
 
 ## 5.0.0
 
-- The error from a failed `NetworkResponse` is now flattened and moved into the `NetworkServiceError` `couldNotParseModel` case to avoid nested switch statements: 
+- The error from a failed `NetworkResponse` is now flattened and moved into the `NetworkServiceError` `couldNotParseModel` case to avoid nested switch statements:
 
 ```swift
 enum NetworkResponse<Model> {
@@ -46,7 +54,7 @@ enum NetworkResponse<Model> {
 	// New interface
 	func model(from data: Data) throws -> Model
 	```
-	
+
 - `JSONDictionaryResourceType` transformation function now throws on failure instead of returning `Model?`:
 
 	```swift
@@ -64,7 +72,7 @@ enum NetworkResponse<Model> {
 	// New interface
 	func model(from jsonArray: [Any]) throws -> Model
 	```
-	
+
 - Refactored network service
 	- Renamed `NetworkDataResourceService` to `GenericNetworkDataResourceService`, this is useful when using it with `ResourceOperation`
 	- New `NetworkDataResourceService` uses a generic fetching function
