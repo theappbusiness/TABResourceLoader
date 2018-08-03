@@ -21,7 +21,7 @@ private struct MockCustomNetworkResource: NetworkResourceType {
   let httpHeaderFields: [String: String]?
   let jsonBody: Any?
   let queryItems: [URLQueryItem]?
-  let requestTimeInterval: TimeInterval? = 27
+  let requestTimeoutInterval: TimeInterval? = 27
 
   init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String : String]? = nil, jsonBody: Any? = nil, queryItems: [URLQueryItem]? = nil) {
     self.url = url

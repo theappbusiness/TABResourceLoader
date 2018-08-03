@@ -60,7 +60,7 @@ public protocol NetworkResourceType {
   var queryItems: [URLQueryItem]? { get }
   
   /// The time interval for the URLRequest for this resource
-  var requestTimeInterval: TimeInterval? { get }
+  var requestTimeoutInterval: TimeInterval? { get }
 
   /**
    Convenience function that builds a URLRequest for this resource
@@ -77,7 +77,7 @@ public extension NetworkResourceType {
   public var httpHeaderFields: [String: String]? { return [:] }
   public var jsonBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
-  public var requestTimeInterval: TimeInterval? { return nil }
+  public var requestTimeoutInterval: TimeInterval? { return nil }
 
   public func urlRequest() -> URLRequest? {
     var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
@@ -86,7 +86,7 @@ public extension NetworkResourceType {
 
     guard let urlFromComponents = urlComponents?.url else { return nil }
     var request: URLRequest
-    if let timeoutInterval = requestTimeInterval {
+    if let timeoutInterval = requestTimeoutInterval {
       request = URLRequest(url: urlFromComponents, timeoutInterval: timeoutInterval)
     } else {
       request = URLRequest(url: urlFromComponents)

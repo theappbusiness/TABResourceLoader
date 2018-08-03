@@ -2,7 +2,7 @@
 
 ## 7.2.2
 
-- Adds  optional  `requestTimeInterval`  property to `NetworkResourceType` which can be used to set a `URLRequest` specific timeout for the resource.
+- Adds  optional  `requestTimeoutInterval`  property to `NetworkResourceType` which can be used to set a `URLRequest` specific timeout for the resource.
 
 ## 7.2.1
 
