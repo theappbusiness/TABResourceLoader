@@ -50,7 +50,7 @@ class NetworkResourceTypeTests: XCTestCase {
     XCTAssertEqual(resource.httpHeaderFields!, [:])
     XCTAssertNil(resource.jsonBody)
     XCTAssertNil(resource.queryItems)
-   	XCTAssertEqual(request?.timeoutInterval, defaultRequestTimeOut)
+    XCTAssertEqual(request?.timeoutInterval, defaultRequestTimeOut)
   }
 
   func test_urlRequest_allProperties() {
