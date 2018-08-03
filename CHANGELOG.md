@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.2.2
+
+- Adds  optional  `requestTimeoutInterval`  property to `NetworkResourceType` which can be used to set a `URLRequest` specific timeout for the resource.
+
 ## 7.2.1
 
 - Fixes an issue where `super.start()` was being called unnecessarily.
