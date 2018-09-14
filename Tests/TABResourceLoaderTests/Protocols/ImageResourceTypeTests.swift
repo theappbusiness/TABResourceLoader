@@ -33,7 +33,7 @@ class ImageResourceTypeTests: XCTestCase {
 
   func test_resultFromData_whenDataIsValid() {
     let mockImage = ImageMocker.mock()
-    let imageData = UIImagePNGRepresentation(mockImage)!
+    let imageData = mockImage.pngData()!
     let testResult = try? mockImageResourceType.model(from: imageData)
     XCTAssertNotNil(testResult)
   }
