@@ -1,7 +1,7 @@
 os:
   - osx
 language: generic
-osx_image: xcode9
+osx_image: xcode10
 script:
   # - xcrun instruments -t 'Blank' -l 10 -w "iPhone 6s (10.3)"
   - xcodebuild -scheme Example -configuration Debug -sdk iphonesimulator11.0 -destination "OS=11.0,name=iPhone 6s" build
