@@ -1,5 +1,9 @@
 # Change Log
 
+## 8.0.0
+
+- Add Swift 4.2 support
+
 ## 7.2.2
 
 - Adds  optional  `requestTimeoutInterval`  property to `NetworkResourceType` which can be used to set a `URLRequest` specific timeout for the resource.
