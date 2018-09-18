@@ -1,5 +1,3 @@
 disabled_rules:
   - line_length
   - nesting
-identifier_name:
-  min_length: 1
