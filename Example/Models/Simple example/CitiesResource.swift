@@ -31,7 +31,7 @@ struct CitiesResource: NetworkJSONDictionaryResourceType {
       else {
         throw CitiesResourceError.parsingFailed
     }
-    return citiesJSONArray.flatMap(City.init)
+    return citiesJSONArray.compactMap(City.init)
   }
 
 }
