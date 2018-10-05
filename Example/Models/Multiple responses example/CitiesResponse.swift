@@ -21,7 +21,7 @@ enum CitiesResponse {
 extension CitiesResponse {
   public init(jsonDictionary: [String : Any]) throws {
     if let citiesJSONArray = jsonDictionary["cities"] as? [[String: Any]] {
-      self = .cities(citiesJSONArray.flatMap(City.init))
+      self = .cities(citiesJSONArray.compactMap(City.init))
     } else if let city = City(jsonDictionary: jsonDictionary) {
       self = .city(city)
     } else if let serverError = ServerError(jsonDictionary: jsonDictionary) {
