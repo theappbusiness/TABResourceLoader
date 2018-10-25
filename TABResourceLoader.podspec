@@ -11,4 +11,5 @@ Pod::Spec.new do |spec|
   }
   spec.source_files = 'Sources/**/*.swift'
   spec.ios.deployment_target = '8.0'
+  spec.swift_version = '4.2'
 end
