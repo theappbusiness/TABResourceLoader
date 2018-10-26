@@ -1,8 +1,12 @@
 # Change Log
 
+## 8.0.1
+
+- Adds `swift_version` to the podspec as it is now enforced by Cocoapods 1.6.0.
+
 ## 8.0.0
 
-- Add Swift 4.2 support
+- Adds Swift 4.2 support
 
 ## 7.2.2
 
