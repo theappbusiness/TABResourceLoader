@@ -58,13 +58,16 @@ public protocol NetworkResourceType {
 
   /// The query items to be added to the url to fetch this resource
   var queryItems: [URLQueryItem]? { get }
-  
+
   /// The time interval for the URLRequest for this resource
   var requestTimeoutInterval: TimeInterval? { get }
 
+  /// The character set of allowed character for the Query URL. Default value is CharacterSet.urlQueryAllowed
+  var urlQueryAllowedCharacterSet: CharacterSet { get }
+
   /**
    Convenience function that builds a URLRequest for this resource
-
+   
    - returns: A URLRequest or nil if the construction of the request failed
    */
   func urlRequest() -> URLRequest?
@@ -73,18 +76,26 @@ public protocol NetworkResourceType {
 // MARK: - NetworkJSONResource defaults
 public extension NetworkResourceType {
 
+  // MARK: Public properties
+
   public var httpRequestMethod: HTTPMethod { return .get }
   public var httpHeaderFields: [String: String]? { return [:] }
   public var jsonBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
   public var requestTimeoutInterval: TimeInterval? { return nil }
+  public var urlQueryAllowedCharacterSet: CharacterSet { return .urlQueryAllowed }
 
-  public func urlRequest() -> URLRequest? {
-    var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-    let initialItems = urlComponents?.queryItems
-    urlComponents?.queryItems = allQueryItems(initialItems: initialItems)
+  // MARK: Public functions
 
-    guard let urlFromComponents = urlComponents?.url else { return nil }
+  func urlRequest() -> URLRequest? {
+    guard let urlComponents = createURLComponents() else {
+      return nil
+    }
+
+    guard let urlFromComponents = urlComponents.url else {
+      return nil
+    }
+
     var request: URLRequest
     if let timeoutInterval = requestTimeoutInterval {
       request = URLRequest(url: urlFromComponents, timeoutInterval: timeoutInterval)
@@ -95,16 +106,42 @@ public extension NetworkResourceType {
     request.httpMethod = httpRequestMethod.rawValue
 
     if let body = jsonBody {
-      request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
+      request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
     }
 
     return request
   }
 
-  private func allQueryItems(initialItems: [URLQueryItem]?) -> [URLQueryItem]? {
-    let combinedQueryItems = (initialItems ?? []) + (queryItems ?? [])
-    let allQueryItems = combinedQueryItems.isEmpty ? nil : combinedQueryItems
-    return allQueryItems
+  // MARK: Private helpers
+
+  private func createURLComponents() -> URLComponents? {
+    guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+
+    guard let queryItems = queryItems else {
+      return urlComponents
+    }
+
+    let encodedQueryStrings = queryItems.compactMap { (item) -> String? in
+
+      let parameter = item.name.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
+      let value = item.value?.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
+
+      guard !parameter.isEmpty, !value.isEmpty else { return nil }
+
+      return "\(parameter)=\(value)"
+    }
+
+    let encodedQuery = encodedQueryStrings.joined(separator: "&")
+
+    if !encodedQuery.isEmpty {
+      if (urlComponents.percentEncodedQuery ?? "").isEmpty {
+        urlComponents.percentEncodedQuery = encodedQuery
+      } else {
+        urlComponents.percentEncodedQuery?.append("&\(encodedQuery)")
+      }
+    }
+
+    return urlComponents
   }
 }
 

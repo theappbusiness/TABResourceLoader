@@ -22,13 +22,15 @@ private struct MockCustomNetworkResource: NetworkResourceType {
   let jsonBody: Any?
   let queryItems: [URLQueryItem]?
   let requestTimeoutInterval: TimeInterval? = 27
+  let urlQueryAllowedCharacterSet: CharacterSet
 
-  init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String : String]? = nil, jsonBody: Any? = nil, queryItems: [URLQueryItem]? = nil) {
+  init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String: String]? = nil, jsonBody: Any? = nil, queryItems: [URLQueryItem]? = nil, urlQueryAllowedCharacterSet: CharacterSet = .urlQueryAllowed) {
     self.url = url
     self.httpRequestMethod = httpRequestMethod
     self.httpHeaderFields = httpHeaderFields
     self.jsonBody = jsonBody
     self.queryItems = queryItems
+    self.urlQueryAllowedCharacterSet = urlQueryAllowedCharacterSet
   }
 }
 
@@ -77,6 +79,31 @@ class NetworkResourceTypeTests: XCTestCase {
 
     let urlRequest = resource.urlRequest()
     XCTAssertEqual(urlRequest?.url?.absoluteString, urlWithQueryParameters.absoluteString)
+  }
+
+  func test_urlRequest_resourceURLWithQueryParametersRemovingAllowedCharacterPlusAndColon() {
+    let mockedURLQueryItems = [URLQueryItem(name: "query:with+another-name", value: "query:value+another-value")]
+
+    var allowedCharacterSet: CharacterSet = .urlQueryAllowed
+    allowedCharacterSet.remove("+")
+    allowedCharacterSet.remove(":")
+
+    let resource = MockCustomNetworkResource(url: urlWithQueryItem, queryItems: mockedURLQueryItems, urlQueryAllowedCharacterSet: allowedCharacterSet)
+
+    let expectedURLString = "\(urlWithQueryItem)&query%3Awith%2Banother-name=query%3Avalue%2Banother-value"
+    let urlRequest = resource.urlRequest()
+
+    XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
+  }
+
+  func test_urlRequest_resourceURLWithQueryParametersUsingAllowedCharacterPlusAndColon() {
+    let mockedURLQueryItems = [URLQueryItem(name: "query:with+another-name", value: "query:value+another-value")]
+    let resource = MockCustomNetworkResource(url: urlWithQueryItem, queryItems: mockedURLQueryItems)
+
+    let expectedURLString = "\(urlWithQueryItem)&query:with+another-name=query:value+another-value"
+    let urlRequest = resource.urlRequest()
+
+    XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
   }
 
   func test_urlRequest_resourceURLWithNoQueryItemsHasNoQuestionMark() {
