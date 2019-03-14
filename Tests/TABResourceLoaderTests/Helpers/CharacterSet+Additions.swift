@@ -10,9 +10,9 @@ import Foundation
 
 extension CharacterSet {
   public static var improvedUrlQueryAllowed: CharacterSet {
-    var miniUrlQueryAllowed = CharacterSet.urlQueryAllowed
-    miniUrlQueryAllowed.remove("&")
-    miniUrlQueryAllowed.remove("=")
-    return miniUrlQueryAllowed
+    var characterSet = CharacterSet.urlQueryAllowed
+    characterSet("&")
+    characterSet("=")
+    return characterSet
   }
 }

@@ -88,7 +88,7 @@ public extension NetworkResourceType {
 
   // MARK: Public functions
 
-  func urlRequest() -> URLRequest? {
+  public func urlRequest() -> URLRequest? {
     guard let urlComponents = createURLComponents(), let urlFromComponents = urlComponents.url else {
       return nil
     }
@@ -113,7 +113,7 @@ public extension NetworkResourceType {
       return urlComponents
     }
 
-    let encodedQueryStrings = queryItems.compactMap { (item) -> String? in
+    let encodedQueryStrings = queryItems.compactMap { item -> String? in
       let parameter = item.name.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
 
       guard !parameter.isEmpty else {
