@@ -113,7 +113,7 @@ public extension NetworkResourceType {
       return urlComponents
     }
     
-    let encodedQueryStrings = createStringsArrayOf(queryItems)
+    let encodedQueryStrings = createQueryItemStrings(queryItems)
     
     let encodedQuery = encodedQueryStrings.joined(separator: "&")
     
@@ -130,7 +130,7 @@ public extension NetworkResourceType {
     return urlComponents
   }
   
-  private func createStringsArrayOf(_ queryItems: [URLQueryItem]) -> [String] {
+  private func createQueryItemStrings(_ queryItems: [URLQueryItem]) -> [String] {
     let queryItemStrings = queryItems.compactMap { item -> String? in
       let parameter = item.name.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
       
