@@ -116,11 +116,11 @@ class NetworkResourceTypeTests: XCTestCase {
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
   }
 
-  func test_urlRequest_resourceURLWithQueryParametersWithAmpAndEquals() {
+  func test_urlRequest_resourceURLWithQueryParametersWithAmpAndEqual() {
     let mockedURLQueryItems = [URLQueryItem(name: "query-name", value: "malformed&value=something")]
     let resource = MockCustomNetworkResource(url: urlWithQueryItem, queryItems: mockedURLQueryItems)
 
-    let expectedURLString = "\(urlWithQueryItem)&query-name=malformed%26value=%3Dsomething"
+    let expectedURLString = "\(urlWithQueryItem)&query-name=malformed%26value%3Dsomething"
     let urlRequest = resource.urlRequest()
 
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
