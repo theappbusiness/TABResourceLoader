@@ -62,7 +62,8 @@ public protocol NetworkResourceType {
   /// The time interval for the URLRequest for this resource
   var requestTimeoutInterval: TimeInterval? { get }
 
-  /// The character set of allowed character for the Query URL. Default value is CharacterSet.urlQueryAllowed
+  /// The CharacterSet of allowed characters for encoding the query parameters.
+  /// By default, this will be `CharacterSet.improvedUrlQueryAllowed`.
   var urlQueryAllowedCharacterSet: CharacterSet { get }
 
   /**
@@ -83,22 +84,16 @@ public extension NetworkResourceType {
   public var jsonBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
   public var requestTimeoutInterval: TimeInterval? { return nil }
-  public var urlQueryAllowedCharacterSet: CharacterSet { return .urlQueryAllowed }
+  public var urlQueryAllowedCharacterSet: CharacterSet { return .improvedUrlQueryAllowed }
 
   // MARK: Public functions
 
   func urlRequest() -> URLRequest? {
-    guard let urlComponents = createURLComponents() else {
+    guard let urlComponents = createURLComponents(), let urlFromComponents = urlComponents.url else {
       return nil
     }
 
-    guard let urlFromComponents = urlComponents.url else {
-      return nil
-    }
-
-    var request: URLRequest
-
-    request = URLRequest(url: urlFromComponents, timeoutInterval: requestTimeoutInterval ?? URLSessionConfiguration.default.timeoutIntervalForRequest)
+    var request = URLRequest(url: urlFromComponents, timeoutInterval: requestTimeoutInterval ?? URLSessionConfiguration.default.timeoutIntervalForRequest)
     request.allHTTPHeaderFields = httpHeaderFields
     request.httpMethod = httpRequestMethod.rawValue
 
@@ -120,7 +115,11 @@ public extension NetworkResourceType {
 
     let encodedQueryStrings = queryItems.compactMap { (item) -> String? in
       let parameter = item.name.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
-      guard !parameter.isEmpty else { return nil }
+
+      guard !parameter.isEmpty else {
+        return nil
+      }
+
       let value = item.value?.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
 
       return "\(parameter)=\(value)"
@@ -128,14 +127,16 @@ public extension NetworkResourceType {
 
     let encodedQuery = encodedQueryStrings.joined(separator: "&")
 
-    if !encodedQuery.isEmpty {
-      if (urlComponents.percentEncodedQuery ?? "").isEmpty {
-        urlComponents.percentEncodedQuery = encodedQuery
-      } else {
-        urlComponents.percentEncodedQuery?.append("&\(encodedQuery)")
-      }
+    guard !encodedQuery.isEmpty else {
+      return nil
     }
 
+    guard (urlComponents.percentEncodedQuery ?? "").isEmpty else {
+      urlComponents.percentEncodedQuery?.append("&\(encodedQuery)")
+      return urlComponents
+    }
+
+    urlComponents.percentEncodedQuery = encodedQuery
     return urlComponents
   }
 }
