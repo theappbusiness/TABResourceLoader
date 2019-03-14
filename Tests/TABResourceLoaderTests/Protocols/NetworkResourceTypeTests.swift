@@ -24,7 +24,7 @@ private struct MockCustomNetworkResource: NetworkResourceType {
   let requestTimeoutInterval: TimeInterval? = 27
   let urlQueryAllowedCharacterSet: CharacterSet
 
-  init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String: String]? = nil, jsonBody: Any? = nil, queryItems: [URLQueryItem]? = nil, urlQueryAllowedCharacterSet: CharacterSet = .urlQueryAllowed) {
+  init(url: URL, httpRequestMethod: HTTPMethod = .get, httpHeaderFields: [String: String]? = nil, jsonBody: Any? = nil, queryItems: [URLQueryItem]? = nil, urlQueryAllowedCharacterSet: CharacterSet = .improvedUrlQueryAllowed) {
     self.url = url
     self.httpRequestMethod = httpRequestMethod
     self.httpHeaderFields = httpHeaderFields
@@ -116,11 +116,11 @@ class NetworkResourceTypeTests: XCTestCase {
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
   }
 
-  func test_urlRequest_resourceURLWithQueryParametersWithMalformedParameter() {
-    let mockedURLQueryItems = [URLQueryItem(name: "query-name", value: "malformed&value")]
+  func test_urlRequest_resourceURLWithQueryParametersWithAmpAndEquals() {
+    let mockedURLQueryItems = [URLQueryItem(name: "query-name", value: "malformed&value=something")]
     let resource = MockCustomNetworkResource(url: urlWithQueryItem, queryItems: mockedURLQueryItems)
 
-    let expectedURLString = "\(urlWithQueryItem)&query-name=malformed&value"
+    let expectedURLString = "\(urlWithQueryItem)&query-name=malformed%26value=%3Dsomething"
     let urlRequest = resource.urlRequest()
 
     XCTAssertEqual(urlRequest?.url?.absoluteString, expectedURLString)
