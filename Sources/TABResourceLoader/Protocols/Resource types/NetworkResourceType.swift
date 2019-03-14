@@ -97,11 +97,8 @@ public extension NetworkResourceType {
     }
 
     var request: URLRequest
-    if let timeoutInterval = requestTimeoutInterval {
-      request = URLRequest(url: urlFromComponents, timeoutInterval: timeoutInterval)
-    } else {
-      request = URLRequest(url: urlFromComponents)
-    }
+
+    request = URLRequest(url: urlFromComponents, timeoutInterval: requestTimeoutInterval ?? URLSessionConfiguration.default.timeoutIntervalForRequest)
     request.allHTTPHeaderFields = httpHeaderFields
     request.httpMethod = httpRequestMethod.rawValue
 
@@ -122,11 +119,9 @@ public extension NetworkResourceType {
     }
 
     let encodedQueryStrings = queryItems.compactMap { (item) -> String? in
-
       let parameter = item.name.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
+      guard !parameter.isEmpty else { return nil }
       let value = item.value?.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
-
-      guard !parameter.isEmpty, !value.isEmpty else { return nil }
 
       return "\(parameter)=\(value)"
     }
