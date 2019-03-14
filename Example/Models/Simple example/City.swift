@@ -13,7 +13,7 @@ struct City {
 }
 
 extension City {
-  init?(jsonDictionary: [String : Any]) {
+  init?(jsonDictionary: [String: Any]) {
     guard let parsedName = jsonDictionary["name"] as? String else {
       return nil
     }

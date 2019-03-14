@@ -52,7 +52,7 @@ struct RegistrationResource: NetworkJSONDictionaryResourceType {
   }
 
   // MARK: JSONDictionaryResourceType
-  func model(from jsonDictionary: [String : Any]) throws -> Model {
+  func model(from jsonDictionary: [String: Any]) throws -> Model {
     if let error = jsonDictionary["errorCode"] as? String {
         let error = try RegistrationErrorType(error: error)
         return .failure(type: error)

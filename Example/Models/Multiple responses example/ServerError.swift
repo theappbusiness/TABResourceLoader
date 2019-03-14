@@ -13,7 +13,7 @@ struct ServerError {
 }
 
 extension ServerError {
-  init?(jsonDictionary: [String : Any]) {
+  init?(jsonDictionary: [String: Any]) {
     guard let parsedErrorMessage = jsonDictionary["errorMessage"] as? String else {
       return nil
     }
