@@ -36,7 +36,7 @@ public enum HTTPMethod: String {
   case delete
   case head
   case put
-  
+
   public var rawValue: String {
     return "\(self)".uppercased()
   }
@@ -46,26 +46,26 @@ public enum HTTPMethod: String {
 public protocol NetworkResourceType {
   /// The URL of the resource
   var url: URL { get }
-  
+
   /// The HTTP method used to fetch this resource
   var httpRequestMethod: HTTPMethod { get }
-  
+
   /// The HTTP header fields used to fetch this resource
   var httpHeaderFields: [String: String]? { get }
-  
+
   /// The HTTP body as JSON used to fetch this resource
   var jsonBody: Any? { get }
-  
+
   /// The query items to be added to the url to fetch this resource
   var queryItems: [URLQueryItem]? { get }
-  
+
   /// The time interval for the URLRequest for this resource
   var requestTimeoutInterval: TimeInterval? { get }
-  
+
   /// The CharacterSet of allowed characters for encoding the query parameters.
   /// By default, this will be `CharacterSet.improvedUrlQueryAllowed`.
   var urlQueryAllowedCharacterSet: CharacterSet { get }
-  
+
   /**
    Convenience function that builds a URLRequest for this resource
    
@@ -76,70 +76,70 @@ public protocol NetworkResourceType {
 
 // MARK: - NetworkJSONResource defaults
 public extension NetworkResourceType {
-  
+
   // MARK: Public properties
-  
+
   public var httpRequestMethod: HTTPMethod { return .get }
   public var httpHeaderFields: [String: String]? { return [:] }
   public var jsonBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
   public var requestTimeoutInterval: TimeInterval? { return nil }
   public var urlQueryAllowedCharacterSet: CharacterSet { return .improvedUrlQueryAllowed }
-  
+
   // MARK: Public functions
-  
+
   public func urlRequest() -> URLRequest? {
     guard let urlComponents = createURLComponents(), let urlFromComponents = urlComponents.url else {
       return nil
     }
-    
+
     var request = URLRequest(url: urlFromComponents, timeoutInterval: requestTimeoutInterval ?? URLSessionConfiguration.default.timeoutIntervalForRequest)
     request.allHTTPHeaderFields = httpHeaderFields
     request.httpMethod = httpRequestMethod.rawValue
-    
+
     if let body = jsonBody {
       request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
     }
-    
+
     return request
   }
-  
+
   // MARK: Private helpers
-  
+
   private func createURLComponents() -> URLComponents? {
     guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
-    
+
     guard let queryItems = queryItems else {
       return urlComponents
     }
-    
+
     let encodedQueryStrings = createQueryItemStrings(queryItems)
-    
+
     let encodedQuery = encodedQueryStrings.joined(separator: "&")
-    
+
     guard !encodedQuery.isEmpty else {
-      return nil
+      return urlComponents
     }
-    
+
     guard (urlComponents.percentEncodedQuery ?? "").isEmpty else {
       urlComponents.percentEncodedQuery?.append("&\(encodedQuery)")
       return urlComponents
     }
-    
+
     urlComponents.percentEncodedQuery = encodedQuery
     return urlComponents
   }
-  
+
   private func createQueryItemStrings(_ queryItems: [URLQueryItem]) -> [String] {
     let queryItemStrings = queryItems.compactMap { item -> String? in
       let parameter = item.name.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
-      
+
       guard !parameter.isEmpty else {
         return nil
       }
-      
+
       let value = item.value?.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
-      
+
       return "\(parameter)=\(value)"
     }
     return queryItemStrings
