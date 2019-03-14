@@ -11,8 +11,8 @@ import Foundation
 extension CharacterSet {
   public static var improvedUrlQueryAllowed: CharacterSet {
     var characterSet = CharacterSet.urlQueryAllowed
-    characterSet("&")
-    characterSet("=")
+    characterSet.remove("&")
+    characterSet.remove("=")
     return characterSet
   }
 }
