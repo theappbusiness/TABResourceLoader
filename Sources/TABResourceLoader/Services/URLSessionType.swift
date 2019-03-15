@@ -40,7 +40,7 @@ extension URLSession: URLSessionType {
     task.resume()
     return task
   }
-  
+
   public func cancelAllRequests() {
     getTasksWithCompletionHandler { (dataTasks, uploadTasks, downloadTasks) in
       URLSession.cancelTasks(dataTasks)

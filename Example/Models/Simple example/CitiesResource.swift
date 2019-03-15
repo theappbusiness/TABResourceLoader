@@ -25,7 +25,7 @@ struct CitiesResource: NetworkJSONDictionaryResourceType {
   }
 
   // MARK: JSONDictionaryResourceType
-  func model(from jsonDictionary: [String : Any]) throws -> Model {
+  func model(from jsonDictionary: [String: Any]) throws -> Model {
     guard let
       citiesJSONArray = jsonDictionary["cities"] as? [[String: Any]]
       else {

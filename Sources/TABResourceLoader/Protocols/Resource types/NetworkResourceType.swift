@@ -58,13 +58,17 @@ public protocol NetworkResourceType {
 
   /// The query items to be added to the url to fetch this resource
   var queryItems: [URLQueryItem]? { get }
-  
+
   /// The time interval for the URLRequest for this resource
   var requestTimeoutInterval: TimeInterval? { get }
 
+  /// The CharacterSet of allowed characters for encoding the query parameters.
+  /// By default, this will be `CharacterSet.improvedUrlQueryAllowed`.
+  var urlQueryAllowedCharacterSet: CharacterSet { get }
+
   /**
    Convenience function that builds a URLRequest for this resource
-
+   
    - returns: A URLRequest or nil if the construction of the request failed
    */
   func urlRequest() -> URLRequest?
@@ -73,38 +77,72 @@ public protocol NetworkResourceType {
 // MARK: - NetworkJSONResource defaults
 public extension NetworkResourceType {
 
+  // MARK: Public properties
+
   public var httpRequestMethod: HTTPMethod { return .get }
   public var httpHeaderFields: [String: String]? { return [:] }
   public var jsonBody: Any? { return nil }
   public var queryItems: [URLQueryItem]? { return nil }
   public var requestTimeoutInterval: TimeInterval? { return nil }
+  public var urlQueryAllowedCharacterSet: CharacterSet { return .improvedUrlQueryAllowed }
+
+  // MARK: Public functions
 
   public func urlRequest() -> URLRequest? {
-    var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-    let initialItems = urlComponents?.queryItems
-    urlComponents?.queryItems = allQueryItems(initialItems: initialItems)
-
-    guard let urlFromComponents = urlComponents?.url else { return nil }
-    var request: URLRequest
-    if let timeoutInterval = requestTimeoutInterval {
-      request = URLRequest(url: urlFromComponents, timeoutInterval: timeoutInterval)
-    } else {
-      request = URLRequest(url: urlFromComponents)
+    guard let urlComponents = createURLComponents(), let urlFromComponents = urlComponents.url else {
+      return nil
     }
+
+    var request = URLRequest(url: urlFromComponents, timeoutInterval: requestTimeoutInterval ?? URLSessionConfiguration.default.timeoutIntervalForRequest)
     request.allHTTPHeaderFields = httpHeaderFields
     request.httpMethod = httpRequestMethod.rawValue
 
     if let body = jsonBody {
-      request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
+      request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
     }
 
     return request
   }
 
-  private func allQueryItems(initialItems: [URLQueryItem]?) -> [URLQueryItem]? {
-    let combinedQueryItems = (initialItems ?? []) + (queryItems ?? [])
-    let allQueryItems = combinedQueryItems.isEmpty ? nil : combinedQueryItems
-    return allQueryItems
+  // MARK: Private helpers
+
+  private func createURLComponents() -> URLComponents? {
+    guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+
+    guard let queryItems = queryItems else {
+      return urlComponents
+    }
+
+    let encodedQueryStrings = createQueryItemStrings(queryItems)
+
+    let encodedQuery = encodedQueryStrings.joined(separator: "&")
+
+    guard !encodedQuery.isEmpty else {
+      return urlComponents
+    }
+
+    guard (urlComponents.percentEncodedQuery ?? "").isEmpty else {
+      urlComponents.percentEncodedQuery?.append("&\(encodedQuery)")
+      return urlComponents
+    }
+
+    urlComponents.percentEncodedQuery = encodedQuery
+    return urlComponents
+  }
+
+  private func createQueryItemStrings(_ queryItems: [URLQueryItem]) -> [String] {
+    let queryItemStrings = queryItems.compactMap { item -> String? in
+      let parameter = item.name.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
+
+      guard !parameter.isEmpty else {
+        return nil
+      }
+
+      let value = item.value?.addingPercentEncoding(withAllowedCharacters: urlQueryAllowedCharacterSet) ?? ""
+
+      return "\(parameter)=\(value)"
+    }
+    return queryItemStrings
   }
 }
 

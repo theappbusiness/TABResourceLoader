@@ -21,7 +21,7 @@ struct MultipleResponseResource: NetworkJSONDictionaryResourceType {
   }
 
   // MARK: JSONDictionaryResourceType
-  func model(from jsonDictionary: [String : Any]) throws -> Model {
+  func model(from jsonDictionary: [String: Any]) throws -> Model {
     return try CitiesResponse(jsonDictionary: jsonDictionary)
   }
 

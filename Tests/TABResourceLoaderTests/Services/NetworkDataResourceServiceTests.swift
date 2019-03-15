@@ -224,7 +224,7 @@ class NetworkDataResourceServiceTests: XCTestCase {
     }
     waitForExpectation()
   }
-  
+
   func testCancelAllRequests() {
     testService = GenericNetworkDataResourceService<MockDefaultNetworkDataResource>()
     performAsyncTest { expectation in
