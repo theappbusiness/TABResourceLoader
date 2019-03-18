@@ -325,6 +325,7 @@
 		4F079D381D8458A000D08DA0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				90B62B47223A5F6C00640CE9 /* CharacterSet+Additions.swift */,
 				4F079D361D84585E00D08DA0 /* NSThread+Additions.swift */,
 			);
 			path = Extensions;
@@ -356,7 +357,6 @@
 				4F4BE52B1ECB415500C2CC56 /* String+Error.swift */,
 				EA1EE0D41F881CF000902527 /* String+Additions.swift */,
 				4FF581741F051F23008D0A20 /* Result+Additions.swift */,
-				90B62B47223A5F6C00640CE9 /* CharacterSet+Additions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
