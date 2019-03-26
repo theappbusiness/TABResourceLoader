@@ -79,16 +79,16 @@ public extension NetworkResourceType {
 
   // MARK: Public properties
 
-  public var httpRequestMethod: HTTPMethod { return .get }
-  public var httpHeaderFields: [String: String]? { return [:] }
-  public var jsonBody: Any? { return nil }
-  public var queryItems: [URLQueryItem]? { return nil }
-  public var requestTimeoutInterval: TimeInterval? { return nil }
-  public var urlQueryAllowedCharacterSet: CharacterSet { return .improvedUrlQueryAllowed }
+  var httpRequestMethod: HTTPMethod { return .get }
+  var httpHeaderFields: [String: String]? { return [:] }
+  var jsonBody: Any? { return nil }
+  var queryItems: [URLQueryItem]? { return nil }
+  var requestTimeoutInterval: TimeInterval? { return nil }
+  var urlQueryAllowedCharacterSet: CharacterSet { return .improvedUrlQueryAllowed }
 
   // MARK: Public functions
 
-  public func urlRequest() -> URLRequest? {
+  func urlRequest() -> URLRequest? {
     guard let urlComponents = createURLComponents(), let urlFromComponents = urlComponents.url else {
       return nil
     }
