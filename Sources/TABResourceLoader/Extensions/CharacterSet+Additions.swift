@@ -29,7 +29,7 @@
 import Foundation
 
 public extension CharacterSet {
-  public static var improvedUrlQueryAllowed: CharacterSet {
+  static var improvedUrlQueryAllowed: CharacterSet {
     var characterSet = CharacterSet.urlQueryAllowed
     characterSet.remove("&")
     characterSet.remove("=")

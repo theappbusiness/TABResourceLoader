@@ -1,10 +1,10 @@
 os:
   - osx
 language: generic
-osx_image: xcode10
+osx_image: xcode10.2
 script:
   # - xcrun instruments -t 'Blank' -l 10 -w "iPhone 6s (10.3)"
-  - xcodebuild -scheme Example -configuration Debug -sdk iphonesimulator12.0 -destination "OS=12.0,name=iPhone 6s" build
-  - xcodebuild -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator12.0 -destination "OS=12.0,name=iPhone 6s" test -enableCodeCoverage YES
+  - xcodebuild -scheme Example -configuration Debug -sdk iphonesimulator12.2 -destination "OS=12.2,name=iPhone Xs" build
+  - xcodebuild -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator12.2 -destination "OS=12.2,name=iPhone Xs" test -enableCodeCoverage YES
 after_success:
   - bash <(curl -s https://codecov.io/bash)

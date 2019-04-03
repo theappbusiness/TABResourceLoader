@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   spec.name         = 'TABResourceLoader'
   spec.homepage     = 'https://github.com/theappbusiness/TABResourceLoader'
-  spec.version      = '8.1.0'
+  spec.version      = '8.2.0'
   spec.license      = { :type => 'MIT' }
   spec.authors      = { 'Luciano Marisi' => 'luciano@techbrewers.com' }
   spec.summary      = 'Framework for loading resources from a network service'
@@ -11,5 +11,5 @@ Pod::Spec.new do |spec|
   }
   spec.source_files = 'Sources/**/*.swift'
   spec.ios.deployment_target = '8.0'
-  spec.swift_version = '4.2'
+  spec.swift_version = '5.0'
 end
