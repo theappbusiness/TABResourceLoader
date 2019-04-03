@@ -25,13 +25,13 @@ class MockResourceService: ResourceServiceType {
   typealias Resource = MockResource
 
   var capturedResource: Resource?
-  var capturedCompletion: ((Result<Resource.Model>) -> Void)?
+  var capturedCompletion: ((Result<Resource.Model, Error>) -> Void)?
   var fetchCallCount: Int = 0
   var mockReturnedCancellable: Cancellable?
 
   required init(session: URLSessionType = MockSessionThatDoesNothing()) {}
 
-  func fetch(resource: Resource, completion: @escaping (Result<Resource.Model>) -> Void) -> Cancellable? {
+  func fetch(resource: Resource, completion: @escaping (Result<Resource.Model, Error>) -> Void) -> Cancellable? {
     capturedResource = resource
     capturedCompletion = completion
     fetchCallCount += 1

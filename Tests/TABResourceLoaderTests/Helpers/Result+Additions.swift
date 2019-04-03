@@ -28,10 +28,10 @@
 
 import TABResourceLoader
 
-extension Result {
+extension Swift.Result {
 
   /// Returns the success result if it exists, otherwise nil
-  func successResult() -> T? {
+  func successResult() -> Success? {
     switch self {
     case .success(let successResult):
       return successResult
