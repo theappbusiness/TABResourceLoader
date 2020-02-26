@@ -59,7 +59,7 @@ struct NetworkResponseHandler {
 
     switch HTTPURLResponse.statusCode {
     case 200..<400:
-      let parsedResult = Result<Resource.Model> {
+      let parsedResult = Result<Resource.Model, Error> {
         return try resource.model(from: data)
       }
       switch parsedResult {

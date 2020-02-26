@@ -86,7 +86,7 @@ class ResourceOperationTests: XCTestCase {
     }
     sut.execute()
     sut.cancel()
-    let expectedResult = Result.success("some result")
+    let expectedResult = Result<String, Error>.success("some result")
     mockService.capturedCompletion!(expectedResult)
     XCTAssertFalse(sut.isFinished)
   }
