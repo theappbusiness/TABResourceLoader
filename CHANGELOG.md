@@ -2,7 +2,7 @@
 
 ## 9.0.0
 
-- This release change the Result type used in the framework, removing the existing Result type and replacing it with the new Result type introduced in Swift 5.0 in the standard library.
+- This release replaces the custom `Result` type with the one provided by the Swift 5 Standard Library. This is a **breaking change**, since you now have to explicitly specify the `Error` type. In addition, the `error` convenience method has also been renamed to `failureResult` to match the `successResult` method.
 
 ## 8.2.0
 
