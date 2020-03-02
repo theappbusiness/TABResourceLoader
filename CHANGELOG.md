@@ -1,5 +1,17 @@
 # Change Log
 
+## 9.0.0
+
+- This release replaces the custom `Result` type with the one provided by the Swift 5 Standard Library. This is a **breaking change**, since you now have to explicitly specify the `Error` type. In addition, the `error` convenience method has also been renamed to `failureResult` to match the `successResult` method.
+
+## 8.2.0
+
+- This release adds support for Swift 5.0
+
+## 8.1.0
+
+- Includes support to override character set for encoding URL query parameters.
+
 ## 8.0.1
 
 - Adds `swift_version` to the podspec as it is now enforced by Cocoapods 1.6.0.
