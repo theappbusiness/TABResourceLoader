@@ -3,7 +3,7 @@
 //  TABResourceLoader
 //
 //  Created by Sam Dods on 10/10/2017.
-//  Copyright © 2017 Luciano Marisi. All rights reserved.
+//  Copyright © 2017 Kin + Carta. All rights reserved.
 //
 
 import XCTest

@@ -1,4 +1,4 @@
-![The App Business](Assets/logo.png)
+![TABResourceLoader - Kin + Carta Create](Assets/logo.png)
 
 # TABResourceLoader
 
