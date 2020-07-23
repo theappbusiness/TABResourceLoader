@@ -3,7 +3,7 @@
 //  Example
 //
 //  Created by Luciano Marisi on 17/09/2016.
-//  Copyright © 2016 Luciano Marisi. All rights reserved.
+//  Copyright © 2016 Kin + Carta. All rights reserved.
 //
 
 import UIKit

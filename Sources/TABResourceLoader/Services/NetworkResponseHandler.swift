@@ -3,7 +3,7 @@
 //  TABResourceLoader
 //
 //  Created by Luciano Marisi on 11/02/2017.
-//  Copyright © 2017 Luciano Marisi. All rights reserved.
+//  Copyright © 2017 Kin + Carta. All rights reserved.
 //
 
 import Foundation

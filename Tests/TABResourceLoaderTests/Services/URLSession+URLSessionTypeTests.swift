@@ -3,7 +3,7 @@
 //  TABResourceLoaderTests
 //
 //  Created by Priya Marwaha on 22/12/17.
-//  Copyright © 2017 Luciano Marisi. All rights reserved.
+//  Copyright © 2017 Kin + Carta. All rights reserved.
 //
 
 import XCTest
