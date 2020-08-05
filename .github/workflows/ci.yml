@@ -1,0 +1,24 @@
+name: TABResourceLoader CI
+
+on:
+  workflow_dispatch: # This allows you to manually run the workflow from GitHub's web UI
+  push:
+    branches: [ chore/github-action ] # For testing for the moment
+  pull_request:
+    branches: [ '*' ] # This means this workflow will run when any PR is created or any changes are pushed to a PR, on any branch
+
+jobs:
+  test_xcode10_ios12:
+    name: Run tests on Xcode 10 and iOS 12
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set Xcode version to 10.3
+        run: sudo xcode-select -switch /Applications/Xcode_10.3.app
+      - name: Build for testing
+        run:  xcodebuild  build -scheme Example -configuration Debug -sdk iphonesimulator12.2 -destination "OS=12.4,name=iPhone Xs"
+#         run: xcodebuild build-for-testing -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
+#      - name: Test on iPhone Xs
+#        run: xcodebuild test-without-building -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
