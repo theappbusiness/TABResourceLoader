@@ -26,7 +26,6 @@ jobs:
 #        run: bash <(curl -s https://codecov.io/bash)    
 #        run: xcodebuild test-without-building -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
 
-jobs:
   test_xcode11_ios13:
     name: Run tests on Xcode 10 and iOS 12
     runs-on: macOS-latest
