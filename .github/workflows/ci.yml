@@ -7,25 +7,6 @@ on:
   pull_request:
     branches: [ '*' ] # This means this workflow will run when any PR is created or any changes are pushed to a PR, on any branch
 
-jobs:
-  test_xcode10_ios12:
-    name: Run tests on Xcode 10 and iOS 12
-    runs-on: macOS-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Set Xcode version to 10.3
-        run: sudo xcode-select -switch /Applications/Xcode_10.3.app
-      - name: Build for testing
-        run:  xcodebuild  build -scheme Example -configuration Debug -sdk iphonesimulator12.4 -destination "OS=12.4,name=iPhone Xs"
-#         run: xcodebuild build-for-testing -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
-      - name: Test on iPhone Xs
-        run:  xcodebuild -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator12.4 -destination "OS=12.4,name=iPhone Xs" test -enableCodeCoverage YES
-#      - name: codecov
-#        run: bash <(curl -s https://codecov.io/bash)    
-#        run: xcodebuild test-without-building -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
-
   test_xcode11_ios13:
     name: Run tests on Xcode 11 and iOS 13
     runs-on: macOS-latest
@@ -37,9 +18,7 @@ jobs:
         run: sudo xcode-select -switch /Applications/Xcode_11.6.app
       - name: Build for testing
         run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro"
-#         run: xcodebuild build-for-testing -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
       - name: Test on iPhone 11 Pro
         run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro" -enableCodeCoverage YES
       - name: codecov
         run: bash <(curl -s https://codecov.io/bash)    
-#        run: xcodebuild test-without-building -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
