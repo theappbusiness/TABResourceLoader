@@ -2,8 +2,6 @@ name: TABResourceLoader CI
 
 on:
   workflow_dispatch: # This allows you to manually run the workflow from GitHub's web UI
-  push:
-    branches: [ chore/github-action ] # For testing for the moment
   pull_request:
     branches: [ '*' ] # This means this workflow will run when any PR is created or any changes are pushed to a PR, on any branch
 
