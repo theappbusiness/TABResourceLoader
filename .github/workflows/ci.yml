@@ -18,7 +18,8 @@ jobs:
       - name: Set Xcode version to 10.3
         run: sudo xcode-select -switch /Applications/Xcode_10.3.app
       - name: Build for testing
-        run:  xcodebuild  build -scheme Example -configuration Debug -sdk iphonesimulator12.4 -destination "OS=12.4,name=iPhone Xs"
+        run:  xcodebuild  build-for-testing -scheme Example -configuration Debug -sdk iphonesimulator12.4 -destination "OS=12.4,name=iPhone Xs"
 #         run: xcodebuild build-for-testing -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
-#      - name: Test on iPhone Xs
+      - name: Test on iPhone Xs
+        run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator12.4 -destination "OS=12.4,name=iPhone Xs" -enableCodeCoverage YES
 #        run: xcodebuild test-without-building -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
