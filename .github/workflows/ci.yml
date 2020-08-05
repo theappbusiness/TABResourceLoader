@@ -27,14 +27,14 @@ jobs:
 #        run: xcodebuild test-without-building -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
 
   test_xcode11_ios13:
-    name: Run tests on Xcode 10 and iOS 12
+    name: Run tests on Xcode 11 and iOS 13
     runs-on: macOS-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Set Xcode version to 11.6
-        run: sudo xcode-select -switch /Applications/Xcode_10.6.app
+        run: sudo xcode-select -switch /Applications/Xcode_11.6.app
       - name: Build for testing
         run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro"
 #         run: xcodebuild build-for-testing -workspace Example/TABTestKit.xcworkspace -scheme TABTestKit-Example -destination 'platform=iOS Simulator,name=iPhone Xs,OS=12.4'
