@@ -7,6 +7,7 @@ on:
   pull_request:
     branches: [ '*' ] # This means this workflow will run when any PR is created or any changes are pushed to a PR, on any branch
 
+jobs:
   test_xcode11_ios13:
     name: Run tests on Xcode 11 and iOS 13
     runs-on: macOS-latest
