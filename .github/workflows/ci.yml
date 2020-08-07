@@ -1,0 +1,23 @@
+name: TABResourceLoader CI
+
+on:
+  workflow_dispatch: # This allows you to manually run the workflow from GitHub's web UI
+  pull_request:
+    branches: [ '*' ] # This means this workflow will run when any PR is created or any changes are pushed to a PR, on any branch
+
+jobs:
+  test_xcode11_ios13:
+    name: Run tests on Xcode 11 and iOS 13
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set Xcode version to 11.6
+        run: sudo xcode-select -switch /Applications/Xcode_11.6.app
+      - name: Build for testing
+        run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro"
+      - name: Test on iPhone 11 Pro
+        run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro" -enableCodeCoverage YES
+      - name: codecov
+        run: bash <(curl -s https://codecov.io/bash)    
