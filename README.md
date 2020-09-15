@@ -2,10 +2,10 @@
 
 # TABResourceLoader
 
-[![Build Status](https://travis-ci.org/theappbusiness/TABResourceLoader.svg?branch=master)](https://travis-ci.org/theappbusiness/TABResourceLoader)
+[![Build Status](https://travis-ci.org/theappbusiness/TABResourceLoader.svg?branch=main)](https://travis-ci.org/theappbusiness/TABResourceLoader)
 [![](https://img.shields.io/cocoapods/v/TABResourceLoader.svg)](https://cocoapods.org/pods/TABResourceLoader)
 [![](https://img.shields.io/cocoapods/p/TABResourceLoader.svg?style=flat)](https://cocoapods.org/pods/TABResourceLoader)
-[![codecov.io](http://codecov.io/github/theappbusiness/TABResourceLoader/coverage.svg?branch=master)](http://codecov.io/github/theappbusiness/TABResourceLoader?branch=master)
+[![codecov.io](http://codecov.io/github/theappbusiness/TABResourceLoader/coverage.svg?branch=main)](http://codecov.io/github/theappbusiness/TABResourceLoader?branch=main)
 
 This library is designed to fetch resources in a consistent and modular way. The user can define resources by conforming to protocols that define where and how to get them. These resources can then be retrieved using a generic service type with or without an operation provided by the library. By following this approach it's easy to have testable and modular networking stack.
 
