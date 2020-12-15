@@ -9,6 +9,24 @@
 
 This library is designed to fetch resources in a consistent and modular way. The user can define resources by conforming to protocols that define where and how to get them. These resources can then be retrieved using a generic service type with or without an operation provided by the library. By following this approach it's easy to have testable and modular networking stack.
 
+
+## Installation
+
+
+### Swift Package Manager
+
+You can add **TABResourceLoader** as a remote Swift Package dependency in Xcode 11 or newer.
+
+
+### Cocoapods
+
+To use the latest version of **TABResourceLoader** just add this to your `Podfile` and run `pod update` or `pod install` in Terminal:
+
+```ruby
+pod 'TABResourceLoader'
+```
+
+
 ## Example use cases
 
 ### Working with a web service

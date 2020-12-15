@@ -1,5 +1,9 @@
 # Change Log
 
+## 9.1.0
+
+- This release adds support for Swift Package Manager.
+
 ## 9.0.0
 
 - This release replaces the custom `Result` type with the one provided by the Swift 5 Standard Library. This is a **breaking change**, since you now have to explicitly specify the `Error` type. In addition, the `error` convenience method has also been renamed to `failureResult` to match the `successResult` method.
