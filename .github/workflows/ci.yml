@@ -20,4 +20,52 @@ jobs:
       - name: Test on iPhone 11 Pro
         run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro" -enableCodeCoverage YES
       - name: codecov
-        run: bash <(curl -s https://codecov.io/bash)    
+        run: bash <(curl -s https://codecov.io/bash)
+        
+  test_xcode12_ios14:
+    name: Run tests on Xcode 12 and iOS 14
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set Xcode version to 12.1
+        run: sudo xcode-select -switch /Applications/Xcode_12.1.app
+      - name: Build for testing
+        run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator14.1 -destination "OS=14.1,name=iPhone 12 Pro"
+      - name: Test on iPhone 12 Pro
+        run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=14.1,name=iPhone 12 Pro" -enableCodeCoverage YES
+      - name: codecov
+        run: bash <(curl -s https://codecov.io/bash)
+
+  build_cocoapods:
+    name: Ensure Cocoapods builds
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set Xcode version to 11.7
+        run: sudo xcode-select -switch /Applications/Xcode_11.7.app
+      - name: Build Cocoapods
+        run: pod lib lint --verbose
+      - name: Set Xcode version to 12.1
+        run: sudo xcode-select -switch /Applications/Xcode_12.1.app
+      - name: Build Cocoapods
+        run: pod lib lint --verbose --allow-warnings
+        
+  build_spm:
+    name: Ensure Swift Package Manager builds
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set Xcode version to 11.7
+        run: sudo xcode-select -switch /Applications/Xcode_11.7.app
+      - name: Build Swift Package Manager
+        run: xcodebuild -workspace package.xcworkspace -scheme TABTestKit -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.7'
+      - name: Set Xcode version to 12.1
+        run: sudo xcode-select -switch /Applications/Xcode_12.1.app
+      - name: Build Swift Package Manager
+        run: xcodebuild -workspace package.xcworkspace -scheme TABTestKit -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.1'
