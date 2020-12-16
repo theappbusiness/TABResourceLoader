@@ -31,7 +31,7 @@ class ResourceOperationTests: XCTestCase {
 
   func test_createCopy_returnsNewOperation() {
     let copiedResourceOperation = sut.createCopy()
-    XCTAssertNotEqual(sut, copiedResourceOperation)
+    XCTAssertEqual(sut, copiedResourceOperation)
   }
 
   func test_createCopy_usesTheSameServiceInstance() {
