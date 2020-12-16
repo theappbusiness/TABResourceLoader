@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Set Xcode version to 11.6
-        run: sudo xcode-select -switch /Applications/Xcode_11.6.app
+      - name: Set Xcode version to 11.7
+        run: sudo xcode-select -switch /Applications/Xcode_11.7.app
       - name: Build for testing
         run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro"
       - name: Test on iPhone 11 Pro
@@ -34,7 +34,7 @@ jobs:
       - name: Build for testing
         run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator14.1 -destination "OS=14.1,name=iPhone 12 Pro"
       - name: Test on iPhone 12 Pro
-        run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=14.1,name=iPhone 12 Pro" -enableCodeCoverage YES
+        run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator14.1 -destination "OS=14.1,name=iPhone 12 Pro" -enableCodeCoverage YES
       - name: codecov
         run: bash <(curl -s https://codecov.io/bash)
 
@@ -64,8 +64,8 @@ jobs:
       - name: Set Xcode version to 11.7
         run: sudo xcode-select -switch /Applications/Xcode_11.7.app
       - name: Build Swift Package Manager
-        run: xcodebuild -workspace package.xcworkspace -scheme TABTestKit -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.7'
+        run: xcodebuild -workspace ./.swiftpm/xcode/package.xcworkspace -scheme TABResourceLoader -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.7'
       - name: Set Xcode version to 12.1
         run: sudo xcode-select -switch /Applications/Xcode_12.1.app
       - name: Build Swift Package Manager
-        run: xcodebuild -workspace package.xcworkspace -scheme TABTestKit -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.1'
+        run: xcodebuild -workspace ./.swiftpm/xcode/package.xcworkspace -scheme TABResourceLoader -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.1'
