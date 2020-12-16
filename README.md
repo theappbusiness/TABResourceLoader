@@ -2,9 +2,12 @@
 
 # TABResourceLoader
 
-[![](https://img.shields.io/cocoapods/v/TABResourceLoader.svg)](https://cocoapods.org/pods/TABResourceLoader)
-[![](https://img.shields.io/cocoapods/p/TABResourceLoader.svg?style=flat)](https://cocoapods.org/pods/TABResourceLoader)
+[![TABResourceLoader CI](https://github.com/theappbusiness/TABResourceLoader/workflows/TABResourceLoader%20CI/badge.svg)](https://github.com/theappbusiness/TABResourceLoader/actions)
+[![Version](https://img.shields.io/cocoapods/v/TABResourceLoader.svg)](https://cocoapods.org/pods/TABResourceLoader)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![codecov.io](http://codecov.io/github/theappbusiness/TABResourceLoader/coverage.svg?branch=main)](http://codecov.io/github/theappbusiness/TABResourceLoader?branch=main)
+[![License](https://img.shields.io/cocoapods/l/TABResourceLoader.svg?style=flat)](http://cocoapods.org/pods/TABResourceLoader)
+[![Platform](https://img.shields.io/cocoapods/p/TABResourceLoader.svg?style=flat)](http://cocoapods.org/pods/TABResourceLoader)
 
 This library is designed to fetch resources in a consistent and modular way. The user can define resources by conforming to protocols that define where and how to get them. These resources can then be retrieved using a generic service type with or without an operation provided by the library. By following this approach it's easy to have testable and modular networking stack.
 
