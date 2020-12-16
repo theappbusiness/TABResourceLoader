@@ -12,13 +12,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Set Xcode version to 11.7
         run: sudo xcode-select -switch /Applications/Xcode_11.7.app
       - name: Build for testing
-        run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro"
+        run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.7 -destination "OS=13.7,name=iPhone 11 Pro"
       - name: Test on iPhone 11 Pro
-        run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.6 -destination "OS=13.6,name=iPhone 11 Pro" -enableCodeCoverage YES
+        run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.7 -destination "OS=13.7,name=iPhone 11 Pro" -enableCodeCoverage YES
       - name: codecov
         run: bash <(curl -s https://codecov.io/bash)
         
@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Set Xcode version to 12.1
         run: sudo xcode-select -switch /Applications/Xcode_12.1.app
       - name: Build for testing
@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Set Xcode version to 11.7
         run: sudo xcode-select -switch /Applications/Xcode_11.7.app
       - name: Build Cocoapods
@@ -60,7 +60,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Set Xcode version to 11.7
         run: sudo xcode-select -switch /Applications/Xcode_11.7.app
       - name: Build Swift Package Manager
