@@ -19,6 +19,12 @@ jobs:
         run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.7 -destination "OS=13.7,name=iPhone 11 Pro"
       - name: Test on iPhone 11 Pro
         run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator13.7 -destination "OS=13.7,name=iPhone 11 Pro" -enableCodeCoverage YES
+      - name: Archive tests results
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+         name: Test-TABResourceLoader-Xcode11_7-iOS13_7.xcresult
+         path: /Users/runner/Library/Developer/Xcode/DerivedData/*/Logs/Test/*.xcresult
       - name: codecov
         run: bash <(curl -s https://codecov.io/bash)
         
@@ -35,6 +41,12 @@ jobs:
         run:  xcodebuild  build-for-testing -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator14.1 -destination "OS=14.1,name=iPhone 12 Pro"
       - name: Test on iPhone 12 Pro
         run:  xcodebuild test-without-building -scheme TABResourceLoader -configuration Debug -sdk iphonesimulator14.1 -destination "OS=14.1,name=iPhone 12 Pro" -enableCodeCoverage YES
+      - name: Archive tests results
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+         name: Test-TABResourceLoader-Xcode12_1-iOS14_1.xcresult
+         path: /Users/runner/Library/Developer/Xcode/DerivedData/*/Logs/Test/*.xcresult
       - name: codecov
         run: bash <(curl -s https://codecov.io/bash)
 
